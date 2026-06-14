@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini Simulador Brasfoot</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 50px;
+        }
+        .painel {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            width: 350px;
+            text-align: center;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .placar {
+            font-size: 18px;
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #e9ecef;
+            border-radius: 4px;
+        }
+        .forca {
+            font-size: 12px;
+            color: #666;
+        }
+    </style>
+<script src="times.js"></script>
+</head>
+<body>
+
+    <<div id="tela-inicial" class="painel" style="width: 400px;">
+        <h2>Brasfoot Web ⚽</h2>
+        <p>Escolha o time que você vai treinar:</p>
+        <select id="seletor-time" style="padding: 10px; width: 100%; margin-bottom: 20px; font-size: 16px;">
+            </select>
+        <button onclick="iniciarJogo()">Começar Campeonato</button>
+    </div>
+
+    <div id="tela-jogo" class="painel" style="width: 600px; display: none;"> 
+        <h2>Simulador de Rodada</h2>
+        <button onclick="simularRodada()">Simular Jogos</button>
+        
+        <div id="resultados">
+            <p>Clique no botão para jogar!</p>
+        </div>
+
+        <hr> <h3>Tabela de Classificação</h3>
+        <div id="tabela"></div>
+
+        <hr> <h3>Artilharia ⚽</h3>
+        <div id="artilharia">
+            <p>Nenhum gol marcado ainda.</p>
+        </div>
+    </div>
+    <script>
+      let calendario = [];
+      let numeroDaRodadaAtual = 0;
+       // Agora a variável 'listaDeTimes' está disponível aqui!
+    let meuTimeId = null; // Guarda o ID do time que o jogador escolheu
+
+function carregarTelaInicial() {
+    const seletor = document.getElementById("seletor-time");
+    
+    // Organiza os times em ordem alfabética só para ficar bonito no menu
+    let timesOrdenados = [...listaDeTimes].sort((a, b) => a.nome.localeCompare(b.nome));
+    
+    // Coloca os times dentro da caixa de seleção
+    timesOrdenados.forEach(time => {
+        seletor.innerHTML += `<option value="${time.id}">${time.nome}</option>`;
+    });
+}
+
+function iniciarJogo() {
+    // 1. Salva o time que o jogador escolheu
+    const seletor = document.getElementById("seletor-time");
+    meuTimeId = parseInt(seletor.value);
+
+    // 2. Esconde a tela inicial e mostra a tela do jogo
+    document.getElementById("tela-inicial").style.display = "none";
+    document.getElementById("tela-jogo").style.display = "block";
+
+    // 3. Gera o calendário e monta a primeira tabela
+    gerarCalendario();
+    atualizarTabela();
+}
+      function gerarCalendario() {
+    let times = [...listaDeTimes]; 
+    let totalRodadas = times.length - 1; // 19 rodadas
+    let metade = times.length / 2;
+
+    let turno = []; // Vamos guardar o primeiro turno aqui provisoriamente
+
+    // 1. GERA O TURNO (Jogos de Ida)
+    for (let r = 0; r < totalRodadas; r++) {
+        let jogosDaRodada = [];
+        
+        for (let i = 0; i < metade; i++) {
+            let timeCasa = times[i];
+            let timeVisitante = times[times.length - 1 - i];
+            
+            jogosDaRodada.push({ casa: timeCasa, visitante: timeVisitante });
+        }
+        
+        turno.push(jogosDaRodada);
+        calendario.push(jogosDaRodada); // Salva no calendário oficial
+        
+        // Rotaciona os times
+        times.splice(1, 0, times.pop());
+    }
+
+    // 2. GERA O RETURNO (Jogos de Volta)
+    // Passamos por todas as 19 rodadas que acabamos de criar...
+    for (let r = 0; r < turno.length; r++) {
+        let jogosDoReturno = [];
+        
+        // Para cada jogo daquela rodada, nós invertemos as posições
+        turno[r].forEach(jogoOriginal => {
+            jogosDoReturno.push({
+                casa: jogoOriginal.visitante, // Visitante vira Mandante
+                visitante: jogoOriginal.casa  // Mandante vira Visitante
+            });
+        });
+        
+        // Adiciona essa nova rodada invertida ao calendário oficial
+        calendario.push(jogosDoReturno);
+    }
+    
+    console.log("Calendário completo com 38 rodadas gerado com sucesso!");
+}
+
+// Chame essa função assim que a página carregar
+carregarTelaInicial();
+
+        // 2. A Lógica de Simulação (A "Engine")
+        function calcularGols(minhaForca, forcaAdversario, ehCasa = false) {
+    // 1. Vantagem de jogar em casa
+    let forcaFinal = minhaForca + (ehCasa ? 5 : 0);
+    
+    // 2. Compara a força dos dois times
+    let diferenca = forcaFinal - forcaAdversario;
+    
+    // 3. Base do futebol realista: sorteia de 0 a 3 gols
+    let gols = Math.floor(Math.random() * 4); 
+    
+    // 4. Aplica o "Peso da Camisa" baseado na diferença técnica
+    if (diferenca >= 15) {
+        // Muito mais forte: chance de golear (+0 a 2 gols)
+        gols += Math.floor(Math.random() * 3); 
+    } else if (diferenca >= 5) {
+        // Um pouco mais forte: leve vantagem (+0 a 1 gol)
+        gols += Math.floor(Math.random() * 2); 
+    } else if (diferenca <= -15) {
+        // Muito mais fraco: dificuldade de marcar (tira de 0 a 2 gols)
+        gols -= Math.floor(Math.random() * 3); 
+    } else if (diferenca <= -5) {
+        // Um pouco mais fraco (tira 0 a 1 gol)
+        gols -= Math.floor(Math.random() * 2); 
+    }
+    
+    // 5. Math.max garante que o placar nunca fique negativo (ex: -1 gol)
+    return Math.max(0, gols);
+}
+    function sortearArtilheiro(time) {
+    // Se o time não tiver elenco cadastrado ainda, retorna um nome genérico
+    if (!time.elenco || time.elenco.length === 0) {
+        return "Jogador Desconhecido";
+    }
+
+    // Sorteia um jogador aleatório da lista do time
+    let indiceSorteado = Math.floor(Math.random() * time.elenco.length);
+    let jogadorSorteado = time.elenco[indiceSorteado];
+    
+    // Soma 1 gol na conta pessoal do jogador
+    jogadorSorteado.gols += 1;
+    
+    return jogadorSorteado.nome;
+}
+        // 3. A Função que roda ao clicar no botão
+        function simularRodada() {
+    // Verifica se o campeonato já acabou
+    if (numeroDaRodadaAtual >= calendario.length) {
+        alert("O Campeonato acabou!");
+        return;
+    }
+
+    const divResultados = document.getElementById("resultados");
+    divResultados.innerHTML = `<h3>Rodada ${numeroDaRodadaAtual + 1}</h3>`; 
+
+    // Puxa os jogos da rodada atual do nosso calendário
+    let jogosDeHoje = calendario[numeroDaRodadaAtual];
+
+    // Simula cada jogo da rodada
+    jogosDeHoje.forEach(jogo => {
+        let timeCasa = jogo.casa;
+        let timeVisitante = jogo.visitante;
+
+        let golsCasa = calcularGols(timeCasa.forca, timeVisitante.forca, true);
+        let golsVisitante = calcularGols(timeVisitante.forca, timeCasa.forca, false);
+
+        // === 1. ATUALIZA JOGOS E GOLS ===
+        timeCasa.jogos = (timeCasa.jogos || 0) + 1;
+        timeVisitante.jogos = (timeVisitante.jogos || 0) + 1;
+
+        timeCasa.gp = (timeCasa.gp || 0) + golsCasa;
+        timeCasa.gc = (timeCasa.gc || 0) + golsVisitante;
+        timeVisitante.gp = (timeVisitante.gp || 0) + golsVisitante;
+        timeVisitante.gc = (timeVisitante.gc || 0) + golsCasa;
+
+        // Calcula o Saldo de Gols (SG)
+        timeCasa.sg = timeCasa.gp - timeCasa.gc;
+        timeVisitante.sg = timeVisitante.gp - timeVisitante.gc;
+
+        // === 2. ATUALIZA PONTOS, VITÓRIAS, EMPATES E DERROTAS ===
+        if (golsCasa > golsVisitante) {
+            timeCasa.pontos += 3;
+            timeCasa.vitorias += 1;
+            timeVisitante.derrotas = (timeVisitante.derrotas || 0) + 1;
+        } else if (golsVisitante > golsCasa) {
+            timeVisitante.pontos += 3;
+            timeVisitante.vitorias += 1;
+            timeCasa.derrotas = (timeCasa.derrotas || 0) + 1;
+        } else {
+            timeCasa.pontos += 1;
+            timeVisitante.pontos += 1;
+            timeCasa.empates = (timeCasa.empates || 0) + 1;
+            timeVisitante.empates = (timeVisitante.empates || 0) + 1;
+        }
+
+        // === DESCOBRE OS AUTORES DOS GOLS ===
+        let autoresCasa = [];
+        for (let g = 0; g < golsCasa; g++) {
+            autoresCasa.push(sortearArtilheiro(timeCasa));
+        }
+
+        let autoresVisitante = [];
+        for (let g = 0; g < golsVisitante; g++) {
+            autoresVisitante.push(sortearArtilheiro(timeVisitante));
+        }
+
+        // Formata a lista de nomes separada por vírgula
+        let textoGolsCasa = autoresCasa.length > 0 ? `<br><small style="color: #555;">⚽ ${autoresCasa.join(', ')}</small>` : '';
+        let textoGolsVisitante = autoresVisitante.length > 0 ? `<br><small style="color: #555;">⚽ ${autoresVisitante.join(', ')}</small>` : '';
+
+        // === 3. MOSTRA O RESULTADO NA TELA COM OS NOMES ===
+        // Deixamos apenas este bloco para mostrar o placar uma vez só!
+        divResultados.innerHTML += `
+            <div class="placar">
+                <strong>${timeCasa.nome}</strong> ${golsCasa} x ${golsVisitante} <strong>${timeVisitante.nome}</strong>
+                ${textoGolsCasa}
+                ${textoGolsVisitante}
+            </div>
+        `;
+    });
+
+    // Atualiza a tabela com os novos dados e avança a rodada
+    atualizarTabela();
+    atualizarArtilharia(); // <--- ADICIONE ESTA LINHA AQUI
+    numeroDaRodadaAtual++;
+}
+
+function atualizarTabela() {
+    // 1. Ordenação Avançada (Pontos > Vitórias > Saldo de Gols)
+    listaDeTimes.sort((a, b) => {
+        if (b.pontos !== a.pontos) return b.pontos - a.pontos; 
+        if (b.vitorias !== a.vitorias) return b.vitorias - a.vitorias; 
+        return (b.sg || 0) - (a.sg || 0); // Critério 3: Saldo de Gols
+    });
+
+    const divTabela = document.getElementById("tabela");
+    let htmlTabela = `
+        <table style="width: 100%; text-align: center; border-collapse: collapse; font-size: 14px;">
+            <tr style="background-color: #333; color: white;">
+                <th>#</th>
+                <th style="text-align: left;">Time</th>
+                <th>P</th>
+                <th>J</th>
+                <th>V</th>
+                <th>E</th>
+                <th>D</th>
+                <th>GP</th>
+                <th>GC</th>
+                <th>SG</th>
+            </tr>
+    `;
+
+    listaDeTimes.forEach((time, index) => {
+        // Lógica para pintar as linhas (G4, Sulamericana, Z4)
+        let corFundo = "#fff";
+        let posicao = index + 1;
+        let corDoNome = time.id === meuTimeId ? "color: #007bff;" : "color: #000;";
+        if (posicao <= 4) corFundo = "#d4edda"; // Verde claro (Libertadores)
+        else if (posicao >= 17) corFundo = "#f8d7da"; // Vermelho claro (Rebaixamento)
+        else if (posicao >= 5 && posicao <= 12) corFundo = "#e2e3e5"; // Cinza claro (Sulamericana)
+
+        htmlTabela += `
+        
+            <tr style="background-color: ${corFundo}; border-bottom: 1px solid #ddd;">
+                <td><strong>${posicao}º</strong></td>
+                <td style="text-align: left; ${corDoNome}"><strong>${time.nome}</strong></td>
+                <td><strong>${time.pontos}</strong></td>
+                <td>${time.jogos || 0}</td>
+                <td>${time.vitorias}</td>
+                <td>${time.empates || 0}</td>
+                <td>${time.derrotas || 0}</td>
+                <td>${time.gp || 0}</td>
+                <td>${time.gc || 0}</td>
+                <td><strong>${time.sg || 0}</strong></td>
+            </tr>
+        `;
+    });
+
+    htmlTabela += `</table>`;
+    divTabela.innerHTML = htmlTabela;
+}
+
+function atualizarArtilharia() {
+    let todosOsJogadores = [];
+
+    // 1. Passa por todos os times e extrai os jogadores
+    listaDeTimes.forEach(time => {
+        if (time.elenco) {
+            time.elenco.forEach(jogador => {
+                // Guardamos o nome do time junto para exibir na tabela
+                todosOsJogadores.push({
+                    nome: jogador.nome,
+                    gols: jogador.gols,
+                    time: time.nome
+                });
+            });
+        }
+    });
+
+    // 2. Ordena os jogadores por gols (do maior para o menor)
+    todosOsJogadores.sort((a, b) => b.gols - a.gols);
+
+    // 3. Pega apenas os 10 primeiros
+    let top10 = todosOsJogadores.slice(0, 10);
+
+    // 4. Monta o visual da tabela
+    const divArtilharia = document.getElementById("artilharia");
+    let htmlArtilharia = `
+        <table style="width: 100%; text-align: center; border-collapse: collapse; font-size: 14px;">
+            <tr style="background-color: #333; color: white;">
+                <th>#</th>
+                <th style="text-align: left;">Jogador</th>
+                <th>Time</th>
+                <th>Gols</th>
+            </tr>
+    `;
+
+    top10.forEach((jogador, index) => {
+        // Mostra apenas jogadores que fizeram pelo menos 1 gol
+        if (jogador.gols > 0) { 
+            htmlArtilharia += `
+                <tr style="border-bottom: 1px solid #ddd; background-color: #fff;">
+                    <td><strong>${index + 1}º</strong></td>
+                    <td style="text-align: left;">${jogador.nome}</td>
+                    <td>${jogador.time}</td>
+                    <td><strong>${jogador.gols}</strong></td>
+                </tr>
+            `;
+        }
+    });
+
+    htmlArtilharia += `</table>`;
+    divArtilharia.innerHTML = htmlArtilharia;
+}
+    </script>
+
+</body>
+</html>

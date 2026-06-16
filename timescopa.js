@@ -755,7 +755,8 @@ const listaDeTimes = [
             {
                 "id": 10034,
                 "nome": "Guilherme",
-                "posicao": "ATA/PD/MD",
+                "posicao": "CA",
+                "posicao2": "PD/MD",
                 "idade": 35,
                 "pe": "D",
                 "velocidade": 90,

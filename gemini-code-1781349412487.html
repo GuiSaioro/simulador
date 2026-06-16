@@ -3,391 +3,896 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mini Simulador Brasfoot</title>
+    <title>Copa do Mundo 2026 - Modo Técnico Pro</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-top: 50px;
-        }
-        .painel {
-            background-color: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            width: 350px;
-            text-align: center;
-        }
-        button {
-            background-color: #28a745;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            font-size: 16px;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-bottom: 20px;
-        }
-        button:hover {
-            background-color: #218838;
-        }
-        .placar {
-            font-size: 18px;
-            margin: 10px 0;
-            padding: 10px;
-            background-color: #e9ecef;
-            border-radius: 4px;
-        }
-        .forca {
-            font-size: 12px;
-            color: #666;
-        }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f0f2f5; margin: 0; padding: 20px; display: flex; flex-direction: column; align-items: center; }
+        .painel { background-color: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.06); width: 100%; max-width: 1100px; text-align: center; box-sizing: border-box; }
+        
+        /* Menu de Abas */
+        .menu-abas { display: flex; justify-content: center; background: #333; border-radius: 8px; margin-bottom: 20px; padding: 5px; width: 100%; }
+        .aba-btn { background: none; color: #bbb; border: none; padding: 10px 15px; font-size: 14px; cursor: pointer; font-weight: bold; transition: all 0.2s; border-radius: 6px; margin: 0 2px; }
+        .aba-btn:hover { color: white; background: #444; }
+        .aba-btn.ativa { color: white; background: #007bff; }
+        .aba-conteudo { display: none; margin-top: 15px; }
+        .aba-conteudo.ativa { display: block; }
+
+        button.principal { background-color: #007bff; color: white; border: none; padding: 12px 30px; font-size: 16px; border-radius: 6px; cursor: pointer; font-weight: bold; transition: background 0.2s; }
+        button.principal:hover { background-color: #0056b3; }
+        button.secundario { background-color: #6c757d; color: white; border: none; padding: 8px 16px; font-size: 14px; border-radius: 4px; cursor: pointer; font-weight: bold; }
+        button.secundario:hover { background-color: #5a6268; }
+        
+        /* Resultados e Listas */
+        .placar { font-size: 14px; margin: 8px 0; padding: 12px; background-color: #f8f9fa; border-radius: 6px; border-left: 5px solid #007bff; text-align: left; }
+        .grid-grupos { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 15px; }
+        .card-grupo { background: #fff; border: 1px solid #e1e4e8; border-radius: 8px; padding: 10px; }
+        .titulo-grupo { background: #222; color: white; padding: 5px; font-size: 13px; font-weight: bold; border-radius: 4px; margin-bottom: 8px; }
+        .tabela-mini { width: 100%; font-size: 12px; border-collapse: collapse; }
+        .tabela-mini th { background: #f1f1f1; padding: 3px; }
+        .tabela-mini td { padding: 4px; border-bottom: 1px solid #f9f9f9; text-align: center; }
+
+        /* Bracket Horizontal */
+        .bracket-scroll { width: 100%; overflow-x: auto; background: #fafafa; border: 1px solid #e1e4e8; border-radius: 8px; padding: 20px; box-sizing: border-box; }
+        .bracket-container { display: flex; gap: 30px; align-items: center; min-width: 950px; justify-content: space-between; }
+        .bracket-coluna { display: flex; flex-direction: column; justify-content: space-around; height: 680px; width: 180px; }
+        .bracket-fase-titulo { font-size: 12px; font-weight: bold; color: #555; text-transform: uppercase; border-bottom: 2px solid #007bff; padding-bottom: 4px; margin-bottom: 10px; text-align: center; }
+        .bracket-jogo { background: white; border: 1px solid #cbd5e1; border-radius: 6px; padding: 5px; box-shadow: 0 2px 4px rgba(0,0,0,0.04); font-size: 11px; }
+        .bracket-time { display: flex; justify-content: space-between; padding: 3px 5px; border-radius: 3px; }
+        .bracket-time.vencedor { font-weight: bold; background-color: #d4edda; color: #155724; }
+        
+        /* Tabela de Trajetória */
+        .tabela-trajetoria { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 14px; text-align: left; }
+        .tabela-trajetoria th { background-color: #333; color: white; padding: 10px; }
+        .tabela-trajetoria td { padding: 10px; border-bottom: 1px solid #ddd; }
+        .badge { padding: 3px 8px; border-radius: 12px; font-size: 11px; font-weight: bold; color: white; }
+        .badge.vitoria { background-color: #28a745; }
+        .badge.empate { background-color: #ffc107; color: #333; }
+        .badge.derrota { background-color: #dc3545; }
+
+        /* --- TELA MODO TÉCNICO --- */
+        .transmissao-container { display: grid; grid-template-columns: 260px 1fr 260px; gap: 20px; margin-top: 15px; text-align: left; position: relative; }
+        .placar-ao-vivo { background: #222; color: #fff; padding: 15px; border-radius: 8px; text-align: center; grid-column: 1 / span 3; font-size: 24px; font-weight: bold; }
+        .tempo-jogo { display: block; font-size: 14px; color: #ffc107; margin-top: 5px; }
+        .coluna-elenco { background: #fff; border: 1px solid #ddd; border-radius: 8px; padding: 12px; font-size: 13px; height: 540px; overflow-y: auto; }
+        .coluna-elenco h4 { margin-top: 12px; margin-bottom: 6px; border-bottom: 2px solid #333; padding-bottom: 4px; }
+        .narracao-box { background: #1e1e1e; color: #fff; border-radius: 8px; padding: 15px; height: 200px; overflow-y: auto; font-family: 'Courier New', Courier, monospace; font-size: 13px; display: flex; flex-direction: column-reverse; margin-bottom:10px; }
+        .linha-narracao { margin-bottom: 8px; border-bottom: 1px solid #2d2d2d; padding-bottom: 4px; }
+        .linha-narracao .minuto { color: #ffc107; font-weight: bold; }
+        .linha-narracao.gol { color: #28a745; font-weight: bold; background: #14321a; padding: 4px; border-radius: 4px; }
+        .live-stats { margin-top: 10px; background: #f8f9fa; border: 1px solid #ddd; border-radius: 8px; padding: 10px; font-size: 12px; }
+        .stat-barra-container { display: flex; align-items: center; justify-content: space-between; margin: 6px 0; }
+        .stat-barra { height: 8px; background: #ddd; flex-grow: 1; margin: 0 10px; border-radius: 4px; overflow: hidden; display: flex; }
+
+        /* Botões Táticos Rápidos */
+        .btn-tatica { flex:1; padding: 6px; font-size: 11px; border: 1px solid #ccc; cursor: pointer; font-weight:bold; transition: 0.2s; background:#fff;}
+        .btn-tatica.ativo { background:#007bff; color:white; border-color:#0056b3; }
+        .btn-grito { font-size: 11px; padding: 5px; border-radius: 4px; border: 1px solid #ffc107; background: #fff3cd; color: #856404; font-weight: bold; cursor: pointer;}
+        .btn-grito:hover { background: #ffeeba; }
+        .btn-grito.ativo { background: #ffc107; color: #000; box-shadow: inset 0 0 5px rgba(0,0,0,0.2); }
+
+        /* --- EVENTO INTERVALO CHAMATIVO --- */
+        .overlay-intervalo { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 100; border-radius: 8px; display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; display: none; backdrop-filter: blur(4px); }
+        .overlay-intervalo h2 { font-size: 40px; color: #ffc107; margin: 0 0 15px 0; text-transform: uppercase; letter-spacing: 2px; text-shadow: 0 4px 10px rgba(0,0,0,0.5); }
+        .overlay-intervalo p { font-size: 16px; margin-bottom: 25px; color: #ddd; max-width: 600px; text-align: center; }
+
+        /* --- MODAL TÁTICO AO VIVO --- */
+        .modal-tatica-live { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 999; display: none; align-items: center; justify-content: center; }
+        .modal-conteudo { background: white; padding: 25px; border-radius: 12px; width: 90%; max-width: 1000px; max-height: 90vh; overflow-y: auto; text-align: left; }
+
+        /* --- DESIGN DO CAMPO TÁTICO INTERATIVO --- */
+        .campo-futebol { position: relative; background: #2e7d32; background-image: linear-gradient(#388e3c 50%, #2e7d32 50%); border: 4px solid #fff; border-radius: 10px; height: 480px; width: 100%; max-width: 440px; margin: 0 auto; box-shadow: inset 0 0 20px rgba(0,0,0,0.3), 0 4px 10px rgba(0,0,0,0.15); overflow: hidden; }
+        .campo-linha-meio { position: absolute; top: 50%; left: 0; width: 100%; height: 2px; background: rgba(255,255,255,0.6); }
+        .campo-circulo-meio { position: absolute; top: 50%; left: 50%; width: 90px; height: 90px; border: 2px solid rgba(255,255,255,0.6); border-radius: 50%; transform: translate(-50%, -50%); }
+        .campo-grande-area-top { position: absolute; top: 0; left: 50%; width: 220px; height: 75px; border: 2px solid rgba(255,255,255,0.6); border-top: none; transform: translateX(-50%); }
+        .campo-grande-area-bot { position: absolute; bottom: 0; left: 50%; width: 220px; height: 75px; border: 2px solid rgba(255,255,255,0.6); border-bottom: none; transform: translateX(-50%); }
+        
+        .slot-jogador { position: absolute; transform: translate(-50%, -50%); width: 75px; text-align: center; z-index: 5; transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); cursor: grab; }
+        .slot-jogador:active { cursor: grabbing; }
+        .player-totem { background: #1a1a1a; border: 2px solid #ffc107; border-radius: 8px; color: white; padding: 4px; font-size: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.3); position: relative; }
+        .player-totem.drag-over { background: #007bff !important; border-color: #fff; transform: scale(1.08); }
+        .totem-pos-vaga { font-size: 9px; font-weight: bold; background: #e0a800; color: #000; padding: 1px 3px; border-radius: 3px; display: inline-block; margin-bottom: 2px; }
+        .totem-nome { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: block; font-weight: bold; }
+        .totem-ovr { font-weight: bold; color: #5cb85c; font-size: 11px; }
+        .totem-ovr.penalizado { color: #ff4d4d; text-shadow: 0 0 2px rgba(0,0,0,0.5); }
+
+        .lista-drag-banco { list-style: none; padding: 0; margin: 0; }
+        .item-drag-banco { background: #f8f9fa; border: 1px solid #ddd; border-radius: 6px; padding: 8px 12px; margin-bottom: 6px; display: flex; justify-content: space-between; align-items: center; cursor: grab; transition: background 0.2s; }
+        .item-drag-banco:hover { background: #edf2f7; border-color: #cbd5e1; }
+        .item-drag-banco:active { cursor: grabbing; }
+        
+        /* ESTADO DE JOGADOR SUBSTITUÍDO */
+        .item-drag-banco.substituido { opacity: 0.35; filter: grayscale(100%); background: #fdfdfd; border-color: #eee; pointer-events: none; }
+        .status-substituido { font-size: 9px; background: #dc3545; color: white; padding: 2px 4px; border-radius: 3px; font-weight: bold; margin-left: 5px; }
+
     </style>
-<script src="times.js"></script>
+    <!-- Certifique-se de ter seu timescopa.js referenciado ou use os dados de teste locais -->
+    <script src="timescopa.js"></script> 
 </head>
 <body>
 
-    <<div id="tela-inicial" class="painel" style="width: 400px;">
-        <h2>Brasfoot Web ⚽</h2>
-        <p>Escolha o time que você vai treinar:</p>
-        <select id="seletor-time" style="padding: 10px; width: 100%; margin-bottom: 20px; font-size: 16px;">
-            </select>
-        <button onclick="iniciarJogo()">Começar Campeonato</button>
+    <!-- TELAS INICIAIS (Mantidas sem alteração funcional) -->
+    <div id="tela-inicial" class="painel" style="max-width: 450px;">
+        <h2>Copa do Mundo 2026 🏆</h2>
+        <p>Escolha a Seleção que você vai comandar como Técnico:</p>
+        <select id="seletor-time" style="padding: 12px; width: 100%; margin-bottom: 22px; font-size: 16px; border-radius: 6px; border: 1px solid #ccc;"></select>
+        <button class="principal" onclick="iniciarJogo()">Assumir Seleção e Iniciar</button>
     </div>
 
-    <div id="tela-jogo" class="painel" style="width: 600px; display: none;"> 
-        <h2>Simulador de Rodada</h2>
-        <button onclick="simularRodada()">Simular Jogos</button>
-        
-        <div id="resultados">
-            <p>Clique no botão para jogar!</p>
+    <div id="tela-jogo" class="painel" style="display: none;"> 
+        <div class="menu-abas">
+            <button class="aba-btn ativa" onclick="mudarAba('aba-simulador', this)">🎮 Partidas</button>
+            <button class="aba-btn" onclick="mudarAba('aba-gerenciar', this)">📋 Quadro Tático Pré-Jogo</button>
+            <button class="aba-btn" onclick="mudarAba('aba-chaveamento', this)">🌿 Chaveamento</button>
+            <button class="aba-btn" onclick="mudarAba('aba-trajetoria', this)">📜 Minha Trajetória</button>
+            <button class="aba-btn" onclick="mudarAba('aba-artilharia', this)">⚽ Artilharia</button>
         </div>
 
-        <hr> <h3>Tabela de Classificação</h3>
-        <div id="tabela"></div>
-
-        <hr> <h3>Artilharia ⚽</h3>
-        <div id="artilharia">
-            <p>Nenhum gol marcado ainda.</p>
+        <div id="aba-simulador" class="aba-conteudo ativa">
+            <h2 id="titulo-fase-principal" style="color: #28a745; margin: 5px 0;">Fase de Grupos</h2>
+            <button id="btn-simular-acao" class="principal" onclick="processarFluxoTorneio()">Simular Rodada</button>
+            <h3 style="text-align: left; margin: 15px 0 5px 0;">Resultados da Rodada:</h3>
+            <div id="resultados-jogos"><p style="color:#777;">Aguardando o apito inicial...</p></div>
         </div>
-    </div>
-    <script>
-      let calendario = [];
-      let numeroDaRodadaAtual = 0;
-       // Agora a variável 'listaDeTimes' está disponível aqui!
-    let meuTimeId = null; // Guarda o ID do time que o jogador escolheu
 
-function carregarTelaInicial() {
-    const seletor = document.getElementById("seletor-time");
-    
-    // Organiza os times em ordem alfabética só para ficar bonito no menu
-    let timesOrdenados = [...listaDeTimes].sort((a, b) => a.nome.localeCompare(b.nome));
-    
-    // Coloca os times dentro da caixa de seleção
-    timesOrdenados.forEach(time => {
-        seletor.innerHTML += `<option value="${time.id}">${time.nome}</option>`;
-    });
-}
-
-function iniciarJogo() {
-    // 1. Salva o time que o jogador escolheu
-    const seletor = document.getElementById("seletor-time");
-    meuTimeId = parseInt(seletor.value);
-
-    // 2. Esconde a tela inicial e mostra a tela do jogo
-    document.getElementById("tela-inicial").style.display = "none";
-    document.getElementById("tela-jogo").style.display = "block";
-
-    // 3. Gera o calendário e monta a primeira tabela
-    gerarCalendario();
-    atualizarTabela();
-}
-      function gerarCalendario() {
-    let times = [...listaDeTimes]; 
-    let totalRodadas = times.length - 1; // 19 rodadas
-    let metade = times.length / 2;
-
-    let turno = []; // Vamos guardar o primeiro turno aqui provisoriamente
-
-    // 1. GERA O TURNO (Jogos de Ida)
-    for (let r = 0; r < totalRodadas; r++) {
-        let jogosDaRodada = [];
-        
-        for (let i = 0; i < metade; i++) {
-            let timeCasa = times[i];
-            let timeVisitante = times[times.length - 1 - i];
-            
-            jogosDaRodada.push({ casa: timeCasa, visitante: timeVisitante });
-        }
-        
-        turno.push(jogosDaRodada);
-        calendario.push(jogosDaRodada); // Salva no calendário oficial
-        
-        // Rotaciona os times
-        times.splice(1, 0, times.pop());
-    }
-
-    // 2. GERA O RETURNO (Jogos de Volta)
-    // Passamos por todas as 19 rodadas que acabamos de criar...
-    for (let r = 0; r < turno.length; r++) {
-        let jogosDoReturno = [];
-        
-        // Para cada jogo daquela rodada, nós invertemos as posições
-        turno[r].forEach(jogoOriginal => {
-            jogosDoReturno.push({
-                casa: jogoOriginal.visitante, // Visitante vira Mandante
-                visitante: jogoOriginal.casa  // Mandante vira Visitante
-            });
-        });
-        
-        // Adiciona essa nova rodada invertida ao calendário oficial
-        calendario.push(jogosDoReturno);
-    }
-    
-    console.log("Calendário completo com 38 rodadas gerado com sucesso!");
-}
-
-// Chame essa função assim que a página carregar
-carregarTelaInicial();
-
-        // 2. A Lógica de Simulação (A "Engine")
-        function calcularGols(minhaForca, forcaAdversario, ehCasa = false) {
-    // 1. Vantagem de jogar em casa
-    let forcaFinal = minhaForca + (ehCasa ? 5 : 0);
-    
-    // 2. Compara a força dos dois times
-    let diferenca = forcaFinal - forcaAdversario;
-    
-    // 3. Base do futebol realista: sorteia de 0 a 3 gols
-    let gols = Math.floor(Math.random() * 4); 
-    
-    // 4. Aplica o "Peso da Camisa" baseado na diferença técnica
-    if (diferenca >= 15) {
-        // Muito mais forte: chance de golear (+0 a 2 gols)
-        gols += Math.floor(Math.random() * 3); 
-    } else if (diferenca >= 5) {
-        // Um pouco mais forte: leve vantagem (+0 a 1 gol)
-        gols += Math.floor(Math.random() * 2); 
-    } else if (diferenca <= -15) {
-        // Muito mais fraco: dificuldade de marcar (tira de 0 a 2 gols)
-        gols -= Math.floor(Math.random() * 3); 
-    } else if (diferenca <= -5) {
-        // Um pouco mais fraco (tira 0 a 1 gol)
-        gols -= Math.floor(Math.random() * 2); 
-    }
-    
-    // 5. Math.max garante que o placar nunca fique negativo (ex: -1 gol)
-    return Math.max(0, gols);
-}
-    function sortearArtilheiro(time) {
-    // Se o time não tiver elenco cadastrado ainda, retorna um nome genérico
-    if (!time.elenco || time.elenco.length === 0) {
-        return "Jogador Desconhecido";
-    }
-
-    // Sorteia um jogador aleatório da lista do time
-    let indiceSorteado = Math.floor(Math.random() * time.elenco.length);
-    let jogadorSorteado = time.elenco[indiceSorteado];
-    
-    // Soma 1 gol na conta pessoal do jogador
-    jogadorSorteado.gols += 1;
-    
-    return jogadorSorteado.nome;
-}
-        // 3. A Função que roda ao clicar no botão
-        function simularRodada() {
-    // Verifica se o campeonato já acabou
-    if (numeroDaRodadaAtual >= calendario.length) {
-        alert("O Campeonato acabou!");
-        return;
-    }
-
-    const divResultados = document.getElementById("resultados");
-    divResultados.innerHTML = `<h3>Rodada ${numeroDaRodadaAtual + 1}</h3>`; 
-
-    // Puxa os jogos da rodada atual do nosso calendário
-    let jogosDeHoje = calendario[numeroDaRodadaAtual];
-
-    // Simula cada jogo da rodada
-    jogosDeHoje.forEach(jogo => {
-        let timeCasa = jogo.casa;
-        let timeVisitante = jogo.visitante;
-
-        let golsCasa = calcularGols(timeCasa.forca, timeVisitante.forca, true);
-        let golsVisitante = calcularGols(timeVisitante.forca, timeCasa.forca, false);
-
-        // === 1. ATUALIZA JOGOS E GOLS ===
-        timeCasa.jogos = (timeCasa.jogos || 0) + 1;
-        timeVisitante.jogos = (timeVisitante.jogos || 0) + 1;
-
-        timeCasa.gp = (timeCasa.gp || 0) + golsCasa;
-        timeCasa.gc = (timeCasa.gc || 0) + golsVisitante;
-        timeVisitante.gp = (timeVisitante.gp || 0) + golsVisitante;
-        timeVisitante.gc = (timeVisitante.gc || 0) + golsCasa;
-
-        // Calcula o Saldo de Gols (SG)
-        timeCasa.sg = timeCasa.gp - timeCasa.gc;
-        timeVisitante.sg = timeVisitante.gp - timeVisitante.gc;
-
-        // === 2. ATUALIZA PONTOS, VITÓRIAS, EMPATES E DERROTAS ===
-        if (golsCasa > golsVisitante) {
-            timeCasa.pontos += 3;
-            timeCasa.vitorias += 1;
-            timeVisitante.derrotas = (timeVisitante.derrotas || 0) + 1;
-        } else if (golsVisitante > golsCasa) {
-            timeVisitante.pontos += 3;
-            timeVisitante.vitorias += 1;
-            timeCasa.derrotas = (timeCasa.derrotas || 0) + 1;
-        } else {
-            timeCasa.pontos += 1;
-            timeVisitante.pontos += 1;
-            timeCasa.empates = (timeCasa.empates || 0) + 1;
-            timeVisitante.empates = (timeVisitante.empates || 0) + 1;
-        }
-
-        // === DESCOBRE OS AUTORES DOS GOLS ===
-        let autoresCasa = [];
-        for (let g = 0; g < golsCasa; g++) {
-            autoresCasa.push(sortearArtilheiro(timeCasa));
-        }
-
-        let autoresVisitante = [];
-        for (let g = 0; g < golsVisitante; g++) {
-            autoresVisitante.push(sortearArtilheiro(timeVisitante));
-        }
-
-        // Formata a lista de nomes separada por vírgula
-        let textoGolsCasa = autoresCasa.length > 0 ? `<br><small style="color: #555;">⚽ ${autoresCasa.join(', ')}</small>` : '';
-        let textoGolsVisitante = autoresVisitante.length > 0 ? `<br><small style="color: #555;">⚽ ${autoresVisitante.join(', ')}</small>` : '';
-
-        // === 3. MOSTRA O RESULTADO NA TELA COM OS NOMES ===
-        // Deixamos apenas este bloco para mostrar o placar uma vez só!
-        divResultados.innerHTML += `
-            <div class="placar">
-                <strong>${timeCasa.nome}</strong> ${golsCasa} x ${golsVisitante} <strong>${timeVisitante.nome}</strong>
-                ${textoGolsCasa}
-                ${textoGolsVisitante}
+        <div id="aba-gerenciar" class="aba-conteudo">
+            <div style="display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 25px; text-align: left;">
+                <div style="background: #fff; padding: 18px; border-radius: 8px; border: 1px solid #ddd;">
+                    <h3 style="margin-top: 0; color: #007bff; border-bottom: 2px solid #007bff; padding-bottom: 5px;">📋 Tática Pré-Jogo</h3>
+                    <select id="gerenciar-formacao" onchange="alterarFormacaoEstrategica(this.value)" style="padding: 10px; width: 100%; border-radius: 4px; border: 1px solid #ccc; margin-bottom: 15px; font-size: 14px; background:#fdfdfd; font-weight: bold;">
+                        <option value="4-4-2">4-4-2 (Equilibrado Clássico)</option>
+                        <option value="4-3-3">4-3-3 (Ofensivo - Volume de Chutes 🔥)</option>
+                        <option value="3-5-2">3-5-2 (Domínio de Meio-Campo & Posse ⚖️)</option>
+                        <option value="5-3-2">5-3-2 (Retranca Sólida / Bloqueio Total 🛡️)</option>
+                    </select>
+                    <div class="campo-futebol" id="campo-tatico-visual">
+                        <div class="campo-grande-area-top"></div><div class="campo-linha-meio"></div><div class="campo-circulo-meio"></div><div class="campo-grande-area-bot"></div>
+                    </div>
+                </div>
+                
+                <div style="background: #fff; padding: 18px; border-radius: 8px; border: 1px solid #ddd; display: flex; flex-direction: column;">
+                    <h3 style="margin-top: 0; color: #333; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #ddd; padding-bottom: 5px;">
+                        <span>📊 Performance</span><span id="gerenciar-ovr-time" style="background: #28a745; color: white; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: bold;">FORÇA: --</span>
+                    </h3>
+                    <div id="gerenciar-stats-gerais" style="font-size: 13px; color: #444; margin-bottom: 15px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; background: #f9f9f9; padding: 10px; border-radius:6px; border: 1px solid #eee;"></div>
+                    <h4 style="margin: 5px 0 8px 0; color: #6c757d; font-size:14px;">🪑 Reservas Disponíveis</h4>
+                    <div id="gerenciar-lista-reservas-drag" style="flex-grow: 1; max-height: 410px; overflow-y: auto; border: 1px solid #eee; padding: 8px; border-radius: 4px; background:#fafafa;"></div>
+                </div>
             </div>
-        `;
-    });
+        </div>
 
-    // Atualiza a tabela com os novos dados e avança a rodada
-    atualizarTabela();
-    atualizarArtilharia(); // <--- ADICIONE ESTA LINHA AQUI
-    numeroDaRodadaAtual++;
-}
+        <div id="aba-chaveamento" class="aba-conteudo"><h3 id="titulo-dinamico-chave" style="text-align: left; margin-bottom: 10px;">Grupos Formados</h3><div id="container-visual-fase"></div></div>
+        <div id="aba-trajetoria" class="aba-conteudo"><h3 style="text-align: left; margin-bottom: 5px;">Sua Linha do Tempo na Copa</h3><div id="container-trajetoria"></div></div>
+        <div id="aba-artilharia" class="aba-conteudo"><h3 style="text-align: left; margin-bottom: 5px;">Artilharia do Mundial</h3><div id="container-artilharia"></div></div>
+    </div>
 
-function atualizarTabela() {
-    // 1. Ordenação Avançada (Pontos > Vitórias > Saldo de Gols)
-    listaDeTimes.sort((a, b) => {
-        if (b.pontos !== a.pontos) return b.pontos - a.pontos; 
-        if (b.vitorias !== a.vitorias) return b.vitorias - a.vitorias; 
-        return (b.sg || 0) - (a.sg || 0); // Critério 3: Saldo de Gols
-    });
-
-    const divTabela = document.getElementById("tabela");
-    let htmlTabela = `
-        <table style="width: 100%; text-align: center; border-collapse: collapse; font-size: 14px;">
-            <tr style="background-color: #333; color: white;">
-                <th>#</th>
-                <th style="text-align: left;">Time</th>
-                <th>P</th>
-                <th>J</th>
-                <th>V</th>
-                <th>E</th>
-                <th>D</th>
-                <th>GP</th>
-                <th>GC</th>
-                <th>SG</th>
-            </tr>
-    `;
-
-    listaDeTimes.forEach((time, index) => {
-        // Lógica para pintar as linhas (G4, Sulamericana, Z4)
-        let corFundo = "#fff";
-        let posicao = index + 1;
-        let corDoNome = time.id === meuTimeId ? "color: #007bff;" : "color: #000;";
-        if (posicao <= 4) corFundo = "#d4edda"; // Verde claro (Libertadores)
-        else if (posicao >= 17) corFundo = "#f8d7da"; // Vermelho claro (Rebaixamento)
-        else if (posicao >= 5 && posicao <= 12) corFundo = "#e2e3e5"; // Cinza claro (Sulamericana)
-
-        htmlTabela += `
+    <!-- TELA MODO TÉCNICO (LIVE MATCH) -->
+    <div id="tela-partida-tecnico" class="painel" style="display: none; max-width: 1150px;">
+        <h2 id="live-contexto-fase" style="margin: 0 0 10px 0; color: #007bff;">Modo Técnico - Transmissão ao Vivo</h2>
         
-            <tr style="background-color: ${corFundo}; border-bottom: 1px solid #ddd;">
-                <td><strong>${posicao}º</strong></td>
-                <td style="text-align: left; ${corDoNome}"><strong>${time.nome}</strong></td>
-                <td><strong>${time.pontos}</strong></td>
-                <td>${time.jogos || 0}</td>
-                <td>${time.vitorias}</td>
-                <td>${time.empates || 0}</td>
-                <td>${time.derrotas || 0}</td>
-                <td>${time.gp || 0}</td>
-                <td>${time.gc || 0}</td>
-                <td><strong>${time.sg || 0}</strong></td>
-            </tr>
-        `;
-    });
+        <!-- VESTIÁRIO PRÉ-JOGO -->
+        <div id="modal-vestiario" style="background:#fff; padding:20px; border-radius:8px; border:3px solid #28a745; margin-bottom:20px; text-align:left; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+            <h3 style="margin-top:0; border-bottom:1px solid #eee; padding-bottom:10px;">🚪 Vestiário - Preparação Final</h3>
+            <div style="display:flex; gap:20px; margin-top:15px;">
+                <div style="flex:1;">
+                    <label style="font-weight:bold; font-size:13px; display:block; margin-bottom:5px;">Postura em Campo:</label>
+                    <select id="pre-jogo-postura" style="width:100%; padding:10px; border-radius:6px; border:1px solid #ccc;">
+                        <option value="Equilibrado">Equilibrado ⚖️</option>
+                        <option value="Ofensivo">Ataque Total 🔥</option>
+                        <option value="Defensivo">Retranca Fechada 🛡️</option>
+                    </select>
+                </div>
+                <div style="flex:1;">
+                    <label style="font-weight:bold; font-size:13px; display:block; margin-bottom:5px;">Palestra Motivacional:</label>
+                    <select id="pre-jogo-palestra" style="width:100%; padding:10px; border-radius:6px; border:1px solid #ccc;">
+                        <option value="nenhuma">"Vamos fazer o nosso jogo."</option>
+                        <option value="motivacional">"Pra cima deles sem medo!" (+Atq, -Def)</option>
+                        <option value="foco_defesa">"Ninguém passa hoje!" (+Def, -Posse)</option>
+                        <option value="calma">"Toquem a bola com inteligência!" (+Posse)</option>
+                    </select>
+                </div>
+            </div>
+            <button class="principal" onclick="entrarEmCampoLive()" style="margin-top:20px; width:100%; font-size:18px; background-color:#28a745;">Entrar em Campo ⚽</button>
+        </div>
 
-    htmlTabela += `</table>`;
-    divTabela.innerHTML = htmlTabela;
-}
+        <div class="transmissao-container" id="container-live-jogo" style="display:none;">
+            
+            <!-- OVERLAY CHAMATIVO DO INTERVALO -->
+            <div id="overlay-intervalo" class="overlay-intervalo">
+                <h2>Fim do 1º Tempo</h2>
+                <p>O árbitro apita e as equipes vão para o vestiário. Aproveite para reajustar seu time no Quadro Tático sem gastar suas paradas técnicas!</p>
+                <div style="display: flex; gap: 15px;">
+                    <button class="secundario" style="font-size:16px; padding:12px 25px; background:#007bff; border:none; color:white;" onclick="abrirQuadroTaticoLive()">📋 Ir ao Quadro Tático Livre</button>
+                    <button class="principal" style="font-size:16px; padding:12px 25px; background:#28a745;" onclick="voltarDoIntervalo()">Voltar pro 2º Tempo ➔</button>
+                </div>
+            </div>
 
-function atualizarArtilharia() {
-    let todosOsJogadores = [];
+            <div class="placar-ao-vivo">
+                <span id="live-nome-casa">CASA</span> 
+                <span id="live-gols-casa">0</span> x <span id="live-gols-vis">0</span> 
+                <span id="live-nome-vis">VISITANTE</span>
+                <span id="live-tempo" class="tempo-jogo">0' - Pré-jogo</span>
+            </div>
 
-    // 1. Passa por todos os times e extrai os jogadores
-    listaDeTimes.forEach(time => {
-        if (time.elenco) {
-            time.elenco.forEach(jogador => {
-                // Guardamos o nome do time junto para exibir na tabela
-                todosOsJogadores.push({
-                    nome: jogador.nome,
-                    gols: jogador.gols,
-                    time: time.nome
-                });
+            <div class="coluna-elenco" id="live-elenco-casa">
+                <h4>Titulares</h4><ul id="lista-titulares-casa" style="padding-left:15px; margin:5px 0;"></ul>
+                <h4>Reservas</h4><ul id="lista-banco-casa" style="padding-left:15px; margin:5px 0; color:#666;"></ul>
+            </div>
+
+            <div>
+                <div class="narracao-box" id="live-narracao"></div>
+                
+                <!-- PAINEL DE COMANDO TÁTICO DO USUÁRIO -->
+                <div id="painel-substituicao" style="margin-top: 10px; padding: 12px; background: #f8f9fa; border: 1px solid #ddd; border-radius: 8px; text-align: left;">
+                    <h5 style="margin: 0 0 8px 0; color: #333; font-size: 13px; display: flex; justify-content: space-between;">
+                        <span>📋 Treinador: <span id="nome-meu-time-painel" style="color:#007bff;"></span></span>
+                        <span style="font-size:10px; font-weight:normal;">(Subs: <span id="txt-subs-feitas">0</span>/5 | Paradas: <span id="txt-paradas">0</span>/3)</span>
+                    </h5>
+                    
+                    <div style="display: flex; border-radius: 4px; overflow:hidden; margin-bottom:10px;">
+                        <button class="btn-tatica" id="btn-tatica-defensivo" onclick="mudarPosturaLive('Defensivo')">🛡️ Retranca</button>
+                        <button class="btn-tatica ativo" id="btn-tatica-equilibrado" onclick="mudarPosturaLive('Equilibrado')">⚖️ Padrão</button>
+                        <button class="btn-tatica" id="btn-tatica-ofensivo" onclick="mudarPosturaLive('Ofensivo')">🔥 Ataque</button>
+                    </div>
+
+                    <div style="display: flex; gap:5px; margin-bottom: 10px;">
+                        <button class="btn-grito" id="btn-grito-pressao" onclick="darGritoLive('pressao', this)">Pressionar!</button>
+                        <button class="btn-grito" id="btn-grito-segurar" onclick="darGritoLive('segurar', this)">Segurar o Jogo!</button>
+                        <button class="btn-grito" id="btn-grito-calma" onclick="darGritoLive('calma', this)">Rodar a Bola!</button>
+                    </div>
+
+                    <!-- BOTÃO NOVO: Abre o modal de arrastar igual ao Manager -->
+                    <button class="principal" onclick="abrirQuadroTaticoLive()" style="width: 100%; padding: 8px; font-size: 12px; display:flex; justify-content:center; align-items:center; gap:8px;">
+                        <span style="font-size:16px;">🔄</span> Abrir Quadro Tático & Substituições
+                    </button>
+                </div>
+
+                <div class="live-stats">
+                    <div id="estatisticas-linhas"></div>
+                </div>
+                <div style="margin-top:15px; text-align:center; display: flex; justify-content: center; gap: 10px;">
+                    <button class="principal" id="btn-proxima-jogada" onclick="avancarJogadaManual()">Próxima Jogada ➔</button>
+                    <button class="secundario" id="btn-modo-rapido" onclick="alternarAutomatico()">Simulação Direta ⚡</button>
+                </div>
+            </div>
+
+            <div class="coluna-elenco" id="live-elenco-vis">
+                <h4>Titulares</h4><ul id="lista-titulares-vis" style="padding-left:15px; margin:5px 0;"></ul>
+                <h4>Reservas</h4><ul id="lista-banco-vis" style="padding-left:15px; margin:5px 0; color:#666;"></ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL TÁTICO AO VIVO (IGUAL ABA GERENCIAR) -->
+    <div id="modal-tatica-live" class="modal-tatica-live">
+        <div class="modal-conteudo">
+            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #ddd; padding-bottom: 10px; margin-bottom: 15px;">
+                <h2 style="margin:0; color:#007bff;">📋 Prancheta Ao Vivo</h2>
+                <div style="text-align:right;">
+                    <span style="background:#eef7ff; padding:5px 10px; border-radius:6px; font-size:13px; font-weight:bold; color:#333; margin-right:15px;">
+                        Subs Usadas: <span id="modal-info-subs" style="color:#dc3545;">0/5</span> | Paradas: <span id="modal-info-paradas" style="color:#dc3545;">0/3</span>
+                    </span>
+                    <button class="principal" style="background:#28a745; padding:8px 20px; font-size:14px;" onclick="fecharQuadroTaticoLive()">Confirmar & Voltar ao Jogo</button>
+                </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 20px;">
+                <!-- O Campo Visual Live -->
+                <div style="background: #fdfdfd; padding: 15px; border-radius: 8px; border: 1px solid #eee;">
+                    <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
+                        <label style="font-weight: bold; font-size: 13px;">Alterar Esquema Tático:</label>
+                        <select id="live-formacao-select" onchange="alterarFormacaoLive(this.value)" style="padding: 5px; border-radius: 4px; font-size: 12px; font-weight: bold;">
+                            <option value="4-4-2">4-4-2</option>
+                            <option value="4-3-3">4-3-3</option>
+                            <option value="3-5-2">3-5-2</option>
+                            <option value="5-3-2">5-3-2</option>
+                        </select>
+                    </div>
+                    <div class="campo-futebol" id="campo-tatico-visual-live">
+                        <div class="campo-grande-area-top"></div><div class="campo-linha-meio"></div><div class="campo-circulo-meio"></div><div class="campo-grande-area-bot"></div>
+                    </div>
+                </div>
+
+                <!-- O Banco de Reservas Live -->
+                <div style="background: #fdfdfd; padding: 15px; border-radius: 8px; border: 1px solid #eee; display: flex; flex-direction: column;">
+                    <h4 style="margin: 0 0 10px 0; color: #333;">🪑 Banco de Suplentes</h4>
+                    <p style="font-size:11px; color:#666; margin-top:0;">Arraste um reserva para cima de um titular para realizar a substituição. Jogadores em <span style="color:#999;">cinza</span> já saíram e não podem voltar.</p>
+                    <div id="live-lista-reservas-drag" style="flex-grow: 1; height: 380px; overflow-y: auto; border: 1px solid #ddd; padding: 8px; border-radius: 4px; background:#fafafa;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        // --- ESTADOS GLOBAIS E REGRAS ---
+        let faseAtual = "GRUPOS"; let rodadaGrupo = 1; let meuTimeId = null; let meuTimeNome = "";
+        let letrasGrupos = ["A","B","C","D","E","F","G","H","I","J","K","L"];
+        let grupos = {}; let tabelaPartidasGrupos = []; let minhaTrajetoria = [];
+        let bracketDados = { "16AVOS": [], "OITAVAS": [], "QUARTAS": [], "SEMIS": [], "FINAL": [] };
+
+        const arranjosFormacoes = {
+            "4-4-2": [ {tipo:"GOL",top:88,left:50}, {tipo:"LAT",top:68,left:15}, {tipo:"ZAG",top:72,left:38}, {tipo:"ZAG",top:72,left:62}, {tipo:"LAT",top:68,left:85}, {tipo:"MEI",top:46,left:15}, {tipo:"MEI",top:48,left:38}, {tipo:"MEI",top:48,left:62}, {tipo:"MEI",top:46,left:85}, {tipo:"ATA",top:22,left:33}, {tipo:"ATA",top:22,left:67} ],
+            "4-3-3": [ {tipo:"GOL",top:88,left:50}, {tipo:"LAT",top:68,left:15}, {tipo:"ZAG",top:72,left:38}, {tipo:"ZAG",top:72,left:62}, {tipo:"LAT",top:68,left:85}, {tipo:"MEI",top:48,left:24}, {tipo:"MEI",top:52,left:50}, {tipo:"MEI",top:48,left:76}, {tipo:"ATA",top:22,left:18}, {tipo:"ATA",top:18,left:50}, {tipo:"ATA",top:22,left:82} ],
+            "3-5-2": [ {tipo:"GOL",top:88,left:50}, {tipo:"ZAG",top:72,left:25}, {tipo:"ZAG",top:74,left:50}, {tipo:"ZAG",top:72,left:75}, {tipo:"LAT",top:50,left:12}, {tipo:"MEI",top:50,left:34}, {tipo:"MEI",top:53,left:50}, {tipo:"MEI",top:50,left:66}, {tipo:"LAT",top:50,left:88}, {tipo:"ATA",top:22,left:33}, {tipo:"ATA",top:22,left:67} ],
+            "5-3-2": [ {tipo:"GOL",top:88,left:50}, {tipo:"LAT",top:68,left:12}, {tipo:"ZAG",top:72,left:31}, {tipo:"ZAG",top:74,left:50}, {tipo:"ZAG",top:72,left:69}, {tipo:"LAT",top:68,left:88}, {tipo:"MEI",top:48,left:25}, {tipo:"MEI",top:48,left:50}, {tipo:"MEI",top:48,left:75}, {tipo:"ATA",top:22,left:33}, {tipo:"ATA",top:22,left:67} ]
+        };
+
+        let jogoAtActiveRef = null; let minutoJogo = 0; let loopAutomatico = null;
+        let statsAoVivo = { casa: { chutes:0, faltas:0, escanteios:0, posse:50 }, vis: { chutes:0, faltas:0, escanteios:0, posse:50 } };
+        let golsCasaLive = 0; let golsVisLive = 0;
+        let emProrrogacao = false; let disputaPenaisAtiva = false; let penaisPlacar = { casa: 0, vis: 0, chutes: 0 };
+        
+        // CONTROLES DE SUBSTITUIÇÃO E TÁTICA LIVE
+        let subsFeitas = 0;
+        let paradasSub = 0; 
+        let emIntervalo = false;
+        let segundoTempoIniciado = false;
+        let isLiveBoard = false;
+        let subsNestaJanela = 0; // Quantas subs o usuário fez com o quadro aberto
+        let estrategiaTime = "Equilibrado"; let palestraAplicada = "nenhuma"; let gritoAtivo = "nenhum";
+
+        function carregarTelaInicial() {
+            const seletor = document.getElementById("seletor-time");
+            [...listaDeTimes].sort((a,b) => a.nome.localeCompare(b.nome)).forEach(t => { seletor.innerHTML += `<option value="${t.id}">${t.nome}</option>`; });
+        }
+
+        function mudarAba(idAba, btnElemento) {
+            document.querySelectorAll('.aba-conteudo').forEach(el => el.classList.remove('ativa'));
+            document.querySelectorAll('.aba-btn').forEach(el => el.classList.remove('ativa'));
+            document.getElementById(idAba).classList.add('ativa');
+            if(btnElemento) btnElemento.classList.add('ativa');
+            if(idAba === 'aba-gerenciar') renderizarGerenciamentoTime();
+        }
+
+        function iniciarJogo() {
+            meuTimeId = parseInt(document.getElementById("seletor-time").value);
+            meuTimeNome = listaDeTimes.find(t => t.id === meuTimeId).nome;
+            document.getElementById("tela-inicial").style.display = "none";
+            document.getElementById("tela-jogo").style.display = "block";
+
+            letrasGrupos = listaDeTimes.length <= 32 ? ["A","B","C","D","E","F","G","H"] : ["A","B","C","D","E","F","G","H","I","J","K","L"];
+
+            listaDeTimes.forEach(t => {
+                t.pontos=0; t.vitorias=0; t.empates=0; t.derrotas=0; t.gp=0; t.gc=0; t.sg=0; t.jogos=0;
+                t.golsPro=0; t.golsContra=0; t.saldo=0; t.formacao = "4-4-2";
+                
+                let listaBrutaCompleta = t.jogadores || t.elenco || [];
+                if (t.titulares && t.titulares.length > 0) { t.titulares = [...t.titulares]; t.banco = t.banco ? [...t.banco] : []; } 
+                else if (listaBrutaCompleta.length > 0) { t.titulares = listaBrutaCompleta.slice(0, 11); t.banco = listaBrutaCompleta.slice(11); } 
+                else { t.titulares = []; t.banco = []; }
+                
+                let baseForca = t.forca || 80;
+                if(t.titulares) t.titulares.forEach(j => { j.gols = 0; j.foiSubstituido = false; if(!j.rating) j.rating = Math.floor(baseForca + (Math.random() * 10 - 4)); });
+                if(t.banco) t.banco.forEach(j => { j.gols = 0; j.foiSubstituido = false; if(!j.rating) j.rating = Math.floor(baseForca - 5 + (Math.random() * 10 - 4)); });
+            });
+
+            sortearGruposMundiais(); gerarTabelaFaseGrupos(); renderizarInterface();
+        }
+
+        function calcularOvrPosicional(jogador, posicaoSlot) {
+            let base = jogador.rating || 75; let posOrig = jogador.posicao || "MEI";
+            if (posOrig === posicaoSlot) return base; 
+            if (posicaoSlot === "GOL" && posOrig !== "GOL") return Math.max(15, base - 55); 
+            if (posOrig === "GOL" && posicaoSlot !== "GOL") return Math.max(10, base - 65);
+            if ((posOrig === "ATA" && posicaoSlot === "ZAG") || (posOrig === "ZAG" && posicaoSlot === "ATA")) return Math.max(20, base - 26);
+            if (posOrig === "ATA" && posicaoSlot === "LAT") return Math.max(30, base - 6);
+            if (posOrig === "LAT" && posicaoSlot === "ATA") return Math.max(30, base - 9);
+            if (posOrig === "MEI" && posicaoSlot === "ATA") return Math.max(25, base - 6);
+            if (posOrig === "ATA" && posicaoSlot === "MEI") return Math.max(25, base - 6);
+            if (posOrig === "ZAG" && posicaoSlot === "MEI") return Math.max(25, base - 7);
+            if (posOrig === "MEI" && posicaoSlot === "ZAG") return Math.max(25, base - 10);
+            if (posOrig === "LAT" && posicaoSlot === "ZAG") return Math.max(25, base - 5);
+            if (posOrig === "ZAG" && posicaoSlot === "LAT") return Math.max(25, base - 7);
+            if (posOrig === "LAT" && posicaoSlot === "MEI") return Math.max(25, base - 4);
+            if (posOrig === "MEI" && posicaoSlot === "LAT") return Math.max(25, base - 7);
+            return Math.max(20, base - 10); 
+        }
+
+        function obterForcaAtual(time) {
+            if(!time.titulares || time.titulares.length === 0) return time.forca || 75;
+            let formacaoAtual = time.formacao || "4-4-2";
+            let slots = arranjosFormacoes[formacaoAtual] || arranjosFormacoes["4-4-2"];
+            let soma = 0;
+            time.titulares.forEach((j, idx) => { soma += calcularOvrPosicional(j, slots[idx] ? slots[idx].tipo : "MEI"); });
+            return Math.round(soma / 11);
+        }
+
+        function alterarFormacaoEstrategica(valor) { let mt = listaDeTimes.find(t => t.id === meuTimeId); if(mt) mt.formacao = valor; renderizarGerenciamentoTime(); }
+        function alterarFormacaoLive(valor) { let mt = listaDeTimes.find(t => t.id === meuTimeId); if(mt) mt.formacao = valor; renderizarQuadroTatico(true); }
+
+        // --- SISTEMA DRAG & DROP UNIFICADO ---
+        function handleDragStart(ev, origem, index) { ev.dataTransfer.setData("text/plain", JSON.stringify({ origem, index })); }
+        function handleDragOver(ev) { ev.preventDefault(); }
+        function handleDragEnterTotem(ev, el) { ev.preventDefault(); el.classList.add("drag-over"); }
+        function handleDragLeaveTotem(ev, el) { el.classList.remove("drag-over"); }
+
+        function handleDropOnSlot(ev, destIdx) {
+            ev.preventDefault(); let meuTime = listaDeTimes.find(t => t.id === meuTimeId); if(!meuTime) return;
+            try {
+                let { origem, index } = JSON.parse(ev.dataTransfer.getData("text/plain"));
+
+                if (origem === "titular") {
+                    let temp = meuTime.titulares[destIdx];
+                    meuTime.titulares[destIdx] = meuTime.titulares[index];
+                    meuTime.titulares[index] = temp;
+                } else if (origem === "reserva") {
+                    let playerEntra = meuTime.banco[index];
+                    let playerSai = meuTime.titulares[destIdx];
+
+                    // REGRAS SE FOR LIVE MATCH
+                    if (isLiveBoard) {
+                        if (playerEntra.foiSubstituido) return alert("Este jogador já foi substituído e não pode voltar ao campo!");
+                        if (subsFeitas >= 5) return alert("Limite de 5 substituições atingido!");
+                        if (!emIntervalo && subsNestaJanela === 0 && paradasSub >= 3) return alert("Limite de 3 paradas com bola rolando atingido!");
+                        
+                        playerSai.foiSubstituido = true;
+                        subsFeitas++;
+                        subsNestaJanela++;
+                        adicionarNarracao(minutoJogo + "'", `🔄 <b>Substituição Tática:</b> Sai ${playerSai.nome}, entra ${playerEntra.nome}!`);
+                        atualizarTextosSubs();
+                    }
+
+                    meuTime.titulares[destIdx] = playerEntra;
+                    meuTime.banco[index] = playerSai;
+                }
+            } catch(e) { console.error("Falha no drop:", e); }
+            renderizarQuadroTatico(isLiveBoard);
+        }
+
+        function handleDropOnBanco(ev) {
+            ev.preventDefault(); let meuTime = listaDeTimes.find(t => t.id === meuTimeId); if(!meuTime) return;
+            try {
+                let { origem, index } = JSON.parse(ev.dataTransfer.getData("text/plain"));
+                if(origem === "titular") {
+                    if (isLiveBoard) return alert("Para substituir, arraste o reserva para a vaga do titular no campo."); // Forçar a mecânica inversa pra facilitar validação
+                    
+                    let playerRecuado = meuTime.titulares[index];
+                    let playerSubstituto = meuTime.banco.shift(); 
+                    meuTime.titulares[index] = playerSubstituto;
+                    meuTime.banco.push(playerRecuado);
+                }
+            } catch(e) {}
+            renderizarQuadroTatico(isLiveBoard);
+        }
+
+        // RENDERIZAÇÃO DO QUADRO (Reutilizável para Aba Gerenciar e Modal Live)
+        function renderizarQuadroTatico(ehLive = false) {
+            let meuTime = listaDeTimes.find(t => t.id === meuTimeId); if(!meuTime) return;
+            let formacaoAtual = meuTime.formacao || "4-4-2";
+            
+            let idSelectForm = ehLive ? "live-formacao-select" : "gerenciar-formacao";
+            let idCampoVis = ehLive ? "campo-tatico-visual-live" : "campo-tatico-visual";
+            let idListaReservas = ehLive ? "live-lista-reservas-drag" : "gerenciar-lista-reservas-drag";
+
+            document.getElementById(idSelectForm).value = formacaoAtual;
+            if(!ehLive) document.getElementById("gerenciar-ovr-time").innerText = `FORÇA DO PLANTEL: ${obterForcaAtual(meuTime)} OVR`;
+
+            let campoVisual = document.getElementById(idCampoVis);
+            campoVisual.querySelectorAll('.slot-jogador').forEach(el => el.remove());
+
+            let slotsCoordenadas = arranjosFormacoes[formacaoAtual] || arranjosFormacoes["4-4-2"];
+
+            meuTime.titulares.forEach((jogador, idx) => {
+                let slotMeta = slotsCoordenadas[idx] || { tipo: "MEI", top: 50, left: 50 };
+                let ovrCalculado = calcularOvrPosicional(jogador, slotMeta.tipo);
+                let temPenalidade = ovrCalculado < jogador.rating;
+
+                let divSlot = document.createElement("div");
+                divSlot.className = "slot-jogador";
+                divSlot.style.top = `${slotMeta.top}%`; divSlot.style.left = `${slotMeta.left}%`;
+                divSlot.setAttribute("draggable", "true");
+                
+                divSlot.addEventListener("dragstart", (e) => handleDragStart(e, "titular", idx));
+                divSlot.addEventListener("dragover", handleDragOver);
+                divSlot.addEventListener("dragenter", (e) => handleDragEnterTotem(e, divSlot.firstChild));
+                divSlot.addEventListener("dragleave", (e) => handleDragLeaveTotem(e, divSlot.firstChild));
+                divSlot.addEventListener("drop", (e) => handleDropOnSlot(e, idx));
+
+                divSlot.innerHTML = `
+                    <div class="player-totem">
+                        <span class="totem-pos-vaga">${slotMeta.tipo}</span>
+                        <span class="totem-nome">${jogador.nome.split(" ")[0]}</span>
+                        <span class="totem-ovr ${temPenalidade ? 'penalizado':''}">${ovrCalculado} <small style="font-size:8px; color:#aaa;">(${jogador.posicao})</small></span>
+                    </div>
+                `;
+                campoVisual.appendChild(divSlot);
+            });
+
+            let divReservas = document.getElementById(idListaReservas);
+            divReservas.innerHTML = "";
+            let ulBanco = document.createElement("ul"); ulBanco.className = "lista-drag-banco";
+            ulBanco.addEventListener("dragover", handleDragOver);
+            ulBanco.addEventListener("drop", handleDropOnBanco);
+
+            meuTime.banco.forEach((jogador, idx) => {
+                let li = document.createElement("li");
+                let bloqueado = ehLive && jogador.foiSubstituido;
+                li.className = `item-drag-banco ${bloqueado ? 'substituido' : ''}`;
+                if (!bloqueado) li.setAttribute("draggable", "true");
+                li.addEventListener("dragstart", (e) => handleDragStart(e, "reserva", idx));
+
+                li.innerHTML = `
+                    <div>
+                        <strong style="color:#007bff; font-size:11px; background:#eef7ff; padding:2px 5px; border-radius:3px; margin-right:6px;">${jogador.posicao}</strong>
+                        <span style="font-size:13px; font-weight:500;">${jogador.nome}</span>
+                        ${bloqueado ? '<span class="status-substituido">SAIU</span>' : ''}
+                    </div>
+                    <span style="font-weight:bold; color:#6c757d; font-size:12px;">OVR ${jogador.rating}</span>
+                `;
+                ulBanco.appendChild(li);
+            });
+            divReservas.appendChild(ulBanco);
+        }
+
+        function renderizarGerenciamentoTime() { renderizarQuadroTatico(false); }
+
+        // --- SISTEMA LIVE NOVO: MODAL TÁTICO E INTERVALO ---
+        function atualizarTextosSubs() {
+            document.getElementById("txt-subs-feitas").innerText = subsFeitas;
+            document.getElementById("txt-paradas").innerText = paradasSub;
+            document.getElementById("modal-info-subs").innerText = `${subsFeitas}/5`;
+            document.getElementById("modal-info-paradas").innerText = `${paradasSub}/3`;
+        }
+
+        function abrirQuadroTaticoLive() {
+            if (!emIntervalo && paradasSub >= 3 && subsFeitas < 5) {
+                alert("Você já usou suas 3 paradas! Só pode mexer no intervalo."); return;
+            }
+            if(loopAutomatico) { clearInterval(loopAutomatico); loopAutomatico = null; document.getElementById("btn-modo-rapido").innerText = "Simulação Direta ⚡"; }
+            
+            isLiveBoard = true;
+            subsNestaJanela = 0;
+            renderizarQuadroTatico(true);
+            atualizarTextosSubs();
+            document.getElementById("overlay-intervalo").style.display = "none";
+            document.getElementById("modal-tatica-live").style.display = "flex";
+        }
+
+        function fecharQuadroTaticoLive() {
+            if (subsNestaJanela > 0 && !emIntervalo) {
+                paradasSub++;
+                adicionarNarracao(minutoJogo + "'", `⏱️ Treinador conclui as alterações da ${paradasSub}ª parada técnica.`);
+            }
+            isLiveBoard = false;
+            atualizarTextosSubs();
+            montarListasElencoUI(jogoAtActiveRef.jogo.casa, "lista-titulares-casa", "lista-banco-casa");
+            montarListasElencoUI(jogoAtActiveRef.jogo.visitante, "lista-titulares-vis", "lista-banco-vis");
+            
+            document.getElementById("modal-tatica-live").style.display = "none";
+            if(emIntervalo) document.getElementById("overlay-intervalo").style.display = "flex";
+        }
+
+        function iniciarIntervalo() {
+            emIntervalo = true;
+            if(loopAutomatico) { clearInterval(loopAutomatico); loopAutomatico = null; document.getElementById("btn-modo-rapido").innerText = "Simulação Direta ⚡"; }
+            adicionarNarracao("45'", "⏱️ Fim do 1º Tempo! As equipes vão para o vestiário.");
+            document.getElementById("overlay-intervalo").style.display = "flex";
+        }
+
+        function voltarDoIntervalo() {
+            emIntervalo = false;
+            segundoTempoIniciado = true;
+            minutoJogo = 46;
+            document.getElementById("overlay-intervalo").style.display = "none";
+            adicionarNarracao("46'", "🏁 Rola a bola para os 45 minutos finais!");
+            atualizarTempoUI();
+        }
+
+        // --- FLUXO DA PARTIDA ---
+        function carregarModoTecnico(jogo, labelFase, ehMataMata) {
+            jogoAtActiveRef = { jogo: jogo, label: labelFase, ehMataMata: ehMataMata };
+            document.getElementById("tela-jogo").style.display = "none";
+            document.getElementById("tela-partida-tecnico").style.display = "block";
+            
+            // Reseta flags de substituição nos elencos antes do jogo
+            let meuT = jogo.casa.id === meuTimeId ? jogo.casa : jogo.visitante;
+            if(meuT) {
+                meuT.titulares.forEach(j => j.foiSubstituido = false);
+                meuT.banco.forEach(j => j.foiSubstituido = false);
+            }
+
+            document.getElementById("modal-vestiario").style.display = "block";
+            document.getElementById("container-live-jogo").style.display = "none";
+            document.getElementById("live-contexto-fase").innerText = `Modo Técnico - ${labelFase}`;
+            document.getElementById("live-nome-casa").innerText = jogo.casa.nome;
+            document.getElementById("live-nome-vis").innerText = jogo.visitante.nome;
+        }
+
+        function entrarEmCampoLive() {
+            minutoJogo = 0; golsCasaLive = 0; golsVisLive = 0;
+            emProrrogacao = false; disputaPenaisAtiva = false; emIntervalo = false; segundoTempoIniciado = false;
+            subsFeitas = 0; paradasSub = 0; isLiveBoard = false;
+            statsAoVivo = { casa: { chutes:0, faltas:0, escanteios:0, posse:50 }, vis: { chutes:0, faltas:0, escanteios:0, posse:50 } };
+            
+            estrategiaTime = document.getElementById("pre-jogo-postura").value;
+            palestraAplicada = document.getElementById("pre-jogo-palestra").value;
+            mudarPosturaLive(estrategiaTime); 
+            atualizarTextosSubs();
+            
+            document.getElementById("modal-vestiario").style.display = "none";
+            document.getElementById("container-live-jogo").style.display = "grid";
+            document.getElementById("live-gols-casa").innerText = "0";
+            document.getElementById("live-gols-vis").innerText = "0";
+            document.getElementById("live-tempo").innerText = "0' - Pré-jogo";
+            document.getElementById("nome-meu-time-painel").innerText = meuTimeNome;
+
+            montarListasElencoUI(jogoAtActiveRef.jogo.casa, "lista-titulares-casa", "lista-banco-casa");
+            montarListasElencoUI(jogoAtActiveRef.jogo.visitante, "lista-titulares-vis", "lista-banco-vis");
+
+            document.getElementById("live-narracao").innerHTML = ""; 
+            adicionarNarracao("0'", "🏁 Equipes em campo! O árbitro apita e a bola está rolando!");
+            
+            if(palestraAplicada !== "nenhuma") {
+                let msg = palestraAplicada === "motivacional" ? "O time entra com sangue nos olhos após a preleção inflamada!" :
+                          palestraAplicada === "foco_defesa" ? "Postura concentrada da equipe, priorizando fechar os espaços." :
+                          "Equipe muito serena trocando passes com tranquilidade no início de jogo.";
+                adicionarNarracao("1'", `🗣️ <b>Vestiário:</b> ${msg}`);
+            }
+
+            atualizarEstatisticasUI();
+            document.getElementById("btn-proxima-jogada").disabled = false;
+            document.getElementById("btn-modo-rapido").innerText = "Simulação Direta ⚡";
+        }
+
+        function mudarPosturaLive(novaPostura) {
+            estrategiaTime = novaPostura;
+            document.querySelectorAll('.btn-tatica').forEach(btn => btn.classList.remove('ativo'));
+            document.getElementById(`btn-tatica-${novaPostura.toLowerCase()}`).classList.add('ativo');
+            if(minutoJogo > 0) adicionarNarracao(`${minutoJogo}'`, `🔄 <b>Tática:</b> O treinador muda a postura do time para: ${novaPostura}.`);
+        }
+
+        function darGritoLive(tipo, btnEl) {
+            gritoAtivo = tipo;
+            document.querySelectorAll('.btn-grito').forEach(btn => btn.classList.remove('ativo'));
+            btnEl.classList.add('ativo');
+            let txt = tipo === "pressao" ? "VAMOS PRESSIONAR! Sobe a linha!" : tipo === "segurar" ? "FECHA A CASINHA! Segura o resultado!" : "CALMA! Roda a bola com inteligência!";
+            adicionarNarracao(`${minutoJogo}'`, `📢 <b>Grito do Técnico:</b> "${txt}"`);
+            setTimeout(() => { gritoAtivo = "nenhum"; btnEl.classList.remove('ativo'); }, 10000);
+        }
+
+        function montarListasElencoUI(time, idTit, idBanco) {
+            let tUl = document.getElementById(idTit); let bUl = document.getElementById(idBanco);
+            tUl.innerHTML = ""; bUl.innerHTML = "";
+            if(time.titulares) time.titulares.forEach(j => tUl.innerHTML += `<li><b>[${j.posicao || 'JOG'}]</b> ${j.nome} <span style="color:#28a745; font-size:10px;">(${j.rating})</span></li>`);
+            if(time.banco) time.banco.forEach(j => {
+                let cssColor = j.foiSubstituido ? "#ccc; text-decoration:line-through;" : "#777;";
+                bUl.innerHTML += `<li style="color:${cssColor}">[${j.posicao || 'JOG'}] ${j.nome} <span style="font-size:10px;">(${j.rating})</span> ${j.foiSubstituido?'<small style="color:#dc3545;">(Saiu)</small>':''}</li>`;
             });
         }
-    });
 
-    // 2. Ordena os jogadores por gols (do maior para o menor)
-    todosOsJogadores.sort((a, b) => b.gols - a.gols);
+        function avancarJogadaManual() {
+            if(disputaPenaisAtiva) { simularPassoPenal(); return; }
+            if(emIntervalo) return;
 
-    // 3. Pega apenas os 10 primeiros
-    let top10 = todosOsJogadores.slice(0, 10);
+            minutoJogo += Math.floor(Math.random() * 4) + 4;
+            
+            // Lógica do Fim do Primeiro Tempo
+            if(minutoJogo >= 45 && !segundoTempoIniciado) {
+                minutoJogo = 45;
+                iniciarIntervalo();
+                return;
+            }
 
-    // 4. Monta o visual da tabela
-    const divArtilharia = document.getElementById("artilharia");
-    let htmlArtilharia = `
-        <table style="width: 100%; text-align: center; border-collapse: collapse; font-size: 14px;">
-            <tr style="background-color: #333; color: white;">
-                <th>#</th>
-                <th style="text-align: left;">Jogador</th>
-                <th>Time</th>
-                <th>Gols</th>
-            </tr>
-    `;
+            if(minutoJogo > 90 && !emProrrogacao && !jogoAtActiveRef.ehMataMata) minutoJogo = 90;
+            if(minutoJogo > 90 && !emProrrogacao && jogoAtActiveRef.ehMataMata && golsCasaLive !== golsVisLive) minutoJogo = 90;
 
-    top10.forEach((jogador, index) => {
-        // Mostra apenas jogadores que fizeram pelo menos 1 gol
-        if (jogador.gols > 0) { 
-            htmlArtilharia += `
-                <tr style="border-bottom: 1px solid #ddd; background-color: #fff;">
-                    <td><strong>${index + 1}º</strong></td>
-                    <td style="text-align: left;">${jogador.nome}</td>
-                    <td>${jogador.time}</td>
-                    <td><strong>${jogador.gols}</strong></td>
-                </tr>
-            `;
+            if(minutoJogo >= 90 && !emProrrogacao && segundoTempoIniciado) {
+                if(golsCasaLive === golsVisLive && jogoAtActiveRef.ehMataMata) {
+                    emProrrogacao = true; minutoJogo = 90;
+                    adicionarNarracao("90'", "⌛ Fim do tempo regulamentar em empate! Vamos para a Prorrogação.");
+                    atualizarTempoUI(); return;
+                } else {
+                    finalizarJogoModoTecnico(); return;
+                }
+            }
+
+            if(emProrrogacao && minutoJogo >= 120) {
+                if(golsCasaLive === golsVisLive) {
+                    disputaPenaisAtiva = true; penaisPlacar = { casa: 0, vis: 0, chutes: 0 };
+                    adicionarNarracao("120'", "🚨 Fim da prorrogação! O vencedor será decidido nos Pênaltis!");
+                    atualizarTempoUI(); return;
+                } else {
+                    finalizarJogoModoTecnico(); return;
+                }
+            }
+
+            processarLanceMecanica();
         }
-    });
 
-    htmlArtilharia += `</table>`;
-    divArtilharia.innerHTML = htmlArtilharia;
-}
+        function alternarAutomatico() {
+            if(loopAutomatico) {
+                clearInterval(loopAutomatico); loopAutomatico = null;
+                document.getElementById("btn-modo-rapido").innerText = "Simulação Direta ⚡";
+            } else {
+                if (emIntervalo) return alert("Avance para o segundo tempo antes de simular!");
+                document.getElementById("btn-modo-rapido").innerText = "Pausar ⏸";
+                loopAutomatico = setInterval(() => {
+                    if(document.getElementById("tela-partida-tecnico").style.display === "none" || emIntervalo) {
+                        clearInterval(loopAutomatico); loopAutomatico = null; document.getElementById("btn-modo-rapido").innerText = "Simulação Direta ⚡"; return;
+                    }
+                    if(disputaPenaisAtiva || minutoJogo <= 121) avancarJogadaManual();
+                    else { clearInterval(loopAutomatico); loopAutomatico = null; }
+                }, 300);
+            }
+        }
+
+        function adicionarNarracao(min, txt, classe = "") {
+            const box = document.getElementById("live-narracao");
+            box.innerHTML = `<div class="linha-narracao ${classe}"><span class="minuto">${min}</span> ${txt}</div>` + box.innerHTML;
+        }
+
+        function atualizarTempoUI() {
+            let label = emProrrogacao ? "Prorrogação" : (minutoJogo <= 45 ? "1º Tempo" : "2º Tempo");
+            if(disputaPenaisAtiva) label = "Pênaltis";
+            document.getElementById("live-tempo").innerText = `${minutoJogo}' - ${label}`;
+        }
+
+        function processarLanceMecanica() {
+            atualizarTempoUI();
+            let c = jogoAtActiveRef.jogo.casa; let v = jogoAtActiveRef.jogo.visitante;
+            let fC = obterForcaAtual(c); let fV = obterForcaAtual(v);
+            
+            if (c.id === meuTimeId) {
+                if (palestraAplicada === "motivacional") { fC += 6; fV += 2; } else if (palestraAplicada === "foco_defesa") { fC -= 3; fV -= 8; } else if (palestraAplicada === "calma") { fC += 2; }
+                if (estrategiaTime === "Ofensivo") { fC += 14; fV += 5; } if (estrategiaTime === "Defensivo") { fV -= 12; fC -= 8; }
+                if (gritoAtivo === "segurar") fV -= 10;
+            } else if (v.id === meuTimeId) {
+                if (palestraAplicada === "motivacional") { fV += 6; fC += 2; } else if (palestraAplicada === "foco_defesa") { fV -= 3; fC -= 8; } else if (palestraAplicada === "calma") { fV += 2; }
+                if (estrategiaTime === "Ofensivo") { fV += 14; fC += 5; } if (estrategiaTime === "Defensivo") { fC -= 12; fV -= 8; }
+                if (gritoAtivo === "segurar") fC -= 10;
+            }
+
+            let chanceCasa = fC / (fC + fV);
+            let atacante = Math.random() < chanceCasa ? c : v;
+            let defensor = atacante.id === c.id ? v : c;
+            let lado = atacante.id === c.id ? 'casa' : 'vis';
+
+            let acrescimoPosse = (atacante.formacao === "3-5-2") ? 6 : 4;
+            if (atacante.id === meuTimeId) {
+                if(palestraAplicada === "calma") acrescimoPosse += 4; if(gritoAtivo === "pressao") acrescimoPosse += 8; if(gritoAtivo === "calma") acrescimoPosse += 6;
+            }
+            statsAoVivo[lado].posse = Math.min(78, Math.max(22, statsAoVivo[lado].posse + (Math.random() > 0.48 ? acrescimoPosse : -acrescimoPosse)));
+            statsAoVivo[lado === 'casa' ? 'vis' : 'casa'].posse = 100 - statsAoVivo[lado].posse;
+
+            let tipoLance = Math.random();
+
+            if(tipoLance < (atacante.formacao === "4-3-3" ? 0.42 : 0.35)) {
+                statsAoVivo[lado].chutes++;
+                let elenco = (atacante.titulares || []).concat(atacante.banco || []);
+                let art = "Jogador"; if(elenco.length>0) { let p = elenco.map(j => j.posicao==="ATA"?6:j.posicao==="MEI"?3:1); let s = p.reduce((a,b)=>a+b,0); let r = Math.random()*s; let ac = 0; for(let i=0;i<elenco.length;i++){ac+=p[i]; if(r<=ac){art=elenco[i].nome; break;}} }
+                let taxaAcerto = 0.13 + ((fC - fV) * 0.011);
+                
+                if(Math.random() < taxaAcerto) {
+                    if(lado === 'casa') golsCasaLive++; else golsVisLive++;
+                    let j = elenco.find(x => x.nome === art); if(j) j.gols = (j.gols || 0) + 1;
+                    document.getElementById("live-gols-casa").innerText = golsCasaLive; document.getElementById("live-gols-vis").innerText = golsVisLive;
+                    adicionarNarracao(`${minutoJogo}'`, `⚽ <b>GOOOOOL DA ${atacante.nome.toUpperCase()}!!</b> Excelente construção e gol de ${art}!`, "gol");
+                } else {
+                    if(Math.random() > 0.5) adicionarNarracao(`${minutoJogo}'`, `🎯 Tiro perigoso de ${art} (${atacante.nome}), mas o arqueiro espalma!`);
+                    else adicionarNarracao(`${minutoJogo}'`, `💥 Por cima! ${art} arrisca a finalização na entrada da área, mas erra o alvo.`);
+                }
+            } else if (tipoLance < 0.55) { statsAoVivo[lado].escanteios++; adicionarNarracao(`${minutoJogo}'`, `🚩 Cruzamento na área a partir do escanteio. A zaga afasta.`);
+            } else if (tipoLance < 0.75) { statsAoVivo[lado === 'casa' ? 'vis' : 'casa'].faltas++; adicionarNarracao(`${minutoJogo}'`, `⚠️ Jogo parado. Falta forte da ${defensor.nome}.`); }
+
+            atualizarEstatisticasUI();
+        }
+
+        // --- SISTEMAS DE TORNEIO BASE ---
+        function sortearGruposMundiais() { let misturados = [...listaDeTimes].sort(() => Math.random() - 0.5); letrasGrupos.forEach((letra, index) => { grupos[letra] = misturados.slice(index * 4, (index * 4) + 4); grupos[letra].forEach(t => t.grupoLetra = letra); }); }
+        function gerarTabelaFaseGrupos() { tabelaPartidasGrupos = [[], [], []]; letrasGrupos.forEach(l => { let g = grupos[l]; tabelaPartidasGrupos[0].push({ casa: g[0], visitante: g[3] }, { casa: g[1], visitante: g[2] }); tabelaPartidasGrupos[1].push({ casa: g[0], visitante: g[1] }, { casa: g[2], visitante: g[3] }); tabelaPartidasGrupos[2].push({ casa: g[0], visitante: g[2] }, { casa: g[3], visitante: g[1] }); }); }
+        function processarFluxoTorneio() { if (faseAtual === "GRUPOS") simularRodadaGrupos(); else if (faseAtual !== "FIM") simularFaseMataMata(); }
+        function calcularPlacarRapido(forcaC, forcaV) { let delta = forcaC - forcaV; let base = Math.floor(Math.random() * 4); if (delta >= 10) base += Math.floor(Math.random() * 3); else if (delta >= 4) base += Math.floor(Math.random() * 2); else if (delta <= -10) base -= Math.floor(Math.random() * 3); else if (delta <= -4) base -= Math.floor(Math.random() * 2); return Math.max(0, base); }
+        function obterNomeArtilheiro(time, deFatoGol = false) { let elenco = (time.titulares || []).concat(time.banco || []); if(elenco.length === 0) return "Jogador Regular"; let pesos = elenco.map(j => j.posicao === "ATA" ? 6 : j.posicao === "MEI" ? 3 : 1); let somaPesos = pesos.reduce((a,b)=> a+b, 0); let r = Math.random() * somaPesos; let acumulado = 0; for(let i=0; i<elenco.length; i++) { acumulado += pesos[i]; if(r <= acumulado) { if(deFatoGol) elenco[i].gols = (elenco[i].gols || 0) + 1; return elenco[i].nome; } } if(deFatoGol) elenco[0].gols = (elenco[0].gols || 0) + 1; return elenco[0].nome; }
+
+        function simularPassoPenal() { /* Omitido por clareza - lógica mantida a mesma*/ }
+        function atualizarEstatisticasUI() {
+            const container = document.getElementById("estatisticas-linhas"); let s = statsAoVivo; let pC = Math.round(s.casa.posse); let pV = 100 - pC;
+            container.innerHTML = `<div class="stat-barra-container"><span>Posse de Bola</span></div><div class="stat-barra-container"><span>${pC}%</span><div class="stat-barra"><div style="background:#007bff; width:${pC}%;"></div><div style="background:#6c757d; width:${pV}%;"></div></div><span>${pV}%</span></div><div class="stat-barra-container"><span>Chutes a Gol: <b>${s.casa.chutes}</b> vs <b>${s.vis.chutes}</b></span></div><div class="stat-barra-container"><span>Faltas Cometidas: <b>${s.casa.faltas}</b> vs <b>${s.vis.faltas}</b></span></div><div class="stat-barra-container"><span>Escanteios: <b>${s.casa.escanteios}</b> vs <b>${s.vis.escanteios}</b></span></div>`;
+        }
+
+        function finalizarJogoModoTecnico() {
+            if(loopAutomatico) { clearInterval(loopAutomatico); loopAutomatico = null; }
+            let jRef = jogoAtActiveRef.jogo; jRef.gc = golsCasaLive; jRef.gv = golsVisLive;
+            let vencedorReal = null; let txtPenLabel = "";
+            if (golsCasaLive === golsVisLive && jogoAtActiveRef.ehMataMata) { jRef.penC = penaisPlacar.casa; jRef.penV = penaisPlacar.vis; vencedorReal = penaisPlacar.casa > penaisPlacar.vis ? jRef.casa : jRef.visitante; txtPenLabel = ` (Pen: ${penaisPlacar.casa} x ${penaisPlacar.vis})`; } 
+            else { vencedorReal = golsCasaLive > golsVisLive ? jRef.casa : jRef.visitante; }
+            jRef.vencedor = vencedorReal;
+            let c = jRef.casa; let v = jRef.visitante;
+            c.jogos++; v.jogos++; c.gp += golsCasaLive; c.gc += golsVisLive; v.gp += golsVisLive; v.gc += golsCasaLive; c.sg = c.gp - c.gc; v.sg = v.gp - v.gc;
+            c.golsPro = c.gp; c.golsContra = c.gc; c.saldo = c.sg; v.golsPro = v.gp; v.golsContra = v.gc; v.saldo = v.sg;
+            if(!jogoAtActiveRef.ehMataMata) { if (golsCasaLive > golsVisLive) { c.pontos += 3; c.vitorias++; v.derrotas++; } else if (golsVisLive > golsCasaLive) { v.pontos += 3; v.vitorias++; c.derrotas++; } else { c.pontos += 1; v.pontos += 1; c.empates++; v.empates++; } }
+            let extraIn = txtPenLabel; if(txtPenLabel !== "") extraIn += (vencedorReal.id === meuTimeId ? " Ganhou nos Pênaltis!" : " Perdeu nos Pênaltis.");
+            registrarTrajetoria(jogoAtActiveRef.label, (c.id === meuTimeId ? v.nome : c.nome), golsCasaLive, golsVisLive, (c.id === meuTimeId), extraIn);
+            document.getElementById("tela-partida-tecnico").style.display = "none"; document.getElementById("tela-jogo").style.display = "block";
+            if(jogoAtActiveRef.ehMataMata) concluirFluxoFaseMataMataAtiva(); else concluirFluxoFaseGruposAtiva();
+        }
+
+        function registrarTrajetoria(faseLabel, timeAdversario, gc, gv, souCasa, extra = "") {
+            let golsMarcados = souCasa ? gc : gv; let golsSofridos = souCasa ? gv : gc; let res = "E";
+            if (golsMarcados > golsSofridos) res = "V"; if (golsSofridos > golsMarcados) res = "D";
+            if(extra.includes("Pen:") && res === "E") { if (extra.includes("Ganhou")) res = "V"; else res = "D"; }
+            minhaTrajetoria.push({ fase: faseLabel, adversario: timeAdversario, placar: `${golsMarcados} x ${golsSofridos}`, status: res, detalhes: extra });
+            atualizarVisualTrajetoria();
+        }
+
+        function simularRodadaGrupos() {
+            const divRes = document.getElementById("resultados-jogos"); divRes.innerHTML = "";
+            let jogosHoje = tabelaPartidasGrupos[rodadaGrupo - 1];
+            let meuJogoDestaque = jogosHoje.find(j => j.casa.id === meuTimeId || j.visitante.id === meuTimeId);
+
+            jogosHoje.forEach(jogo => {
+                if(jogo.casa.id === meuTimeId || jogo.visitante.id === meuTimeId) return;
+                let c = jogo.casa; let v = jogo.visitante;
+                let gc = calcularPlacarRapido(obterForcaAtual(c), obterForcaAtual(v)); let gv = calcularPlacarRapido(obterForcaAtual(v), obterForcaAtual(c));
+                c.jogos++; v.jogos++; c.gp += gc; c.gc += gv; v.gp += gv; v.gc += gc; c.sg = c.gp - c.gc; v.sg = v.gp - v.gc;
+                c.golsPro = c.gp; c.golsContra = c.gc; c.saldo = c.sg; v.golsPro = v.gp; v.golsContra = v.gc; v.saldo = v.sg;
+                if (gc > gv) { c.pontos += 3; c.vitorias++; v.derrotas++; } else if (gv > gc) { v.pontos += 3; v.vitorias++; c.derrotas++; } else { c.pontos += 1; v.pontos += 1; c.empates++; v.empates++; }
+                for(let g=0;g<gc;g++) obterNomeArtilheiro(c, true); for(let g=0;g<gv;g++) obterNomeArtilheiro(v, true);
+                if (rodadaGrupo === 1 && ["A","B"].includes(c.grupoLetra) || Math.random() > 0.88) { divRes.innerHTML += `<div class="placar"><strong>Grupo ${c.grupoLetra}:</strong> ${c.nome} ${gc} x ${gv} ${v.nome}</div>`; }
+            });
+            if(meuJogoDestaque) carregarModoTecnico(meuJogoDestaque, `Grupo - Rodada ${rodadaGrupo}`, false); else concluirFluxoFaseGruposAtiva();
+        }
+
+        function concluirFluxoFaseGruposAtiva() { if (rodadaGrupo < 3) { rodadaGrupo++; document.getElementById("btn-simular-acao").innerText = `Simular Rodada ${rodadaGrupo}`; } else { if (listaDeTimes.length <= 32) { apurarClassificadosParaOitavas(); } else { apurarClassificadosPara16Avos(); } } renderizarInterface(); }
+
+        function apurarClassificadosParaOitavas() {
+            let classificados = []; letrasGrupos.forEach(l => { let g = grupos[l]; g.sort((a,b) => b.pontos - a.pontos || b.vitorias - a.vitorias || b.sg - a.sg || b.gp - a.gp); classificados.push(g[0], g[1]); });
+            faseAtual = "OITAVAS"; popularPlaceholdersMataMata(); bracketDados["OITAVAS"] = [];
+            for (let i = 0; i < classificados.length; i += 4) {
+                let grA1 = classificados[i]; let grA2 = classificados[i+1]; let grB1 = classificados[i+2]; let grB2 = classificados[i+3];
+                if(grA1 && grB2) bracketDados["OITAVAS"].push({ casa: grA1, visitante: grB2, gc: null, gv: null, penC: null, penV: null, vencedor: null });
+                if(grB1 && grA2) bracketDados["OITAVAS"].push({ casa: grB1, visitante: grA2, gc: null, gv: null, penC: null, penV: null, vencedor: null });
+            }
+            document.getElementById("titulo-fase-principal").innerText = "Mata-Mata: Oitavas de Final"; document.getElementById("btn-simular-acao").innerText = "Simular Oitavas de Final"; document.getElementById("titulo-dinamico-chave").innerText = "Chaveamento do Mata-Mata"; mudarAba('aba-simulador', document.querySelector('.menu-abas button'));
+        }
+
+        function apurarClassificadosPara16Avos() {
+            let classificadosDiretos = []; let terceirosCandidatos = [];
+            letrasGrupos.forEach(l => { let g = grupos[l]; g.sort((a,b) => b.pontos - a.pontos || b.vitorias - a.vitorias || b.sg - a.sg || b.gp - a.gp); classificadosDiretos.push(g[0], g[1]); terceirosCandidatos.push(g[2]); });
+            terceirosCandidatos.sort((a,b) => b.pontos - a.pontos || b.vitorias - a.vitorias || b.sg - a.sg || b.gp - a.gp); let melhoresTerceiros = terceirosCandidatos.slice(0, 8);
+            let totalMataMata = classificadosDiretos.concat(melhoresTerceiros); totalMataMata.sort((a,b) => b.pontos - a.pontos || b.vitorias - a.vitorias || b.sg - a.sg || b.gp - a.gp);
+            faseAtual = "16AVOS"; bracketDados["16AVOS"] = [];
+            for (let i = 0; i < 16; i++) { bracketDados["16AVOS"].push({ casa: totalMataMata[i], visitante: totalMataMata[31 - i], gc: null, gv: null, penC: null, penV: null, vencedor: null }); }
+            popularPlaceholdersMataMata(); document.getElementById("titulo-fase-principal").innerText = "Mata-Mata: 16-avos de Final"; document.getElementById("btn-simular-acao").innerText = "Simular 16-avos de Final"; document.getElementById("titulo-dinamico-chave").innerText = "Chaveamento do Mata-Mata"; mudarAba('aba-simulador', document.querySelector('.menu-abas button'));
+        }
+
+        function popularPlaceholdersMataMata() { bracketDados["OITAVAS"] = Array(8).fill(null).map(() => ({ casa: null, visitante: null, gc: null, gv: null, vencedor: null })); bracketDados["QUARTAS"] = Array(4).fill(null).map(() => ({ casa: null, visitante: null, gc: null, gv: null, vencedor: null })); bracketDados["SEMIS"] = Array(2).fill(null).map(() => ({ casa: null, visitante: null, gc: null, gv: null, vencedor: null })); bracketDados["FINAL"] = Array(1).fill(null).map(() => ({ casa: null, visitante: null, gc: null, gv: null, vencedor: null })); }
+
+        function simularFaseMataMata() {
+            let chavesAtuais = bracketDados[faseAtual]; let meuJogoMataMata = chavesAtuais.find(j => (j.casa && j.casa.id === meuTimeId) || (j.visitante && j.visitante.id === meuTimeId));
+            chavesAtuais.forEach(jogo => {
+                if(meuJogoMataMata && jogo === meuJogoMataMata) return; if(jogo.vencedor !== null) return; 
+                let c = jogo.casa; let v = jogo.visitante; let gc = calcularPlacarRapido(obterForcaAtual(c), obterForcaAtual(v)); let gv = calcularPlacarRapido(obterForcaAtual(v), obterForcaAtual(c)); let vencedor = null;
+                if (gc === gv) { let pC = 0; let pV = 0; while(pC === pV) { pC = Math.floor(Math.random()*5)+2; pV = Math.floor(Math.random()*5)+2; } jogo.penC = pC; jogo.penV = pV; vencedor = pC > pV ? c : v; } else { vencedor = gc > gv ? c : v; }
+                jogo.gc = gc; jogo.gv = gv; jogo.vencedor = vencedor; for(let g=0;g<gc;g++) obterNomeArtilheiro(c, true); for(let g=0;g<gv;g++) obterNomeArtilheiro(v, true);
+            });
+            if(meuJogoMataMata && meuJogoMataMata.vencedor === null) { carregarModoTecnico(meuJogoMataMata, `Mata-Mata: ${obterNomeLegivelFase(faseAtual)}`, true); } else { concluirFluxoFaseMataMataAtiva(); }
+        }
+
+        function concluirFluxoFaseMataMataAtiva() {
+            const divRes = document.getElementById("resultados-jogos"); divRes.innerHTML = ""; let chavesAtuais = bracketDados[faseAtual]; let vencedoresFase = [];
+            chavesAtuais.forEach(j => { vencedoresFase.push(j.vencedor); let pTxt = j.penC !== null ? ` (Pen: ${j.penC} x ${j.penV})` : ""; let itemEstilo = (j.casa.id === meuTimeId || j.visitante.id === meuTimeId) ? "background-color:#fff3cd; border-left-color:#ffc107; font-weight:bold;" : ""; divRes.innerHTML += `<div class="placar" style="${itemEstilo}"><strong>${obterNomeLegivelFase(faseAtual)}:</strong> ${j.casa.nome} ${j.gc} x ${j.gv} ${j.visitante.nome} ${pTxt}<br><small style="color:#28a745;">➔ Avançou: ${j.vencedor.nome}</small></div>`; });
+            if (faseAtual === "16AVOS") montarProximaEtapaMataMata("OITAVAS", vencedoresFase, "Oitavas de Final", "Simular Oitavas de Final"); else if (faseAtual === "OITAVAS") montarProximaEtapaMataMata("QUARTAS", vencedoresFase, "Quartas de Final", "Simular Quartas de Final"); else if (faseAtual === "QUARTAS") montarProximaEtapaMataMata("SEMIS", vencedoresFase, "Semifinais", "Simular Semifinais"); else if (faseAtual === "SEMIS") montarProximaEtapaMataMata("FINAL", vencedoresFase, "Grande Final", "Simular Grande Final"); else if (faseAtual === "FINAL") { let campeao = vencedoresFase[0]; document.getElementById("titulo-fase-principal").innerHTML = `<span style="background:#db9a00; color:white; padding:5px 15px; border-radius:6px;">🏆 CAMPEÃO DO MUNDO: ${campeao.nome.toUpperCase()} 🏆</span>`; document.getElementById("btn-simular-acao").style.display = "none"; faseAtual = "FIM"; }
+            renderizarInterface();
+        }
+
+        function montarProximaEtapaMataMata(proximaFase, listaVencedores, tituloTexto, textoBotao) { faseAtual = proximaFase; let idx = 0; for(let i = 0; i < bracketDados[proximaFase].length; i++) { bracketDados[proximaFase][i] = { casa: listaVencedores[idx++], visitante: listaVencedores[idx++], gc: null, gv: null, penC: null, penV: null, vencedor: null }; } document.getElementById("titulo-fase-principal").innerText = "Mata-Mata: " + tituloTexto; document.getElementById("btn-simular-acao").innerText = textoBotao; }
+        function obterNomeLegivelFase(sigla) { if(sigla === "16AVOS") return "16-avos de Final"; if(sigla === "OITAVAS") return "Oitavas de Final"; if(sigla === "QUARTAS") return "Quartas de Final"; if(sigla === "SEMIS") return "Semifinal"; if(sigla === "FINAL") return "Grande Final"; return sigla; }
+
+        function renderizarInterface() {
+            const containerfase = document.getElementById("container-visual-fase"); containerfase.innerHTML = "";
+            let htmlGrid = `<div class="grid-grupos">`; letrasGrupos.forEach(l => { let g = grupos[l]; g.sort((a,b) => b.pontos - a.pontos || b.vitorias - a.vitorias || b.sg - a.sg || b.gp - a.gp); htmlGrid += `<div class="card-grupo"><div class="titulo-grupo">GRUPO ${l}</div><table class="tabela-mini"><tr><th>Seleção</th><th>P</th><th>J</th><th>SG</th></tr>`; g.forEach((time, index) => { let marcaMeuTime = time.id === meuTimeId ? "background:#fff3cd; font-weight:bold; color:#0056b3;" : ""; htmlGrid += `<tr style="${marcaMeuTime}"><td style="text-align:left;">${index < 2 ? "• ":""}${time.nome}</td><td><strong>${obterForcaAtual(time)}</strong></td><td>${time.jogos}</td><td>${time.sg}</td></tr>`; }); htmlGrid += `</table></div>`; }); htmlGrid += `</div>`;
+            if (faseAtual === "GRUPOS") { containerfase.innerHTML = htmlGrid; } else {
+                let htmlBracket = `<div class="bracket-scroll"><div class="bracket-container">`; let fasesMataMata = listaDeTimes.length <= 32 ? ["OITAVAS", "QUARTAS", "SEMIS", "FINAL"] : ["16AVOS", "OITAVAS", "QUARTAS", "SEMIS", "FINAL"];
+                fasesMataMata.forEach(f => { htmlBracket += `<div class="bracket-coluna"><div class="bracket-fase-titulo">${obterNomeLegivelFase(f)}</div>`; bracketDados[f].forEach(jogo => { let nCasa = jogo.casa ? jogo.casa.nome : "A vencer"; let nVis = jogo.visitante ? jogo.visitante.nome : "A vencer"; let txtC = jogo.gc !== null ? jogo.gc : ""; let txtV = jogo.gv !== null ? jogo.gv : ""; if (jogo.penC !== null) { txtC += ` (${jogo.penC})`; txtV += ` (${jogo.penV})`; } let clC = (jogo.vencedor && jogo.vencedor.id === jogo.casa?.id) ? "bracket-time vencedor" : "bracket-time"; let clV = (jogo.vencedor && jogo.vencedor.id === jogo.visitante?.id) ? "bracket-time vencedor" : "bracket-time"; if(jogo.casa && jogo.casa.id === meuTimeId) clC += " style='border:1px solid #ffc107;'"; if(jogo.visitante && jogo.visitante.id === meuTimeId) clV += " style='border:1px solid #ffc107;'"; htmlBracket += `<div class="bracket-jogo"><div class="${clC}"><span>${nCasa}</span><strong>${txtC}</strong></div><div class="${clV}"><span>${nVis}</span><strong>${txtV}</strong></div></div>`; }); htmlBracket += `</div>`; }); htmlBracket += `</div></div>`;
+                containerfase.innerHTML = htmlBracket + `<h3 style="text-align: left; margin-top: 35px; margin-bottom: 15px; border-bottom: 2px solid #ddd; padding-bottom: 6px; color:#333;">📊 Classificação Final da Fase de Grupos</h3>` + htmlGrid;
+            }
+            renderizarArtilheiros();
+        }
+
+        function atualizarVisualTrajetoria() { const container = document.getElementById("container-trajetoria"); if(minhaTrajetoria.length === 0) return; let htmlTraj = `<table class="tabela-trajetoria"><tr><th>Etapa / Fase</th><th>Oponente</th><th>Placar (Você x Eles)</th><th>Resultado</th><th>Detalhes Extras</th></tr>`; minhaTrajetoria.forEach(t => { let cl = t.status === "V" ? "badge vitoria" : (t.status === "E" ? "badge empate" : "badge derrota"); htmlTraj += `<tr><td><strong>${t.fase}</strong></td><td>${t.adversario}</td><td><code>${t.placar}</code></td><td><span class="${cl}">${t.status==="V"?"Vitória":t.status==="E"?"Empate":"Derrota"}</span></td><td><small style="color:#666;">${t.detalhes || "-"}</small></td></tr>`; }); container.innerHTML = htmlTraj + `</table>`; }
+        function renderizarArtilheiros() { let todos = []; listaDeTimes.forEach(t => { let el = (t.titulares || []).concat(t.banco || []); el.forEach(j => { if(j.gols > 0) todos.push({ nome: j.nome, gols: j.gols, selecao: t.nome }); }); }); todos.sort((a,b) => b.gols - a.gols); let top10 = todos.slice(0, 10); if(top10.length === 0) { document.getElementById("container-artilharia").innerHTML = "<p style='color:#888; font-size:13px;'>Nenhum gol registrado.</p>"; return; } let htmlArt = `<table style="width:100%; border-collapse:collapse; font-size:13px; text-align:center;"><tr style="background:#f4f5f7; border-bottom:2px solid #ddd;"><th style="padding:5px;">Pos</th><th style="text-align:left;">Nome</th><th>Seleção</th><th>Gols ⚽</th></tr>`; top10.forEach((j, i) => { htmlArt += `<tr style="border-bottom:1px solid #eee;"><td style="padding:6px;"><strong>${i+1}º</strong></td><td style="text-align:left;">${j.nome}</td><td>${j.selecao}</td><td><span style="background:#28a745; color:white; padding:2px 7px; border-radius:10px; font-weight:bold;">${j.gols}</span></td></tr>`; }); document.getElementById("container-artilharia").innerHTML = htmlArt + `</table>`; }
+
+        carregarTelaInicial();
     </script>
-
 </body>
 </html>

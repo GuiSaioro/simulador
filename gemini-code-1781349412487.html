@@ -1,846 +1,1431 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Copa do Mundo 2026 - Modo Técnico Pro</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f0f2f5; margin: 0; padding: 20px; display: flex; flex-direction: column; align-items: center; }
-        .painel { background-color: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.06); width: 100%; max-width: 1100px; text-align: center; box-sizing: border-box; }
-        
-        /* Menu de Abas */
-        .menu-abas { display: flex; justify-content: center; background: #333; border-radius: 8px; margin-bottom: 20px; padding: 5px; width: 100%; }
-        .aba-btn { background: none; color: #bbb; border: none; padding: 10px 15px; font-size: 14px; cursor: pointer; font-weight: bold; transition: all 0.2s; border-radius: 6px; margin: 0 2px; }
-        .aba-btn:hover { color: white; background: #444; }
-        .aba-btn.ativa { color: white; background: #007bff; }
-        .aba-conteudo { display: none; margin-top: 15px; }
-        .aba-conteudo.ativa { display: block; }
+        body {
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            background: #f0f2f5;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
 
-        button.principal { background-color: #007bff; color: white; border: none; padding: 12px 30px; font-size: 16px; border-radius: 6px; cursor: pointer; font-weight: bold; transition: background 0.2s; }
-        button.principal:hover { background-color: #0056b3; }
-        button.secundario { background-color: #6c757d; color: white; border: none; padding: 8px 16px; font-size: 14px; border-radius: 4px; cursor: pointer; font-weight: bold; }
-        button.secundario:hover { background-color: #5a6268; }
-        
-        .placar { font-size: 14px; margin: 8px 0; padding: 12px; background-color: #f8f9fa; border-radius: 6px; border-left: 5px solid #007bff; text-align: left; }
-        .grid-grupos { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 15px; }
-        .card-grupo { background: #fff; border: 1px solid #e1e4e8; border-radius: 8px; padding: 10px; }
-        .titulo-grupo { background: #222; color: white; padding: 5px; font-size: 13px; font-weight: bold; border-radius: 4px; margin-bottom: 8px; }
-        .tabela-mini { width: 100%; font-size: 12px; border-collapse: collapse; }
-        .tabela-mini th { background: #f1f1f1; padding: 3px; }
-        .tabela-mini td { padding: 4px; border-bottom: 1px solid #f9f9f9; text-align: center; }
+        .painel {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+            width: 100%;
+            max-width: 1150px;
+            text-align: center;
+            box-sizing: border-box;
+        }
 
-        .bracket-scroll { width: 100%; overflow-x: auto; background: #fafafa; border: 1px solid #e1e4e8; border-radius: 8px; padding: 20px; box-sizing: border-box; }
-        .bracket-container { display: flex; gap: 30px; align-items: center; min-width: 950px; justify-content: space-between; }
-        .bracket-coluna { display: flex; flex-direction: column; justify-content: space-around; height: 680px; width: 180px; }
-        .bracket-fase-titulo { font-size: 12px; font-weight: bold; color: #555; text-transform: uppercase; border-bottom: 2px solid #007bff; padding-bottom: 4px; margin-bottom: 10px; text-align: center; }
-        .bracket-jogo { background: white; border: 1px solid #cbd5e1; border-radius: 6px; padding: 5px; box-shadow: 0 2px 4px rgba(0,0,0,0.04); font-size: 11px; }
-        .bracket-time { display: flex; justify-content: space-between; padding: 3px 5px; border-radius: 3px; }
-        .bracket-time.vencedor { font-weight: bold; background-color: #d4edda; color: #155724; }
-        
-        .tabela-trajetoria { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 14px; text-align: left; }
-        .tabela-trajetoria th { background-color: #333; color: white; padding: 10px; }
-        .tabela-trajetoria td { padding: 10px; border-bottom: 1px solid #ddd; }
-        .badge { padding: 3px 8px; border-radius: 12px; font-size: 11px; font-weight: bold; color: white; }
-        .badge.vitoria { background-color: #28a745; }
-        .badge.empate { background-color: #ffc107; color: #333; }
-        .badge.derrota { background-color: #dc3545; }
+        .menu-abas {
+            display: flex;
+            justify-content: center;
+            background: #333;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            padding: 5px;
+            width: 100%;
+        }
 
-        /* --- TELA MODO TÉCNICO --- */
-        .transmissao-container { display: grid; grid-template-columns: 260px 1fr 260px; gap: 20px; margin-top: 15px; text-align: left; position: relative; }
-        .placar-ao-vivo { background: #222; color: #fff; padding: 15px; border-radius: 8px; text-align: center; grid-column: 1 / span 3; font-size: 24px; font-weight: bold; }
-        .tempo-jogo { display: block; font-size: 14px; color: #ffc107; margin-top: 5px; }
-        .coluna-elenco { background: #fff; border: 1px solid #ddd; border-radius: 8px; padding: 12px; font-size: 13px; height: 540px; overflow-y: auto; }
-        .coluna-elenco h4 { margin-top: 12px; margin-bottom: 6px; border-bottom: 2px solid #333; padding-bottom: 4px; }
-        .narracao-box { background: #1e1e1e; color: #fff; border-radius: 8px; padding: 15px; height: 200px; overflow-y: auto; font-family: 'Courier New', Courier, monospace; font-size: 13px; display: flex; flex-direction: column-reverse; margin-bottom:10px; }
-        .linha-narracao { margin-bottom: 8px; border-bottom: 1px solid #2d2d2d; padding-bottom: 4px; }
-        .linha-narracao .minuto { color: #ffc107; font-weight: bold; }
-        .linha-narracao.gol { color: #28a745; font-weight: bold; background: #14321a; padding: 4px; border-radius: 4px; }
-        .live-stats { margin-top: 10px; background: #f8f9fa; border: 1px solid #ddd; border-radius: 8px; padding: 10px; font-size: 12px; }
-        .stat-barra-container { display: flex; align-items: center; justify-content: space-between; margin: 6px 0; }
-        .stat-barra { height: 8px; background: #ddd; flex-grow: 1; margin: 0 10px; border-radius: 4px; overflow: hidden; display: flex; }
+        .aba-btn {
+            background: none;
+            color: #bbb;
+            border: none;
+            padding: 10px 15px;
+            font-size: 14px;
+            cursor: pointer;
+            font-weight: bold;
+            border-radius: 6px;
+            margin: 0 2px;
+        }
 
-        .btn-tatica { flex:1; padding: 6px; font-size: 11px; border: 1px solid #ccc; cursor: pointer; font-weight:bold; transition: 0.2s; background:#fff;}
-        .btn-tatica.ativo { background:#007bff; color:white; border-color:#0056b3; }
-        .btn-grito { font-size: 11px; padding: 5px; border-radius: 4px; border: 1px solid #ffc107; background: #fff3cd; color: #856404; font-weight: bold; cursor: pointer;}
-        .btn-grito:hover { background: #ffeeba; }
-        .btn-grito.ativo { background: #ffc107; color: #000; box-shadow: inset 0 0 5px rgba(0,0,0,0.2); }
+        .aba-btn:hover {
+            color: white;
+            background: #444;
+        }
 
-        .overlay-intervalo { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 100; border-radius: 8px; display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; display: none; backdrop-filter: blur(4px); }
-        .overlay-intervalo h2 { font-size: 40px; color: #ffc107; margin: 0 0 15px 0; text-transform: uppercase; letter-spacing: 2px; text-shadow: 0 4px 10px rgba(0,0,0,0.5); }
-        .overlay-intervalo p { font-size: 16px; margin-bottom: 25px; color: #ddd; max-width: 600px; text-align: center; }
+        .aba-btn.ativa {
+            color: white;
+            background: #007bff;
+        }
 
-        /* --- MODAL TÁTICO E CAMPO INTERATIVO --- */
-        .modal-tatica-live { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 999; display: none; align-items: center; justify-content: center; }
-        .modal-conteudo { background: white; padding: 25px; border-radius: 12px; width: 90%; max-width: 1000px; max-height: 90vh; overflow-y: auto; text-align: left; position: relative; }
+        .aba-conteudo {
+            display: none;
+            margin-top: 15px;
+        }
 
-        .campo-futebol { position: relative; background: #2e7d32; background-image: linear-gradient(#388e3c 50%, #2e7d32 50%); border: 4px solid #fff; border-radius: 10px; height: 480px; width: 100%; max-width: 440px; margin: 0 auto; box-shadow: inset 0 0 20px rgba(0,0,0,0.3), 0 4px 10px rgba(0,0,0,0.15); overflow: hidden; }
-        .campo-linha-meio { position: absolute; top: 50%; left: 0; width: 100%; height: 2px; background: rgba(255,255,255,0.6); }
-        .campo-circulo-meio { position: absolute; top: 50%; left: 50%; width: 90px; height: 90px; border: 2px solid rgba(255,255,255,0.6); border-radius: 50%; transform: translate(-50%, -50%); }
-        .campo-grande-area-top { position: absolute; top: 0; left: 50%; width: 220px; height: 75px; border: 2px solid rgba(255,255,255,0.6); border-top: none; transform: translateX(-50%); }
-        .campo-grande-area-bot { position: absolute; bottom: 0; left: 50%; width: 220px; height: 75px; border: 2px solid rgba(255,255,255,0.6); border-bottom: none; transform: translateX(-50%); }
-        
-        .slot-jogador { position: absolute; transform: translate(-50%, -50%); width: 75px; text-align: center; z-index: 5; transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); cursor: pointer; }
-        .player-totem { background: #1a1a1a; border: 2px solid #ffc107; border-radius: 8px; color: white; padding: 4px; font-size: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.3); position: relative; transition: 0.2s; }
-        .totem-pos-vaga { font-size: 9px; font-weight: bold; background: #e0a800; color: #000; padding: 1px 3px; border-radius: 3px; display: inline-block; margin-bottom: 2px; }
-        .totem-nome { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: block; font-weight: bold; }
-        .totem-ovr { font-weight: bold; color: #5cb85c; font-size: 11px; }
-        .totem-ovr.penalizado { color: #ff4d4d; text-shadow: 0 0 2px rgba(0,0,0,0.5); }
+        .aba-conteudo.ativa {
+            display: block;
+        }
 
-        .lista-drag-banco { list-style: none; padding: 0; margin: 0; }
-        .item-drag-banco { background: #f8f9fa; border: 1px solid #ddd; border-radius: 6px; padding: 8px 12px; margin-bottom: 6px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; transition: background 0.2s; }
-        .item-drag-banco:hover { background: #edf2f7; border-color: #cbd5e1; }
-        .item-drag-banco.substituido { opacity: 0.35; filter: grayscale(100%); background: #fdfdfd; border-color: #eee; pointer-events: none; }
-        .status-substituido { font-size: 9px; background: #dc3545; color: white; padding: 2px 4px; border-radius: 3px; font-weight: bold; margin-left: 5px; }
+        button.principal {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+        }
 
-        /* Estilo Seleção para Click-To-Swap */
-        .selecionado-troca { border: 3px dashed #28a745 !important; transform: scale(1.08); box-shadow: 0 0 12px rgba(40, 167, 69, 0.6) !important; z-index: 10; }
+        button.principal:hover {
+            background: #0056b3;
+        }
 
-        /* Painel Flutuante de Atributos */
-        #painel-atributos-jogador { display:none; position: fixed; bottom: 20px; right: 20px; background: #fff; border-left: 6px solid #007bff; border-radius: 8px; padding: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.3); z-index: 2000; width: 220px; text-align: left; }
+        button.secundario {
+            background: #6c757d;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            font-size: 14px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .placar {
+            font-size: 14px;
+            margin: 8px 0;
+            padding: 12px;
+            background: #f8f9fa;
+            border-radius: 6px;
+            border-left: 5px solid #007bff;
+            text-align: left;
+        }
+
+        .grid-grupos {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 15px;
+        }
+
+        .card-grupo {
+            background: #fff;
+            border: 1px solid #e1e4e8;
+            border-radius: 8px;
+            padding: 10px;
+        }
+
+        .titulo-grupo {
+            background: #222;
+            color: white;
+            padding: 5px;
+            font-size: 13px;
+            font-weight: bold;
+            border-radius: 4px;
+            margin-bottom: 8px;
+        }
+
+        .tabela-mini {
+            width: 100%;
+            font-size: 12px;
+            border-collapse: collapse;
+        }
+
+        .tabela-mini th {
+            background: #f1f1f1;
+            padding: 3px;
+        }
+
+        .tabela-mini td {
+            padding: 4px;
+            border-bottom: 1px solid #f9f9f9;
+            text-align: center;
+        }
+
+        .bracket-scroll {
+            width: 100%;
+            overflow-x: auto;
+            background: #fafafa;
+            border: 1px solid #e1e4e8;
+            border-radius: 8px;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .bracket-container {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+            min-width: 950px;
+            justify-content: space-between;
+        }
+
+        .bracket-coluna {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            height: 680px;
+            width: 180px;
+        }
+
+        .bracket-fase-titulo {
+            font-size: 12px;
+            font-weight: bold;
+            color: #555;
+            text-transform: uppercase;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 4px;
+            text-align: center;
+        }
+
+        .bracket-jogo {
+            background: white;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            padding: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+            font-size: 11px;
+        }
+
+        .bracket-time {
+            display: flex;
+            justify-content: space-between;
+            padding: 3px 5px;
+            border-radius: 3px;
+        }
+
+        .bracket-time.vencedor {
+            font-weight: bold;
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .tabela-trajetoria {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            font-size: 14px;
+            text-align: left;
+        }
+
+        .tabela-trajetoria th {
+            background: #333;
+            color: white;
+            padding: 10px;
+        }
+
+        .tabela-trajetoria td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .transmissao-container {
+            display: grid;
+            grid-template-columns: 260px 1fr 260px;
+            gap: 20px;
+            margin-top: 15px;
+            text-align: left;
+            position: relative;
+        }
+
+        .placar-ao-vivo {
+            background: #222;
+            color: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            grid-column: 1 / span 3;
+            font-size: 24px;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .coluna-elenco {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 12px;
+            font-size: 13px;
+            height: 540px;
+            overflow-y: auto;
+        }
+
+        .narracao-box {
+            background: #1e1e1e;
+            color: #fff;
+            border-radius: 8px;
+            padding: 15px;
+            height: 200px;
+            overflow-y: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            display: flex;
+            flex-direction: column-reverse;
+            margin-bottom: 10px;
+        }
+
+        .linha-narracao {
+            margin-bottom: 8px;
+            border-bottom: 1px solid #2d2d2d;
+            padding-bottom: 4px;
+        }
+
+        .linha-narracao .minuto {
+            color: #ffc107;
+            font-weight: bold;
+        }
+
+        .linha-narracao.gol {
+            color: #28a745;
+            font-weight: bold;
+            background: #14321a;
+            padding: 4px;
+            border-radius: 4px;
+        }
+
+        .linha-narracao.penalti {
+            color: #fff;
+            font-weight: bold;
+            background: #856404;
+            border-left: 4px solid #ffc107;
+            padding: 4px;
+        }
+
+        .live-stats {
+            margin-top: 10px;
+            background: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 10px;
+            font-size: 12px;
+        }
+
+        .stat-barra-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 6px 0;
+        }
+
+        .stat-barra {
+            height: 8px;
+            background: #ddd;
+            flex-grow: 1;
+            margin: 0 10px;
+            border-radius: 4px;
+            overflow: hidden;
+            display: flex;
+        }
+
+        .btn-tatica {
+            flex: 1;
+            padding: 6px;
+            font-size: 11px;
+            border: 1px solid #ccc;
+            cursor: pointer;
+            font-weight: bold;
+            background: #fff;
+        }
+
+        .btn-tatica.ativo {
+            background: #007bff;
+            color: white;
+            border-color: #0056b3;
+        }
+
+        .btn-grito {
+            font-size: 11px;
+            padding: 5px;
+            border-radius: 4px;
+            border: 1px solid #ffc107;
+            background: #fff3cd;
+            color: #856404;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .btn-grito.ativo {
+            background: #ffc107;
+            color: #000;
+            box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .overlay-intervalo {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 100;
+            border-radius: 8px;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            display: none;
+            backdrop-filter: blur(4px);
+        }
+
+        .overlay-intervalo h2 {
+            font-size: 40px;
+            color: #ffc107;
+            margin: 0 0 15px 0;
+            text-transform: uppercase;
+        }
+
+        .modal-tatica-live {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-conteudo {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 1000px;
+            max-height: 90vh;
+            overflow-y: auto;
+            text-align: left;
+        }
+
+        .campo-futebol {
+            position: relative;
+            background: #2e7d32;
+            border: 4px solid #fff;
+            border-radius: 10px;
+            height: 480px;
+            width: 100%;
+            max-width: 440px;
+            margin: 0 auto;
+            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        .campo-linha-meio {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.6);
+        }
+
+        .campo-circulo-meio {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 90px;
+            height: 90px;
+            border: 2px solid rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .campo-grande-area-top {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 220px;
+            height: 75px;
+            border: 2px solid rgba(255, 255, 255, 0.6);
+            border-top: none;
+            transform: translateX(-50%);
+        }
+
+        .campo-grande-area-bot {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 220px;
+            height: 75px;
+            border: 2px solid rgba(255, 255, 255, 0.6);
+            border-bottom: none;
+            transform: translateX(-50%);
+        }
+
+        .slot-jogador {
+            position: absolute;
+            transform: translate(-50%, -50%);
+            width: 78px;
+            height: 70px;
+            text-align: center;
+            z-index: 5;
+            cursor: pointer;
+        }
+
+        .player-totem {
+            background: #1a1a1a;
+            border: 2px solid #ffc107;
+            border-radius: 8px;
+            color: white;
+            padding: 4px;
+            font-size: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-sizing: border-box;
+        }
+
+        .totem-pos-vaga {
+            font-size: 9px;
+            font-weight: bold;
+            background: #e0a800;
+            color: #000;
+            padding: 1px 3px;
+            border-radius: 3px;
+        }
+
+        .totem-nome {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 95%;
+            font-size: 10px;
+            margin: 2px 0;
+            font-weight: bold;
+        }
+
+        .totem-ovr {
+            font-weight: bold;
+            color: #5cb85c;
+            font-size: 11px;
+            margin-top: 1px;
+        }
+
+        .totem-ovr.penalizado {
+            color: #ff4d4d;
+        }
+
+        .num-camisa {
+            background: #333;
+            color: #fff;
+            font-size: 9px;
+            padding: 1px 3px;
+            border-radius: 3px;
+            border: 1px solid #666;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        .lista-drag-banco {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .item-drag-banco {
+            background: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            padding: 8px 12px;
+            margin-bottom: 6px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .item-drag-banco.substituido {
+            opacity: 0.4;
+            filter: grayscale(100%);
+            cursor: not-allowed;
+        }
+
+        .selecionado-troca-1 {
+            border: 2px solid #ffc107 !important;
+            box-shadow: 0 0 10px rgba(255, 193, 7, 0.9) !important;
+            z-index: 10;
+        }
+
+        .selecionado-troca-2 {
+            border: 2px dashed #17a2b8 !important;
+            box-shadow: 0 0 10px rgba(23, 162, 184, 0.9) !important;
+            z-index: 10;
+        }
+
+        .painel-scout-inline {
+            background: #1a1a1a;
+            color: #fff;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            border-left: 4px solid #ffc107;
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+            min-height: 140px;
+            justify-content: center;
+        }
+
+        .grid-attr {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            text-align: center;
+            gap: 5px;
+            margin-top: 8px;
+        }
+
+        .attr-lbl {
+            font-size: 10px;
+            color: #aaa;
+            font-weight: bold;
+        }
+
+        .attr-val {
+            font-size: 14px;
+            font-weight: bold;
+            color: #28a745;
+        }
+
+        .grid-compare {
+            display: grid;
+            grid-template-columns: 1fr 30px 1fr;
+            text-align: center;
+            gap: 5px;
+            margin-top: 10px;
+            font-size: 12px;
+            font-weight: bold;
+            align-items: center;
+            background: #2a2a2a;
+            padding: 8px;
+            border-radius: 6px;
+        }
+
+        .big-ovr-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #222;
+            border-radius: 6px;
+            padding: 5px 10px;
+            border: 1px solid #333;
+        }
+
+        .big-ovr-number {
+            font-size: 28px;
+            font-weight: bold;
+            color: #ffc107;
+            line-height: 1;
+        }
+
+        .placar-penaltis {
+            font-size: 18px;
+            margin-top: 10px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .bolinha-penalti {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            display: inline-block;
+            background: #ccc;
+            border: 1px solid #999;
+        }
+
+        .bolinha-penalti.gol {
+            background: #28a745;
+            border-color: #1e7e34;
+        }
+
+        .bolinha-penalti.erro {
+            background: #dc3545;
+            border-color: #bd2130;
+        }
+
+        .roles-container {
+            background: #fdfdfd;
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #ddd;
+            margin-bottom: 15px;
+            display: flex;
+            gap: 15px;
+            font-size: 12px;
+        }
+
+        .roles-container select {
+            width: 100%;
+            padding: 5px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .logo-img {
+            width: 100px;
+        }
+
+        .mini-slot {
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            border: 2px solid #fff;
+            font-size: 9px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        /* O estilo base do placar */
+        .placar {
+            font-size: 14px;
+            margin: 8px 0;
+            padding: 12px;
+            background: #f8f9fa;
+            border-radius: 6px;
+            border-left: 5px solid #ccc;
+            /* Cor neutra padrão */
+            text-align: left;
+        }
+
+        /* O estilo específico do seu time */
+        .placar.destaque-meu-time {
+            background: #eef7ff;
+            border-left: 5px solid #007bff;
+            font-weight: bold;
+        }
     </style>
-    <script src="timescopa.js"></script> 
+    <script src="timescopa.js"></script>
+    <!--Carrocel-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 </head>
+
 <body>
+    <div id="tela-inicial" class="painel" style="max-width: 450px; background-color: aquamarine;">
+        <h2>Copa do Mundo 2026</h2>
+        <img src="https://digitalhub.fifa.com/transform/157d23bf-7e13-4d7b-949e-5d27d340987e/WC26_Logo?&io=transform:fill&quality=75"
+            class="logo-img">
+        <p>Escolha a Seleção que você vai comandar:</p>
+        <div class="swiper" id="carrossel-times" style="width: 100%; margin-bottom: 20px;">
+            <div class="swiper-wrapper" id="wrapper-times">
 
-    <div id="painel-atributos-jogador">
-        <button onclick="document.getElementById('painel-atributos-jogador').style.display='none'" style="float: right; background:none; border:none; cursor:pointer; font-weight:bold; color:#dc3545; font-size:16px;">×</button>
-        <h4 id="attr-nome" style="margin:0 0 5px 0; color: #333;">Nome</h4>
-        <p id="attr-pos" style="margin:0 0 10px 0; font-size:11px; color: #666; font-weight:bold; background:#eef7ff; padding:3px; border-radius:4px; display:inline-block;">ATA</p>
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 13px; margin-top:5px;">
-            <div><b>VEL:</b> <span id="attr-vel" style="color:#28a745;">0</span></div>
-            <div><b>FIN:</b> <span id="attr-fin" style="color:#28a745;">0</span></div>
-            <div><b>PAS:</b> <span id="attr-pas" style="color:#28a745;">0</span></div>
-            <div><b>DRI:</b> <span id="attr-dri" style="color:#28a745;">0</span></div>
-            <div><b>DEF:</b> <span id="attr-def" style="color:#28a745;">0</span></div>
-            <div><b>FIS:</b> <span id="attr-fis" style="color:#28a745;">0</span></div>
+            </div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
         </div>
-    </div>
-
-    <div id="tela-inicial" class="painel" style="max-width: 450px;">
-        <h2>Copa do Mundo 2026 🏆</h2>
-        <p>Escolha a Seleção que você vai comandar como Técnico:</p>
-        <select id="seletor-time" style="padding: 12px; width: 100%; margin-bottom: 22px; font-size: 16px; border-radius: 6px; border: 1px solid #ccc;"></select>
         <button class="principal" onclick="iniciarJogo()">Assumir Seleção e Iniciar</button>
     </div>
 
-    <div id="tela-jogo" class="painel" style="display: none;"> 
+    <div id="tela-jogo" class="painel" style="display: none;">
         <div class="menu-abas">
             <button class="aba-btn ativa" onclick="mudarAba('aba-simulador', this)">🎮 Partidas</button>
-            <button class="aba-btn" onclick="mudarAba('aba-gerenciar', this)">📋 Quadro Tático Pré-Jogo</button>
+            <button class="aba-btn" onclick="mudarAba('aba-gerenciar', this)">📋 Quadro Tático</button>
             <button class="aba-btn" onclick="mudarAba('aba-chaveamento', this)">🌿 Chaveamento</button>
-            <button class="aba-btn" onclick="mudarAba('aba-trajetoria', this)">📜 Minha Trajetória</button>
+            <button class="aba-btn" onclick="mudarAba('aba-trajetoria', this)">📜 Histórico</button>
             <button class="aba-btn" onclick="mudarAba('aba-artilharia', this)">⚽ Artilharia</button>
         </div>
 
         <div id="aba-simulador" class="aba-conteudo ativa">
             <h2 id="titulo-fase-principal" style="color: #28a745; margin: 5px 0;">Fase de Grupos</h2>
             <button id="btn-simular-acao" class="principal" onclick="processarFluxoTorneio()">Simular Rodada</button>
-            <h3 style="text-align: left; margin: 15px 0 5px 0;">Resultados da Rodada:</h3>
-            <div id="resultados-jogos"><p style="color:#777;">Aguardando o apito inicial...</p></div>
+            <h3 style="text-align: left; margin: 15px 0 5px 0;">Resultados:</h3>
+            <div id="resultados-jogos"></div>
         </div>
 
         <div id="aba-gerenciar" class="aba-conteudo">
-            <p style="background:#eef7ff; color:#0056b3; padding:10px; border-radius:6px; font-size:13px; text-align:left;">💡 <b>Dica Tática:</b> As alterações feitas aqui serão o esqueleto definitivo do seu time. Toda nova partida começará usando esta formação e escalação.</p>
             <div style="display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 25px; text-align: left;">
                 <div style="background: #fff; padding: 18px; border-radius: 8px; border: 1px solid #ddd;">
-                    <h3 style="margin-top: 0; color: #007bff; border-bottom: 2px solid #007bff; padding-bottom: 5px;">📋 Tática Principal</h3>
-                    <select id="gerenciar-formacao" onchange="alterarFormacaoContexto(this.value, false)" style="padding: 10px; width: 100%; border-radius: 4px; border: 1px solid #ccc; margin-bottom: 15px; font-size: 14px; background:#fdfdfd; font-weight: bold;">
-                        <option value="4-4-2">4-4-2 (Equilibrado Clássico)</option>
-                        <option value="4-3-3">4-3-3 (Ofensivo - Volume de Chutes 🔥)</option>
-                        <option value="3-5-2">3-5-2 (Domínio de Meio-Campo & Posse ⚖️)</option>
-                        <option value="5-3-2">5-3-2 (Retranca Sólida / Bloqueio Total 🛡️)</option>
-                    </select>
-                    <div class="campo-futebol" id="campo-tatico-visual">
-                        <div class="campo-grande-area-top"></div><div class="campo-linha-meio"></div><div class="campo-circulo-meio"></div><div class="campo-grande-area-bot"></div>
+                    <div style="display:flex; justify-content:space-between; margin-bottom:15px;">
+                        <h3 style="margin: 0; color: #007bff;">📋 Tática Principal</h3>
+                        <select id="gerenciar-formacao" onchange="alterarFormacaoContexto(this.value, false)"
+                            style="padding: 6px; border-radius: 4px; font-weight: bold;">
+                            <option value="4-4-2">4-4-2</option>
+                            <option value="4-3-3">4-3-3</option>
+                            <option value="3-5-2">3-5-2</option>
+                            <option value="5-3-2">5-3-2</option>
+                        </select>
+                        <select id="gerenciar-postura" onchange="salvarPostura()"
+                            style="padding: 6px; border-radius: 4px; font-weight: bold;">
+                            <option value="Equilibrado">Equilibrado</option>
+                            <option value="Ofensivo">Ataque</option>
+                            <option value="Defensivo">Retranca</option>
+                        </select>
                     </div>
+                    <div class="roles-container">
+                        <div style="flex:1;"><label>🎖️ Capitão:</label><select id="gerenciar-capitao"
+                                onchange="salvarRoles(false)"></select></div>
+                        <div style="flex:1;"><label>🎯 Batedor:</label><select id="gerenciar-batedor"
+                                onchange="salvarRoles(false)"></select></div>
+                    </div>
+                    <div class="campo-futebol" id="campo-tatico-visual"></div>
                 </div>
-                
-                <div style="background: #fff; padding: 18px; border-radius: 8px; border: 1px solid #ddd; display: flex; flex-direction: column;">
-                    <h3 style="margin-top: 0; color: #333; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #ddd; padding-bottom: 5px;">
-                        <span>📊 Performance</span><span id="gerenciar-ovr-time" style="background: #28a745; color: white; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: bold;">FORÇA: --</span>
+                <div
+                    style="background: #fff; padding: 18px; border-radius: 8px; border: 1px solid #ddd; display: flex; flex-direction: column;">
+                    <h3
+                        style="margin-top: 0; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #ddd; padding-bottom: 5px;">
+                        <span>📊 Performance</span><span id="gerenciar-ovr-time"
+                            style="background: #28a745; color: white; padding: 4px 12px; border-radius: 20px; font-size: 13px;">--
+                            FORÇA</span>
                     </h3>
-                    <div id="gerenciar-stats-gerais" style="font-size: 13px; color: #444; margin-bottom: 15px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; background: #f9f9f9; padding: 10px; border-radius:6px; border: 1px solid #eee;"></div>
-                    <h4 style="margin: 5px 0 8px 0; color: #6c757d; font-size:14px;">🪑 Reservas Disponíveis</h4>
-                    <p style="font-size:10px; color:#888; margin:0 0 10px 0;">Clique em um jogador ou arraste-o para substituí-lo.</p>
-                    <div id="gerenciar-lista-reservas-drag" style="flex-grow: 1; max-height: 410px; overflow-y: auto; border: 1px solid #eee; padding: 8px; border-radius: 4px; background:#fafafa;"></div>
+                    <div id="scout-panel-gerenciar" class="painel-scout-inline">
+                        <div id="sg-vazio" style="text-align:center; color:#888;">Selecione um jogador.</div>
+                        <div id="sg-conteudo" style="display:none; flex-direction:column; width:100%;"></div>
+                    </div>
+                    <h4 style="margin: 5px 0 8px 0; color: #6c757d; font-size:14px;">🪑 Reservas</h4>
+                    <div id="gerenciar-lista-reservas-drag"
+                        style="flex-grow: 1; max-height: 340px; overflow-y: auto; border: 1px solid #eee; padding: 8px; border-radius: 4px; background:#fafafa;">
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div id="aba-chaveamento" class="aba-conteudo"><h3 id="titulo-dinamico-chave" style="text-align: left; margin-bottom: 10px;">Grupos Formados</h3><div id="container-visual-fase"></div></div>
-        <div id="aba-trajetoria" class="aba-conteudo"><h3 style="text-align: left; margin-bottom: 5px;">Sua Linha do Tempo na Copa</h3><div id="container-trajetoria"></div></div>
-        <div id="aba-artilharia" class="aba-conteudo"><h3 style="text-align: left; margin-bottom: 5px;">Artilharia do Mundial</h3><div id="container-artilharia"></div></div>
+        <div id="aba-chaveamento" class="aba-conteudo">
+            <div id="container-visual-fase"></div>
+        </div>
+        <div id="aba-trajetoria" class="aba-conteudo">
+            <div id="container-trajetoria"></div>
+        </div>
+        <div id="aba-artilharia" class="aba-conteudo">
+            <div id="container-artilharia"></div>
+        </div>
     </div>
 
-    <div id="tela-partida-tecnico" class="painel" style="display: none; max-width: 1150px;">
-        <h2 id="live-contexto-fase" style="margin: 0 0 10px 0; color: #007bff;">Modo Técnico - Transmissão ao Vivo</h2>
-        
-        <div id="modal-vestiario" style="background:#fff; padding:20px; border-radius:8px; border:3px solid #28a745; margin-bottom:20px; text-align:left; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
-            <h3 style="margin-top:0; border-bottom:1px solid #eee; padding-bottom:10px; display:flex; justify-content:space-between; align-items:center;">
-                🚪 Vestiário - Preparação Final
-                <button class="secundario" onclick="abrirQuadroTaticoLive(true)" style="background:#007bff;">📋 Ajustar Tática (Este Jogo)</button>
-            </h3>
-            <div style="display:flex; gap:20px; margin-top:15px;">
-                <div style="flex:1;">
-                    <label style="font-weight:bold; font-size:13px; display:block; margin-bottom:5px;">Postura em Campo:</label>
-                    <select id="pre-jogo-postura" style="width:100%; padding:10px; border-radius:6px; border:1px solid #ccc;">
-                        <option value="Equilibrado">Equilibrado ⚖️</option>
-                        <option value="Ofensivo">Ataque Total 🔥</option>
-                        <option value="Defensivo">Retranca Fechada 🛡️</option>
-                    </select>
+    <div id="tela-partida-tecnico" class="painel" style="display: none;">
+        <h2 id="live-contexto-fase" style="margin: 0 0 10px 0; color: #007bff;">Modo Técnico</h2>
+
+        <div id="modal-vestiario"
+            style="background:#fff; border-radius:8px; border:3px solid #28a745; margin-bottom:20px; text-align:left;">
+            <div style="background:#28a745; color:white; padding:15px; font-size:18px; font-weight:bold;">🚪 Vestiário -
+                Preparação</div>
+            <div style="padding: 20px;">
+                <div
+                    style="background:#f8f9fa; padding:12px; border-radius:6px; margin-bottom:20px; border-left:5px solid #dc3545; display:flex; justify-content:space-between; align-items:center;">
+                    <div>
+                        <h4 style="margin:0;">Adversário: <span id="vestiario-adv-nome"
+                                style="color:#dc3545;">---</span></h4><span style="font-size:12px;">Tática Esperada: <b
+                                id="vestiario-adv-tatica">---</b></span>
+                    </div>
+                    <div style="text-align:right;"><span style="font-size:11px; color:#666; display:block;">Força
+                            Rival</span><span id="vestiario-adv-ovr"
+                            style="font-size:24px; font-weight:bold; color:#dc3545;">00</span></div>
                 </div>
-                <div style="flex:1;">
-                    <label style="font-weight:bold; font-size:13px; display:block; margin-bottom:5px;">Palestra Motivacional:</label>
-                    <select id="pre-jogo-palestra" style="width:100%; padding:10px; border-radius:6px; border:1px solid #ccc;">
-                        <option value="nenhuma">"Vamos fazer o nosso jogo."</option>
-                        <option value="motivacional">"Pra cima deles sem medo!" (+Atq, -Def)</option>
-                        <option value="foco_defesa">"Ninguém passa hoje!" (+Def, -Posse)</option>
-                        <option value="calma">"Toquem a bola com inteligência!" (+Posse)</option>
-                    </select>
+                <div style="display:flex; gap:20px; margin-bottom:20px;">
+                    <div style="flex:1;"><label
+                            style="font-weight:bold; font-size:13px; display:block; margin-bottom:5px;">Postura:</label><select
+                            id="pre-jogo-postura" style="width:100%; padding:10px;">
+                            <option value="Equilibrado">Equilibrado</option>
+                            <option value="Ofensivo">Ataque</option>
+                            <option value="Defensivo">Retranca</option>
+                        </select></div>
+                    <div style="flex:1;"><label
+                            style="font-weight:bold; font-size:13px; display:block; margin-bottom:5px;">Palestra:</label><select
+                            id="pre-jogo-palestra" style="width:100%; padding:10px;">
+                            <option value="nenhuma">Padrão</option>
+                            <option value="motivacional">Motivacional</option>
+                            <option value="calma">Reter Posse</option>
+                        </select></div>
                 </div>
+                <div id="slot-prancheta-vestiario"></div>
+                <button class="principal" onclick="entrarEmCampoLive()"
+                    style="margin-top:20px; width:100%; font-size:18px; background:#28a745; padding:15px;">ENTRAR EM
+                    CAMPO ⚽</button>
             </div>
-            <button class="principal" onclick="entrarEmCampoLive()" style="margin-top:20px; width:100%; font-size:18px; background-color:#28a745;">Entrar em Campo ⚽</button>
         </div>
 
         <div class="transmissao-container" id="container-live-jogo" style="display:none;">
-            
             <div id="overlay-intervalo" class="overlay-intervalo">
-                <h2>Fim do 1º Tempo</h2>
-                <p>Aproveite para reajustar seu time no Quadro Tático sem gastar suas paradas técnicas!</p>
-                <div style="display: flex; gap: 15px;">
-                    <button class="secundario" style="font-size:16px; padding:12px 25px; background:#007bff; border:none; color:white;" onclick="abrirQuadroTaticoLive(false)">📋 Abrir Quadro Tático</button>
-                    <button class="principal" style="font-size:16px; padding:12px 25px; background:#28a745;" onclick="voltarDoIntervalo()">Voltar pro 2º Tempo ➔</button>
+                <h2 id="titulo-overlay-jogo">Pausado</h2>
+                <div style="display: flex; gap: 15px;" id="botoes-overlay-jogo"></div>
+            </div>
+
+            <div id="modal-escolher-batedor" class="modal-tatica-live" style="z-index: 1000;">
+                <div class="modal-conteudo" style="max-width: 500px; text-align:center;">
+                    <h2 style="color:#dc3545;">🚨 PÊNALTI! 🚨</h2>
+                    <p>Seu cobrador oficial não está em campo. Defina o batedor:</p>
+                    <div id="lista-batedores-penalti"
+                        style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin: 20px 0;"></div>
                 </div>
             </div>
 
             <div class="placar-ao-vivo">
-                <span id="live-nome-casa">CASA</span> 
-                <span id="live-gols-casa">0</span> x <span id="live-gols-vis">0</span> 
-                <span id="live-nome-vis">VISITANTE</span>
-                <span id="live-tempo" class="tempo-jogo">0' - Pré-jogo</span>
+                <div style="flex:1; text-align:right;"><span id="live-nome-casa">CASA</span> <img id="live-escudo-casa"
+                        src="" onerror="this.style.display='none'" style="width:30px; height:30px; object-fit:contain;">
+                    <span id="live-gols-casa"
+                        style="background:#000; padding:5px 15px; border-radius:6px; margin-left:10px;">0</span>
+                </div>
+                <div style="width:50px; text-align:center; font-size:16px; color:#aaa;">X</div>
+                <div style="flex:1; text-align:left;"><span id="live-gols-vis"
+                        style="background:#000; padding:5px 15px; border-radius:6px; margin-right:10px;">0</span>
+                    <img id="live-escudo-vis" src="" onerror="this.style.display='none'"
+                        style="width:30px; height:30px; object-fit:contain;">
+                    <span id="live-nome-vis">VISITANTE</span>
+                </div>
+            </div>
+            <div id="live-tempo" style="grid-column: 1 / span 3; text-align:center; color:#ffc107; font-weight:bold;">0'
+            </div>
+
+            <div id="placar-shootout"
+                style="display:none; grid-column: 1 / span 3; text-align:center; background:#222; padding:10px; border-radius:8px; margin-bottom:10px;">
+                <h4 style="margin:0 0 5px 0; color:#fff;">Disputa de Pênaltis</h4>
+                <div class="placar-penaltis">
+                    <div id="bolinhas-casa"></div>
+                    <div style="color:#ffc107; font-weight:bold; font-size:20px;"><span id="gols-pen-casa">0</span> x
+                        <span id="gols-pen-vis">0</span>
+                    </div>
+                    <div id="bolinhas-vis"></div>
+                </div>
             </div>
 
             <div class="coluna-elenco" id="live-elenco-casa">
-                <h4>Titulares</h4><ul id="lista-titulares-casa" style="padding-left:15px; margin:5px 0;"></ul>
-                <h4>Reservas</h4><ul id="lista-banco-casa" style="padding-left:15px; margin:5px 0; color:#666;"></ul>
+                <h4>Titulares</h4>
+                <ul id="lista-titulares-casa"></ul>
+                <h4>Reservas</h4>
+                <ul id="lista-banco-casa" style="color:#666;"></ul>
             </div>
 
             <div>
                 <div class="narracao-box" id="live-narracao"></div>
-                <div id="painel-substituicao" style="margin-top: 10px; padding: 12px; background: #f8f9fa; border: 1px solid #ddd; border-radius: 8px; text-align: left;">
-                    <h5 style="margin: 0 0 8px 0; color: #333; font-size: 13px; display: flex; justify-content: space-between;">
-                        <span>📋 Treinador: <span id="nome-meu-time-painel" style="color:#007bff;"></span></span>
-                        <span style="font-size:10px; font-weight:normal;">(Subs: <span id="txt-subs-feitas">0</span>/5 | Paradas: <span id="txt-paradas">0</span>/3)</span>
-                    </h5>
-                    
+                <div
+                    style="padding: 12px; background: #f8f9fa; border: 1px solid #ddd; border-radius: 8px; text-align: left;">
                     <div style="display: flex; border-radius: 4px; overflow:hidden; margin-bottom:10px;">
-                        <button class="btn-tatica" id="btn-tatica-defensivo" onclick="mudarPosturaLive('Defensivo')">🛡️ Retranca</button>
-                        <button class="btn-tatica ativo" id="btn-tatica-equilibrado" onclick="mudarPosturaLive('Equilibrado')">⚖️ Padrão</button>
-                        <button class="btn-tatica" id="btn-tatica-ofensivo" onclick="mudarPosturaLive('Ofensivo')">🔥 Ataque</button>
+                        <button class="btn-tatica" id="btn-tatica-defensivo" onclick="mudarPosturaLive('Defensivo')">🛡️
+                            Retranca</button>
+                        <button class="btn-tatica ativo" id="btn-tatica-equilibrado"
+                            onclick="mudarPosturaLive('Equilibrado')">⚖️ Padrão</button>
+                        <button class="btn-tatica" id="btn-tatica-ofensivo" onclick="mudarPosturaLive('Ofensivo')">🔥
+                            Ataque</button>
                     </div>
+                    <button class="principal" onclick="abrirQuadroTaticoLive()"
+                        style="width: 100%; font-size: 12px; background:#0056b3;">🔄 Quadro Tático & Subs
+                        (Pausar)</button>
 
-                    <div style="display: flex; gap:5px; margin-bottom: 10px;">
-                        <button class="btn-grito" id="btn-grito-pressao" onclick="darGritoLive('pressao', this)">Pressionar!</button>
-                        <button class="btn-grito" id="btn-grito-segurar" onclick="darGritoLive('segurar', this)">Segurar o Jogo!</button>
-                        <button class="btn-grito" id="btn-grito-calma" onclick="darGritoLive('calma', this)">Rodar a Bola!</button>
-                    </div>
 
-                    <button class="principal" onclick="abrirQuadroTaticoLive(false)" style="width: 100%; padding: 8px; font-size: 12px; display:flex; justify-content:center; align-items:center; gap:8px;">
-                        <span style="font-size:16px;">🔄</span> Quadro Tático & Substituições
-                    </button>
                 </div>
-
+                <div style="display: flex; gap:5px; margin-bottom: 10px;">
+                    <button class="btn-grito" onclick="darGritoLive('pressao', this)">Pressionar!</button>
+                    <button class="btn-grito" onclick="darGritoLive('segurar', this)">Segurar!</button>
+                    <button class="btn-grito" onclick="darGritoLive('calma', this)">Girar Bola!</button>
+                </div>
                 <div class="live-stats">
                     <div id="estatisticas-linhas"></div>
                 </div>
-                <div style="margin-top:15px; text-align:center; display: flex; justify-content: center; gap: 10px;">
-                    <button class="principal" id="btn-proxima-jogada" onclick="avancarJogadaManual()">Próxima Jogada ➔</button>
-                    <button class="secundario" id="btn-modo-rapido" onclick="alternarAutomatico()">Simulação Direta ⚡</button>
+                <div style="margin-top:15px; display: flex; justify-content: center; gap: 10px;">
+                    <button class="secundario" id="btn-modo-rapido" onclick="alternarAutomatico()">Pausar ⏸</button>
+                    <select id="velocidade-simulacao" onchange="mudarVelocidade(this.value)"
+                        style="padding: 8px; border-radius: 6px;">
+                        <option value="1500">Normal (1x)</option>
+                        <option value="800">Rápido (2x)</option>
+                        <option value="300">Turbo (3x)</option>
+                    </select>
+                    <!--<button class="principal" id="btn-proxima-jogada" onclick="avancarJogadaManual()">Lance ➔</button>-->
                 </div>
             </div>
 
             <div class="coluna-elenco" id="live-elenco-vis">
-                <h4>Titulares</h4><ul id="lista-titulares-vis" style="padding-left:15px; margin:5px 0;"></ul>
-                <h4>Reservas</h4><ul id="lista-banco-vis" style="padding-left:15px; margin:5px 0; color:#666;"></ul>
+                <h4>Titulares</h4>
+                <ul id="lista-titulares-vis"></ul>
+                <h4>Reservas</h4>
+                <ul id="lista-banco-vis" style="color:#666;"></ul>
             </div>
         </div>
     </div>
 
     <div id="modal-tatica-live" class="modal-tatica-live">
         <div class="modal-conteudo">
-            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #ddd; padding-bottom: 10px; margin-bottom: 15px;">
-                <h2 id="titulo-modal-tatica" style="margin:0; color:#007bff;">📋 Prancheta Ao Vivo</h2>
+            <div
+                style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #ddd; padding-bottom: 10px; margin-bottom: 15px;">
+                <h2 style="margin:0; color:#007bff;">📋 Prancheta de Campo</h2>
                 <div style="text-align:right;">
-                    <span id="info-limites-modal" style="background:#eef7ff; padding:5px 10px; border-radius:6px; font-size:13px; font-weight:bold; color:#333; margin-right:15px;">
-                        Subs: <span id="modal-info-subs" style="color:#dc3545;">0/5</span> | Paradas: <span id="modal-info-paradas" style="color:#dc3545;">0/3</span>
-                    </span>
-                    <button class="principal" style="background:#28a745; padding:8px 20px; font-size:14px;" onclick="fecharQuadroTaticoLive()">Confirmar & Voltar</button>
+                    <span id="info-limites-modal"
+                        style="background:#eef7ff; padding:5px 10px; border-radius:6px; font-weight:bold; color:#333; margin-right:15px;">Subs:
+                        <span id="modal-info-subs" style="color:#dc3545;">0/5</span></span>
+                    <button class="principal" style="background:#28a745; padding:8px 20px;"
+                        onclick="fecharQuadroTaticoLive()">Confirmar & Retomar</button>
                 </div>
             </div>
+            <div id="slot-prancheta-modal"></div>
+        </div>
+    </div>
 
-            <div style="display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 20px;">
-                <div style="background: #fdfdfd; padding: 15px; border-radius: 8px; border: 1px solid #eee;">
-                    <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
-                        <label style="font-weight: bold; font-size: 13px;">Esquema Tático do Jogo:</label>
-                        <select id="live-formacao-select" onchange="alterarFormacaoContexto(this.value, true)" style="padding: 5px; border-radius: 4px; font-size: 12px; font-weight: bold;">
-                            <option value="4-4-2">4-4-2</option>
-                            <option value="4-3-3">4-3-3</option>
-                            <option value="3-5-2">3-5-2</option>
-                            <option value="5-3-2">5-3-2</option>
-                        </select>
-                    </div>
-                    <div class="campo-futebol" id="campo-tatico-visual-live">
-                        <div class="campo-grande-area-top"></div><div class="campo-linha-meio"></div><div class="campo-circulo-meio"></div><div class="campo-grande-area-bot"></div>
-                    </div>
-                </div>
-
-                <div style="background: #fdfdfd; padding: 15px; border-radius: 8px; border: 1px solid #eee; display: flex; flex-direction: column;">
-                    <h4 style="margin: 0 0 10px 0; color: #333;">🪑 Banco de Suplentes</h4>
-                    <p style="font-size:11px; color:#666; margin-top:0;">Clique em um reserva e depois no titular (ou arraste) para substituir.</p>
-                    <div id="live-lista-reservas-drag" style="flex-grow: 1; height: 380px; overflow-y: auto; border: 1px solid #ddd; padding: 8px; border-radius: 4px; background:#fafafa;"></div>
-                </div>
+    <div id="prancheta-componente-live" style="display: none; grid-template-columns: 1.1fr 0.9fr; gap: 20px;">
+        <div style="background: #fdfdfd; padding: 15px; border-radius: 8px; border: 1px solid #eee;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
+                <label style="font-weight: bold; font-size: 13px;">Formação:</label>
+                <select id="live-formacao-select" onchange="alterarFormacaoContexto(this.value, true)"
+                    style="padding: 5px; border-radius: 4px; font-size: 12px; font-weight: bold;">
+                    <option value="4-4-2">4-4-2</option>
+                    <option value="4-3-3">4-3-3</option>
+                    <option value="3-5-2">3-5-2</option>
+                    <option value="5-3-2">5-3-2</option>
+                </select>
+            </div>
+            <div class="roles-container">
+                <div style="flex:1;"><label>🎖️ Capitão:</label><select id="live-capitao"
+                        onchange="salvarRoles(true)"></select></div>
+                <div style="flex:1;"><label>🎯 Cobrador:</label><select id="live-batedor"
+                        onchange="salvarRoles(true)"></select></div>
+            </div>
+            <div class="campo-futebol" id="campo-tatico-visual-live"></div>
+        </div>
+        <div
+            style="background: #fdfdfd; padding: 15px; border-radius: 8px; border: 1px solid #eee; display: flex; flex-direction: column;">
+            <div id="scout-panel-live" class="painel-scout-inline">
+                <div id="sl-vazio" style="text-align:center; color:#888;">Selecione um jogador.</div>
+                <div id="sl-conteudo" style="display:none; flex-direction:column; width:100%;"></div>
+            </div>
+            <h4 style="margin: 0 0 10px 0;">🪑 Reservas</h4>
+            <div id="live-lista-reservas-drag"
+                style="flex-grow: 1; height: 210px; overflow-y: auto; border: 1px solid #ddd; padding: 8px; border-radius: 4px; background:#fafafa;">
             </div>
         </div>
     </div>
 
-
     <script>
-        // --- ESTADOS GLOBAIS ---
         let faseAtual = "GRUPOS"; let rodadaGrupo = 1; let meuTimeId = null; let meuTimeNome = "";
-        let letrasGrupos = ["A","B","C","D","E","F","G","H","I","J","K","L"];
-        let grupos = {}; let tabelaPartidasGrupos = []; let minhaTrajetoria = [];
-        let bracketDados = { "16AVOS": [], "OITAVAS": [], "QUARTAS": [], "SEMIS": [], "FINAL": [] };
-
+        let letrasGrupos = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L"]; let grupos = {}; let tabelaPartidasGrupos = []; let minhaTrajetoria = [];
+        let bracketDados = { "OITAVAS": [], "QUARTAS": [], "SEMIS": [], "FINAL": [] };
         const arranjosFormacoes = {
-            "4-4-2": [ {tipo:"GOL",top:88,left:50}, {tipo:"LE",top:68,left:15}, {tipo:"ZAG",top:72,left:38}, {tipo:"ZAG",top:72,left:62}, {tipo:"LD",top:68,left:85}, {tipo:"ME",top:46,left:15}, {tipo:"MC",top:48,left:38}, {tipo:"MC",top:48,left:62}, {tipo:"MD",top:46,left:85}, {tipo:"CA",top:22,left:33}, {tipo:"CA",top:22,left:67} ],
-            "4-3-3": [ {tipo:"GOL",top:88,left:50}, {tipo:"LE",top:68,left:15}, {tipo:"ZAG",top:72,left:38}, {tipo:"ZAG",top:72,left:62}, {tipo:"LD",top:68,left:85}, {tipo:"MC",top:48,left:24}, {tipo:"VOL",top:52,left:50}, {tipo:"MC",top:48,left:76}, {tipo:"PE",top:22,left:18}, {tipo:"CA",top:18,left:50}, {tipo:"PD",top:22,left:82} ],
-            "3-5-2": [ {tipo:"GOL",top:88,left:50}, {tipo:"ZAG",top:72,left:25}, {tipo:"ZAG",top:74,left:50}, {tipo:"ZAG",top:72,left:75}, {tipo:"AE",top:50,left:12}, {tipo:"MC",top:50,left:34}, {tipo:"VOL",top:53,left:50}, {tipo:"MC",top:50,left:66}, {tipo:"AD",top:50,left:88}, {tipo:"CA",top:22,left:33}, {tipo:"CA",top:22,left:67} ],
-            "5-3-2": [ {tipo:"GOL",top:88,left:50}, {tipo:"LE",top:68,left:12}, {tipo:"ZAG",top:72,left:31}, {tipo:"ZAG",top:74,left:50}, {tipo:"ZAG",top:72,left:69}, {tipo:"LD",top:68,left:88}, {tipo:"MC",top:48,left:25}, {tipo:"VOL",top:48,left:50}, {tipo:"MC",top:48,left:75}, {tipo:"CA",top:22,left:33}, {tipo:"CA",top:22,left:67} ]
+            "4-4-2": [{ tipo: "GOL", top: 88, left: 50 }, { tipo: "LE", top: 68, left: 15 }, { tipo: "ZAG", top: 72, left: 38 }, { tipo: "ZAG", top: 72, left: 62 }, { tipo: "LD", top: 68, left: 85 }, { tipo: "ME", top: 46, left: 15 }, { tipo: "MC", top: 48, left: 38 }, { tipo: "MC", top: 48, left: 62 }, { tipo: "MD", top: 46, left: 85 }, { tipo: "CA", top: 22, left: 33 }, { tipo: "CA", top: 22, left: 67 }],
+            "4-3-3": [{ tipo: "GOL", top: 88, left: 50 }, { tipo: "LE", top: 68, left: 15 }, { tipo: "ZAG", top: 72, left: 38 }, { tipo: "ZAG", top: 72, left: 62 }, { tipo: "LD", top: 68, left: 85 }, { tipo: "MC", top: 48, left: 24 }, { tipo: "VOL", top: 52, left: 50 }, { tipo: "MC", top: 48, left: 76 }, { tipo: "PE", top: 22, left: 18 }, { tipo: "CA", top: 18, left: 50 }, { tipo: "PD", top: 22, left: 82 }],
+            "3-5-2": [{ tipo: "GOL", top: 88, left: 50 }, { tipo: "ZAG", top: 72, left: 25 }, { tipo: "ZAG", top: 74, left: 50 }, { tipo: "ZAG", top: 72, left: 75 }, { tipo: "AE", top: 50, left: 12 }, { tipo: "MC", top: 50, left: 34 }, { tipo: "VOL", top: 53, left: 50 }, { tipo: "MC", top: 50, left: 66 }, { tipo: "AD", top: 50, left: 88 }, { tipo: "CA", top: 22, left: 33 }, { tipo: "CA", top: 22, left: 67 }],
+            "5-3-2": [{ tipo: "GOL", top: 88, left: 50 }, { tipo: "LE", top: 68, left: 12 }, { tipo: "ZAG", top: 72, left: 31 }, { tipo: "ZAG", top: 74, left: 50 }, { tipo: "ZAG", top: 72, left: 69 }, { tipo: "LD", top: 68, left: 88 }, { tipo: "MC", top: 48, left: 25 }, { tipo: "VOL", top: 48, left: 50 }, { tipo: "MC", top: 48, left: 75 }, { tipo: "CA", top: 22, left: 33 }, { tipo: "CA", top: 22, left: 67 }]
         };
+        let jogoAtActiveRef = null; let minutoJogo = 0; let loopAutomatico = null; let velocidadeMs = 1500;
+        let statsAoVivo = { casa: { chutes: 0, posse: 50 }, vis: { chutes: 0, posse: 50 } }; let golsCasaLive = 0; let golsVisLive = 0;
+        let emProrrogacao = false; let disputaPenaisAtiva = false; let penaisPlacar = { casa: 0, vis: 0, chutes: 0 }; let penaisSeries = { casa: [], vis: [] }; let currentPenalTaker = 'casa';
+        let subsFeitasAnteriormente = 0; let paradasSub = 0; let emIntervalo = false; let segundoTempoIniciado = false; let isLiveBoard = false; let emVestiario = false; let snapshotTitularesJanela = []; let aiEstrategia = "Equilibrado";
+        let scoutSel1 = null; let scoutSel2 = null; let estrategiaTime = "Equilibrado"; let palestraAplicada = "nenhuma"; let meuCapitaoNome = ""; let meuBatedorNome = "";
 
-        let jogoAtActiveRef = null; let minutoJogo = 0; let loopAutomatico = null;
-        let statsAoVivo = { casa: { chutes:0, faltas:0, escanteios:0, posse:50 }, vis: { chutes:0, faltas:0, escanteios:0, posse:50 } };
-        let golsCasaLive = 0; let golsVisLive = 0;
-        let emProrrogacao = false; let disputaPenaisAtiva = false; let penaisPlacar = { casa: 0, vis: 0, chutes: 0 };
-        
-        let subsFeitas = 0; let paradasSub = 0; let emIntervalo = false; let segundoTempoIniciado = false;
-        let isLiveBoard = false; let emVestiario = false; let subsNestaJanela = 0;
-        let slotSelecionadoClick = null; 
-        let estrategiaTime = "Equilibrado"; let palestraAplicada = "nenhuma"; let gritoAtivo = "nenhum";
+        function getMacroPosicao(pos) { let p = (pos || "MEI").toUpperCase(); if (["GOL", "GK"].includes(p)) return "GOL"; if (["ZAG", "CB", "ZC"].includes(p)) return "ZAG"; if (["LAT", "LD", "LE", "ALA", "AD", "AE", "RB", "LB", "RWB", "LWB"].includes(p)) return "LAT"; if (["ATA", "CA", "SA", "PE", "PD", "PT", "ST", "CF", "RW", "LW"].includes(p)) return "ATA"; return "MEI"; }
+        function calcularOvrPosicional(j, posSlot) { const pesos = { "GOL": { v: 0.05, f: 0, p: 0.05, d: 0, de: 0.9, fi: 0 }, "ZAG": { v: 0.15, f: 0.05, p: 0.1, d: 0.05, de: 0.5, fi: 0.15 }, "LAT": { v: 0.25, f: 0.1, p: 0.2, d: 0.15, de: 0.2, fi: 0.1 }, "MEI": { v: 0.2, f: 0.2, p: 0.3, d: 0.2, de: 0.05, fi: 0.05 }, "ATA": { v: 0.2, f: 0.35, p: 0.1, d: 0.25, de: 0, fi: 0.1 } }; let mac = getMacroPosicao(posSlot); let p = pesos[mac] || pesos["MEI"]; let base = ((j.velocidade || 70) * p.v) + ((j.finalizacao || 70) * p.f) + ((j.passe || 70) * p.p) + ((j.drible || 70) * p.d) + ((j.defesa || 70) * p.de) + ((j.fisico || 70) * p.fi); let posJog = (j.posicao || "MEI") + (j.posicao2 ? "/" + j.posicao2 : ""); if (!posJog.toUpperCase().includes(mac)) base -= 10; return Math.round(base); }
+        function obterForcaAtual(t, usePadrao = true) { let tits = usePadrao ? t.titularesPadrao : t.titulares; let form = usePadrao ? t.formacaoPadrao : t.formacao; if (!tits || tits.length === 0) return 75; let slots = arranjosFormacoes[form || "4-4-2"]; let soma = 0; tits.forEach((j, i) => { soma += calcularOvrPosicional(j, slots[i] ? slots[i].tipo : "MEI"); }); return Math.round(soma / 11); }
+        function formatarNomePequeno(n) { let p = n.split(" "); return p.length === 1 ? p[0] : p[0] + " " + p[p.length - 1]; }
 
-        // --- SISTEMA DE CÁLCULO DE OVR COM PESOS E "POSICAO2" ---
-        function getMacroPosicao(pos) {
-            if (!pos) return "MEI";
-            let p = pos.toUpperCase().trim();
-            if (["GOL", "GK"].includes(p)) return "GOL";
-            if (["ZAG", "CB", "ZC"].includes(p)) return "ZAG";
-            if (["LAT", "LD", "LE", "ALA", "AD", "AE", "RB", "LB", "RWB", "LWB"].includes(p)) return "LAT";
-            if (["MEI", "VOL", "MC", "ME", "MD", "MOC", "MDC", "CM", "CDM", "CAM", "RM", "LM"].includes(p)) return "MEI";
-            if (["ATA", "CA", "SA", "PE", "PD", "PT", "ST", "CF", "RW", "LW"].includes(p)) return "ATA";
-            return "MEI"; 
-        }
 
-        function calcularOvrPosicional(jogador, posicaoSlot) {
-            const pesos = {
-                "GOL": { vel: 0.05, fin: 0.0, pass: 0.05, drib: 0.0, def: 0.9, fis: 0.0 },
-                "ZAG": { vel: 0.15, fin: 0.05, pass: 0.1, drib: 0.05, def: 0.5, fis: 0.15 },
-                "LAT": { vel: 0.25, fin: 0.1, pass: 0.2, drib: 0.15, def: 0.2, fis: 0.1 },
-                "MEI": { vel: 0.2, fin: 0.2, pass: 0.3, drib: 0.2, def: 0.05, fis: 0.05 },
-                "ATA": { vel: 0.2, fin: 0.35, pass: 0.1, drib: 0.25, def: 0.0, fis: 0.1 }
-            };
 
-            let macroDestino = getMacroPosicao(posicaoSlot);
-            let p = pesos[macroDestino] || pesos["MEI"];
+        let swiperTimes;
 
-            let forcaReal = (
-                ((jogador.velocidade || 70) * p.vel) +
-                ((jogador.finalizacao || 70) * p.fin) +
-                ((jogador.passe || 70) * p.pass) +
-                ((jogador.drible || 70) * p.drib) +
-                ((jogador.defesa || 70) * p.def) +
-                ((jogador.fisico || 70) * p.fis)
-            );
+        window.addEventListener('load', function () {
+            const wrapper = document.getElementById("wrapper-times");
 
-            // Lê as posições primárias e a 'posicao2' para descobrir a versatilidade
-            let posStr = (jogador.posicao || "MEI") + (jogador.posicao2 ? "/" + jogador.posicao2 : "");
-            let posicoesJogador = posStr.split(/[\/\,\-]/).map(p => p.trim().toUpperCase());
-            let macrosOrigem = posicoesJogador.map(p => getMacroPosicao(p));
+            wrapper.innerHTML = "";
+            [...listaDeTimes].sort((a, b) => a.nome.localeCompare(b.nome)).forEach(t => {
+                let ovrTime = obterForcaAtual(t, true);
+                let slide = document.createElement("div");
+                slide.className = "swiper-slide";
+                slide.innerHTML = `
+                <div style="
+      opacity: 90%;
+      padding:15px;
+      border-radius:12px;
+      text-align:center;
+      width:160px;
+      margin: 0 auto;
+      background: linear-gradient(#111318,#111318) padding-box,
+      linear-gradient(90deg,#00ff7b,#00d4ff,#4477ff,#8b00ff) border-box !important;
+      border: 2px solid transparent !important;
+      color: #fff !important;
+      ">
+                    <img src="${t.brasaoUrl || 'caminho/brasao_padrao.png'}" style="width:100px; height:100px; margin-bottom:5px;">
+            <h4 style="margin:0; font-size:16px;">${t.nome}</h4>
+            
+           <div style="background: #6fffd7 !important; color: #000 !important; box-shadow: 0 0 20px rgba(111,255,215,.35) !important;"">
+               <b> FORÇA: ${ovrTime}</b>
+            </div>
+            <div style="margin-top:8px; font-size:10px; text-align:left; width:100%;">
+                <div style="color:green;">✅ ${t.fortes ? t.fortes.join(', ') : 'N/A'}</div>
+                <div style="color:red;">❌ ${t.fracos ? t.fracos.join(', ') : 'N/A'}</div>
+            </div>
+           
 
-            if (!macrosOrigem.includes(macroDestino)) {
-                forcaReal -= 10; 
+                </div>`;
+                wrapper.appendChild(slide);
+            });
+
+            // 3. Inicializar Swiper
+            try {
+                swiperTimes = new Swiper('#carrossel-times', {
+                    slidesPerView: 1,
+                    navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' }
+                });
+                console.log("Swiper inicializado com sucesso.");
+            } catch (e) {
+                console.error("Erro ao inicializar o Swiper (verifique se o CSS/JS foram carregados):", e);
             }
-
-            return Math.round(forcaReal);
-        }
-
-        function obterForcaAtual(time, usePadrao = true) {
-            let tits = usePadrao ? time.titularesPadrao : time.titulares;
-            let form = usePadrao ? time.formacaoPadrao : time.formacao;
-            if(!tits || tits.length === 0) return 75;
-            let slots = arranjosFormacoes[form || "4-4-2"];
-            let soma = 0;
-            tits.forEach((j, idx) => { soma += calcularOvrPosicional(j, slots[idx] ? slots[idx].tipo : "MEI"); });
-            return Math.round(soma / 11);
-        }
-
-        // --- SISTEMA DE INICIALIZAÇÃO E CÓPIA TÁTICA ---
-        function carregarTelaInicial() {
-            const seletor = document.getElementById("seletor-time");
-            [...listaDeTimes].sort((a,b) => a.nome.localeCompare(b.nome)).forEach(t => { seletor.innerHTML += `<option value="${t.id}">${t.nome}</option>`; });
-        }
+        });
 
         function iniciarJogo() {
-            meuTimeId = parseInt(document.getElementById("seletor-time").value);
-            meuTimeNome = listaDeTimes.find(t => t.id === meuTimeId).nome;
+            // 1. Verifica se o Swiper já foi inicializado
+            if (typeof swiperTimes === 'undefined' || swiperTimes.activeIndex === undefined) {
+                alert("Erro: O carrossel não está pronto.");
+                return;
+            }
+
+            // 2. Pega o índice do slide que está ativo no momento
+            let indexAtual = swiperTimes.activeIndex;
+
+            // 3. Ordena a lista igual fizemos no carrossel para bater o índice
+            let listaOrdenada = [...listaDeTimes].sort((a, b) => a.nome.localeCompare(b.nome));
+            let timeEscolhido = listaOrdenada[swiperTimes.activeIndex];
+
+            if (!timeEscolhido) {
+                alert("Erro: Selecione um time válido.");
+                return;
+            }
+
+            meuTimeId = timeEscolhido.id;
+            meuTimeNome = timeEscolhido.nome;
+
+            let t = listaDeTimes.find(x => x.id === meuTimeId);
+
             document.getElementById("tela-inicial").style.display = "none";
             document.getElementById("tela-jogo").style.display = "block";
 
-            letrasGrupos = listaDeTimes.length <= 32 ? ["A","B","C","D","E","F","G","H"] : ["A","B","C","D","E","F","G","H","I","J","K","L"];
-
+            letrasGrupos = listaDeTimes.length <= 32 ? ["A", "B", "C", "D", "E", "F", "G", "H"] : ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L"];
             listaDeTimes.forEach(t => {
-                t.pontos=0; t.vitorias=0; t.empates=0; t.derrotas=0; t.gp=0; t.gc=0; t.sg=0; t.jogos=0; t.saldo=0;
-                
+                t.pontos = 0; t.vitorias = 0; t.empates = 0; t.derrotas = 0; t.gp = 0; t.gc = 0; t.sg = 0; t.jogos = 0;
                 let el = t.jogadores || t.elenco || [];
-                if (!t.titulares) t.titulares = el.slice(0, 11);
-                if (!t.banco) t.banco = el.slice(11);
-                
-                // CRIA A BASE PADRÃO DO TIME (Definitiva)
-                t.formacaoPadrao = t.formacao || "4-4-2";
-                t.titularesPadrao = [...t.titulares];
-                t.bancoPadrao = [...t.banco];
-
-                t.titularesPadrao.forEach(j => j.gols = 0);
-                t.bancoPadrao.forEach(j => j.gols = 0);
+                if (!t.titulares || t.titulares.length === 0) t.titulares = el.slice(0, 11);
+                if (!t.banco || t.banco.length === 0) t.banco = el.slice(11);
+                t.formacaoPadrao = t.formacao || "4-4-2"; t.titularesPadrao = [...t.titulares]; t.bancoPadrao = [...t.banco];
+                t.titularesPadrao.forEach((j, i) => { if (j) { j.gols = 0; j.numero = j.numero || (i + 1); } });
+                t.bancoPadrao.forEach((j, i) => { if (j) { j.gols = 0; j.numero = j.numero || (i + 12); } });
+                t.posturaPadrao = t.postura || "Equilibrado";
             });
-
+            let meuTime = listaDeTimes.find(t => t.id === meuTimeId);
+            meuCapitaoNome = (meuTime.titularesPadrao.length > 0) ? meuTime.titularesPadrao[0].nome : "";
+            meuBatedorNome = meuTime.titularesPadrao.find(j => j && j.posicao && j.posicao.includes("ATA"))?.nome || meuCapitaoNome;
             sortearGruposMundiais(); gerarTabelaFaseGrupos(); renderizarInterface();
         }
-
-        function prepararTimesParaJogo(jogo) {
-            // Toda partida começa espelhando a Tática Padrão para não trazer subs de jogos passados
-            [jogo.casa, jogo.visitante].forEach(t => {
-                t.titulares = [...t.titularesPadrao];
-                t.banco = [...t.bancoPadrao];
-                t.formacao = t.formacaoPadrao;
-                t.titulares.forEach(j => j.foiSubstituido = false);
-                t.banco.forEach(j => j.foiSubstituido = false);
-            });
-        }
-
-        function mudarAba(idAba, btnElemento) {
-            document.querySelectorAll('.aba-conteudo').forEach(el => el.classList.remove('ativa'));
-            document.querySelectorAll('.aba-btn').forEach(el => el.classList.remove('ativa'));
-            document.getElementById(idAba).classList.add('ativa');
-            if(btnElemento) btnElemento.classList.add('ativa');
-            if(idAba === 'aba-gerenciar') renderizarQuadroTatico(false);
-        }
-
-        // --- SISTEMA DE CLIQUE E ARRASTO (CLICK-TO-SWAP / DRAG-AND-DROP) ---
-        function mostrarAtributosJogador(j) {
-            document.getElementById("painel-atributos-jogador").style.display = "block";
-            document.getElementById("attr-nome").innerText = j.nome.split(" ")[0];
-            let posTxt = j.posicao; if (j.posicao2) posTxt += ` (+ ${j.posicao2})`;
-            document.getElementById("attr-pos").innerText = posTxt;
-            document.getElementById("attr-vel").innerText = j.velocidade || 70;
-            document.getElementById("attr-fin").innerText = j.finalizacao || 70;
-            document.getElementById("attr-pas").innerText = j.passe || 70;
-            document.getElementById("attr-dri").innerText = j.drible || 70;
-            document.getElementById("attr-def").innerText = j.defesa || 70;
-            document.getElementById("attr-fis").innerText = j.fisico || 70;
-        }
-
-        function aoClicarJogador(tipo, idx, element, ev) {
-            if(ev) ev.stopPropagation();
+        function salvarPostura() {
+            let select = document.getElementById("gerenciar-postura");
+            let novaPostura = select.value;
             let time = listaDeTimes.find(t => t.id === meuTimeId);
-            let ctxTitulares = isLiveBoard ? time.titulares : time.titularesPadrao;
-            let ctxBanco = isLiveBoard ? time.banco : time.bancoPadrao;
-            let jogador = tipo === 'titular' ? ctxTitulares[idx] : ctxBanco[idx];
             
-            // Bloqueio visual se já foi substituído no Live
-            if (isLiveBoard && jogador.foiSubstituido && tipo === 'reserva') return;
-
-            mostrarAtributosJogador(jogador);
-
-            if (!slotSelecionadoClick) {
-                slotSelecionadoClick = { tipo, idx };
-                document.querySelectorAll('.selecionado-troca').forEach(el => el.classList.remove('selecionado-troca'));
-                element.classList.add('selecionado-troca');
-            } else {
-                if (slotSelecionadoClick.tipo === tipo && slotSelecionadoClick.idx === idx) {
-                    slotSelecionadoClick = null; // desmarca se clicar de novo
-                    element.classList.remove('selecionado-troca');
-                    return;
-                }
-                efetuarTroca(slotSelecionadoClick.tipo, slotSelecionadoClick.idx, tipo, idx);
-                slotSelecionadoClick = null;
-                document.querySelectorAll('.selecionado-troca').forEach(el => el.classList.remove('selecionado-troca'));
+            if (time) {
+                time.posturaPadrao = novaPostura; // Salva permanentemente no objeto do time
+                console.log("Postura salva no Quadro Tático:", novaPostura);
             }
         }
-
-        function efetuarTroca(tipo1, idx1, tipo2, idx2) {
-            let time = listaDeTimes.find(t => t.id === meuTimeId);
-            let ctxTitulares = isLiveBoard ? time.titulares : time.titularesPadrao;
-            let ctxBanco = isLiveBoard ? time.banco : time.bancoPadrao;
-
-            let t1 = tipo1, i1 = idx1, t2 = tipo2, i2 = idx2;
-            if (tipo1 === 'reserva' && tipo2 === 'titular') { t1 = 'titular'; i1 = idx2; t2 = 'reserva'; i2 = idx1; }
-
-            if (t1 === 'titular' && t2 === 'titular') {
-                let temp = ctxTitulares[i1]; ctxTitulares[i1] = ctxTitulares[i2]; ctxTitulares[i2] = temp;
-            } else if (t1 === 'reserva' && t2 === 'reserva') {
-                let temp = ctxBanco[i1]; ctxBanco[i1] = ctxBanco[i2]; ctxBanco[i2] = temp;
-            } else if (t1 === 'titular' && t2 === 'reserva') {
-                let pSai = ctxTitulares[i1]; let pEntra = ctxBanco[i2];
-
-                if (isLiveBoard && !emVestiario) {
-                    if (pEntra.foiSubstituido) return alert("Jogador bloqueado (já substituído)!");
-                    if (subsFeitas >= 5) return alert("Limite de 5 substituições usado!");
-                    if (!emIntervalo && subsNestaJanela === 0 && paradasSub >= 3) return alert("As 3 paradas de jogo foram usadas!");
-                    
-                    pSai.foiSubstituido = true; subsFeitas++; subsNestaJanela++;
-                    adicionarNarracao(minutoJogo + "'", `🔄 <b>Substituição Tática:</b> Sai ${pSai.nome}, entra ${pEntra.nome}!`);
-                    atualizarTextosSubs();
-                }
-                ctxTitulares[i1] = pEntra; ctxBanco[i2] = pSai;
-            }
-            renderizarQuadroTatico(isLiveBoard);
+        function prepararTimesParaJogo(jogo) { [jogo.casa, jogo.visitante].forEach(t => { t.titulares = [...t.titularesPadrao]; t.banco = [...t.bancoPadrao]; t.formacao = t.formacaoPadrao; t.titulares.forEach(j => j.foiSubstituidoDefinitivo = false); t.banco.forEach(j => j.foiSubstituidoDefinitivo = false); }); }
+        function mudarAba(idAba, btn) { document.querySelectorAll('.aba-conteudo').forEach(e => e.classList.remove('ativa')); document.querySelectorAll('.aba-btn').forEach(e => e.classList.remove('ativa')); document.getElementById(idAba).classList.add('ativa'); if (btn) btn.classList.add('ativa'); if (idAba === 'aba-gerenciar') { scoutSel1 = null; scoutSel2 = null; renderizarQuadroTatico(false); } }
+        function aoClicarJogador(tipo, idx, ehLive) {
+            let t = listaDeTimes.find(x => x.id === meuTimeId); let cT = ehLive ? t.titulares : t.titularesPadrao; let cB = ehLive ? t.banco : t.bancoPadrao; let j = tipo === 'titular' ? cT[idx] : cB[idx];
+            if (ehLive && j.foiSubstituidoDefinitivo && tipo === 'reserva') return;
+            if (scoutSel1 && scoutSel1.tipo === tipo && scoutSel1.idx === idx) { scoutSel1 = null; scoutSel2 = null; } else if (scoutSel2 && scoutSel2.tipo === tipo && scoutSel2.idx === idx) scoutSel2 = null; else if (!scoutSel1) scoutSel1 = { tipo, idx, j }; else scoutSel2 = { tipo, idx, j };
+            renderizarScoutUI(ehLive); renderizarQuadroTatico(ehLive);
         }
 
-        function handleDragStart(ev, origem, index) { ev.dataTransfer.setData("text/plain", JSON.stringify({ origem, index })); }
-        function handleDropOnSlot(ev, destIdx) { ev.preventDefault(); try { let { origem, index } = JSON.parse(ev.dataTransfer.getData("text/plain")); efetuarTroca(origem, index, 'titular', destIdx); } catch(e){} }
-        function handleDropOnBancoItem(ev, destIdx) { ev.preventDefault(); ev.stopPropagation(); try { let { origem, index } = JSON.parse(ev.dataTransfer.getData("text/plain")); efetuarTroca(origem, index, 'reserva', destIdx); } catch(e){} }
+        function renderizarScoutUI(ehLive) {
+            let pref = ehLive ? "sl" : "sg"; let divV = document.getElementById(`${pref}-vazio`); let divC = document.getElementById(`${pref}-conteudo`);
+            if (!scoutSel1 && !scoutSel2) { divV.style.display = "block"; divC.style.display = "none"; return; }
+            divV.style.display = "none"; divC.style.display = "flex";
+            if (scoutSel1 && !scoutSel2) {
+                let j = scoutSel1.j; let posC = j.posicao ? j.posicao.split(/[\/\,\-]/)[0].trim() : "MEI"; let ovr = calcularOvrPosicional(j, posC);
+                divC.innerHTML = `<div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #333; padding-bottom:10px; margin-bottom:10px;"><div><span style="font-size:15px; font-weight:bold; color:#fff;">${j.nome}</span><br><span style="background:#007bff; color:#fff; font-size:10px; padding:2px 5px; border-radius:4px;">${posC}</span><span style="font-size:11px; color:#888;">${j.posicao2 ? ' | Sec: ' + j.posicao2 : ''}</span></div><div class="big-ovr-container"><span class="big-ovr-number">${ovr}</span></div></div><div class="grid-attr"><div><div class="attr-lbl">VEL</div><div class="attr-val">${j.velocidade || 70}</div></div><div><div class="attr-lbl">FIN</div><div class="attr-val">${j.finalizacao || 70}</div></div><div><div class="attr-lbl">PAS</div><div class="attr-val">${j.passe || 70}</div></div><div><div class="attr-lbl">DRI</div><div class="attr-val">${j.drible || 70}</div></div><div><div class="attr-lbl">DEF</div><div class="attr-val">${j.defesa || 70}</div></div><div><div class="attr-lbl">FIS</div><div class="attr-val">${j.fisico || 70}</div></div></div>`;
+            } else if (scoutSel1 && scoutSel2) {
+                let j1 = scoutSel1.j, j2 = scoutSel2.j; let v1 = j1.velocidade || 70, v2 = j2.velocidade || 70, f1 = j1.finalizacao || 70, f2 = j2.finalizacao || 70, p1 = j1.passe || 70, p2 = j2.passe || 70, d1 = j1.drible || 70, d2 = j2.drible || 70, de1 = j1.defesa || 70, de2 = j2.defesa || 70, fi1 = j1.fisico || 70, fi2 = j2.fisico || 70; let gC = (a, b) => a > b ? "#28a745" : a < b ? "#dc3545" : "#fff";
+                divC.innerHTML = `<div style="display:flex; justify-content:space-between; font-size:12px; text-align:center;"><div style="flex:1;"><b style="color:#ffc107;">${formatarNomePequeno(j1.nome)}</b></div><div>VS</div><div style="flex:1;"><b style="color:#17a2b8;">${formatarNomePequeno(j2.nome)}</b></div></div><div class="grid-compare"><span style="color:${gC(v1, v2)}">${v1}</span><span style="color:#888;">VEL</span><span style="color:${gC(v2, v1)}">${v2}</span><span style="color:${gC(f1, f2)}">${f1}</span><span style="color:#888;">FIN</span><span style="color:${gC(f2, f1)}">${f2}</span><span style="color:${gC(p1, p2)}">${p1}</span><span style="color:#888;">PAS</span><span style="color:${gC(p2, p1)}">${p2}</span><span style="color:${gC(d1, d2)}">${d1}</span><span style="color:#888;">DRI</span><span style="color:${gC(d2, d1)}">${d2}</span><span style="color:${gC(de1, de2)}">${de1}</span><span style="color:#888;">DEF</span><span style="color:${gC(de2, de1)}">${de2}</span><span style="color:${gC(fi1, fi2)}">${fi1}</span><span style="color:#888;">FIS</span><span style="color:${gC(fi2, fi1)}">${fi2}</span></div><button onclick="efetuarTrocaConfirmada(${ehLive})" style="margin-top:10px; background:#28a745; color:#fff; padding:6px; font-weight:bold; width:100%; border:none; border-radius:4px; cursor:pointer;">🔄 CONFIRMAR</button>`;
+            }
+        }
+        function efetuarTrocaConfirmada(ehLive) { if (!scoutSel1 || !scoutSel2) return; efetuarTrocaCore(scoutSel1.tipo, scoutSel1.idx, scoutSel2.tipo, scoutSel2.idx, ehLive); scoutSel1 = null; scoutSel2 = null; renderizarScoutUI(ehLive); renderizarQuadroTatico(ehLive); }
+        function efetuarTrocaCore(t1, i1, t2, i2, ehLive) {
+            let t = listaDeTimes.find(x => x.id === meuTimeId); let tits = ehLive ? t.titulares : t.titularesPadrao; let bans = ehLive ? t.banco : t.bancoPadrao;
+            if (t1 === 'reserva' && t2 === 'titular') { let x = t1, y = i1; t1 = t2; i1 = i2; t2 = x; i2 = y; }
+            if (ehLive && !emVestiario && t1 === 'titular' && t2 === 'reserva') { let tmp = [...tits]; tmp[i1] = bans[i2]; if (subsFeitasAnteriormente + tmp.filter(j => !snapshotTitularesJanela.includes(j)).length > 5) return alert("Limite de substituições!"); }
+            if (t1 === 'titular' && t2 === 'titular') { let tmp = tits[i1]; tits[i1] = tits[i2]; tits[i2] = tmp; } else if (t1 === 'reserva' && t2 === 'reserva') { let tmp = bans[i1]; bans[i1] = bans[i2]; bans[i2] = tmp; } else if (t1 === 'titular' && t2 === 'reserva') { let tmp = tits[i1]; tits[i1] = bans[i2]; bans[i2] = tmp; }
+        }
+        function handleDragStart(ev, o, i) { ev.dataTransfer.setData("text/plain", JSON.stringify({ origem: o, index: i })); }
+        function handleDropOnSlot(ev, destIdx, ehLive) { ev.preventDefault(); try { let d = JSON.parse(ev.dataTransfer.getData("text/plain")); efetuarTrocaCore(d.origem, d.index, 'titular', destIdx, ehLive); scoutSel1 = null; scoutSel2 = null; renderizarScoutUI(ehLive); renderizarQuadroTatico(ehLive); } catch (e) { } }
+        function handleDropOnBancoItem(ev, destIdx, ehLive) { ev.preventDefault(); ev.stopPropagation(); try { let d = JSON.parse(ev.dataTransfer.getData("text/plain")); efetuarTrocaCore(d.origem, d.index, 'reserva', destIdx, ehLive); scoutSel1 = null; scoutSel2 = null; renderizarScoutUI(ehLive); renderizarQuadroTatico(ehLive); } catch (e) { } }
         function handleDragOver(ev) { ev.preventDefault(); }
+        function alterarFormacaoContexto(valor, ehLive) { let t = listaDeTimes.find(x => x.id === meuTimeId); if (ehLive) t.formacao = valor; else t.formacaoPadrao = valor; renderizarQuadroTatico(ehLive); }
+        function salvarRoles(ehLive) { let p = ehLive ? "live" : "gerenciar"; meuCapitaoNome = document.getElementById(`${p}-capitao`).value; meuBatedorNome = document.getElementById(`${p}-batedor`).value; }
+        function salvarPostura(selectElement) {
+    let novaPostura = selectElement.value;
+    let time = listaDeTimes.find(t => t.id === meuTimeId);
+    
+    if (time) {
+        // Isso sobrescreve a preferência apenas para este time, 
+        // mantendo a alteração salva enquanto o jogo estiver aberto
+        time.posturaPadrao = novaPostura; 
+        
+        console.log("Postura salva no Quadro Tático para o time:", time.nome, "->", novaPostura);
+    }
+}
 
-        // --- RENDERIZAÇÃO DO QUADRO (Aba Principal e Modal Ao Vivo) ---
-        function alterarFormacaoContexto(valor, ehLive) { 
-            let t = listaDeTimes.find(t => t.id === meuTimeId); 
-            if(ehLive) t.formacao = valor; else t.formacaoPadrao = valor; 
-            renderizarQuadroTatico(ehLive); 
-        }
-
-        function renderizarQuadroTatico(ehLive = false) {
-            let meuTime = listaDeTimes.find(t => t.id === meuTimeId); if(!meuTime) return;
-            
-            let tits = ehLive ? meuTime.titulares : meuTime.titularesPadrao;
-            let ban = ehLive ? meuTime.banco : meuTime.bancoPadrao;
-            let formAtual = ehLive ? meuTime.formacao : meuTime.formacaoPadrao;
-
-            document.getElementById(ehLive ? "live-formacao-select" : "gerenciar-formacao").value = formAtual;
-            if(!ehLive) document.getElementById("gerenciar-ovr-time").innerText = `FORÇA DO PLANTEL: ${obterForcaAtual(meuTime, true)} OVR`;
-
-            let campoVisual = document.getElementById(ehLive ? "campo-tatico-visual-live" : "campo-tatico-visual");
-            campoVisual.innerHTML = `<div class="campo-grande-area-top"></div><div class="campo-linha-meio"></div><div class="campo-circulo-meio"></div><div class="campo-grande-area-bot"></div>`;
-
-            let slots = arranjosFormacoes[formAtual] || arranjosFormacoes["4-4-2"];
-
-            tits.forEach((jogador, idx) => {
-                let slotMeta = slots[idx] || { tipo: "MEI", top: 50, left: 50 };
-                let ovrCalculado = calcularOvrPosicional(jogador, slotMeta.tipo);
-                let base = ((jogador.velocidade||70) + (jogador.finalizacao||70) + (jogador.passe||70) + (jogador.drible||70) + (jogador.defesa||70) + (jogador.fisico||70)) / 6;
-                let temPenalidade = ovrCalculado < base - 4;
-
-                let divSlot = document.createElement("div"); divSlot.className = "slot-jogador";
-                divSlot.style.top = `${slotMeta.top}%`; divSlot.style.left = `${slotMeta.left}%`;
-                divSlot.setAttribute("draggable", "true");
-                
-                divSlot.ondragstart = (e) => handleDragStart(e, "titular", idx);
-                divSlot.ondragover = handleDragOver;
-                divSlot.ondrop = (e) => handleDropOnSlot(e, idx);
-                divSlot.onclick = (e) => aoClicarJogador('titular', idx, divSlot.firstChild, e);
-
-                divSlot.innerHTML = `<div class="player-totem"><span class="totem-pos-vaga">${slotMeta.tipo}</span><span class="totem-nome">${jogador.nome.split(" ")[0]}</span><span class="totem-ovr ${temPenalidade ? 'penalizado':''}">${ovrCalculado} <small style="font-size:8px; color:#aaa;">(${jogador.posicao})</small></span></div>`;
-                campoVisual.appendChild(divSlot);
+        function renderizarQuadroTatico(ehLive) {
+            let mt = listaDeTimes.find(t => t.id === meuTimeId); if (!mt) return;
+            let tits = ehLive ? mt.titulares : mt.titularesPadrao; let ban = ehLive ? mt.banco : mt.bancoPadrao; let formA = ehLive ? mt.formacao : mt.formacaoPadrao;
+            if (!ehLive) { document.getElementById("gerenciar-formacao").value = formA; let mt = listaDeTimes.find(t => t.id === meuTimeId); document.getElementById("gerenciar-postura").value = mt.posturaPadrao || "Equilibrado"; document.getElementById("gerenciar-ovr-time").innerText = `${obterForcaAtual(mt, true)} OVR`; } else { document.getElementById("live-formacao-select").value = formA; }
+            let p = ehLive ? "live" : "gerenciar"; let sC = document.getElementById(`${p}-capitao`); let sB = document.getElementById(`${p}-batedor`);
+            if (sC && sB) { sC.innerHTML = ""; sB.innerHTML = ""; tits.forEach(j => { sC.innerHTML += `<option value="${j.nome}">${j.nome}</option>`; sB.innerHTML += `<option value="${j.nome}">${j.nome}</option>`; }); sC.value = meuCapitaoNome; sB.value = meuBatedorNome; }
+            let cV = document.getElementById(ehLive ? "campo-tatico-visual-live" : "campo-tatico-visual");
+            cV.innerHTML = `<div class="campo-grande-area-top"></div><div class="campo-linha-meio"></div><div class="campo-circulo-meio"></div><div class="campo-grande-area-bot"></div>`;
+            let slots = arranjosFormacoes[formA] || arranjosFormacoes["4-4-2"];
+            tits.forEach((j, i) => {
+                let sm = slots[i] || { tipo: "MEI", top: 50, left: 50 }; let ovr = calcularOvrPosicional(j, sm.tipo);
+                let div = document.createElement("div"); div.className = "slot-jogador"; div.style.top = `${sm.top}%`; div.style.left = `${sm.left}%`;
+                div.setAttribute("draggable", "true"); div.ondragstart = (e) => handleDragStart(e, "titular", i); div.ondragover = handleDragOver; div.ondrop = (e) => handleDropOnSlot(e, i, ehLive); div.onclick = () => aoClicarJogador('titular', i, ehLive);
+                if (scoutSel1 && scoutSel1.tipo === 'titular' && scoutSel1.idx === i) div.classList.add('selecionado-troca-1'); if (scoutSel2 && scoutSel2.tipo === 'titular' && scoutSel2.idx === i) div.classList.add('selecionado-troca-2');
+                let isC = j.nome === meuCapitaoNome ? `<span style="background:#000; color:#ffc107; font-size:8px; padding:1px; margin-left:2px;">(C)</span>` : "";
+                div.innerHTML = `<div class="player-totem"><div style="display:flex; width:100%; justify-content:space-between; font-size:8px;"><span>${sm.tipo}</span><span class="num-camisa">${j.numero}</span></div><span class="totem-nome">${formatarNomePequeno(j.nome)}${isC}</span><span class="totem-ovr">${ovr}</span></div>`; cV.appendChild(div);
             });
-
-            let divReservas = document.getElementById(ehLive ? "live-lista-reservas-drag" : "gerenciar-lista-reservas-drag");
-            divReservas.innerHTML = "";
-            let ulBanco = document.createElement("ul"); ulBanco.className = "lista-drag-banco";
-
-            ban.forEach((jogador, idx) => {
-                let li = document.createElement("li");
-                let bloqueado = ehLive && jogador.foiSubstituido;
-                li.className = `item-drag-banco ${bloqueado ? 'substituido' : ''}`;
-                
-                if (!bloqueado) {
-                    li.setAttribute("draggable", "true");
-                    li.ondragstart = (e) => handleDragStart(e, "reserva", idx);
-                    li.ondragover = handleDragOver;
-                    li.ondrop = (e) => handleDropOnBancoItem(e, idx);
-                    li.onclick = (e) => aoClicarJogador('reserva', idx, li, e);
-                }
-
-                li.innerHTML = `<div><strong style="color:#007bff; font-size:11px; background:#eef7ff; padding:2px 5px; border-radius:3px; margin-right:6px;">${jogador.posicao}</strong><span style="font-size:13px; font-weight:500;">${jogador.nome}</span>${bloqueado ? '<span class="status-substituido">SAIU</span>' : ''}</div>`;
-                ulBanco.appendChild(li);
+            let dR = document.getElementById(ehLive ? "live-lista-reservas-drag" : "gerenciar-lista-reservas-drag"); dR.innerHTML = "";
+            let ul = document.createElement("ul"); ul.className = "lista-drag-banco";
+            ban.forEach((j, i) => {
+                let li = document.createElement("li"); let bl = ehLive && j.foiSubstituidoDefinitivo; li.className = `item-drag-banco ${bl ? 'substituido' : ''}`;
+                if (!bl) { li.setAttribute("draggable", "true"); li.ondragstart = (e) => handleDragStart(e, "reserva", i); li.ondragover = handleDragOver; li.ondrop = (e) => handleDropOnBancoItem(e, i, ehLive); li.onclick = () => aoClicarJogador('reserva', i, ehLive); }
+                if (scoutSel1 && scoutSel1.tipo === 'reserva' && scoutSel1.idx === i) li.classList.add('selecionado-troca-1'); if (scoutSel2 && scoutSel2.tipo === 'reserva' && scoutSel2.idx === i) li.classList.add('selecionado-troca-2');
+                let pC = j.posicao ? j.posicao.split(/[\/\,\-]/)[0].trim() : "MEI"; li.innerHTML = `<div><strong style="color:#007bff; font-size:11px; background:#eef7ff; padding:2px 5px; border-radius:3px; margin-right:6px;">${pC}</strong><span style="font-size:13px; font-weight:500;">${j.nome}</span>${bl ? '<span class="status-substituido">TRANCADO</span>' : ''}</div>`; ul.appendChild(li);
             });
-            divReservas.appendChild(ulBanco);
+            dR.appendChild(ul);
         }
 
-        // --- SISTEMAS DE SUBSTITUIÇÃO EM JOGO ---
-        function atualizarTextosSubs() {
-            document.getElementById("txt-subs-feitas").innerText = subsFeitas;
-            document.getElementById("txt-paradas").innerText = paradasSub;
-            document.getElementById("modal-info-subs").innerText = `${subsFeitas}/5`;
-            document.getElementById("modal-info-paradas").innerText = `${paradasSub}/3`;
-        }
-
-        function abrirQuadroTaticoLive(fromVestiario = false) {
-            if (!fromVestiario && !emIntervalo && paradasSub >= 3 && subsFeitas < 5) {
-                alert("Você já usou suas 3 paradas! Só pode mexer no intervalo."); return;
-            }
-            if(loopAutomatico) { clearInterval(loopAutomatico); loopAutomatico = null; document.getElementById("btn-modo-rapido").innerText = "Simulação Direta ⚡"; }
-            
-            isLiveBoard = true; emVestiario = fromVestiario; subsNestaJanela = 0; slotSelecionadoClick = null;
-            
-            if (fromVestiario) {
-                document.getElementById("titulo-modal-tatica").innerText = "📋 Vestiário: Ajustes (Sem Limites)";
-                document.getElementById("info-limites-modal").style.display = "none";
-            } else {
-                document.getElementById("titulo-modal-tatica").innerText = "📋 Prancheta Ao Vivo";
-                document.getElementById("info-limites-modal").style.display = "inline";
-            }
-
-            renderizarQuadroTatico(true); atualizarTextosSubs();
-            document.getElementById("overlay-intervalo").style.display = "none";
-            document.getElementById("modal-tatica-live").style.display = "flex";
-        }
-
-        function fecharQuadroTaticoLive() {
-            if (subsNestaJanela > 0 && !emIntervalo && !emVestiario) {
-                paradasSub++; adicionarNarracao(minutoJogo + "'", `⏱️ Treinador conclui as alterações da ${paradasSub}ª parada técnica.`);
-            }
-            isLiveBoard = false; slotSelecionadoClick = null; atualizarTextosSubs();
-            
-            if (!emVestiario) {
-                montarListasElencoUI(jogoAtActiveRef.jogo.casa, "lista-titulares-casa", "lista-banco-casa");
-                montarListasElencoUI(jogoAtActiveRef.jogo.visitante, "lista-titulares-vis", "lista-banco-vis");
-            }
-            
-            document.getElementById("modal-tatica-live").style.display = "none";
-            if(emIntervalo) document.getElementById("overlay-intervalo").style.display = "flex";
-            document.getElementById("painel-atributos-jogador").style.display = "none";
-        }
-
-        // --- FLUXO DE PARTIDA ---
-        function carregarModoTecnico(jogo, labelFase, ehMataMata) {
-            prepararTimesParaJogo(jogo); // Reseta para a Tática Padrão e remove fadiga do jogo passado
-            jogoAtActiveRef = { jogo: jogo, label: labelFase, ehMataMata: ehMataMata };
-            emVestiario = true; // Estamos na tela de vestiário
-            
-            document.getElementById("tela-jogo").style.display = "none";
-            document.getElementById("tela-partida-tecnico").style.display = "block";
-            document.getElementById("modal-vestiario").style.display = "block";
-            document.getElementById("container-live-jogo").style.display = "none";
-            
-            document.getElementById("live-contexto-fase").innerText = `Modo Técnico - ${labelFase}`;
-            document.getElementById("live-nome-casa").innerText = jogo.casa.nome;
-            document.getElementById("live-nome-vis").innerText = jogo.visitante.nome;
-        }
-
+        // TÁTICAS E JOGO
+        function atualizarTextosSubs() { document.getElementById("modal-info-subs").innerText = `${subsFeitasAnteriormente}/5`; }
+        function abrirQuadroTaticoLive() { if (!emIntervalo && paradasSub >= 3 && subsFeitasAnteriormente < 5) return alert("Você já usou suas paradas!"); pausarSimulacao(); isLiveBoard = true; scoutSel1 = null; scoutSel2 = null; let t = listaDeTimes.find(x => x.id === meuTimeId); snapshotTitularesJanela = [...t.titulares]; document.getElementById("prancheta-componente-live").style.display = "grid"; document.getElementById("slot-prancheta-modal").appendChild(document.getElementById("prancheta-componente-live")); renderizarScoutUI(true); renderizarQuadroTatico(true); atualizarTextosSubs(); document.getElementById("overlay-intervalo").style.display = "none"; document.getElementById("modal-tatica-live").style.display = "flex"; }
+        function fecharQuadroTaticoLive() { isLiveBoard = false; scoutSel1 = null; scoutSel2 = null; let t = listaDeTimes.find(x => x.id === meuTimeId); if (!emVestiario) { let rasc = t.titulares.filter(j => !snapshotTitularesJanela.includes(j)); if (rasc.length > 0) { snapshotTitularesJanela.filter(j => !t.titulares.includes(j)).forEach(j => j.foiSubstituidoDefinitivo = true); subsFeitasAnteriormente += rasc.length; if (!emIntervalo) paradasSub++; adicionarNarracao(minutoJogo + "'", `🔄 Tática: ${rasc.length} substituições feitas.`); } montarListasElencoUI(jogoAtActiveRef.jogo.casa, "lista-titulares-casa", "lista-banco-casa"); montarListasElencoUI(jogoAtActiveRef.jogo.visitante, "lista-titulares-vis", "lista-banco-vis"); } atualizarTextosSubs(); document.getElementById("modal-tatica-live").style.display = "none"; if (emIntervalo) document.getElementById("overlay-intervalo").style.display = "flex"; }
+        function carregarModoTecnico(jogo, lbl, ehMata) { prepararTimesParaJogo(jogo); jogoAtActiveRef = { jogo, label: lbl, ehMataMata: ehMata }; emVestiario = true; isLiveBoard = true; scoutSel1 = null; scoutSel2 = null; document.getElementById("tela-jogo").style.display = "none"; document.getElementById("tela-partida-tecnico").style.display = "block"; document.getElementById("modal-vestiario").style.display = "block"; document.getElementById("container-live-jogo").style.display = "none"; let adv = jogo.casa.id === meuTimeId ? jogo.visitante : jogo.casa; document.getElementById("vestiario-adv-nome").innerText = adv.nome; document.getElementById("vestiario-adv-tatica").innerText = adv.formacaoPadrao || "4-4-2"; let mt = listaDeTimes.find(t => t.id === meuTimeId); document.getElementById("pre-jogo-postura").value = mt.posturaPadrao; jogoAtActiveRef.posturaLive = mt.posturaPadrao;
+    
+    document.getElementById("pre-jogo-postura").value = jogoAtActiveRef.posturaLive; document.getElementById("vestiario-adv-ovr").innerText = obterForcaAtual(adv, true); document.getElementById("prancheta-componente-live").style.display = "grid"; document.getElementById("slot-prancheta-vestiario").appendChild(document.getElementById("prancheta-componente-live")); renderizarScoutUI(true); renderizarQuadroTatico(true); document.getElementById("live-contexto-fase").innerText = `Modo Técnico - ${lbl}`; document.getElementById("live-nome-casa").innerText = jogo.casa.nome; document.getElementById("live-nome-vis").innerText = jogo.visitante.nome; }
         function entrarEmCampoLive() {
-            emVestiario = false; // Fecha portas da imunidade de substituição
-            minutoJogo = 0; golsCasaLive = 0; golsVisLive = 0;
-            emProrrogacao = false; disputaPenaisAtiva = false; emIntervalo = false; segundoTempoIniciado = false;
-            subsFeitas = 0; paradasSub = 0; isLiveBoard = false; slotSelecionadoClick = null;
-            statsAoVivo = { casa: { chutes:0, faltas:0, escanteios:0, posse:50 }, vis: { chutes:0, faltas:0, escanteios:0, posse:50 } };
-            
-            estrategiaTime = document.getElementById("pre-jogo-postura").value;
-            palestraAplicada = document.getElementById("pre-jogo-palestra").value;
-            mudarPosturaLive(estrategiaTime); atualizarTextosSubs();
-            
-            document.getElementById("modal-vestiario").style.display = "none";
-            document.getElementById("container-live-jogo").style.display = "grid";
-            document.getElementById("live-gols-casa").innerText = "0";
-            document.getElementById("live-gols-vis").innerText = "0";
-            document.getElementById("live-tempo").innerText = "0' - Pré-jogo";
-            document.getElementById("nome-meu-time-painel").innerText = meuTimeNome;
-
-            montarListasElencoUI(jogoAtActiveRef.jogo.casa, "lista-titulares-casa", "lista-banco-casa");
-            montarListasElencoUI(jogoAtActiveRef.jogo.visitante, "lista-titulares-vis", "lista-banco-vis");
-
-            document.getElementById("live-narracao").innerHTML = ""; 
-            adicionarNarracao("0'", "🏁 Equipes em campo! O árbitro apita e a bola está rolando!");
-            atualizarEstatisticasUI();
-            document.getElementById("btn-proxima-jogada").disabled = false;
-            document.getElementById("btn-modo-rapido").innerText = "Simulação Direta ⚡";
+            emVestiario = false; isLiveBoard = false; scoutSel1 = null; scoutSel2 = null; minutoJogo = 0; golsCasaLive = 0; golsVisLive = 0; emProrrogacao = false; disputaPenaisAtiva = false; emIntervalo = false; segundoTempoIniciado = false; subsFeitasAnteriormente = 0; paradasSub = 0; snapshotTitularesJanela = []; statsAoVivo = { casa: { chutes: 0, posse: 50 }, vis: { chutes: 0, posse: 50 } }; document.getElementById("placar-shootout").style.display = "none"; estrategiaTime = document.getElementById("pre-jogo-postura").value; palestraAplicada = document.getElementById("pre-jogo-palestra").value; mudarPosturaLive(estrategiaTime); atualizarTextosSubs(); document.getElementById("modal-vestiario").style.display = "none"; document.getElementById("container-live-jogo").style.display = "grid"; document.getElementById("live-gols-casa").innerText = "0"; document.getElementById("live-gols-vis").innerText = "0"; document.getElementById("live-tempo").innerText = "0'"; montarListasElencoUI(jogoAtActiveRef.jogo.casa, "lista-titulares-casa", "lista-banco-casa"); montarListasElencoUI(jogoAtActiveRef.jogo.visitante, "lista-titulares-vis", "lista-banco-vis"); document.getElementById("live-narracao").innerHTML = ""; adicionarNarracao("0'", "🏁 Rola a bola! Início de partida!"); atualizarEstatisticasUI(); iniciarSimulacaoAutomatica(); document.getElementById("live-escudo-casa").src = jogoAtActiveRef.jogo.casa.brasaoUrl || jogoAtActiveRef.jogo.casa.escudo || "";
+            document.getElementById("live-escudo-vis").src = jogoAtActiveRef.jogo.visitante.brasaoUrl || jogoAtActiveRef.jogo.visitante.escudo || "";
+            document.getElementById("live-narracao").innerHTML = ""; adicionarNarracao("0'", "🏁 Rola a bola! Início de partida!");
+            let selectVestiario = document.getElementById("pre-jogo-postura");
+            estrategiaTime = selectVestiario.value;
+            mudarPosturaLive(estrategiaTime);
+            atualizarEstatisticasUI(); iniciarSimulacaoAutomatica();
         }
-
-        function iniciarIntervalo() {
-            emIntervalo = true;
-            if(loopAutomatico) { clearInterval(loopAutomatico); loopAutomatico = null; document.getElementById("btn-modo-rapido").innerText = "Simulação Direta ⚡"; }
-            adicionarNarracao("45'", "⏱️ Fim do 1º Tempo! As equipes vão para o vestiário.");
-            document.getElementById("overlay-intervalo").style.display = "flex";
-        }
-
-        function voltarDoIntervalo() {
-            emIntervalo = false; segundoTempoIniciado = true; minutoJogo = 46;
-            document.getElementById("overlay-intervalo").style.display = "none";
-            adicionarNarracao("46'", "🏁 Rola a bola para os 45 minutos finais!");
-            atualizarTempoUI();
-        }
-
-        function avancarJogadaManual() {
-            if(disputaPenaisAtiva) { simularPassoPenal(); return; }
-            if(emIntervalo) return;
-
-            minutoJogo += Math.floor(Math.random() * 4) + 4;
-            if(minutoJogo >= 45 && !segundoTempoIniciado) { minutoJogo = 45; iniciarIntervalo(); return; }
-            if(minutoJogo > 90 && !emProrrogacao && !jogoAtActiveRef.ehMataMata) minutoJogo = 90;
-            if(minutoJogo > 90 && !emProrrogacao && jogoAtActiveRef.ehMataMata && golsCasaLive !== golsVisLive) minutoJogo = 90;
-
-            if(minutoJogo >= 90 && !emProrrogacao && segundoTempoIniciado) {
-                if(golsCasaLive === golsVisLive && jogoAtActiveRef.ehMataMata) {
-                    emProrrogacao = true; minutoJogo = 90; adicionarNarracao("90'", "⌛ Empate! Vamos para a Prorrogação."); atualizarTempoUI(); return;
-                } else { finalizarJogoModoTecnico(); return; }
-            }
-
-            if(emProrrogacao && minutoJogo >= 120) {
-                if(golsCasaLive === golsVisLive) {
-                    disputaPenaisAtiva = true; penaisPlacar = { casa: 0, vis: 0, chutes: 0 };
-                    adicionarNarracao("120'", "🚨 O vencedor será decidido nos Pênaltis!"); atualizarTempoUI(); return;
-                } else { finalizarJogoModoTecnico(); return; }
-            }
-            processarLanceMecanica();
-        }
-
-        function alternarAutomatico() {
-            if(loopAutomatico) { clearInterval(loopAutomatico); loopAutomatico = null; document.getElementById("btn-modo-rapido").innerText = "Simulação Direta ⚡"; } 
-            else {
-                if (emIntervalo) return alert("Avance para o segundo tempo antes de simular!");
-                document.getElementById("btn-modo-rapido").innerText = "Pausar ⏸";
-                loopAutomatico = setInterval(() => {
-                    if(document.getElementById("tela-partida-tecnico").style.display === "none" || emIntervalo) { clearInterval(loopAutomatico); loopAutomatico = null; document.getElementById("btn-modo-rapido").innerText = "Simulação Direta ⚡"; return; }
-                    if(disputaPenaisAtiva || minutoJogo <= 121) avancarJogadaManual(); else { clearInterval(loopAutomatico); loopAutomatico = null; }
-                }, 300);
-            }
-        }
-
-        // Mecânicas menores (UI, Postura, Narracao, Placar)
-        function mudarPosturaLive(nova) { estrategiaTime = nova; document.querySelectorAll('.btn-tatica').forEach(btn => btn.classList.remove('ativo')); document.getElementById(`btn-tatica-${nova.toLowerCase()}`).classList.add('ativo'); if(minutoJogo > 0) adicionarNarracao(`${minutoJogo}'`, `🔄 <b>Tática:</b> O treinador muda a postura para: ${nova}.`); }
-        function darGritoLive(tipo, btnEl) { gritoAtivo = tipo; document.querySelectorAll('.btn-grito').forEach(btn => btn.classList.remove('ativo')); btnEl.classList.add('ativo'); adicionarNarracao(`${minutoJogo}'`, `📢 <b>Grito:</b> "${tipo==='pressao'?'Sobe a linha!':tipo==='segurar'?'Fecha a casinha!':'Calma, roda a bola!'}"`); setTimeout(() => { gritoAtivo = "nenhum"; btnEl.classList.remove('ativo'); }, 10000); }
-        function montarListasElencoUI(time, idTit, idBanco) {
-            let tUl = document.getElementById(idTit); let bUl = document.getElementById(idBanco); tUl.innerHTML = ""; bUl.innerHTML = "";
-            time.titulares.forEach(j => tUl.innerHTML += `<li><b>[${j.posicao}]</b> ${j.nome.split(' ')[0]}</li>`);
-            time.banco.forEach(j => bUl.innerHTML += `<li style="color:${j.foiSubstituido?'#ccc; text-decoration:line-through;':'#777;'}">[${j.posicao}] ${j.nome.split(' ')[0]} ${j.foiSubstituido?'<small style="color:#dc3545;">(Saiu)</small>':''}</li>`);
-        }
-        function adicionarNarracao(min, txt, classe = "") { const box = document.getElementById("live-narracao"); box.innerHTML = `<div class="linha-narracao ${classe}"><span class="minuto">${min}</span> ${txt}</div>` + box.innerHTML; }
-        function atualizarTempoUI() { let label = emProrrogacao ? "Prorrogação" : (minutoJogo <= 45 ? "1º Tempo" : "2º Tempo"); if(disputaPenaisAtiva) label = "Pênaltis"; document.getElementById("live-tempo").innerText = `${minutoJogo}' - ${label}`; }
-        function atualizarEstatisticasUI() { const container = document.getElementById("estatisticas-linhas"); let pC = Math.round(statsAoVivo.casa.posse); let pV = 100 - pC; container.innerHTML = `<div class="stat-barra-container"><span>Posse de Bola</span></div><div class="stat-barra-container"><span>${pC}%</span><div class="stat-barra"><div style="background:#007bff; width:${pC}%;"></div><div style="background:#6c757d; width:${pV}%;"></div></div><span>${pV}%</span></div><div class="stat-barra-container"><span>Chutes a Gol: <b>${statsAoVivo.casa.chutes}</b> vs <b>${statsAoVivo.vis.chutes}</b></span></div>`; }
+        function mudarPosturaLive(n) {
+    estrategiaTime = n; // Atualiza a variável que a simulação usa
+    
+    // Atualiza o visual dos botões
+    document.querySelectorAll('.btn-tatica').forEach(b => b.classList.remove('ativo'));
+    let btnAtivo = document.getElementById(`btn-tatica-${n.toLowerCase()}`);
+    if(btnAtivo) btnAtivo.classList.add('ativo');
+    
+    if(minutoJogo > 0) adicionarNarracao(`${minutoJogo}'`, `🔄 Postura alterada para: ${n}.`);
+}
+        function mudarVelocidade(v) { velocidadeMs = parseInt(v); if (loopAutomatico) { pausarSimulacao(); iniciarSimulacaoAutomatica(); } }
+        function pausarSimulacao() { if (loopAutomatico) { clearInterval(loopAutomatico); loopAutomatico = null; } document.getElementById("btn-modo-rapido").innerText = "Play ▶️"; }
+        function iniciarSimulacaoAutomatica() { if (emIntervalo) return; pausarSimulacao(); document.getElementById("btn-modo-rapido").innerText = "Pausar ⏸"; loopAutomatico = setInterval(() => { if (document.getElementById("tela-partida-tecnico").style.display === "none" || emIntervalo) { pausarSimulacao(); return; } if (disputaPenaisAtiva || minutoJogo <= 121) avancarJogadaManual(); else pausarSimulacao(); }, velocidadeMs); }
+        function alternarAutomatico() { if (loopAutomatico) pausarSimulacao(); else iniciarSimulacaoAutomatica(); }
+        function iniciarIntervalo() { emIntervalo = true; pausarSimulacao(); let divO = document.getElementById("botoes-overlay-jogo"); divO.innerHTML = ""; let bT = document.createElement("button"); bT.className = "secundario"; bT.style.padding = "12px 25px"; bT.innerText = "📋 Abrir Táticas"; bT.onclick = abrirQuadroTaticoLive; let bV = document.createElement("button"); bV.className = "principal"; bV.style.padding = "12px 25px"; bV.innerText = "Voltar ➔"; bV.onclick = voltarDoIntervalo; divO.appendChild(bT); divO.appendChild(bV); document.getElementById("titulo-overlay-jogo").innerText = emProrrogacao ? "Intervalo Prorrogação" : "Fim do 1º Tempo"; adicionarNarracao(minutoJogo + "'", "⏱️ Fim de etapa."); document.getElementById("overlay-intervalo").style.display = "flex"; }
+        function voltarDoIntervalo() { emIntervalo = false; segundoTempoIniciado = true; if (minutoJogo === 45) minutoJogo = 46; else if (minutoJogo === 105) minutoJogo = 106; document.getElementById("overlay-intervalo").style.display = "none"; adicionarNarracao(minutoJogo + "'", "🏁 Bola rolando!"); atualizarTempoUI(); iniciarSimulacaoAutomatica(); }
+        function avancarJogadaManual() { if (disputaPenaisAtiva) { simularPassoPenal(); return; } if (emIntervalo) return; minutoJogo += Math.floor(Math.random() * 4) + 4; if (minutoJogo >= 45 && !segundoTempoIniciado) { minutoJogo = 45; iniciarIntervalo(); return; } if (minutoJogo > 90 && !emProrrogacao && !jogoAtActiveRef.ehMataMata) minutoJogo = 90; if (minutoJogo > 90 && !emProrrogacao && jogoAtActiveRef.ehMataMata && golsCasaLive !== golsVisLive) minutoJogo = 90; if (minutoJogo >= 90 && !emProrrogacao && segundoTempoIniciado) { if (golsCasaLive === golsVisLive && jogoAtActiveRef.ehMataMata) { emProrrogacao = true; minutoJogo = 90; adicionarNarracao("90'", "⌛ Prorrogação!"); atualizarTempoUI(); return; } else { finalizarJogoModoTecnico(); return; } } if (emProrrogacao && minutoJogo >= 105 && minutoJogo < 108 && !emIntervalo) { minutoJogo = 105; iniciarIntervalo(); return; } if (emProrrogacao && minutoJogo >= 120) { if (golsCasaLive === golsVisLive) { disputaPenaisAtiva = true; penaisPlacar = { casa: 0, vis: 0, chutes: 0 }; adicionarNarracao("120'", "🚨 Vamos para os Pênaltis!"); atualizarTempoUI(); iniciarDisputaPenaltis(); return; } else { finalizarJogoModoTecnico(); return; } } processarLanceMecanica(); }
+        function mudarPosturaLive(n) { estrategiaTime = n; document.querySelectorAll('.btn-tatica').forEach(b => b.classList.remove('ativo')); document.getElementById(`btn-tatica-${n.toLowerCase()}`).classList.add('ativo'); if (minutoJogo > 0) adicionarNarracao(`${minutoJogo}'`, `🔄 Postura: ${n}.`); }
+        function darGritoLive(tipo, btn) {
+            document.querySelectorAll('.btn-grito').forEach(b => b.classList.remove('ativo'));
+            btn.classList.add('ativo');
+            gritoAtivo = tipo; tempoGritoAtivo = 15;
+            let msg = tipo === 'pressao' ? "Subir as linhas!" : tipo === 'segurar' ? "Retranca máxima!" : "Manter a posse de bola!";
+            adicionarNarracao(`${minutoJogo}'`, `📢 <b>Grito:</b> "${msg}"`);
+        } function montarListasElencoUI(t, idT, idB) { let tU = document.getElementById(idT), bU = document.getElementById(idB); tU.innerHTML = ""; bU.innerHTML = ""; t.titulares.forEach(j => tU.innerHTML += `<li><span class="num-camisa">${j.numero}</span> <b>[${j.posicao ? j.posicao.split('/')[0] : 'MEI'}]</b> ${formatarNomePequeno(j.nome)}</li>`); t.banco.forEach(j => bU.innerHTML += `<li style="color:${j.foiSubstituidoDefinitivo ? '#ccc' : '#666'}"><span class="num-camisa">${j.numero}</span> [${j.posicao ? j.posicao.split('/')[0] : 'MEI'}] ${formatarNomePequeno(j.nome)}</li>`); }
+        function adicionarNarracao(m, txt, cl = "") { let b = document.getElementById("live-narracao"); b.innerHTML = `<div class="linha-narracao ${cl}"><span class="minuto">${m}</span> ${txt}</div>` + b.innerHTML; }
+        function atualizarTempoUI() { document.getElementById("live-tempo").innerText = disputaPenaisAtiva ? "Pênaltis" : `${minutoJogo}'`; }
+        function atualizarEstatisticasUI() { let pC = Math.round(statsAoVivo.casa.posse); let pV = 100 - pC; document.getElementById("estatisticas-linhas").innerHTML = `<div class="stat-barra-container"><span>Posse</span></div><div class="stat-barra-container"><span>${pC}%</span><div class="stat-barra"><div style="background:#007bff;width:${pC}%;"></div><div style="background:#6c757d;width:${pV}%;"></div></div><span>${pV}%</span></div><div class="stat-barra-container"><span>Chutes: <b>${statsAoVivo.casa.chutes}</b> x <b>${statsAoVivo.vis.chutes}</b></span></div>`; }
 
         function processarLanceMecanica() {
-            atualizarTempoUI();
-            let c = jogoAtActiveRef.jogo.casa; let v = jogoAtActiveRef.jogo.visitante;
-            let fC = obterForcaAtual(c, false); let fV = obterForcaAtual(v, false);
-            
-            if (c.id === meuTimeId) { if (estrategiaTime === "Ofensivo") { fC += 14; } if (estrategiaTime === "Defensivo") { fV -= 12; fC -= 8; } } 
-            else if (v.id === meuTimeId) { if (estrategiaTime === "Ofensivo") { fV += 14; } if (estrategiaTime === "Defensivo") { fC -= 12; fV -= 8; } }
+            atualizarTempoUI(); let c = jogoAtActiveRef.jogo.casa; let v = jogoAtActiveRef.jogo.visitante;
+            let IA = c.id === meuTimeId ? v : c; let sdG = c.id === meuTimeId ? (golsVisLive - golsCasaLive) : (golsCasaLive - golsVisLive);
+            if (minutoJogo > 70 && sdG > 0 && aiEstrategia !== "Defensivo") { aiEstrategia = "Defensivo"; adicionarNarracao(`${minutoJogo}'`, `🛡️ Adversário recua.`); } else if (minutoJogo > 70 && sdG < 0 && aiEstrategia !== "Ofensivo") { aiEstrategia = "Ofensivo"; adicionarNarracao(`${minutoJogo}'`, `🔥 Adversário ataca!`); }
+            let fC = obterForcaAtual(c, false); let fV = obterForcaAtual(v, false); let pC = c.id === meuTimeId ? estrategiaTime : aiEstrategia; let pV = v.id === meuTimeId ? estrategiaTime : aiEstrategia;
+            let postura = (c.id === meuTimeId) ? c.posturaPadrao : "Equilibrado";
+            if (postura === "Ofensivo") fC += 15; // Bónus de ataque
+            if (postura === "Defensivo") { fC -= 10; fV -= 5; } // Bónus defensivo (reduz ritmo)
 
-            let chanceCasa = fC / (fC + fV);
-            let atacante = Math.random() < chanceCasa ? c : v;
-            let lado = atacante.id === c.id ? 'casa' : 'vis';
+            if (pC === "Ofensivo") fC += 14; if (pC === "Defensivo") { fC -= 8; fV -= 12; } if (pV === "Ofensivo") fV += 14; if (pV === "Defensivo") { fV -= 8; fC -= 12; }
 
-            statsAoVivo[lado].posse = Math.min(75, Math.max(25, statsAoVivo[lado].posse + (Math.random() > 0.5 ? 5 : -5)));
-            statsAoVivo[lado === 'casa' ? 'vis' : 'casa'].posse = 100 - statsAoVivo[lado].posse;
+            let lAtq = Math.random() < (fC / (fC + fV)) ? 'casa' : 'vis'; let atq = lAtq === 'casa' ? c : v;
+            statsAoVivo[lAtq].posse = Math.min(75, Math.max(25, statsAoVivo[lAtq].posse + (Math.random() > 0.5 ? 5 : -5))); statsAoVivo[lAtq === 'casa' ? 'vis' : 'casa'].posse = 100 - statsAoVivo[lAtq].posse;
 
-            if(Math.random() < 0.40) {
-                statsAoVivo[lado].chutes++;
-                if(Math.random() < (0.15 + ((fC - fV) * 0.01))) {
-                    if(lado === 'casa') golsCasaLive++; else golsVisLive++;
-                    let elenco = (atacante.titulares || []).concat(atacante.banco || []);
-                    let art = elenco.length > 0 ? elenco[Math.floor(Math.random() * Math.min(4, elenco.length))].nome : "Jogador";
-                    document.getElementById("live-gols-casa").innerText = golsCasaLive; document.getElementById("live-gols-vis").innerText = golsVisLive;
-                    adicionarNarracao(`${minutoJogo}'`, `⚽ <b>GOOOOOL DA ${atacante.nome.toUpperCase()}!!</b> Feito por ${art}!`, "gol");
-                } else { adicionarNarracao(`${minutoJogo}'`, `💥 Tiro perigoso da ${atacante.nome}, mas o goleiro salva!`); }
-            } else { adicionarNarracao(`${minutoJogo}'`, `🚩 Jogo truncado no meio de campo.`); }
-            atualizarEstatisticasUI();
+            if (Math.random() < 0.40) {
+                if (Math.random() < 0.05) { dispararPenaltiEmJogo(atq, lAtq); return; }
+                statsAoVivo[lAtq].chutes++;
+                if (Math.random() < (0.15 + ((fC - fV) * 0.01))) {
+                    if (lAtq === 'casa') golsCasaLive++; else golsVisLive++; let el = (atq.titulares || []).concat(atq.banco || []); let art = el.length > 0 ? el[Math.floor(Math.random() * Math.min(4, el.length))] : { nome: "Jogador" };
+                    art.gols = (art.gols || 0) + 1; document.getElementById("live-gols-casa").innerText = golsCasaLive; document.getElementById("live-gols-vis").innerText = golsVisLive; adicionarNarracao(`${minutoJogo}'`, `⚽ <b>GOOOOOL DA ${atq.nome.toUpperCase()}!</b> ${art.nome}!`, "gol");
+                } else { let r = Math.random(); if (r < 0.3) adicionarNarracao(`${minutoJogo}'`, `Na trave!! Quase o gol.`); else if (r < 0.6) adicionarNarracao(`${minutoJogo}'`, `Espalma o goleiro!`); else adicionarNarracao(`${minutoJogo}'`, `Pra fora! Tiro de meta.`); }
+            } else { let r = Math.random(); if (r < 0.4) adicionarNarracao(`${minutoJogo}'`, `A zaga corta o ataque.`); else adicionarNarracao(`${minutoJogo}'`, `Toque de bola no meio campo.`); } atualizarEstatisticasUI();
         }
 
-        // --- SISTEMAS DE TORNEIO E FASE DE GRUPOS ---
-        function sortearGruposMundiais() { let misturados = [...listaDeTimes].sort(() => Math.random() - 0.5); letrasGrupos.forEach((letra, index) => { grupos[letra] = misturados.slice(index * 4, (index * 4) + 4); grupos[letra].forEach(t => t.grupoLetra = letra); }); }
+        function dispararPenaltiEmJogo(atq, lado) {
+            pausarSimulacao(); adicionarNarracao(`${minutoJogo}'`, `🚨 <b>PÊNALTI PARA A ${atq.nome.toUpperCase()}!</b>`, "penalti");
+            if (atq.id === meuTimeId) {
+                let bt = atq.titulares.find(j => j.nome === meuBatedorNome);
+                if (!bt) { let cd = document.getElementById("lista-batedores-penalti"); cd.innerHTML = ""; atq.titulares.forEach(j => { let b = document.createElement("button"); b.className = "secundario"; b.innerHTML = `<b>${j.nome.split(" ")[0]}</b>`; b.onclick = () => { document.getElementById("modal-escolher-batedor").style.display = "none"; executarCobrancaPenaltiEmJogo(atq, lado, j); }; cd.appendChild(b); }); document.getElementById("modal-escolher-batedor").style.display = "flex"; }
+                else { executarCobrancaPenaltiEmJogo(atq, lado, bt); }
+            } else { let aiBt = atq.titulares.reduce((a, b) => ((a.finalizacao || 70) > (b.finalizacao || 70)) ? a : b); executarCobrancaPenaltiEmJogo(atq, lado, aiBt); }
+        }
+        function executarCobrancaPenaltiEmJogo(t, l, j) {
+            statsAoVivo[l].chutes++; if (Math.random() < (0.75 + (((j.finalizacao || 70) - 70) * 0.01))) { if (l === 'casa') golsCasaLive++; else golsVisLive++; j.gols = (j.gols || 0) + 1; document.getElementById("live-gols-casa").innerText = golsCasaLive; document.getElementById("live-gols-vis").innerText = golsVisLive; adicionarNarracao(`${minutoJogo}'`, `⚽ <b>GOL DE PÊNALTI!</b> ${j.nome} converte!`, "gol"); } else { adicionarNarracao(`${minutoJogo}'`, `❌ <b>PERDEU!</b> Goleiro pega a cobrança de ${j.nome}!`, "penalti"); }
+            atualizarEstatisticasUI(); setTimeout(() => { if (!emIntervalo) alternarAutomatico(); }, 1500);
+        }
+
+        function iniciarDisputaPenaltis() { document.getElementById("placar-shootout").style.display = "block"; document.getElementById("bolinhas-casa").innerHTML = ""; document.getElementById("bolinhas-vis").innerHTML = ""; document.getElementById("gols-pen-casa").innerText = "0"; document.getElementById("gols-pen-vis").innerText = "0"; penaisSeries = { casa: [], vis: [] }; currentPenalTaker = 'casa'; penaisPlacar.chutes = 0; document.getElementById("btn-proxima-jogada").innerText = "Bater Pênalti ➔"; }
+        function simularPassoPenal() {
+            let tc = currentPenalTaker === 'casa' ? jogoAtActiveRef.jogo.casa : jogoAtActiveRef.jogo.visitante;
+            if (Math.random() < 0.7) { penaisSeries[currentPenalTaker].push("gol"); penaisPlacar[currentPenalTaker]++; adicionarNarracao("PEN", `⚽ <b>GOL!</b> ${tc.nome} converte!`); } else { penaisSeries[currentPenalTaker].push("erro"); adicionarNarracao("PEN", `❌ <b>ERROU!</b> ${tc.nome} desperdiça!`, "penalti"); }
+            document.getElementById("gols-pen-casa").innerText = penaisPlacar.casa; document.getElementById("gols-pen-vis").innerText = penaisPlacar.vis; let hC = ""; penaisSeries.casa.forEach(r => hC += `<span class="bolinha-penalti ${r}"></span>`); document.getElementById("bolinhas-casa").innerHTML = hC; let hV = ""; penaisSeries.vis.forEach(r => hV += `<span class="bolinha-penalti ${r}"></span>`); document.getElementById("bolinhas-vis").innerHTML = hV;
+            if (currentPenalTaker === 'casa') currentPenalTaker = 'vis'; else { currentPenalTaker = 'casa'; penaisPlacar.chutes++; }
+            let cG = penaisPlacar.casa, vG = penaisPlacar.vis, mx = 5, rAt = penaisPlacar.chutes;
+            if (rAt < mx) { if (cG > vG + (mx - rAt) || vG > cG + (mx - rAt) - (currentPenalTaker === 'vis' ? 1 : 0)) encerrarDisputaPenaltis(); } else if (rAt >= mx && currentPenalTaker === 'casa' && cG !== vG) encerrarDisputaPenaltis();
+        }
+        function encerrarDisputaPenaltis() { let v = penaisPlacar.casa > penaisPlacar.vis ? jogoAtActiveRef.jogo.casa : jogoAtActiveRef.jogo.visitante; adicionarNarracao("FIM", `🏆 <b>${v.nome.toUpperCase()} VENCE NOS PÊNALTIS!</b>`); document.getElementById("btn-proxima-jogada").innerText = "Finalizar Partida"; document.getElementById("btn-proxima-jogada").onclick = finalizarJogoModoTecnico; }
+
+        function sortearGruposMundiais() { let mt = [...listaDeTimes].sort(() => Math.random() - 0.5); letrasGrupos.forEach((l, i) => { grupos[l] = mt.slice(i * 4, (i * 4) + 4); grupos[l].forEach(t => t.grupoLetra = l); }); }
         function gerarTabelaFaseGrupos() { tabelaPartidasGrupos = [[], [], []]; letrasGrupos.forEach(l => { let g = grupos[l]; tabelaPartidasGrupos[0].push({ casa: g[0], visitante: g[3] }, { casa: g[1], visitante: g[2] }); tabelaPartidasGrupos[1].push({ casa: g[0], visitante: g[1] }, { casa: g[2], visitante: g[3] }); tabelaPartidasGrupos[2].push({ casa: g[0], visitante: g[2] }, { casa: g[3], visitante: g[1] }); }); }
         function processarFluxoTorneio() { if (faseAtual === "GRUPOS") simularRodadaGrupos(); else if (faseAtual !== "FIM") simularFaseMataMata(); }
-        function calcularPlacarRapido(forcaC, forcaV) { let base = Math.floor(Math.random() * 4); let dif = forcaC - forcaV; if(dif>8) base += 2; else if (dif < -8) base -= 2; return Math.max(0, base); }
+        function calcularPlacarRapido(fC, fV) { let b = Math.floor(Math.random() * 4); let d = fC - fV; if (d > 8) b += 2; else if (d < -8) b -= 2; return Math.max(0, b); }
 
-        function simularPassoPenal() { /* Omitido por clareza - lógica simulada no finalizarJogo */ }
-        
         function finalizarJogoModoTecnico() {
-            if(loopAutomatico) { clearInterval(loopAutomatico); loopAutomatico = null; }
-            let jRef = jogoAtActiveRef.jogo; jRef.gc = golsCasaLive; jRef.gv = golsVisLive;
-            let vencedorReal = null; let txtPen = "";
-            if (golsCasaLive === golsVisLive && jogoAtActiveRef.ehMataMata) { jRef.penC = Math.floor(Math.random()*3)+3; jRef.penV = Math.floor(Math.random()*3)+1; vencedorReal = jRef.penC > jRef.penV ? jRef.casa : jRef.visitante; txtPen = ` (Pen: ${jRef.penC}x${jRef.penV})`; } 
-            else { vencedorReal = golsCasaLive > golsVisLive ? jRef.casa : jRef.visitante; }
-            jRef.vencedor = vencedorReal; let c = jRef.casa; let v = jRef.visitante;
-            if(!jogoAtActiveRef.ehMataMata) { if (golsCasaLive > golsVisLive) { c.pontos += 3; c.vitorias++; v.derrotas++; } else if (golsVisLive > golsCasaLive) { v.pontos += 3; v.vitorias++; c.derrotas++; } else { c.pontos += 1; v.pontos += 1; c.empates++; v.empates++; } }
-            c.sg += (golsCasaLive - golsVisLive); v.sg += (golsVisLive - golsCasaLive); c.jogos++; v.jogos++;
-            
-            registrarTrajetoria(jogoAtActiveRef.label, (c.id === meuTimeId ? v.nome : c.nome), golsCasaLive, golsVisLive, (c.id === meuTimeId), txtPen);
-            document.getElementById("tela-partida-tecnico").style.display = "none"; document.getElementById("tela-jogo").style.display = "block";
-            if(jogoAtActiveRef.ehMataMata) concluirFluxoFaseMataMataAtiva(); else concluirFluxoFaseGruposAtiva();
-        }
+            pausarSimulacao();
 
-        function registrarTrajetoria(faseLabel, adv, gc, gv, souCasa, ext = "") {
-            let gm = souCasa ? gc : gv; let gs = souCasa ? gv : gc; let r = gm > gs ? "V" : gs > gm ? "D" : "E";
-            if(ext.includes("Pen:") && r === "E") r = ext.includes(gm+"x") ? "V" : "D"; // Simplificado
-            minhaTrajetoria.push({ fase: faseLabel, adversario: adv, placar: `${gm} x ${gs}`, status: r, detalhes: ext }); atualizarVisualTrajetoria();
-        }
+            // 1. Esconde a tela de jogo e volta para a tela principal
+            document.getElementById("tela-partida-tecnico").style.display = "none";
+            document.getElementById("tela-jogo").style.display = "block";
+            document.getElementById("container-live-jogo").style.display = "none";
 
-        function simularRodadaGrupos() {
-            const divRes = document.getElementById("resultados-jogos"); divRes.innerHTML = "";
-            let jogosHoje = tabelaPartidasGrupos[rodadaGrupo - 1];
-            let meuJogoDestaque = jogosHoje.find(j => j.casa.id === meuTimeId || j.visitante.id === meuTimeId);
+            // 2. Registra o resultado
+            let jR = jogoAtActiveRef.jogo;
+            jR.gc = golsCasaLive;
+            jR.gv = golsVisLive;
 
-            jogosHoje.forEach(jogo => {
-                if(jogo.casa.id === meuTimeId || jogo.visitante.id === meuTimeId) return;
-                let c = jogo.casa; let v = jogo.visitante;
-                let gc = calcularPlacarRapido(obterForcaAtual(c, true), obterForcaAtual(v, true)); let gv = calcularPlacarRapido(obterForcaAtual(v, true), obterForcaAtual(c, true));
-                c.sg += (gc - gv); v.sg += (gv - gc); c.jogos++; v.jogos++;
-                if (gc > gv) { c.pontos += 3; c.vitorias++; v.derrotas++; } else if (gv > gc) { v.pontos += 3; v.vitorias++; c.derrotas++; } else { c.pontos += 1; v.pontos += 1; c.empates++; v.empates++; }
-                if (Math.random() > 0.8) divRes.innerHTML += `<div class="placar"><strong>Grupo ${c.grupoLetra}:</strong> ${c.nome} ${gc} x ${gv} ${v.nome}</div>`;
-            });
-            if(meuJogoDestaque) carregarModoTecnico(meuJogoDestaque, `Grupo - Rodada ${rodadaGrupo}`, false); else concluirFluxoFaseGruposAtiva();
-        }
+            let c = jR.casa;
+            let v = jR.visitante;
 
-        function concluirFluxoFaseGruposAtiva() { if (rodadaGrupo < 3) { rodadaGrupo++; document.getElementById("btn-simular-acao").innerText = `Simular Rodada ${rodadaGrupo}`; } else { apurarClassificadosPara16Avos(); } renderizarInterface(); }
-        function apurarClassificadosPara16Avos() {
-            let classDiretos = []; letrasGrupos.forEach(l => { let g = grupos[l]; g.sort((a,b) => b.pontos - a.pontos || b.sg - a.sg); classDiretos.push(g[0], g[1]); });
-            faseAtual = "OITAVAS"; bracketDados["OITAVAS"] = [];
-            for (let i = 0; i < classDiretos.length; i += 4) { if(classDiretos[i] && classDiretos[i+3]) bracketDados["OITAVAS"].push({ casa: classDiretos[i], visitante: classDiretos[i+3], gc: null, gv: null, penC: null, penV: null, vencedor: null }); if(classDiretos[i+2] && classDiretos[i+1]) bracketDados["OITAVAS"].push({ casa: classDiretos[i+2], visitante: classDiretos[i+1], gc: null, gv: null, penC: null, penV: null, vencedor: null }); }
-            bracketDados["QUARTAS"] = Array(4).fill(null).map(()=>({casa:null,visitante:null,vencedor:null})); bracketDados["SEMIS"] = Array(2).fill(null).map(()=>({casa:null,visitante:null,vencedor:null})); bracketDados["FINAL"] = Array(1).fill(null).map(()=>({casa:null,visitante:null,vencedor:null}));
-            document.getElementById("titulo-fase-principal").innerText = "Mata-Mata: Oitavas de Final"; document.getElementById("btn-simular-acao").innerText = "Simular Oitavas"; mudarAba('aba-simulador', document.querySelector('.menu-abas button'));
-        }
+            atualizarExibicaoResultados();
 
-        function simularFaseMataMata() {
-            let chavesAtuais = bracketDados[faseAtual]; let meuJogoMataMata = chavesAtuais.find(j => (j.casa && j.casa.id === meuTimeId) || (j.visitante && j.visitante.id === meuTimeId));
-            chavesAtuais.forEach(jogo => {
-                if(meuJogoMataMata && jogo === meuJogoMataMata) return; if(jogo.vencedor !== null) return; 
-                let c = jogo.casa; let v = jogo.visitante; let gc = calcularPlacarRapido(obterForcaAtual(c, true), obterForcaAtual(v, true)); let gv = calcularPlacarRapido(obterForcaAtual(v, true), obterForcaAtual(c, true)); let vencedor = null;
-                if (gc === gv) { jogo.penC = 4; jogo.penV = 2; vencedor = c; } else { vencedor = gc > gv ? c : v; }
-                jogo.gc = gc; jogo.gv = gv; jogo.vencedor = vencedor; 
-            });
-            if(meuJogoMataMata && meuJogoMataMata.vencedor === null) { carregarModoTecnico(meuJogoMataMata, `Mata-Mata: ${faseAtual}`, true); } else { concluirFluxoFaseMataMataAtiva(); }
-        }
+            // Atualiza pontuação (se não for mata-mata)
+            if (!jogoAtActiveRef.ehMataMata) {
+                if (golsCasaLive > golsVisLive) { c.pontos += 3; c.vitorias++; v.derrotas++; }
+                else if (golsVisLive > golsCasaLive) { v.pontos += 3; v.vitorias++; c.derrotas++; }
+                else { c.pontos++; v.pontos++; c.empates++; v.empates++; }
+            }
 
-        function concluirFluxoFaseMataMataAtiva() {
-            const divRes = document.getElementById("resultados-jogos"); divRes.innerHTML = ""; let chavesAtuais = bracketDados[faseAtual]; let vencedores = [];
-            chavesAtuais.forEach(j => { vencedores.push(j.vencedor); let itemEstilo = (j.casa.id === meuTimeId || j.visitante.id === meuTimeId) ? "background-color:#fff3cd;" : ""; divRes.innerHTML += `<div class="placar" style="${itemEstilo}"><strong>${faseAtual}:</strong> ${j.casa.nome} ${j.gc} x ${j.gv} ${j.visitante.nome}<br><small style="color:#28a745;">➔ Avançou: ${j.vencedor.nome}</small></div>`; });
-            if (faseAtual === "OITAVAS") { faseAtual = "QUARTAS"; let idx=0; for(let i=0; i<4; i++) bracketDados["QUARTAS"][i] = {casa: vencedores[idx++], visitante: vencedores[idx++]}; document.getElementById("btn-simular-acao").innerText = "Simular Quartas"; }
-            else if (faseAtual === "QUARTAS") { faseAtual = "SEMIS"; let idx=0; for(let i=0; i<2; i++) bracketDados["SEMIS"][i] = {casa: vencedores[idx++], visitante: vencedores[idx++]}; document.getElementById("btn-simular-acao").innerText = "Simular Semifinal"; }
-            else if (faseAtual === "SEMIS") { faseAtual = "FINAL"; bracketDados["FINAL"][0] = {casa: vencedores[0], visitante: vencedores[1]}; document.getElementById("btn-simular-acao").innerText = "Simular Final"; }
-            else if (faseAtual === "FINAL") { document.getElementById("titulo-fase-principal").innerHTML = `🏆 CAMPEÃO: ${vencedores[0].nome} 🏆`; document.getElementById("btn-simular-acao").style.display = "none"; faseAtual = "FIM"; }
-            renderizarInterface();
-        }
+            c.sg += (golsCasaLive - golsVisLive);
+            v.sg += (golsVisLive - golsCasaLive);
+            c.jogos++;
+            v.jogos++;
 
-        function renderizarInterface() {
-            const containerfase = document.getElementById("container-visual-fase"); containerfase.innerHTML = "";
-            let htmlGrid = `<div class="grid-grupos">`; letrasGrupos.forEach(l => { let g = grupos[l]; g.sort((a,b) => b.pontos - a.pontos || b.sg - a.sg); htmlGrid += `<div class="card-grupo"><div class="titulo-grupo">GRUPO ${l}</div><table class="tabela-mini"><tr><th>Seleção</th><th>P</th><th>SG</th></tr>`; g.forEach((time) => { let m = time.id === meuTimeId ? "background:#fff3cd; font-weight:bold;" : ""; htmlGrid += `<tr style="${m}"><td>${time.nome}</td><td><strong>${time.pontos}</strong></td><td>${time.sg}</td></tr>`; }); htmlGrid += `</table></div>`; }); htmlGrid += `</div>`;
-            if (faseAtual === "GRUPOS") { containerfase.innerHTML = htmlGrid; } else {
-                let htmlBracket = `<div class="bracket-scroll"><div class="bracket-container">`; ["OITAVAS", "QUARTAS", "SEMIS", "FINAL"].forEach(f => { htmlBracket += `<div class="bracket-coluna"><div class="bracket-fase-titulo">${f}</div>`; bracketDados[f].forEach(jogo => { let nCasa = jogo.casa ? jogo.casa.nome : "A vencer"; let nVis = jogo.visitante ? jogo.visitante.nome : "A vencer"; let txtC = jogo.gc !== null ? jogo.gc : ""; let txtV = jogo.gv !== null ? jogo.gv : ""; let clC = (jogo.vencedor && jogo.vencedor.id === jogo.casa?.id) ? "bracket-time vencedor" : "bracket-time"; let clV = (jogo.vencedor && jogo.vencedor.id === jogo.visitante?.id) ? "bracket-time vencedor" : "bracket-time"; htmlBracket += `<div class="bracket-jogo"><div class="${clC}"><span>${nCasa}</span><strong>${txtC}</strong></div><div class="${clV}"><span>${nVis}</span><strong>${txtV}</strong></div></div>`; }); htmlBracket += `</div>`; }); htmlBracket += `</div></div>`;
-                containerfase.innerHTML = htmlBracket + `<br><h3 style="text-align:left;">Classificação Grupos</h3>` + htmlGrid;
+            // 3. Verifica o vencedor (para Mata-Mata)
+            if (disputaPenaisAtiva) {
+                jR.vencedor = (penaisPlacar.casa > penaisPlacar.vis) ? c : v;
+            } else {
+                jR.vencedor = (golsCasaLive > golsVisLive) ? c : v;
+            }
+
+            // 4. Continua o fluxo do torneio
+            if (jogoAtActiveRef.ehMataMata) {
+                concluirFluxoFaseMataMataAtiva();
+            } else {
+                concluirFluxoFaseGruposAtiva();
             }
         }
 
-        function atualizarVisualTrajetoria() { const container = document.getElementById("container-trajetoria"); if(minhaTrajetoria.length === 0) return; let htmlTraj = `<table class="tabela-trajetoria"><tr><th>Fase</th><th>Oponente</th><th>Placar</th><th>Res.</th><th>Detalhes</th></tr>`; minhaTrajetoria.forEach(t => { let cl = t.status === "V" ? "badge vitoria" : (t.status === "E" ? "badge empate" : "badge derrota"); htmlTraj += `<tr><td><strong>${t.fase}</strong></td><td>${t.adversario}</td><td><code>${t.placar}</code></td><td><span class="${cl}">${t.status}</span></td><td><small>${t.detalhes || "-"}</small></td></tr>`; }); container.innerHTML = htmlTraj + `</table>`; }
+        function atualizarExibicaoResultados() {
+            let div = document.getElementById("resultados-jogos");
+            if (!div) return;
+            let jg = tabelaPartidasGrupos[rodadaGrupo - 1];
+            div.innerHTML = "";
 
-        carregarTelaInicial();
+            jg.forEach(j => {
+                // 1. Identifica se é o seu jogo (usando comparação segura com String)
+                let ehMeuTime = (String(j.casa.id) === String(meuTimeId) || String(j.visitante.id) === String(meuTimeId));
+
+                // 2. Define o placar (usa os resultados reais se o jogo já acabou, ou os da simulação)
+                let gc = ehMeuTime ? (jogoAtActiveRef.jogo.gc ?? 0) : (j.gc ?? 0);
+                let gv = ehMeuTime ? (jogoAtActiveRef.jogo.gv ?? 0) : (j.gv ?? 0);
+
+                // 3. Aplica a classe apenas se for o seu time
+                let classeDestaque = ehMeuTime ? 'destaque-meu-time' : '';
+
+                // 4. Monta o HTML com a classe
+                div.innerHTML += `
+            <div class="placar ${classeDestaque}">
+                <strong>Grupo ${j.casa.grupoLetra}:</strong> 
+                ${j.casa.nome} <b>${gc} x ${gv}</b> ${j.visitante.nome}
+            </div>`;
+            });
+        }
+
+
+        function registrarTrajetoria(lbl, adv, gc, gv, sC, ext) { let gm = sC ? gc : gv, gs = sC ? gv : gc, r = gm > gs ? "V" : gs > gm ? "D" : "E"; if (ext.includes("Pen:") && r === "E") r = ext.includes(gm + "x") ? "V" : "D"; minhaTrajetoria.push({ fase: lbl, adversario: adv, placar: `${gm} x ${gs}`, status: r, detalhes: ext }); atualizarVisualTrajetoria(); }
+        function simularRodadaGrupos() {
+            let div = document.getElementById("resultados-jogos");
+            div.innerHTML = "";
+            let jg = tabelaPartidasGrupos[rodadaGrupo - 1];
+            let mJ = jg.find(j => j.casa.id === meuTimeId || j.visitante.id === meuTimeId);
+
+            jg.forEach(j => {
+                let c = j.casa, v = j.visitante;
+
+                // Se for o seu jogo, calculamos o resultado apenas para registro, 
+                // mas mantemos o placar zerado ou simulado para aparecer na lista
+                let gc, gv;
+                if (j.casa.id === meuTimeId || j.visitante.id === meuTimeId) {
+                    // O seu jogo será decidido no modo técnico, então vamos colocar um placar fictício inicial
+                    gc = 0; gv = 0;
+                } else {
+                    gc = calcularPlacarRapido(obterForcaAtual(c, true), obterForcaAtual(v, true));
+                    gv = calcularPlacarRapido(obterForcaAtual(v, true), obterForcaAtual(c, true));
+                    c.sg += (gc - gv); v.sg += (gv - gc);
+                    c.jogos++; v.jogos++;
+                    if (gc > gv) { c.pontos += 3; c.vitorias++; v.derrotas++; }
+                    else if (gv > gc) { v.pontos += 3; v.vitorias++; c.derrotas++; }
+                    else { c.pontos++; v.pontos++; c.empates++; v.empates++; }
+                }
+
+                // Adiciona na lista de resultados (destacado se for o seu time)
+                let destaque = (j.casa.id === meuTimeId || j.visitante.id === meuTimeId) ? "background:#eef7ff; font-weight:bold;" : "";
+                div.innerHTML += `<div class="placar" style="${destaque}"><strong>Grupo ${c.grupoLetra}:</strong> ${c.nome} <b>${gc} x ${gv}</b> ${v.nome} ${destaque ? '(A seguir)' : ''}</div>`;
+            });
+
+            if (mJ) {
+                carregarModoTecnico(mJ, `Grupo - Rodada ${rodadaGrupo}`, false);
+            } else {
+                concluirFluxoFaseGruposAtiva();
+            }
+        }
+        function concluirFluxoFaseGruposAtiva() { if (rodadaGrupo < 3) { rodadaGrupo++; document.getElementById("btn-simular-acao").innerText = `Simular Rodada ${rodadaGrupo}`; } else { apurarClassificadosPara16Avos(); } renderizarInterface(); }
+        function apurarClassificadosPara16Avos() { let cl = []; letrasGrupos.forEach(l => { let g = grupos[l]; g.sort((a, b) => b.pontos - a.pontos || b.sg - a.sg); cl.push(g[0], g[1]); }); faseAtual = "OITAVAS"; bracketDados["OITAVAS"] = []; for (let i = 0; i < cl.length; i += 4) { if (cl[i] && cl[i + 3]) bracketDados["OITAVAS"].push({ casa: cl[i], visitante: cl[i + 3], gc: null, gv: null, penC: null, penV: null, vencedor: null }); if (cl[i + 2] && cl[i + 1]) bracketDados["OITAVAS"].push({ casa: cl[i + 2], visitante: cl[i + 1], gc: null, gv: null, penC: null, penV: null, vencedor: null }); } bracketDados["QUARTAS"] = Array(4).fill(null).map(() => ({ casa: null, visitante: null, vencedor: null })); bracketDados["SEMIS"] = Array(2).fill(null).map(() => ({ casa: null, visitante: null, vencedor: null })); bracketDados["FINAL"] = Array(1).fill(null).map(() => ({ casa: null, visitante: null, vencedor: null })); document.getElementById("titulo-fase-principal").innerText = "Mata-Mata: Oitavas"; document.getElementById("btn-simular-acao").innerText = "Simular Oitavas"; mudarAba('aba-simulador', document.querySelector('.menu-abas button')); }
+        function simularFaseMataMata() {
+            let cA = bracketDados[faseAtual]; let mJ = cA.find(j => (j.casa && j.casa.id === meuTimeId) || (j.visitante && j.visitante.id === meuTimeId));
+            cA.forEach(j => { if (mJ && j === mJ) return; if (j.vencedor !== null) return; let c = j.casa, v = j.visitante, gc = calcularPlacarRapido(obterForcaAtual(c, true), obterForcaAtual(v, true)), gv = calcularPlacarRapido(obterForcaAtual(v, true), obterForcaAtual(c, true)), venc = null; if (gc === gv) { j.penC = Math.floor(Math.random() * 3) + 3; j.penV = Math.floor(Math.random() * 3) + 1; venc = c; } else venc = gc > gv ? c : v; j.gc = gc; j.gv = gv; j.vencedor = venc; });
+            if (mJ && mJ.vencedor === null) carregarModoTecnico(mJ, `Mata-Mata: ${faseAtual}`, true); else concluirFluxoFaseMataMataAtiva();
+        }
+        function concluirFluxoFaseMataMataAtiva() {
+            let div = document.getElementById("resultados-jogos"); div.innerHTML = ""; let cA = bracketDados[faseAtual]; let vnc = [];
+            cA.forEach(j => { vnc.push(j.vencedor); let st = (j.casa.id === meuTimeId || j.visitante.id === meuTimeId) ? "background:#fff3cd;" : ""; let pP = j.penC !== null ? ` (Pen: ${j.penC}x${j.penV})` : ""; div.innerHTML += `<div class="placar" style="${st}"><strong>${faseAtual}:</strong> ${j.casa.nome} ${j.gc} x ${j.gv} ${j.visitante.nome}${pP}<br><small style="color:#28a745;">➔ Avançou: ${j.vencedor.nome}</small></div>`; });
+            if (faseAtual === "OITAVAS") { faseAtual = "QUARTAS"; let id = 0; for (let i = 0; i < 4; i++)bracketDados["QUARTAS"][i] = { casa: vnc[id++], visitante: vnc[id++] }; document.getElementById("btn-simular-acao").innerText = "Simular Quartas"; } else if (faseAtual === "QUARTAS") { faseAtual = "SEMIS"; let id = 0; for (let i = 0; i < 2; i++)bracketDados["SEMIS"][i] = { casa: vnc[id++], visitante: vnc[id++] }; document.getElementById("btn-simular-acao").innerText = "Simular Semifinal"; } else if (faseAtual === "SEMIS") { faseAtual = "FINAL"; bracketDados["FINAL"][0] = { casa: vnc[0], visitante: vnc[1] }; document.getElementById("btn-simular-acao").innerText = "Simular Final"; } else if (faseAtual === "FINAL") { document.getElementById("titulo-fase-principal").innerHTML = `🏆 CAMPEÃO: ${vnc[0].nome} 🏆`; document.getElementById("btn-simular-acao").style.display = "none"; faseAtual = "FIM"; }
+            renderizarInterface();
+        }
+        function renderizarInterface() {
+            let cf = document.getElementById("container-visual-fase"); cf.innerHTML = ""; let hG = `<div class="grid-grupos">`; letrasGrupos.forEach(l => { let g = grupos[l]; g.sort((a, b) => b.pontos - a.pontos || b.sg - a.sg); hG += `<div class="card-grupo"><div class="titulo-grupo">GRUPO ${l}</div><table class="tabela-mini"><tr><th>Seleção</th><th>P</th><th>SG</th></tr>`; g.forEach(t => { let m = t.id === meuTimeId ? "background:#fff3cd;font-weight:bold;" : ""; hG += `<tr style="${m}"><td>${t.nome}</td><td><strong>${t.pontos}</strong></td><td>${t.sg}</td></tr>`; }); hG += `</table></div>`; }); hG += `</div>`;
+            if (faseAtual === "GRUPOS") { cf.innerHTML = hG; } else { let hB = `<div class="bracket-scroll"><div class="bracket-container">`;["OITAVAS", "QUARTAS", "SEMIS", "FINAL"].forEach(f => { hB += `<div class="bracket-coluna"><div class="bracket-fase-titulo">${f}</div>`; bracketDados[f].forEach(j => { let nC = j.casa ? j.casa.nome : "A vencer", nV = j.visitante ? j.visitante.nome : "A vencer", tC = j.gc !== null ? j.gc : "", tV = j.gv !== null ? j.gv : "", cC = (j.vencedor && j.vencedor.id === j.casa?.id) ? "bracket-time vencedor" : "bracket-time", cV = (j.vencedor && j.vencedor.id === j.visitante?.id) ? "bracket-time vencedor" : "bracket-time"; hB += `<div class="bracket-jogo"><div class="${cC}"><span>${nC}</span><strong>${tC}</strong></div><div class="${cV}"><span>${nV}</span><strong>${tV}</strong></div></div>`; }); hB += `</div>`; }); hB += `</div></div>`; cf.innerHTML = hB + `<br><h3 style="text-align:left;">Classificação Grupos</h3>` + hG; }
+            renderizarArtilheiros();
+        }
+        function atualizarVisualTrajetoria() { let ct = document.getElementById("container-trajetoria"); if (minhaTrajetoria.length === 0) return; let hT = `<table class="tabela-trajetoria"><tr><th>Fase</th><th>Oponente</th><th>Placar</th><th>Res.</th><th>Detalhes</th></tr>`; minhaTrajetoria.forEach(t => { let c = t.status === "V" ? "badge vitoria" : t.status === "E" ? "badge empate" : "badge derrota"; hT += `<tr><td><strong>${t.fase}</strong></td><td>${t.adversario}</td><td><code>${t.placar}</code></td><td><span class="${c}">${t.status}</span></td><td><small>${t.detalhes || "-"}</small></td></tr>`; }); ct.innerHTML = hT + `</table>`; }
+        function renderizarArtilheiros() { let tds = []; listaDeTimes.forEach(t => { let el = (t.titulares || []).concat(t.banco || []); el.forEach(j => { if (j.gols > 0) tds.push({ nome: j.nome, gols: j.gols, selecao: t.nome }); }); }); tds.sort((a, b) => b.gols - a.gols); let t10 = tds.slice(0, 10); if (t10.length === 0) { document.getElementById("container-artilharia").innerHTML = "<p style='color:#888; font-size:13px;'>Nenhum gol.</p>"; return; } let hA = `<table style="width:100%; border-collapse:collapse; font-size:13px; text-align:center;"><tr style="background:#f4f5f7; border-bottom:2px solid #ddd;"><th style="padding:5px;">Pos</th><th style="text-align:left;">Nome</th><th>Seleção</th><th>Gols ⚽</th></tr>`; t10.forEach((j, i) => { hA += `<tr style="border-bottom:1px solid #eee;"><td style="padding:6px;"><strong>${i + 1}º</strong></td><td style="text-align:left;">${j.nome}</td><td>${j.selecao}</td><td><span style="background:#28a745; color:#fff; padding:2px 8px; border-radius:10px; font-weight:bold;">${j.gols}</span></td></tr>`; }); document.getElementById("container-artilharia").innerHTML = hA + `</table>`; }
     </script>
 </body>
+
 </html>

@@ -3,6 +3,11 @@ const listaDeTimes = [
         "id": 1,
         "nome": "Argentina",
         "sigla": "ARG",
+        "formacao":"4-3-3",
+        "postura":"Equilibrado",
+        "brasaoUrl": "https://escudosfc.com.br/images/argentina_new.png",
+        "capitao": 10002,
+        "penalti": 10006,
         "pontos": 0,
         "vitorias": 0,
         "empates": 0,
@@ -10,11 +15,10 @@ const listaDeTimes = [
         "golsPro": 0,
         "golsContra": 0,
         "saldo": 0,
-        "forca": 88,
         "titulares": [
             {
                 "id": 10001,
-                "nome": "GOL Tanaka 87",
+                "nome": "Boludo",
                 "posicao": "GOL",
                 "idade": 25,
                 "pe": "D",
@@ -30,15 +34,17 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 84,
+                "numero": 84,
                 "potencial": 89
             },
             {
                 "id": 10002,
                 "nome": "LD Jones 68",
                 "posicao": "LD",
+                "posicao2": "ZAG/LE",
                 "idade": 27,
                 "pe": "D",
+                "numero":1,
                 "velocidade": 88,
                 "finalizacao": 75,
                 "passe": 88,
@@ -52,7 +58,6 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 90,
                 "potencial": 90
             },
             {
@@ -74,7 +79,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 85,
+                "numero": 85,
                 "potencial": 88
             },
             {
@@ -96,7 +101,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 85,
+                "numero": 85,
                 "potencial": 87
             },
             {
@@ -118,7 +123,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 86,
+                "numero": 86,
                 "potencial": 89
             },
             {
@@ -140,7 +145,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 84,
+                "numero": 84,
                 "potencial": 86
             },
             {
@@ -162,7 +167,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 86,
+                "numero": 86,
                 "potencial": 89
             },
             {
@@ -184,7 +189,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 86,
+                "numero": 86,
                 "potencial": 86
             },
             {
@@ -206,7 +211,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 87,
+                "numero": 87,
                 "potencial": 90
             },
             {
@@ -228,7 +233,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 85,
+                "numero": 85,
                 "potencial": 89
             },
             {
@@ -250,7 +255,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 87,
+                "numero": 87,
                 "potencial": 92
             }
         ],
@@ -273,7 +278,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 85,
+                "numero": 85,
                 "potencial": 89
             },
             {
@@ -295,7 +300,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 83,
+                "numero": 83,
                 "potencial": 86
             },
             {
@@ -317,7 +322,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 86,
+                "numero": 86,
                 "potencial": 88
             },
             {
@@ -339,7 +344,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 82,
+                "numero": 82,
                 "potencial": 85
             },
             {
@@ -361,7 +366,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 81,
+                "numero": 81,
                 "potencial": 85
             },
             {
@@ -383,7 +388,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 86,
+                "numero": 86,
                 "potencial": 90
             },
             {
@@ -405,7 +410,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 85,
+                "numero": 85,
                 "potencial": 85
             },
             {
@@ -427,7 +432,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 81,
+                "numero": 81,
                 "potencial": 85
             },
             {
@@ -449,7 +454,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 81,
+                "numero": 81,
                 "potencial": 83
             },
             {
@@ -471,7 +476,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 81,
+                "numero": 81,
                 "potencial": 83
             },
             {
@@ -493,7 +498,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 83,
+                "numero": 83,
                 "potencial": 83
             },
             {
@@ -515,7 +520,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 87,
+                "numero": 87,
                 "potencial": 89
             }
         ]
@@ -524,6 +529,11 @@ const listaDeTimes = [
         "id": 2,
         "nome": "Brasil",
         "sigla": "BRA",
+        "formacao":"4-3-3",
+        "postura":"Equilibrado",
+        "brasaoUrl": "https://escudosfc.com.br/images/cbf.jpg",
+        "capitao": null,
+        "penalti": null,
         "pontos": 0,
         "vitorias": 0,
         "empates": 0,
@@ -531,7 +541,6 @@ const listaDeTimes = [
         "golsPro": 0,
         "golsContra": 0,
         "saldo": 0,
-        "forca": 87,
         "titulares": [
             {
                 "id": 10024,
@@ -551,7 +560,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 88,
+                "numero": 88,
                 "potencial": 92
             },
             {
@@ -573,7 +582,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 86,
+                "numero": 86,
                 "potencial": 87
             },
             {
@@ -595,7 +604,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 85,
+                "numero": 85,
                 "potencial": 88
             },
             {
@@ -617,7 +626,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 89,
+                "numero": 89,
                 "potencial": 90
             },
             {
@@ -639,7 +648,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 84,
+                "numero": 84,
                 "potencial": 88
             },
             {
@@ -661,7 +670,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 86,
+                "numero": 86,
                 "potencial": 88
             },
             {
@@ -683,7 +692,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 85,
+                "numero": 85,
                 "potencial": 85
             },
             {
@@ -705,7 +714,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 83,
+                "numero": 83,
                 "potencial": 87
             },
             {
@@ -727,7 +736,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 87,
+                "numero": 87,
                 "potencial": 90
             },
             {
@@ -749,7 +758,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 83,
+                "numero": 83,
                 "potencial": 84
             },
             {
@@ -759,6 +768,7 @@ const listaDeTimes = [
                 "posicao2": "PD/MD",
                 "idade": 35,
                 "pe": "D",
+                "numero": 10,
                 "velocidade": 90,
                 "finalizacao": 91,
                 "passe": 90,
@@ -794,7 +804,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 82,
+                "numero": 82,
                 "potencial": 87
             },
             {
@@ -816,7 +826,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 86,
+                "numero": 86,
                 "potencial": 88
             },
             {
@@ -838,7 +848,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 86,
+                "numero": 86,
                 "potencial": 87
             },
             {
@@ -860,7 +870,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 82,
+                "numero": 82,
                 "potencial": 85
             },
             {
@@ -882,7 +892,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 82,
+                "numero": 82,
                 "potencial": 86
             },
             {
@@ -904,7 +914,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 80,
+                "numero": 80,
                 "potencial": 80
             },
             {
@@ -926,7 +936,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 83,
+                "numero": 83,
                 "potencial": 88
             },
             {
@@ -948,7 +958,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 82,
+                "numero": 82,
                 "potencial": 86
             },
             {
@@ -970,7 +980,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 81,
+                "numero": 81,
                 "potencial": 81
             },
             {
@@ -992,7 +1002,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 86,
+                "numero": 86,
                 "potencial": 88
             },
             {
@@ -1014,7 +1024,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 85,
+                "numero": 85,
                 "potencial": 87
             },
             {
@@ -1036,7 +1046,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 84,
+                "numero": 84,
                 "potencial": 84
             }
         ]
@@ -1045,6 +1055,11 @@ const listaDeTimes = [
         "id": 3,
         "nome": "França",
         "sigla": "FRA",
+        "formacao":"4-4-2",
+        "postura":"Equilibrado",
+        "brasaoUrl": "https://escudosfc.com.br/images/fra_new.png",
+        "capitao": null,
+        "penalti": null,
         "pontos": 0,
         "vitorias": 0,
         "empates": 0,
@@ -1072,7 +1087,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 85,
+                "numero": 85,
                 "potencial": 85
             },
             {
@@ -1094,7 +1109,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 91,
+                "numero": 91,
                 "potencial": 94
             },
             {
@@ -1116,7 +1131,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 91,
+                "numero": 91,
                 "potencial": 94
             },
             {
@@ -1138,7 +1153,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 90,
+                "numero": 90,
                 "potencial": 93
             },
             {
@@ -1160,7 +1175,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 85,
+                "numero": 85,
                 "potencial": 85
             },
             {
@@ -1182,7 +1197,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 87,
+                "numero": 87,
                 "potencial": 91
             },
             {
@@ -1204,7 +1219,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 91,
+                "numero": 91,
                 "potencial": 92
             },
             {
@@ -1226,7 +1241,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 90,
+                "numero": 90,
                 "potencial": 93
             },
             {
@@ -1248,7 +1263,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 86,
+                "numero": 86,
                 "potencial": 89
             },
             {
@@ -1270,7 +1285,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 89,
+                "numero": 89,
                 "potencial": 91
             },
             {
@@ -1292,7 +1307,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 87,
+                "numero": 87,
                 "potencial": 88
             }
         ],
@@ -1315,7 +1330,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 82,
+                "numero": 82,
                 "potencial": 87
             },
             {
@@ -1337,7 +1352,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 88,
+                "numero": 88,
                 "potencial": 90
             },
             {
@@ -1359,7 +1374,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 83,
+                "numero": 83,
                 "potencial": 85
             },
             {
@@ -1381,7 +1396,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 87,
+                "numero": 87,
                 "potencial": 91
             },
             {
@@ -1403,7 +1418,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 86,
+                "numero": 86,
                 "potencial": 86
             },
             {
@@ -1425,7 +1440,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 84,
+                "numero": 84,
                 "potencial": 86
             },
             {
@@ -1447,7 +1462,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 85,
+                "numero": 85,
                 "potencial": 86
             },
             {
@@ -1469,7 +1484,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 86,
+                "numero": 86,
                 "potencial": 90
             },
             {
@@ -1491,7 +1506,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 83,
+                "numero": 83,
                 "potencial": 87
             },
             {
@@ -1513,7 +1528,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 87,
+                "numero": 87,
                 "potencial": 92
             },
             {
@@ -1535,7 +1550,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 86,
+                "numero": 86,
                 "potencial": 87
             },
             {
@@ -1557,7 +1572,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 85,
+                "numero": 85,
                 "potencial": 86
             }
         ]
@@ -1593,7 +1608,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 84,
+                "numero": 84,
                 "potencial": 89
             },
             {
@@ -1615,7 +1630,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 88,
+                "numero": 88,
                 "potencial": 90
             },
             {
@@ -1637,7 +1652,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 87,
+                "numero": 87,
                 "potencial": 87
             },
             {
@@ -1659,7 +1674,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 90,
+                "numero": 90,
                 "potencial": 92
             },
             {
@@ -1681,7 +1696,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 88,
+                "numero": 88,
                 "potencial": 90
             },
             {
@@ -1703,7 +1718,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 88,
+                "numero": 88,
                 "potencial": 88
             },
             {
@@ -1725,7 +1740,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 86,
+                "numero": 86,
                 "potencial": 91
             },
             {
@@ -1747,7 +1762,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 85,
+                "numero": 85,
                 "potencial": 89
             },
             {
@@ -1769,7 +1784,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 85,
+                "numero": 85,
                 "potencial": 89
             },
             {
@@ -1791,7 +1806,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 84,
+                "numero": 84,
                 "potencial": 86
             },
             {
@@ -1813,7 +1828,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 84,
+                "numero": 84,
                 "potencial": 84
             }
         ],
@@ -1836,7 +1851,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 84,
+                "numero": 84,
                 "potencial": 85
             },
             {
@@ -1858,7 +1873,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 86,
+                "numero": 86,
                 "potencial": 91
             },
             {
@@ -1880,7 +1895,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 85,
+                "numero": 85,
                 "potencial": 90
             },
             {
@@ -1902,7 +1917,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 81,
+                "numero": 81,
                 "potencial": 86
             },
             {
@@ -1924,7 +1939,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 87,
+                "numero": 87,
                 "potencial": 88
             },
             {
@@ -1946,7 +1961,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 85,
+                "numero": 85,
                 "potencial": 88
             },
             {
@@ -1968,7 +1983,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 81,
+                "numero": 81,
                 "potencial": 81
             },
             {
@@ -1990,7 +2005,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 82,
+                "numero": 82,
                 "potencial": 82
             },
             {
@@ -2012,7 +2027,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 83,
+                "numero": 83,
                 "potencial": 83
             },
             {
@@ -2034,7 +2049,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 86,
+                "numero": 86,
                 "potencial": 90
             },
             {
@@ -2056,7 +2071,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 83,
+                "numero": 83,
                 "potencial": 88
             },
             {
@@ -2078,7 +2093,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 87,
+                "numero": 87,
                 "potencial": 87
             }
         ]
@@ -2114,7 +2129,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 86,
+                "numero": 86,
                 "potencial": 90
             },
             {
@@ -2136,7 +2151,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 86,
+                "numero": 86,
                 "potencial": 90
             },
             {
@@ -2158,7 +2173,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 88,
+                "numero": 88,
                 "potencial": 88
             },
             {
@@ -2180,7 +2195,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 85,
+                "numero": 85,
                 "potencial": 88
             },
             {
@@ -2202,7 +2217,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 89,
+                "numero": 89,
                 "potencial": 94
             },
             {
@@ -2224,7 +2239,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 83,
+                "numero": 83,
                 "potencial": 83
             },
             {
@@ -2246,7 +2261,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 83,
+                "numero": 83,
                 "potencial": 83
             },
             {
@@ -2268,7 +2283,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 85,
+                "numero": 85,
                 "potencial": 87
             },
             {
@@ -2290,7 +2305,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 84,
+                "numero": 84,
                 "potencial": 85
             },
             {
@@ -2312,7 +2327,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 89,
+                "numero": 89,
                 "potencial": 92
             },
             {
@@ -2334,7 +2349,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 89,
+                "numero": 89,
                 "potencial": 91
             }
         ],
@@ -2357,7 +2372,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 80,
+                "numero": 80,
                 "potencial": 84
             },
             {
@@ -2379,7 +2394,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 82,
+                "numero": 82,
                 "potencial": 84
             },
             {
@@ -2401,7 +2416,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 85,
+                "numero": 85,
                 "potencial": 85
             },
             {
@@ -2423,7 +2438,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 85,
+                "numero": 85,
                 "potencial": 85
             },
             {
@@ -2445,7 +2460,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 84,
+                "numero": 84,
                 "potencial": 85
             },
             {
@@ -2467,7 +2482,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 81,
+                "numero": 81,
                 "potencial": 81
             },
             {
@@ -2489,7 +2504,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 81,
+                "numero": 81,
                 "potencial": 86
             },
             {
@@ -2511,7 +2526,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 85,
+                "numero": 85,
                 "potencial": 86
             },
             {
@@ -2533,7 +2548,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 80,
+                "numero": 80,
                 "potencial": 81
             },
             {
@@ -2555,7 +2570,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 80,
+                "numero": 80,
                 "potencial": 80
             },
             {
@@ -2577,7 +2592,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 80,
+                "numero": 80,
                 "potencial": 81
             },
             {
@@ -2599,7 +2614,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 82,
+                "numero": 82,
                 "potencial": 86
             }
         ]
@@ -2635,7 +2650,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 86,
+                "numero": 86,
                 "potencial": 86
             },
             {
@@ -2657,7 +2672,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 87,
+                "numero": 87,
                 "potencial": 87
             },
             {
@@ -2679,7 +2694,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 85,
+                "numero": 85,
                 "potencial": 85
             },
             {
@@ -2701,7 +2716,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 85,
+                "numero": 85,
                 "potencial": 90
             },
             {
@@ -2723,7 +2738,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 88,
+                "numero": 88,
                 "potencial": 89
             },
             {
@@ -2745,7 +2760,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 86,
+                "numero": 86,
                 "potencial": 89
             },
             {
@@ -2767,7 +2782,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 88,
+                "numero": 88,
                 "potencial": 89
             },
             {
@@ -2789,7 +2804,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 86,
+                "numero": 86,
                 "potencial": 90
             },
             {
@@ -2811,7 +2826,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 86,
+                "numero": 86,
                 "potencial": 91
             },
             {
@@ -2833,7 +2848,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 82,
+                "numero": 82,
                 "potencial": 85
             },
             {
@@ -2855,7 +2870,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 83,
+                "numero": 83,
                 "potencial": 86
             }
         ],
@@ -2878,7 +2893,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 83,
+                "numero": 83,
                 "potencial": 87
             },
             {
@@ -2900,7 +2915,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 83,
+                "numero": 83,
                 "potencial": 87
             },
             {
@@ -2922,7 +2937,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 81,
+                "numero": 81,
                 "potencial": 81
             },
             {
@@ -2944,7 +2959,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 84,
+                "numero": 84,
                 "potencial": 86
             },
             {
@@ -2966,7 +2981,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 82,
+                "numero": 82,
                 "potencial": 82
             },
             {
@@ -2988,7 +3003,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 79,
+                "numero": 79,
                 "potencial": 83
             },
             {
@@ -3010,7 +3025,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 81,
+                "numero": 81,
                 "potencial": 85
             },
             {
@@ -3032,7 +3047,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 82,
+                "numero": 82,
                 "potencial": 85
             },
             {
@@ -3054,7 +3069,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 82,
+                "numero": 82,
                 "potencial": 87
             },
             {
@@ -3076,7 +3091,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 83,
+                "numero": 83,
                 "potencial": 86
             },
             {
@@ -3098,7 +3113,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 84,
+                "numero": 84,
                 "potencial": 84
             },
             {
@@ -3120,7 +3135,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 85,
+                "numero": 85,
                 "potencial": 88
             }
         ]
@@ -3156,7 +3171,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 86,
+                "numero": 86,
                 "potencial": 88
             },
             {
@@ -3178,7 +3193,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 88,
+                "numero": 88,
                 "potencial": 93
             },
             {
@@ -3200,7 +3215,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 86,
+                "numero": 86,
                 "potencial": 86
             },
             {
@@ -3222,7 +3237,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 84,
+                "numero": 84,
                 "potencial": 87
             },
             {
@@ -3244,7 +3259,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 86,
+                "numero": 86,
                 "potencial": 91
             },
             {
@@ -3266,7 +3281,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 86,
+                "numero": 86,
                 "potencial": 86
             },
             {
@@ -3288,7 +3303,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 88,
+                "numero": 88,
                 "potencial": 90
             },
             {
@@ -3310,7 +3325,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 88,
+                "numero": 88,
                 "potencial": 91
             },
             {
@@ -3332,7 +3347,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 83,
+                "numero": 83,
                 "potencial": 88
             },
             {
@@ -3354,7 +3369,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 85,
+                "numero": 85,
                 "potencial": 87
             },
             {
@@ -3376,7 +3391,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 87,
+                "numero": 87,
                 "potencial": 90
             }
         ],
@@ -3399,7 +3414,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 84,
+                "numero": 84,
                 "potencial": 88
             },
             {
@@ -3421,7 +3436,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 79,
+                "numero": 79,
                 "potencial": 82
             },
             {
@@ -3443,7 +3458,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 84,
+                "numero": 84,
                 "potencial": 86
             },
             {
@@ -3465,7 +3480,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 84,
+                "numero": 84,
                 "potencial": 87
             },
             {
@@ -3487,7 +3502,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 83,
+                "numero": 83,
                 "potencial": 83
             },
             {
@@ -3509,7 +3524,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 79,
+                "numero": 79,
                 "potencial": 84
             },
             {
@@ -3531,7 +3546,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 81,
+                "numero": 81,
                 "potencial": 83
             },
             {
@@ -3553,7 +3568,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 81,
+                "numero": 81,
                 "potencial": 84
             },
             {
@@ -3575,7 +3590,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 84,
+                "numero": 84,
                 "potencial": 85
             },
             {
@@ -3597,7 +3612,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 79,
+                "numero": 79,
                 "potencial": 84
             },
             {
@@ -3606,6 +3621,7 @@ const listaDeTimes = [
                 "posicao": "ATA/PD",
                 "idade": 30,
                 "pe": "D",
+                "numero": 10,
                 "velocidade": 84,
                 "finalizacao": 85,
                 "passe": 78,
@@ -3619,7 +3635,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 80,
+                "numero": 80,
                 "potencial": 83
             },
             {
@@ -3641,7 +3657,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 79,
+                "numero": 79,
                 "potencial": 81
             }
         ]
@@ -3677,7 +3693,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 80,
+                "numero": 80,
                 "potencial": 83
             },
             {
@@ -3699,7 +3715,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 86,
+                "numero": 86,
                 "potencial": 89
             },
             {
@@ -3721,7 +3737,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 83,
+                "numero": 83,
                 "potencial": 84
             },
             {
@@ -3743,7 +3759,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 80,
+                "numero": 80,
                 "potencial": 84
             },
             {
@@ -3765,7 +3781,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 82,
+                "numero": 82,
                 "potencial": 87
             },
             {
@@ -3787,7 +3803,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 81,
+                "numero": 81,
                 "potencial": 85
             },
             {
@@ -3809,7 +3825,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 85,
+                "numero": 85,
                 "potencial": 89
             },
             {
@@ -3831,7 +3847,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 83,
+                "numero": 83,
                 "potencial": 83
             },
             {
@@ -3853,7 +3869,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 82,
+                "numero": 82,
                 "potencial": 82
             },
             {
@@ -3875,7 +3891,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 86,
+                "numero": 86,
                 "potencial": 90
             },
             {
@@ -3897,7 +3913,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 84,
+                "numero": 84,
                 "potencial": 84
             }
         ],
@@ -3920,7 +3936,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 82,
+                "numero": 82,
                 "potencial": 84
             },
             {
@@ -3942,7 +3958,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 81,
+                "numero": 81,
                 "potencial": 84
             },
             {
@@ -3964,7 +3980,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 79,
+                "numero": 79,
                 "potencial": 79
             },
             {
@@ -3986,7 +4002,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 80,
+                "numero": 80,
                 "potencial": 85
             },
             {
@@ -4008,7 +4024,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 81,
+                "numero": 81,
                 "potencial": 83
             },
             {
@@ -4030,7 +4046,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 80,
+                "numero": 80,
                 "potencial": 83
             },
             {
@@ -4052,7 +4068,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 81,
+                "numero": 81,
                 "potencial": 86
             },
             {
@@ -4074,7 +4090,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 83,
+                "numero": 83,
                 "potencial": 85
             },
             {
@@ -4096,7 +4112,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 79,
+                "numero": 79,
                 "potencial": 80
             },
             {
@@ -4118,7 +4134,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 83,
+                "numero": 83,
                 "potencial": 85
             },
             {
@@ -4140,7 +4156,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 83,
+                "numero": 83,
                 "potencial": 85
             },
             {
@@ -4162,7 +4178,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 82,
+                "numero": 82,
                 "potencial": 83
             }
         ]
@@ -4198,7 +4214,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 83,
+                "numero": 83,
                 "potencial": 83
             },
             {
@@ -4220,7 +4236,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 85,
+                "numero": 85,
                 "potencial": 85
             },
             {
@@ -4242,7 +4258,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 85,
+                "numero": 85,
                 "potencial": 86
             },
             {
@@ -4264,7 +4280,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 83,
+                "numero": 83,
                 "potencial": 86
             },
             {
@@ -4286,7 +4302,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 83,
+                "numero": 83,
                 "potencial": 84
             },
             {
@@ -4308,7 +4324,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 84,
+                "numero": 84,
                 "potencial": 88
             },
             {
@@ -4330,7 +4346,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 81,
+                "numero": 81,
                 "potencial": 86
             },
             {
@@ -4352,7 +4368,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 84,
+                "numero": 84,
                 "potencial": 89
             },
             {
@@ -4374,7 +4390,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 85,
+                "numero": 85,
                 "potencial": 86
             },
             {
@@ -4396,7 +4412,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 84,
+                "numero": 84,
                 "potencial": 84
             },
             {
@@ -4418,7 +4434,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 87,
+                "numero": 87,
                 "potencial": 90
             }
         ],
@@ -4441,7 +4457,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 81,
+                "numero": 81,
                 "potencial": 82
             },
             {
@@ -4463,7 +4479,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 82,
+                "numero": 82,
                 "potencial": 84
             },
             {
@@ -4485,7 +4501,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 83,
+                "numero": 83,
                 "potencial": 83
             },
             {
@@ -4507,7 +4523,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 82,
+                "numero": 82,
                 "potencial": 87
             },
             {
@@ -4529,7 +4545,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 84,
+                "numero": 84,
                 "potencial": 89
             },
             {
@@ -4551,7 +4567,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 83,
+                "numero": 83,
                 "potencial": 84
             },
             {
@@ -4573,7 +4589,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 80,
+                "numero": 80,
                 "potencial": 83
             },
             {
@@ -4595,7 +4611,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 81,
+                "numero": 81,
                 "potencial": 86
             },
             {
@@ -4617,7 +4633,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 83,
+                "numero": 83,
                 "potencial": 84
             },
             {
@@ -4639,7 +4655,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 80,
+                "numero": 80,
                 "potencial": 84
             },
             {
@@ -4661,7 +4677,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 83,
+                "numero": 83,
                 "potencial": 85
             },
             {
@@ -4683,7 +4699,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 82,
+                "numero": 82,
                 "potencial": 85
             }
         ]
@@ -4719,7 +4735,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 85,
+                "numero": 85,
                 "potencial": 88
             },
             {
@@ -4741,7 +4757,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 80,
+                "numero": 80,
                 "potencial": 81
             },
             {
@@ -4763,7 +4779,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 86,
+                "numero": 86,
                 "potencial": 89
             },
             {
@@ -4785,7 +4801,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 81,
+                "numero": 81,
                 "potencial": 82
             },
             {
@@ -4807,7 +4823,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 82,
+                "numero": 82,
                 "potencial": 83
             },
             {
@@ -4829,7 +4845,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 83,
+                "numero": 83,
                 "potencial": 85
             },
             {
@@ -4851,7 +4867,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 86,
+                "numero": 86,
                 "potencial": 88
             },
             {
@@ -4873,7 +4889,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 85,
+                "numero": 85,
                 "potencial": 86
             },
             {
@@ -4895,7 +4911,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 81,
+                "numero": 81,
                 "potencial": 86
             },
             {
@@ -4917,7 +4933,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 86,
+                "numero": 86,
                 "potencial": 91
             },
             {
@@ -4939,7 +4955,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 84,
+                "numero": 84,
                 "potencial": 88
             }
         ],
@@ -4962,7 +4978,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 77,
+                "numero": 77,
                 "potencial": 80
             },
             {
@@ -4984,7 +5000,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 81,
+                "numero": 81,
                 "potencial": 84
             },
             {
@@ -5006,7 +5022,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 81,
+                "numero": 81,
                 "potencial": 86
             },
             {
@@ -5028,7 +5044,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 83,
+                "numero": 83,
                 "potencial": 85
             },
             {
@@ -5050,7 +5066,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 80,
+                "numero": 80,
                 "potencial": 81
             },
             {
@@ -5072,7 +5088,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 83
             },
             {
@@ -5094,7 +5110,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 82,
+                "numero": 82,
                 "potencial": 84
             },
             {
@@ -5116,7 +5132,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 80,
+                "numero": 80,
                 "potencial": 83
             },
             {
@@ -5138,7 +5154,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 81
             },
             {
@@ -5160,7 +5176,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 82
             },
             {
@@ -5182,7 +5198,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 77,
+                "numero": 77,
                 "potencial": 80
             },
             {
@@ -5204,7 +5220,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 81,
+                "numero": 81,
                 "potencial": 84
             }
         ]
@@ -5240,7 +5256,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 86,
+                "numero": 86,
                 "potencial": 87
             },
             {
@@ -5262,7 +5278,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 80,
+                "numero": 80,
                 "potencial": 80
             },
             {
@@ -5284,7 +5300,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 86,
+                "numero": 86,
                 "potencial": 91
             },
             {
@@ -5306,7 +5322,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 80,
+                "numero": 80,
                 "potencial": 81
             },
             {
@@ -5328,7 +5344,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 85,
+                "numero": 85,
                 "potencial": 87
             },
             {
@@ -5350,7 +5366,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 86,
+                "numero": 86,
                 "potencial": 87
             },
             {
@@ -5372,7 +5388,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 81,
+                "numero": 81,
                 "potencial": 82
             },
             {
@@ -5394,7 +5410,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 85,
+                "numero": 85,
                 "potencial": 89
             },
             {
@@ -5416,7 +5432,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 86,
+                "numero": 86,
                 "potencial": 91
             },
             {
@@ -5438,7 +5454,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 82,
+                "numero": 82,
                 "potencial": 84
             },
             {
@@ -5460,7 +5476,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 84,
+                "numero": 84,
                 "potencial": 87
             }
         ],
@@ -5483,7 +5499,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 81,
+                "numero": 81,
                 "potencial": 83
             },
             {
@@ -5505,7 +5521,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 79,
+                "numero": 79,
                 "potencial": 84
             },
             {
@@ -5527,7 +5543,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 82,
+                "numero": 82,
                 "potencial": 86
             },
             {
@@ -5549,7 +5565,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 82,
+                "numero": 82,
                 "potencial": 86
             },
             {
@@ -5571,7 +5587,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 81,
+                "numero": 81,
                 "potencial": 81
             },
             {
@@ -5593,7 +5609,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 79,
+                "numero": 79,
                 "potencial": 81
             },
             {
@@ -5615,7 +5631,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 81,
+                "numero": 81,
                 "potencial": 86
             },
             {
@@ -5637,7 +5653,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 83,
+                "numero": 83,
                 "potencial": 85
             },
             {
@@ -5659,7 +5675,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 82,
+                "numero": 82,
                 "potencial": 82
             },
             {
@@ -5681,7 +5697,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 82,
+                "numero": 82,
                 "potencial": 86
             },
             {
@@ -5703,7 +5719,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 77,
+                "numero": 77,
                 "potencial": 78
             },
             {
@@ -5725,7 +5741,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 81,
+                "numero": 81,
                 "potencial": 82
             }
         ]
@@ -5761,7 +5777,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 82,
+                "numero": 82,
                 "potencial": 85
             },
             {
@@ -5783,7 +5799,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 85,
+                "numero": 85,
                 "potencial": 89
             },
             {
@@ -5805,7 +5821,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 81,
+                "numero": 81,
                 "potencial": 81
             },
             {
@@ -5827,7 +5843,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 82,
+                "numero": 82,
                 "potencial": 84
             },
             {
@@ -5849,7 +5865,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 79,
+                "numero": 79,
                 "potencial": 81
             },
             {
@@ -5871,7 +5887,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 85,
+                "numero": 85,
                 "potencial": 85
             },
             {
@@ -5893,7 +5909,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 81,
+                "numero": 81,
                 "potencial": 86
             },
             {
@@ -5915,7 +5931,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 82,
+                "numero": 82,
                 "potencial": 82
             },
             {
@@ -5937,7 +5953,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 80,
+                "numero": 80,
                 "potencial": 85
             },
             {
@@ -5959,7 +5975,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 80,
+                "numero": 80,
                 "potencial": 81
             },
             {
@@ -5981,7 +5997,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 81,
+                "numero": 81,
                 "potencial": 81
             }
         ],
@@ -6004,7 +6020,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 82,
+                "numero": 82,
                 "potencial": 82
             },
             {
@@ -6026,7 +6042,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 76
             },
             {
@@ -6048,7 +6064,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 82,
+                "numero": 82,
                 "potencial": 85
             },
             {
@@ -6070,7 +6086,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 80,
+                "numero": 80,
                 "potencial": 84
             },
             {
@@ -6092,7 +6108,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 80,
+                "numero": 80,
                 "potencial": 81
             },
             {
@@ -6114,7 +6130,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 83
             },
             {
@@ -6136,7 +6152,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 81,
+                "numero": 81,
                 "potencial": 82
             },
             {
@@ -6158,7 +6174,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 81,
+                "numero": 81,
                 "potencial": 85
             },
             {
@@ -6180,7 +6196,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 82,
+                "numero": 82,
                 "potencial": 86
             },
             {
@@ -6202,7 +6218,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 81
             },
             {
@@ -6224,7 +6240,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 77,
+                "numero": 77,
                 "potencial": 78
             },
             {
@@ -6246,7 +6262,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 81,
+                "numero": 81,
                 "potencial": 81
             }
         ]
@@ -6282,7 +6298,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 85,
+                "numero": 85,
                 "potencial": 87
             },
             {
@@ -6304,7 +6320,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 85,
+                "numero": 85,
                 "potencial": 86
             },
             {
@@ -6326,7 +6342,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 83,
+                "numero": 83,
                 "potencial": 84
             },
             {
@@ -6348,7 +6364,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 83,
+                "numero": 83,
                 "potencial": 88
             },
             {
@@ -6370,7 +6386,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 84,
+                "numero": 84,
                 "potencial": 85
             },
             {
@@ -6392,7 +6408,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 84,
+                "numero": 84,
                 "potencial": 88
             },
             {
@@ -6414,7 +6430,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 85,
+                "numero": 85,
                 "potencial": 90
             },
             {
@@ -6436,7 +6452,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 84,
+                "numero": 84,
                 "potencial": 88
             },
             {
@@ -6458,7 +6474,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 82,
+                "numero": 82,
                 "potencial": 87
             },
             {
@@ -6480,7 +6496,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 80,
+                "numero": 80,
                 "potencial": 84
             },
             {
@@ -6502,7 +6518,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 85,
+                "numero": 85,
                 "potencial": 87
             }
         ],
@@ -6525,7 +6541,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 81
             },
             {
@@ -6547,7 +6563,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 79,
+                "numero": 79,
                 "potencial": 83
             },
             {
@@ -6569,7 +6585,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 82,
+                "numero": 82,
                 "potencial": 85
             },
             {
@@ -6591,7 +6607,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 81,
+                "numero": 81,
                 "potencial": 86
             },
             {
@@ -6613,7 +6629,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 77,
+                "numero": 77,
                 "potencial": 81
             },
             {
@@ -6635,7 +6651,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 79,
+                "numero": 79,
                 "potencial": 82
             },
             {
@@ -6657,7 +6673,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 81
             },
             {
@@ -6679,7 +6695,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 76
             },
             {
@@ -6701,7 +6717,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 81,
+                "numero": 81,
                 "potencial": 85
             },
             {
@@ -6723,7 +6739,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 81,
+                "numero": 81,
                 "potencial": 81
             },
             {
@@ -6745,7 +6761,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 78
             },
             {
@@ -6767,7 +6783,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 81,
+                "numero": 81,
                 "potencial": 82
             }
         ]
@@ -6803,7 +6819,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 83,
+                "numero": 83,
                 "potencial": 84
             },
             {
@@ -6825,7 +6841,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 84,
+                "numero": 84,
                 "potencial": 84
             },
             {
@@ -6847,7 +6863,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 84,
+                "numero": 84,
                 "potencial": 84
             },
             {
@@ -6869,7 +6885,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 80,
+                "numero": 80,
                 "potencial": 81
             },
             {
@@ -6891,7 +6907,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 81,
+                "numero": 81,
                 "potencial": 86
             },
             {
@@ -6913,7 +6929,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 82,
+                "numero": 82,
                 "potencial": 86
             },
             {
@@ -6935,7 +6951,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 79,
+                "numero": 79,
                 "potencial": 82
             },
             {
@@ -6957,7 +6973,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 85,
+                "numero": 85,
                 "potencial": 86
             },
             {
@@ -6979,7 +6995,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 79,
+                "numero": 79,
                 "potencial": 83
             },
             {
@@ -7001,7 +7017,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 79,
+                "numero": 79,
                 "potencial": 82
             },
             {
@@ -7023,7 +7039,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 85,
+                "numero": 85,
                 "potencial": 90
             }
         ],
@@ -7046,7 +7062,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 80
             },
             {
@@ -7068,7 +7084,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 78
             },
             {
@@ -7090,7 +7106,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 78
             },
             {
@@ -7112,7 +7128,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 81
             },
             {
@@ -7134,7 +7150,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 79,
+                "numero": 79,
                 "potencial": 83
             },
             {
@@ -7156,7 +7172,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 80,
+                "numero": 80,
                 "potencial": 80
             },
             {
@@ -7178,7 +7194,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 78
             },
             {
@@ -7200,7 +7216,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 76
             },
             {
@@ -7222,7 +7238,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 82,
+                "numero": 82,
                 "potencial": 86
             },
             {
@@ -7244,7 +7260,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 78
             },
             {
@@ -7266,7 +7282,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 79,
+                "numero": 79,
                 "potencial": 81
             },
             {
@@ -7288,7 +7304,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 82
             }
         ]
@@ -7324,7 +7340,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 81,
+                "numero": 81,
                 "potencial": 84
             },
             {
@@ -7346,7 +7362,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 83,
+                "numero": 83,
                 "potencial": 85
             },
             {
@@ -7368,7 +7384,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 83,
+                "numero": 83,
                 "potencial": 87
             },
             {
@@ -7390,7 +7406,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 79
             },
             {
@@ -7412,7 +7428,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 81,
+                "numero": 81,
                 "potencial": 83
             },
             {
@@ -7434,7 +7450,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 83,
+                "numero": 83,
                 "potencial": 83
             },
             {
@@ -7456,7 +7472,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 82,
+                "numero": 82,
                 "potencial": 87
             },
             {
@@ -7478,7 +7494,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 83
             },
             {
@@ -7500,7 +7516,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 79,
+                "numero": 79,
                 "potencial": 80
             },
             {
@@ -7522,7 +7538,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 81
             },
             {
@@ -7544,7 +7560,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 81,
+                "numero": 81,
                 "potencial": 83
             }
         ],
@@ -7567,7 +7583,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 77,
+                "numero": 77,
                 "potencial": 79
             },
             {
@@ -7589,7 +7605,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 80,
+                "numero": 80,
                 "potencial": 84
             },
             {
@@ -7611,7 +7627,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 80,
+                "numero": 80,
                 "potencial": 83
             },
             {
@@ -7633,7 +7649,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 83
             },
             {
@@ -7655,7 +7671,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 77,
+                "numero": 77,
                 "potencial": 77
             },
             {
@@ -7677,7 +7693,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 80,
+                "numero": 80,
                 "potencial": 83
             },
             {
@@ -7699,7 +7715,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 74,
+                "numero": 74,
                 "potencial": 74
             },
             {
@@ -7721,7 +7737,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 81
             },
             {
@@ -7743,7 +7759,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 77,
+                "numero": 77,
                 "potencial": 81
             },
             {
@@ -7765,7 +7781,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 78
             },
             {
@@ -7787,7 +7803,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 81
             },
             {
@@ -7809,7 +7825,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 77,
+                "numero": 77,
                 "potencial": 79
             }
         ]
@@ -7845,7 +7861,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 79,
+                "numero": 79,
                 "potencial": 82
             },
             {
@@ -7867,7 +7883,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 77,
+                "numero": 77,
                 "potencial": 78
             },
             {
@@ -7889,7 +7905,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 81,
+                "numero": 81,
                 "potencial": 86
             },
             {
@@ -7911,7 +7927,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 81,
+                "numero": 81,
                 "potencial": 84
             },
             {
@@ -7933,7 +7949,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 80,
+                "numero": 80,
                 "potencial": 84
             },
             {
@@ -7955,7 +7971,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 80,
+                "numero": 80,
                 "potencial": 81
             },
             {
@@ -7977,7 +7993,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 77,
+                "numero": 77,
                 "potencial": 78
             },
             {
@@ -7999,7 +8015,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 78
             },
             {
@@ -8021,7 +8037,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 80,
+                "numero": 80,
                 "potencial": 81
             },
             {
@@ -8043,7 +8059,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 81
             },
             {
@@ -8065,7 +8081,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 82,
+                "numero": 82,
                 "potencial": 87
             }
         ],
@@ -8088,7 +8104,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 74,
+                "numero": 74,
                 "potencial": 79
             },
             {
@@ -8110,7 +8126,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 79,
+                "numero": 79,
                 "potencial": 80
             },
             {
@@ -8132,7 +8148,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 81
             },
             {
@@ -8154,7 +8170,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 83
             },
             {
@@ -8176,7 +8192,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 73,
+                "numero": 73,
                 "potencial": 74
             },
             {
@@ -8198,7 +8214,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 75,
+                "numero": 75,
                 "potencial": 77
             },
             {
@@ -8220,7 +8236,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 74,
+                "numero": 74,
                 "potencial": 76
             },
             {
@@ -8242,7 +8258,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 80
             },
             {
@@ -8264,7 +8280,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 75,
+                "numero": 75,
                 "potencial": 76
             },
             {
@@ -8286,7 +8302,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 79
             },
             {
@@ -8308,7 +8324,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 74,
+                "numero": 74,
                 "potencial": 77
             },
             {
@@ -8330,7 +8346,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 73,
+                "numero": 73,
                 "potencial": 74
             }
         ]
@@ -8366,7 +8382,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 77,
+                "numero": 77,
                 "potencial": 80
             },
             {
@@ -8388,7 +8404,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 80,
+                "numero": 80,
                 "potencial": 82
             },
             {
@@ -8410,7 +8426,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 81,
+                "numero": 81,
                 "potencial": 82
             },
             {
@@ -8432,7 +8448,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 79,
+                "numero": 79,
                 "potencial": 82
             },
             {
@@ -8454,7 +8470,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 80,
+                "numero": 80,
                 "potencial": 85
             },
             {
@@ -8476,7 +8492,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 81,
+                "numero": 81,
                 "potencial": 82
             },
             {
@@ -8498,7 +8514,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 82,
+                "numero": 82,
                 "potencial": 85
             },
             {
@@ -8520,7 +8536,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 80,
+                "numero": 80,
                 "potencial": 80
             },
             {
@@ -8542,7 +8558,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 81,
+                "numero": 81,
                 "potencial": 82
             },
             {
@@ -8564,7 +8580,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 83,
+                "numero": 83,
                 "potencial": 83
             },
             {
@@ -8586,7 +8602,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 82,
+                "numero": 82,
                 "potencial": 85
             }
         ],
@@ -8609,7 +8625,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 74,
+                "numero": 74,
                 "potencial": 77
             },
             {
@@ -8631,7 +8647,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 75,
+                "numero": 75,
                 "potencial": 77
             },
             {
@@ -8653,7 +8669,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 80,
+                "numero": 80,
                 "potencial": 85
             },
             {
@@ -8675,7 +8691,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 77,
+                "numero": 77,
                 "potencial": 81
             },
             {
@@ -8697,7 +8713,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 80,
+                "numero": 80,
                 "potencial": 82
             },
             {
@@ -8719,7 +8735,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 80
             },
             {
@@ -8741,7 +8757,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 75,
+                "numero": 75,
                 "potencial": 78
             },
             {
@@ -8763,7 +8779,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 77,
+                "numero": 77,
                 "potencial": 80
             },
             {
@@ -8785,7 +8801,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 75,
+                "numero": 75,
                 "potencial": 78
             },
             {
@@ -8807,7 +8823,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 78
             },
             {
@@ -8829,7 +8845,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 80,
+                "numero": 80,
                 "potencial": 81
             },
             {
@@ -8851,7 +8867,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 75,
+                "numero": 75,
                 "potencial": 75
             }
         ]
@@ -8887,7 +8903,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 83
             },
             {
@@ -8909,7 +8925,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 80,
+                "numero": 80,
                 "potencial": 83
             },
             {
@@ -8931,7 +8947,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 81
             },
             {
@@ -8953,7 +8969,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 80,
+                "numero": 80,
                 "potencial": 85
             },
             {
@@ -8975,7 +8991,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 80
             },
             {
@@ -8997,7 +9013,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 82,
+                "numero": 82,
                 "potencial": 85
             },
             {
@@ -9019,7 +9035,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 77,
+                "numero": 77,
                 "potencial": 78
             },
             {
@@ -9041,7 +9057,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 79,
+                "numero": 79,
                 "potencial": 81
             },
             {
@@ -9063,7 +9079,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 78
             },
             {
@@ -9085,7 +9101,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 78
             },
             {
@@ -9107,7 +9123,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 79,
+                "numero": 79,
                 "potencial": 84
             }
         ],
@@ -9130,7 +9146,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 80
             },
             {
@@ -9152,7 +9168,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 79,
+                "numero": 79,
                 "potencial": 82
             },
             {
@@ -9174,7 +9190,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 79,
+                "numero": 79,
                 "potencial": 79
             },
             {
@@ -9196,7 +9212,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 77,
+                "numero": 77,
                 "potencial": 80
             },
             {
@@ -9218,7 +9234,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 76
             },
             {
@@ -9240,7 +9256,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 79
             },
             {
@@ -9262,7 +9278,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 74,
+                "numero": 74,
                 "potencial": 77
             },
             {
@@ -9284,7 +9300,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 73,
+                "numero": 73,
                 "potencial": 73
             },
             {
@@ -9306,7 +9322,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 77,
+                "numero": 77,
                 "potencial": 77
             },
             {
@@ -9328,7 +9344,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 77,
+                "numero": 77,
                 "potencial": 81
             },
             {
@@ -9350,7 +9366,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 77,
+                "numero": 77,
                 "potencial": 80
             },
             {
@@ -9372,7 +9388,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 74,
+                "numero": 74,
                 "potencial": 74
             }
         ]
@@ -9381,6 +9397,7 @@ const listaDeTimes = [
         "id": 19,
         "nome": "África do Sul",
         "sigla": "RSA",
+        "brasaoUrl": "https://escudosfc.com.br/images/africadosul_new.png",
         "pontos": 0,
         "vitorias": 0,
         "empates": 0,
@@ -9388,7 +9405,6 @@ const listaDeTimes = [
         "golsPro": 0,
         "golsContra": 0,
         "saldo": 0,
-        "forca": 78,
         "titulares": [
             {
                 "id": 10415,
@@ -9408,7 +9424,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 76
             },
             {
@@ -9430,7 +9446,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 81
             },
             {
@@ -9452,7 +9468,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 79,
+                "numero": 79,
                 "potencial": 84
             },
             {
@@ -9474,7 +9490,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 77,
+                "numero": 77,
                 "potencial": 82
             },
             {
@@ -9496,7 +9512,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 78
             },
             {
@@ -9518,7 +9534,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 80,
+                "numero": 80,
                 "potencial": 83
             },
             {
@@ -9540,7 +9556,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 80,
+                "numero": 80,
                 "potencial": 81
             },
             {
@@ -9562,7 +9578,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 80,
+                "numero": 80,
                 "potencial": 82
             },
             {
@@ -9584,7 +9600,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 81,
+                "numero": 81,
                 "potencial": 84
             },
             {
@@ -9606,7 +9622,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 77,
+                "numero": 77,
                 "potencial": 78
             },
             {
@@ -9628,7 +9644,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 82,
+                "numero": 82,
                 "potencial": 85
             }
         ],
@@ -9651,7 +9667,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 74,
+                "numero": 74,
                 "potencial": 79
             },
             {
@@ -9673,7 +9689,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 74,
+                "numero": 74,
                 "potencial": 74
             },
             {
@@ -9695,7 +9711,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 75,
+                "numero": 75,
                 "potencial": 77
             },
             {
@@ -9717,7 +9733,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 74,
+                "numero": 74,
                 "potencial": 74
             },
             {
@@ -9739,7 +9755,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 75,
+                "numero": 75,
                 "potencial": 75
             },
             {
@@ -9761,7 +9777,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 77,
+                "numero": 77,
                 "potencial": 78
             },
             {
@@ -9783,7 +9799,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 79,
+                "numero": 79,
                 "potencial": 80
             },
             {
@@ -9805,7 +9821,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 82
             },
             {
@@ -9827,7 +9843,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 75,
+                "numero": 75,
                 "potencial": 78
             },
             {
@@ -9849,7 +9865,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 78
             },
             {
@@ -9871,7 +9887,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 79,
+                "numero": 79,
                 "potencial": 81
             },
             {
@@ -9893,7 +9909,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 75,
+                "numero": 75,
                 "potencial": 78
             }
         ]
@@ -9929,7 +9945,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 82
             },
             {
@@ -9951,7 +9967,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 82,
+                "numero": 82,
                 "potencial": 84
             },
             {
@@ -9973,7 +9989,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 81,
+                "numero": 81,
                 "potencial": 85
             },
             {
@@ -9995,7 +10011,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 77,
+                "numero": 77,
                 "potencial": 82
             },
             {
@@ -10017,7 +10033,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 81,
+                "numero": 81,
                 "potencial": 81
             },
             {
@@ -10039,7 +10055,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 82,
+                "numero": 82,
                 "potencial": 82
             },
             {
@@ -10061,7 +10077,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 80
             },
             {
@@ -10083,7 +10099,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 80,
+                "numero": 80,
                 "potencial": 85
             },
             {
@@ -10105,7 +10121,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 83
             },
             {
@@ -10127,7 +10143,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 79,
+                "numero": 79,
                 "potencial": 81
             },
             {
@@ -10149,7 +10165,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 83,
+                "numero": 83,
                 "potencial": 84
             }
         ],
@@ -10172,7 +10188,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 81
             },
             {
@@ -10194,7 +10210,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 77,
+                "numero": 77,
                 "potencial": 78
             },
             {
@@ -10216,7 +10232,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 79,
+                "numero": 79,
                 "potencial": 83
             },
             {
@@ -10238,7 +10254,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 79,
+                "numero": 79,
                 "potencial": 79
             },
             {
@@ -10260,7 +10276,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 79
             },
             {
@@ -10282,7 +10298,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 78
             },
             {
@@ -10304,7 +10320,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 80,
+                "numero": 80,
                 "potencial": 82
             },
             {
@@ -10326,7 +10342,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 74,
+                "numero": 74,
                 "potencial": 76
             },
             {
@@ -10348,7 +10364,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 78
             },
             {
@@ -10370,7 +10386,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 79
             },
             {
@@ -10392,7 +10408,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 81
             },
             {
@@ -10414,7 +10430,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 74,
+                "numero": 74,
                 "potencial": 77
             }
         ]
@@ -10450,7 +10466,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 82,
+                "numero": 82,
                 "potencial": 84
             },
             {
@@ -10472,7 +10488,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 78
             },
             {
@@ -10494,7 +10510,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 84,
+                "numero": 84,
                 "potencial": 88
             },
             {
@@ -10516,7 +10532,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 79,
+                "numero": 79,
                 "potencial": 79
             },
             {
@@ -10538,7 +10554,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 81,
+                "numero": 81,
                 "potencial": 85
             },
             {
@@ -10560,7 +10576,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 84,
+                "numero": 84,
                 "potencial": 86
             },
             {
@@ -10582,7 +10598,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 81,
+                "numero": 81,
                 "potencial": 85
             },
             {
@@ -10604,7 +10620,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 84,
+                "numero": 84,
                 "potencial": 84
             },
             {
@@ -10626,7 +10642,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 84,
+                "numero": 84,
                 "potencial": 84
             },
             {
@@ -10648,7 +10664,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 83,
+                "numero": 83,
                 "potencial": 84
             },
             {
@@ -10670,7 +10686,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 81,
+                "numero": 81,
                 "potencial": 81
             }
         ],
@@ -10693,7 +10709,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 80,
+                "numero": 80,
                 "potencial": 83
             },
             {
@@ -10715,7 +10731,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 79,
+                "numero": 79,
                 "potencial": 80
             },
             {
@@ -10737,7 +10753,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 76
             },
             {
@@ -10759,7 +10775,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 79
             },
             {
@@ -10781,7 +10797,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 77,
+                "numero": 77,
                 "potencial": 78
             },
             {
@@ -10803,7 +10819,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 75,
+                "numero": 75,
                 "potencial": 75
             },
             {
@@ -10825,7 +10841,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 80,
+                "numero": 80,
                 "potencial": 82
             },
             {
@@ -10847,7 +10863,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 81,
+                "numero": 81,
                 "potencial": 83
             },
             {
@@ -10869,7 +10885,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 79,
+                "numero": 79,
                 "potencial": 80
             },
             {
@@ -10891,7 +10907,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 75,
+                "numero": 75,
                 "potencial": 75
             },
             {
@@ -10913,7 +10929,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 81,
+                "numero": 81,
                 "potencial": 86
             },
             {
@@ -10935,7 +10951,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 79
             }
         ]
@@ -10971,7 +10987,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 78
             },
             {
@@ -10993,7 +11009,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 82
             },
             {
@@ -11015,7 +11031,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 82,
+                "numero": 82,
                 "potencial": 86
             },
             {
@@ -11037,7 +11053,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 77,
+                "numero": 77,
                 "potencial": 79
             },
             {
@@ -11059,7 +11075,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 81,
+                "numero": 81,
                 "potencial": 81
             },
             {
@@ -11081,7 +11097,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 79
             },
             {
@@ -11103,7 +11119,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 80
             },
             {
@@ -11125,7 +11141,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 82,
+                "numero": 82,
                 "potencial": 83
             },
             {
@@ -11147,7 +11163,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 80,
+                "numero": 80,
                 "potencial": 82
             },
             {
@@ -11169,7 +11185,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 81,
+                "numero": 81,
                 "potencial": 81
             },
             {
@@ -11191,7 +11207,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 79,
+                "numero": 79,
                 "potencial": 83
             }
         ],
@@ -11214,7 +11230,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 77,
+                "numero": 77,
                 "potencial": 80
             },
             {
@@ -11236,7 +11252,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 73,
+                "numero": 73,
                 "potencial": 77
             },
             {
@@ -11258,7 +11274,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 82
             },
             {
@@ -11280,7 +11296,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 73,
+                "numero": 73,
                 "potencial": 73
             },
             {
@@ -11302,7 +11318,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 79
             },
             {
@@ -11324,7 +11340,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 74,
+                "numero": 74,
                 "potencial": 78
             },
             {
@@ -11346,7 +11362,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 79,
+                "numero": 79,
                 "potencial": 79
             },
             {
@@ -11368,7 +11384,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 79
             },
             {
@@ -11390,7 +11406,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 77
             },
             {
@@ -11412,7 +11428,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 77,
+                "numero": 77,
                 "potencial": 78
             },
             {
@@ -11434,7 +11450,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 79,
+                "numero": 79,
                 "potencial": 81
             },
             {
@@ -11456,7 +11472,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 76
             }
         ]
@@ -11492,7 +11508,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 79,
+                "numero": 79,
                 "potencial": 79
             },
             {
@@ -11514,7 +11530,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 77,
+                "numero": 77,
                 "potencial": 79
             },
             {
@@ -11536,7 +11552,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 75,
+                "numero": 75,
                 "potencial": 80
             },
             {
@@ -11558,7 +11574,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 79,
+                "numero": 79,
                 "potencial": 81
             },
             {
@@ -11580,7 +11596,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 79,
+                "numero": 79,
                 "potencial": 80
             },
             {
@@ -11602,7 +11618,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 77,
+                "numero": 77,
                 "potencial": 80
             },
             {
@@ -11624,7 +11640,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 81,
+                "numero": 81,
                 "potencial": 82
             },
             {
@@ -11646,7 +11662,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 81,
+                "numero": 81,
                 "potencial": 86
             },
             {
@@ -11668,7 +11684,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 81
             },
             {
@@ -11690,7 +11706,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 83
             },
             {
@@ -11712,7 +11728,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 79
             }
         ],
@@ -11735,7 +11751,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 77,
+                "numero": 77,
                 "potencial": 78
             },
             {
@@ -11757,7 +11773,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 82
             },
             {
@@ -11779,7 +11795,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 75,
+                "numero": 75,
                 "potencial": 76
             },
             {
@@ -11801,7 +11817,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 72,
+                "numero": 72,
                 "potencial": 73
             },
             {
@@ -11823,7 +11839,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 74,
+                "numero": 74,
                 "potencial": 78
             },
             {
@@ -11845,7 +11861,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 80
             },
             {
@@ -11867,7 +11883,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 75,
+                "numero": 75,
                 "potencial": 80
             },
             {
@@ -11889,7 +11905,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 73,
+                "numero": 73,
                 "potencial": 73
             },
             {
@@ -11911,7 +11927,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 74,
+                "numero": 74,
                 "potencial": 78
             },
             {
@@ -11933,7 +11949,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 74,
+                "numero": 74,
                 "potencial": 74
             },
             {
@@ -11955,7 +11971,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 72,
+                "numero": 72,
                 "potencial": 74
             },
             {
@@ -11977,7 +11993,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 77
             }
         ]
@@ -12013,7 +12029,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 81,
+                "numero": 81,
                 "potencial": 81
             },
             {
@@ -12035,7 +12051,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 80,
+                "numero": 80,
                 "potencial": 83
             },
             {
@@ -12057,7 +12073,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 81,
+                "numero": 81,
                 "potencial": 85
             },
             {
@@ -12079,7 +12095,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 80,
+                "numero": 80,
                 "potencial": 80
             },
             {
@@ -12101,7 +12117,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 83,
+                "numero": 83,
                 "potencial": 83
             },
             {
@@ -12123,7 +12139,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 79,
+                "numero": 79,
                 "potencial": 79
             },
             {
@@ -12145,7 +12161,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 79,
+                "numero": 79,
                 "potencial": 84
             },
             {
@@ -12167,7 +12183,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 80,
+                "numero": 80,
                 "potencial": 85
             },
             {
@@ -12189,7 +12205,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 81,
+                "numero": 81,
                 "potencial": 83
             },
             {
@@ -12211,7 +12227,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 82,
+                "numero": 82,
                 "potencial": 86
             },
             {
@@ -12233,7 +12249,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 80,
+                "numero": 80,
                 "potencial": 81
             }
         ],
@@ -12256,7 +12272,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 77,
+                "numero": 77,
                 "potencial": 79
             },
             {
@@ -12278,7 +12294,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 79,
+                "numero": 79,
                 "potencial": 84
             },
             {
@@ -12300,7 +12316,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 77,
+                "numero": 77,
                 "potencial": 77
             },
             {
@@ -12322,7 +12338,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 81
             },
             {
@@ -12344,7 +12360,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 80,
+                "numero": 80,
                 "potencial": 83
             },
             {
@@ -12366,7 +12382,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 76
             },
             {
@@ -12388,7 +12404,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 76
             },
             {
@@ -12410,7 +12426,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 80,
+                "numero": 80,
                 "potencial": 82
             },
             {
@@ -12432,7 +12448,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 75,
+                "numero": 75,
                 "potencial": 79
             },
             {
@@ -12454,7 +12470,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 82
             },
             {
@@ -12476,7 +12492,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 79,
+                "numero": 79,
                 "potencial": 84
             },
             {
@@ -12498,7 +12514,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 82
             }
         ]
@@ -12534,7 +12550,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 81,
+                "numero": 81,
                 "potencial": 86
             },
             {
@@ -12556,7 +12572,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 77,
+                "numero": 77,
                 "potencial": 80
             },
             {
@@ -12578,7 +12594,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 78
             },
             {
@@ -12600,7 +12616,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 80,
+                "numero": 80,
                 "potencial": 85
             },
             {
@@ -12622,7 +12638,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 79,
+                "numero": 79,
                 "potencial": 79
             },
             {
@@ -12644,7 +12660,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 80,
+                "numero": 80,
                 "potencial": 80
             },
             {
@@ -12666,7 +12682,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 80
             },
             {
@@ -12688,7 +12704,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 78
             },
             {
@@ -12710,7 +12726,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 77,
+                "numero": 77,
                 "potencial": 82
             },
             {
@@ -12732,7 +12748,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 80,
+                "numero": 80,
                 "potencial": 82
             },
             {
@@ -12754,7 +12770,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 77,
+                "numero": 77,
                 "potencial": 81
             }
         ],
@@ -12777,7 +12793,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 79,
+                "numero": 79,
                 "potencial": 82
             },
             {
@@ -12799,7 +12815,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 80
             },
             {
@@ -12821,7 +12837,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 77,
+                "numero": 77,
                 "potencial": 77
             },
             {
@@ -12843,7 +12859,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 75,
+                "numero": 75,
                 "potencial": 80
             },
             {
@@ -12865,7 +12881,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 81
             },
             {
@@ -12887,7 +12903,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 75,
+                "numero": 75,
                 "potencial": 80
             },
             {
@@ -12909,7 +12925,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 83
             },
             {
@@ -12931,7 +12947,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 74,
+                "numero": 74,
                 "potencial": 78
             },
             {
@@ -12953,7 +12969,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 81
             },
             {
@@ -12975,7 +12991,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 73,
+                "numero": 73,
                 "potencial": 73
             },
             {
@@ -12997,7 +13013,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 74,
+                "numero": 74,
                 "potencial": 76
             },
             {
@@ -13019,7 +13035,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 79,
+                "numero": 79,
                 "potencial": 81
             }
         ]
@@ -13055,7 +13071,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 77
             },
             {
@@ -13077,7 +13093,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 74,
+                "numero": 74,
                 "potencial": 79
             },
             {
@@ -13099,7 +13115,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 79
             },
             {
@@ -13121,7 +13137,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 77,
+                "numero": 77,
                 "potencial": 81
             },
             {
@@ -13143,7 +13159,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 75,
+                "numero": 75,
                 "potencial": 75
             },
             {
@@ -13165,7 +13181,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 80
             },
             {
@@ -13187,7 +13203,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 77
             },
             {
@@ -13209,7 +13225,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 79,
+                "numero": 79,
                 "potencial": 79
             },
             {
@@ -13231,7 +13247,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 76
             },
             {
@@ -13253,7 +13269,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 79,
+                "numero": 79,
                 "potencial": 81
             },
             {
@@ -13275,7 +13291,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 75,
+                "numero": 75,
                 "potencial": 77
             }
         ],
@@ -13298,7 +13314,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 70,
+                "numero": 70,
                 "potencial": 74
             },
             {
@@ -13320,7 +13336,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 79
             },
             {
@@ -13342,7 +13358,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 70,
+                "numero": 70,
                 "potencial": 75
             },
             {
@@ -13364,7 +13380,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 71,
+                "numero": 71,
                 "potencial": 73
             },
             {
@@ -13386,7 +13402,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 75,
+                "numero": 75,
                 "potencial": 78
             },
             {
@@ -13408,7 +13424,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 70,
+                "numero": 70,
                 "potencial": 71
             },
             {
@@ -13430,7 +13446,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 71,
+                "numero": 71,
                 "potencial": 71
             },
             {
@@ -13452,7 +13468,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 74,
+                "numero": 74,
                 "potencial": 76
             },
             {
@@ -13474,7 +13490,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 71,
+                "numero": 71,
                 "potencial": 76
             },
             {
@@ -13496,7 +13512,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 73,
+                "numero": 73,
                 "potencial": 75
             },
             {
@@ -13518,7 +13534,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 73,
+                "numero": 73,
                 "potencial": 73
             },
             {
@@ -13540,7 +13556,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 71,
+                "numero": 71,
                 "potencial": 76
             }
         ]
@@ -13576,7 +13592,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 80,
+                "numero": 80,
                 "potencial": 85
             },
             {
@@ -13598,7 +13614,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 81,
+                "numero": 81,
                 "potencial": 81
             },
             {
@@ -13620,7 +13636,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 80,
+                "numero": 80,
                 "potencial": 82
             },
             {
@@ -13642,7 +13658,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 79
             },
             {
@@ -13664,7 +13680,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 82
             },
             {
@@ -13686,7 +13702,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 79,
+                "numero": 79,
                 "potencial": 81
             },
             {
@@ -13708,7 +13724,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 75,
+                "numero": 75,
                 "potencial": 79
             },
             {
@@ -13730,7 +13746,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 77,
+                "numero": 77,
                 "potencial": 80
             },
             {
@@ -13752,7 +13768,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 75,
+                "numero": 75,
                 "potencial": 75
             },
             {
@@ -13774,7 +13790,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 77,
+                "numero": 77,
                 "potencial": 77
             },
             {
@@ -13796,7 +13812,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 77
             }
         ],
@@ -13819,7 +13835,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 79
             },
             {
@@ -13841,7 +13857,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 77,
+                "numero": 77,
                 "potencial": 82
             },
             {
@@ -13863,7 +13879,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 74,
+                "numero": 74,
                 "potencial": 78
             },
             {
@@ -13885,7 +13901,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 75,
+                "numero": 75,
                 "potencial": 75
             },
             {
@@ -13907,7 +13923,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 72,
+                "numero": 72,
                 "potencial": 76
             },
             {
@@ -13929,7 +13945,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 73,
+                "numero": 73,
                 "potencial": 73
             },
             {
@@ -13951,7 +13967,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 72,
+                "numero": 72,
                 "potencial": 75
             },
             {
@@ -13973,7 +13989,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 75,
+                "numero": 75,
                 "potencial": 77
             },
             {
@@ -13995,7 +14011,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 73,
+                "numero": 73,
                 "potencial": 78
             },
             {
@@ -14017,7 +14033,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 77,
+                "numero": 77,
                 "potencial": 78
             },
             {
@@ -14039,7 +14055,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 81
             },
             {
@@ -14061,7 +14077,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 78
             }
         ]
@@ -14097,7 +14113,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 77,
+                "numero": 77,
                 "potencial": 80
             },
             {
@@ -14119,7 +14135,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 80,
+                "numero": 80,
                 "potencial": 82
             },
             {
@@ -14141,7 +14157,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 77,
+                "numero": 77,
                 "potencial": 79
             },
             {
@@ -14163,7 +14179,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 79,
+                "numero": 79,
                 "potencial": 82
             },
             {
@@ -14185,7 +14201,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 82
             },
             {
@@ -14207,7 +14223,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 83
             },
             {
@@ -14229,7 +14245,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 82,
+                "numero": 82,
                 "potencial": 85
             },
             {
@@ -14251,7 +14267,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 81,
+                "numero": 81,
                 "potencial": 84
             },
             {
@@ -14273,7 +14289,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 81
             },
             {
@@ -14295,7 +14311,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 79,
+                "numero": 79,
                 "potencial": 80
             },
             {
@@ -14317,7 +14333,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 79
             }
         ],
@@ -14340,7 +14356,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 79,
+                "numero": 79,
                 "potencial": 80
             },
             {
@@ -14362,7 +14378,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 79,
+                "numero": 79,
                 "potencial": 82
             },
             {
@@ -14384,7 +14400,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 79,
+                "numero": 79,
                 "potencial": 81
             },
             {
@@ -14406,7 +14422,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 78
             },
             {
@@ -14428,7 +14444,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 83
             },
             {
@@ -14450,7 +14466,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 78
             },
             {
@@ -14472,7 +14488,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 80,
+                "numero": 80,
                 "potencial": 83
             },
             {
@@ -14494,7 +14510,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 79
             },
             {
@@ -14516,7 +14532,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 79,
+                "numero": 79,
                 "potencial": 84
             },
             {
@@ -14538,7 +14554,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 77,
+                "numero": 77,
                 "potencial": 81
             },
             {
@@ -14560,7 +14576,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 80,
+                "numero": 80,
                 "potencial": 85
             },
             {
@@ -14582,7 +14598,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 82
             }
         ]
@@ -14618,7 +14634,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 78
             },
             {
@@ -14640,7 +14656,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 77
             },
             {
@@ -14662,7 +14678,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 81
             },
             {
@@ -14684,7 +14700,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 81,
+                "numero": 81,
                 "potencial": 85
             },
             {
@@ -14706,7 +14722,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 75,
+                "numero": 75,
                 "potencial": 80
             },
             {
@@ -14728,7 +14744,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 81,
+                "numero": 81,
                 "potencial": 82
             },
             {
@@ -14750,7 +14766,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 81,
+                "numero": 81,
                 "potencial": 82
             },
             {
@@ -14772,7 +14788,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 77,
+                "numero": 77,
                 "potencial": 81
             },
             {
@@ -14794,7 +14810,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 81,
+                "numero": 81,
                 "potencial": 81
             },
             {
@@ -14816,7 +14832,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 77,
+                "numero": 77,
                 "potencial": 78
             },
             {
@@ -14838,7 +14854,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 81
             }
         ],
@@ -14861,7 +14877,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 72,
+                "numero": 72,
                 "potencial": 73
             },
             {
@@ -14883,7 +14899,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 83
             },
             {
@@ -14905,7 +14921,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 82
             },
             {
@@ -14927,7 +14943,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 72,
+                "numero": 72,
                 "potencial": 76
             },
             {
@@ -14949,7 +14965,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 74,
+                "numero": 74,
                 "potencial": 79
             },
             {
@@ -14971,7 +14987,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 72,
+                "numero": 72,
                 "potencial": 77
             },
             {
@@ -14993,7 +15009,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 76
             },
             {
@@ -15015,7 +15031,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 72,
+                "numero": 72,
                 "potencial": 76
             },
             {
@@ -15037,7 +15053,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 76
             },
             {
@@ -15059,7 +15075,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 75,
+                "numero": 75,
                 "potencial": 80
             },
             {
@@ -15081,7 +15097,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 74,
+                "numero": 74,
                 "potencial": 77
             },
             {
@@ -15103,7 +15119,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 81
             }
         ]
@@ -15139,7 +15155,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 79,
+                "numero": 79,
                 "potencial": 82
             },
             {
@@ -15161,7 +15177,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 73,
+                "numero": 73,
                 "potencial": 75
             },
             {
@@ -15183,7 +15199,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 76
             },
             {
@@ -15205,7 +15221,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 73,
+                "numero": 73,
                 "potencial": 75
             },
             {
@@ -15227,7 +15243,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 81
             },
             {
@@ -15249,7 +15265,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 78
             },
             {
@@ -15271,7 +15287,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 75,
+                "numero": 75,
                 "potencial": 78
             },
             {
@@ -15293,7 +15309,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 76
             },
             {
@@ -15315,7 +15331,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 77
             },
             {
@@ -15337,7 +15353,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 78
             },
             {
@@ -15359,7 +15375,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 78
             }
         ],
@@ -15382,7 +15398,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 71,
+                "numero": 71,
                 "potencial": 75
             },
             {
@@ -15404,7 +15420,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 73,
+                "numero": 73,
                 "potencial": 76
             },
             {
@@ -15426,7 +15442,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 74,
+                "numero": 74,
                 "potencial": 78
             },
             {
@@ -15448,7 +15464,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 79
             },
             {
@@ -15470,7 +15486,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 74,
+                "numero": 74,
                 "potencial": 76
             },
             {
@@ -15492,7 +15508,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 72,
+                "numero": 72,
                 "potencial": 75
             },
             {
@@ -15514,7 +15530,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 73,
+                "numero": 73,
                 "potencial": 78
             },
             {
@@ -15536,7 +15552,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 76
             },
             {
@@ -15558,7 +15574,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 72,
+                "numero": 72,
                 "potencial": 75
             },
             {
@@ -15580,7 +15596,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 73,
+                "numero": 73,
                 "potencial": 73
             },
             {
@@ -15602,7 +15618,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 76
             },
             {
@@ -15624,7 +15640,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 77
             }
         ]
@@ -15660,7 +15676,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 78
             },
             {
@@ -15682,7 +15698,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 74,
+                "numero": 74,
                 "potencial": 79
             },
             {
@@ -15704,7 +15720,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 77,
+                "numero": 77,
                 "potencial": 82
             },
             {
@@ -15726,7 +15742,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 79,
+                "numero": 79,
                 "potencial": 84
             },
             {
@@ -15748,7 +15764,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 76
             },
             {
@@ -15770,7 +15786,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 80,
+                "numero": 80,
                 "potencial": 85
             },
             {
@@ -15792,7 +15808,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 80,
+                "numero": 80,
                 "potencial": 80
             },
             {
@@ -15814,7 +15830,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 79,
+                "numero": 79,
                 "potencial": 83
             },
             {
@@ -15836,7 +15852,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 77,
+                "numero": 77,
                 "potencial": 80
             },
             {
@@ -15858,7 +15874,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 77
             },
             {
@@ -15880,7 +15896,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 75,
+                "numero": 75,
                 "potencial": 77
             }
         ],
@@ -15903,7 +15919,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 74,
+                "numero": 74,
                 "potencial": 78
             },
             {
@@ -15925,7 +15941,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 77,
+                "numero": 77,
                 "potencial": 78
             },
             {
@@ -15947,7 +15963,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 77,
+                "numero": 77,
                 "potencial": 79
             },
             {
@@ -15969,7 +15985,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 73,
+                "numero": 73,
                 "potencial": 78
             },
             {
@@ -15991,7 +16007,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 77,
+                "numero": 77,
                 "potencial": 80
             },
             {
@@ -16013,7 +16029,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 73,
+                "numero": 73,
                 "potencial": 76
             },
             {
@@ -16035,7 +16051,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 73,
+                "numero": 73,
                 "potencial": 75
             },
             {
@@ -16057,7 +16073,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 71,
+                "numero": 71,
                 "potencial": 76
             },
             {
@@ -16079,7 +16095,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 75,
+                "numero": 75,
                 "potencial": 80
             },
             {
@@ -16101,7 +16117,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 72,
+                "numero": 72,
                 "potencial": 72
             },
             {
@@ -16123,7 +16139,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 75,
+                "numero": 75,
                 "potencial": 76
             },
             {
@@ -16145,7 +16161,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 76
             }
         ]
@@ -16181,7 +16197,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 81
             },
             {
@@ -16203,7 +16219,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 80
             },
             {
@@ -16225,7 +16241,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 79,
+                "numero": 79,
                 "potencial": 81
             },
             {
@@ -16247,7 +16263,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 75,
+                "numero": 75,
                 "potencial": 78
             },
             {
@@ -16269,7 +16285,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 77,
+                "numero": 77,
                 "potencial": 77
             },
             {
@@ -16291,7 +16307,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 74,
+                "numero": 74,
                 "potencial": 76
             },
             {
@@ -16313,7 +16329,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 80,
+                "numero": 80,
                 "potencial": 82
             },
             {
@@ -16335,7 +16351,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 80,
+                "numero": 80,
                 "potencial": 82
             },
             {
@@ -16357,7 +16373,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 80,
+                "numero": 80,
                 "potencial": 85
             },
             {
@@ -16379,7 +16395,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 79,
+                "numero": 79,
                 "potencial": 81
             },
             {
@@ -16401,7 +16417,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 74,
+                "numero": 74,
                 "potencial": 79
             }
         ],
@@ -16424,7 +16440,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 73,
+                "numero": 73,
                 "potencial": 74
             },
             {
@@ -16446,7 +16462,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 73,
+                "numero": 73,
                 "potencial": 76
             },
             {
@@ -16468,7 +16484,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 80
             },
             {
@@ -16490,7 +16506,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 75,
+                "numero": 75,
                 "potencial": 79
             },
             {
@@ -16512,7 +16528,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 71,
+                "numero": 71,
                 "potencial": 72
             },
             {
@@ -16534,7 +16550,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 71,
+                "numero": 71,
                 "potencial": 72
             },
             {
@@ -16556,7 +16572,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 77,
+                "numero": 77,
                 "potencial": 82
             },
             {
@@ -16578,7 +16594,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 77,
+                "numero": 77,
                 "potencial": 81
             },
             {
@@ -16600,7 +16616,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 73,
+                "numero": 73,
                 "potencial": 77
             },
             {
@@ -16622,7 +16638,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 75,
+                "numero": 75,
                 "potencial": 79
             },
             {
@@ -16644,7 +16660,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 74,
+                "numero": 74,
                 "potencial": 76
             },
             {
@@ -16666,7 +16682,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 71,
+                "numero": 71,
                 "potencial": 75
             }
         ]
@@ -16702,7 +16718,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 80,
+                "numero": 80,
                 "potencial": 84
             },
             {
@@ -16724,7 +16740,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 79,
+                "numero": 79,
                 "potencial": 84
             },
             {
@@ -16746,7 +16762,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 80,
+                "numero": 80,
                 "potencial": 84
             },
             {
@@ -16768,7 +16784,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 80
             },
             {
@@ -16790,7 +16806,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 77,
+                "numero": 77,
                 "potencial": 78
             },
             {
@@ -16812,7 +16828,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 77,
+                "numero": 77,
                 "potencial": 80
             },
             {
@@ -16834,7 +16850,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 82
             },
             {
@@ -16856,7 +16872,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 80,
+                "numero": 80,
                 "potencial": 80
             },
             {
@@ -16878,7 +16894,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 80,
+                "numero": 80,
                 "potencial": 80
             },
             {
@@ -16900,7 +16916,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 80
             },
             {
@@ -16922,7 +16938,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 82,
+                "numero": 82,
                 "potencial": 85
             }
         ],
@@ -16945,7 +16961,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 80
             },
             {
@@ -16967,7 +16983,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 81
             },
             {
@@ -16989,7 +17005,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 75,
+                "numero": 75,
                 "potencial": 77
             },
             {
@@ -17011,7 +17027,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 79,
+                "numero": 79,
                 "potencial": 81
             },
             {
@@ -17033,7 +17049,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 81
             },
             {
@@ -17055,7 +17071,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 73,
+                "numero": 73,
                 "potencial": 73
             },
             {
@@ -17077,7 +17093,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 77,
+                "numero": 77,
                 "potencial": 82
             },
             {
@@ -17099,7 +17115,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 80
             },
             {
@@ -17121,7 +17137,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 74,
+                "numero": 74,
                 "potencial": 77
             },
             {
@@ -17143,7 +17159,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 73,
+                "numero": 73,
                 "potencial": 76
             },
             {
@@ -17165,7 +17181,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 80
             },
             {
@@ -17187,7 +17203,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 74,
+                "numero": 74,
                 "potencial": 79
             }
         ]
@@ -17223,7 +17239,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 73,
+                "numero": 73,
                 "potencial": 76
             },
             {
@@ -17245,7 +17261,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 77,
+                "numero": 77,
                 "potencial": 81
             },
             {
@@ -17267,7 +17283,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 73,
+                "numero": 73,
                 "potencial": 76
             },
             {
@@ -17289,7 +17305,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 82
             },
             {
@@ -17311,7 +17327,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 73,
+                "numero": 73,
                 "potencial": 75
             },
             {
@@ -17333,7 +17349,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 74,
+                "numero": 74,
                 "potencial": 77
             },
             {
@@ -17355,7 +17371,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 78
             },
             {
@@ -17377,7 +17393,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 79
             },
             {
@@ -17399,7 +17415,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 79
             },
             {
@@ -17421,7 +17437,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 74,
+                "numero": 74,
                 "potencial": 75
             },
             {
@@ -17443,7 +17459,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 77,
+                "numero": 77,
                 "potencial": 79
             }
         ],
@@ -17466,7 +17482,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 70,
+                "numero": 70,
                 "potencial": 75
             },
             {
@@ -17488,7 +17504,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 71,
+                "numero": 71,
                 "potencial": 76
             },
             {
@@ -17510,7 +17526,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 74,
+                "numero": 74,
                 "potencial": 77
             },
             {
@@ -17532,7 +17548,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 71,
+                "numero": 71,
                 "potencial": 72
             },
             {
@@ -17554,7 +17570,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 73,
+                "numero": 73,
                 "potencial": 76
             },
             {
@@ -17576,7 +17592,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 72,
+                "numero": 72,
                 "potencial": 74
             },
             {
@@ -17598,7 +17614,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 69,
+                "numero": 69,
                 "potencial": 72
             },
             {
@@ -17620,7 +17636,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 69,
+                "numero": 69,
                 "potencial": 69
             },
             {
@@ -17642,7 +17658,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 71,
+                "numero": 71,
                 "potencial": 76
             },
             {
@@ -17664,7 +17680,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 75,
+                "numero": 75,
                 "potencial": 78
             },
             {
@@ -17686,7 +17702,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 73,
+                "numero": 73,
                 "potencial": 75
             },
             {
@@ -17708,7 +17724,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 69,
+                "numero": 69,
                 "potencial": 72
             }
         ]
@@ -17744,7 +17760,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 81
             },
             {
@@ -17766,7 +17782,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 73,
+                "numero": 73,
                 "potencial": 77
             },
             {
@@ -17788,7 +17804,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 73,
+                "numero": 73,
                 "potencial": 78
             },
             {
@@ -17810,7 +17826,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 74,
+                "numero": 74,
                 "potencial": 79
             },
             {
@@ -17832,7 +17848,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 77,
+                "numero": 77,
                 "potencial": 82
             },
             {
@@ -17854,7 +17870,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 83
             },
             {
@@ -17876,7 +17892,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 75,
+                "numero": 75,
                 "potencial": 76
             },
             {
@@ -17898,7 +17914,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 74,
+                "numero": 74,
                 "potencial": 78
             },
             {
@@ -17920,7 +17936,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 74,
+                "numero": 74,
                 "potencial": 75
             },
             {
@@ -17942,7 +17958,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 73,
+                "numero": 73,
                 "potencial": 73
             },
             {
@@ -17964,7 +17980,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 72,
+                "numero": 72,
                 "potencial": 73
             }
         ],
@@ -17987,7 +18003,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 69,
+                "numero": 69,
                 "potencial": 73
             },
             {
@@ -18009,7 +18025,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 73,
+                "numero": 73,
                 "potencial": 78
             },
             {
@@ -18031,7 +18047,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 75,
+                "numero": 75,
                 "potencial": 79
             },
             {
@@ -18053,7 +18069,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 70,
+                "numero": 70,
                 "potencial": 70
             },
             {
@@ -18075,7 +18091,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 71,
+                "numero": 71,
                 "potencial": 72
             },
             {
@@ -18097,7 +18113,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 72,
+                "numero": 72,
                 "potencial": 72
             },
             {
@@ -18119,7 +18135,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 72,
+                "numero": 72,
                 "potencial": 74
             },
             {
@@ -18141,7 +18157,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 74,
+                "numero": 74,
                 "potencial": 77
             },
             {
@@ -18163,7 +18179,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 70,
+                "numero": 70,
                 "potencial": 71
             },
             {
@@ -18185,7 +18201,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 72,
+                "numero": 72,
                 "potencial": 74
             },
             {
@@ -18207,7 +18223,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 75,
+                "numero": 75,
                 "potencial": 76
             },
             {
@@ -18229,7 +18245,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 73,
+                "numero": 73,
                 "potencial": 78
             }
         ]
@@ -18265,7 +18281,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 73,
+                "numero": 73,
                 "potencial": 78
             },
             {
@@ -18287,7 +18303,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 77,
+                "numero": 77,
                 "potencial": 81
             },
             {
@@ -18309,7 +18325,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 79
             },
             {
@@ -18331,7 +18347,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 73,
+                "numero": 73,
                 "potencial": 73
             },
             {
@@ -18353,7 +18369,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 75,
+                "numero": 75,
                 "potencial": 75
             },
             {
@@ -18375,7 +18391,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 78
             },
             {
@@ -18397,7 +18413,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 79
             },
             {
@@ -18419,7 +18435,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 74,
+                "numero": 74,
                 "potencial": 78
             },
             {
@@ -18441,7 +18457,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 73,
+                "numero": 73,
                 "potencial": 73
             },
             {
@@ -18463,7 +18479,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 73,
+                "numero": 73,
                 "potencial": 78
             },
             {
@@ -18485,7 +18501,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 73,
+                "numero": 73,
                 "potencial": 78
             }
         ],
@@ -18508,7 +18524,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 75,
+                "numero": 75,
                 "potencial": 78
             },
             {
@@ -18530,7 +18546,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 73,
+                "numero": 73,
                 "potencial": 78
             },
             {
@@ -18552,7 +18568,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 74,
+                "numero": 74,
                 "potencial": 74
             },
             {
@@ -18574,7 +18590,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 76
             },
             {
@@ -18596,7 +18612,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 74,
+                "numero": 74,
                 "potencial": 75
             },
             {
@@ -18618,7 +18634,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 70,
+                "numero": 70,
                 "potencial": 72
             },
             {
@@ -18640,7 +18656,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 70,
+                "numero": 70,
                 "potencial": 71
             },
             {
@@ -18662,7 +18678,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 72,
+                "numero": 72,
                 "potencial": 77
             },
             {
@@ -18684,7 +18700,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 75,
+                "numero": 75,
                 "potencial": 77
             },
             {
@@ -18706,7 +18722,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 74,
+                "numero": 74,
                 "potencial": 75
             },
             {
@@ -18728,7 +18744,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 71,
+                "numero": 71,
                 "potencial": 76
             },
             {
@@ -18750,7 +18766,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 74,
+                "numero": 74,
                 "potencial": 74
             }
         ]
@@ -18786,7 +18802,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 74,
+                "numero": 74,
                 "potencial": 75
             },
             {
@@ -18808,7 +18824,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 80,
+                "numero": 80,
                 "potencial": 84
             },
             {
@@ -18830,7 +18846,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 79
             },
             {
@@ -18852,7 +18868,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 75,
+                "numero": 75,
                 "potencial": 78
             },
             {
@@ -18874,7 +18890,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 83
             },
             {
@@ -18896,7 +18912,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 74,
+                "numero": 74,
                 "potencial": 74
             },
             {
@@ -18918,7 +18934,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 79,
+                "numero": 79,
                 "potencial": 82
             },
             {
@@ -18940,7 +18956,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 79
             },
             {
@@ -18962,7 +18978,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 79,
+                "numero": 79,
                 "potencial": 83
             },
             {
@@ -18984,7 +19000,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 78
             },
             {
@@ -19006,7 +19022,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 78
             }
         ],
@@ -19029,7 +19045,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 73,
+                "numero": 73,
                 "potencial": 76
             },
             {
@@ -19051,7 +19067,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 75,
+                "numero": 75,
                 "potencial": 75
             },
             {
@@ -19073,7 +19089,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 73,
+                "numero": 73,
                 "potencial": 78
             },
             {
@@ -19095,7 +19111,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 75,
+                "numero": 75,
                 "potencial": 75
             },
             {
@@ -19117,7 +19133,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 73,
+                "numero": 73,
                 "potencial": 75
             },
             {
@@ -19139,7 +19155,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 74,
+                "numero": 74,
                 "potencial": 74
             },
             {
@@ -19161,7 +19177,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 72,
+                "numero": 72,
                 "potencial": 74
             },
             {
@@ -19183,7 +19199,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 74,
+                "numero": 74,
                 "potencial": 78
             },
             {
@@ -19205,7 +19221,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 71,
+                "numero": 71,
                 "potencial": 73
             },
             {
@@ -19227,7 +19243,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 71,
+                "numero": 71,
                 "potencial": 71
             },
             {
@@ -19249,7 +19265,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 81
             },
             {
@@ -19271,7 +19287,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 73,
+                "numero": 73,
                 "potencial": 74
             }
         ]
@@ -19307,7 +19323,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 80,
+                "numero": 80,
                 "potencial": 82
             },
             {
@@ -19329,7 +19345,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 81,
+                "numero": 81,
                 "potencial": 82
             },
             {
@@ -19351,7 +19367,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 77,
+                "numero": 77,
                 "potencial": 80
             },
             {
@@ -19373,7 +19389,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 75,
+                "numero": 75,
                 "potencial": 76
             },
             {
@@ -19395,7 +19411,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 77,
+                "numero": 77,
                 "potencial": 80
             },
             {
@@ -19417,7 +19433,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 78
             },
             {
@@ -19439,7 +19455,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 79,
+                "numero": 79,
                 "potencial": 80
             },
             {
@@ -19461,7 +19477,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 80,
+                "numero": 80,
                 "potencial": 81
             },
             {
@@ -19483,7 +19499,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 80
             },
             {
@@ -19505,7 +19521,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 79,
+                "numero": 79,
                 "potencial": 82
             },
             {
@@ -19527,7 +19543,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 81,
+                "numero": 81,
                 "potencial": 85
             }
         ],
@@ -19550,7 +19566,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 73,
+                "numero": 73,
                 "potencial": 77
             },
             {
@@ -19572,7 +19588,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 72,
+                "numero": 72,
                 "potencial": 72
             },
             {
@@ -19594,7 +19610,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 77,
+                "numero": 77,
                 "potencial": 81
             },
             {
@@ -19616,7 +19632,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 74,
+                "numero": 74,
                 "potencial": 79
             },
             {
@@ -19638,7 +19654,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 75,
+                "numero": 75,
                 "potencial": 80
             },
             {
@@ -19660,7 +19676,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 82
             },
             {
@@ -19682,7 +19698,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 79
             },
             {
@@ -19704,7 +19720,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 74,
+                "numero": 74,
                 "potencial": 77
             },
             {
@@ -19726,7 +19742,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 72,
+                "numero": 72,
                 "potencial": 76
             },
             {
@@ -19748,7 +19764,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 77,
+                "numero": 77,
                 "potencial": 78
             },
             {
@@ -19770,7 +19786,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 75,
+                "numero": 75,
                 "potencial": 80
             },
             {
@@ -19792,7 +19808,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 72,
+                "numero": 72,
                 "potencial": 72
             }
         ]
@@ -19828,7 +19844,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 83
             },
             {
@@ -19850,7 +19866,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 73,
+                "numero": 73,
                 "potencial": 76
             },
             {
@@ -19872,7 +19888,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 74,
+                "numero": 74,
                 "potencial": 79
             },
             {
@@ -19894,7 +19910,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 73,
+                "numero": 73,
                 "potencial": 77
             },
             {
@@ -19916,7 +19932,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 75,
+                "numero": 75,
                 "potencial": 79
             },
             {
@@ -19938,7 +19954,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 79
             },
             {
@@ -19960,7 +19976,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 78
             },
             {
@@ -19982,7 +19998,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 78
             },
             {
@@ -20004,7 +20020,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 74,
+                "numero": 74,
                 "potencial": 74
             },
             {
@@ -20026,7 +20042,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 74,
+                "numero": 74,
                 "potencial": 78
             },
             {
@@ -20048,7 +20064,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 77,
+                "numero": 77,
                 "potencial": 82
             }
         ],
@@ -20071,7 +20087,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 74,
+                "numero": 74,
                 "potencial": 76
             },
             {
@@ -20093,7 +20109,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 74,
+                "numero": 74,
                 "potencial": 78
             },
             {
@@ -20115,7 +20131,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 74,
+                "numero": 74,
                 "potencial": 79
             },
             {
@@ -20137,7 +20153,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 73,
+                "numero": 73,
                 "potencial": 76
             },
             {
@@ -20159,7 +20175,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 74,
+                "numero": 74,
                 "potencial": 74
             },
             {
@@ -20181,7 +20197,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 73,
+                "numero": 73,
                 "potencial": 77
             },
             {
@@ -20203,7 +20219,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 74,
+                "numero": 74,
                 "potencial": 74
             },
             {
@@ -20225,7 +20241,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 75,
+                "numero": 75,
                 "potencial": 80
             },
             {
@@ -20247,7 +20263,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 72,
+                "numero": 72,
                 "potencial": 72
             },
             {
@@ -20269,7 +20285,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 74,
+                "numero": 74,
                 "potencial": 74
             },
             {
@@ -20291,7 +20307,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 73,
+                "numero": 73,
                 "potencial": 76
             },
             {
@@ -20313,7 +20329,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 70,
+                "numero": 70,
                 "potencial": 73
             }
         ]
@@ -20349,7 +20365,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 77,
+                "numero": 77,
                 "potencial": 81
             },
             {
@@ -20371,7 +20387,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 77,
+                "numero": 77,
                 "potencial": 77
             },
             {
@@ -20393,7 +20409,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 74,
+                "numero": 74,
                 "potencial": 77
             },
             {
@@ -20415,7 +20431,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 77
             },
             {
@@ -20437,7 +20453,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 79,
+                "numero": 79,
                 "potencial": 79
             },
             {
@@ -20459,7 +20475,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 77,
+                "numero": 77,
                 "potencial": 77
             },
             {
@@ -20481,7 +20497,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 73,
+                "numero": 73,
                 "potencial": 77
             },
             {
@@ -20503,7 +20519,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 75,
+                "numero": 75,
                 "potencial": 79
             },
             {
@@ -20525,7 +20541,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 73,
+                "numero": 73,
                 "potencial": 76
             },
             {
@@ -20547,7 +20563,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 74,
+                "numero": 74,
                 "potencial": 77
             },
             {
@@ -20569,7 +20585,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 81
             }
         ],
@@ -20592,7 +20608,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 71,
+                "numero": 71,
                 "potencial": 73
             },
             {
@@ -20614,7 +20630,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 76
             },
             {
@@ -20636,7 +20652,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 79
             },
             {
@@ -20658,7 +20674,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 70,
+                "numero": 70,
                 "potencial": 74
             },
             {
@@ -20680,7 +20696,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 72,
+                "numero": 72,
                 "potencial": 77
             },
             {
@@ -20702,7 +20718,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 73,
+                "numero": 73,
                 "potencial": 74
             },
             {
@@ -20724,7 +20740,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 73,
+                "numero": 73,
                 "potencial": 74
             },
             {
@@ -20746,7 +20762,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 79
             },
             {
@@ -20768,7 +20784,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 73,
+                "numero": 73,
                 "potencial": 73
             },
             {
@@ -20790,7 +20806,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 75,
+                "numero": 75,
                 "potencial": 76
             },
             {
@@ -20812,7 +20828,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 75,
+                "numero": 75,
                 "potencial": 75
             },
             {
@@ -20834,7 +20850,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 71,
+                "numero": 71,
                 "potencial": 72
             }
         ]
@@ -20870,7 +20886,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 80,
+                "numero": 80,
                 "potencial": 83
             },
             {
@@ -20892,7 +20908,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 79,
+                "numero": 79,
                 "potencial": 80
             },
             {
@@ -20914,7 +20930,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 81,
+                "numero": 81,
                 "potencial": 86
             },
             {
@@ -20936,7 +20952,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 82
             },
             {
@@ -20958,7 +20974,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 79,
+                "numero": 79,
                 "potencial": 83
             },
             {
@@ -20980,7 +20996,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 83,
+                "numero": 83,
                 "potencial": 83
             },
             {
@@ -21002,7 +21018,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 80,
+                "numero": 80,
                 "potencial": 83
             },
             {
@@ -21024,7 +21040,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 80,
+                "numero": 80,
                 "potencial": 85
             },
             {
@@ -21046,7 +21062,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 82,
+                "numero": 82,
                 "potencial": 86
             },
             {
@@ -21068,7 +21084,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 82,
+                "numero": 82,
                 "potencial": 84
             },
             {
@@ -21090,7 +21106,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 80,
+                "numero": 80,
                 "potencial": 85
             }
         ],
@@ -21113,7 +21129,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 77,
+                "numero": 77,
                 "potencial": 79
             },
             {
@@ -21135,7 +21151,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 77,
+                "numero": 77,
                 "potencial": 80
             },
             {
@@ -21157,7 +21173,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 77,
+                "numero": 77,
                 "potencial": 79
             },
             {
@@ -21179,7 +21195,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 81
             },
             {
@@ -21201,7 +21217,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 74,
+                "numero": 74,
                 "potencial": 76
             },
             {
@@ -21223,7 +21239,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 79,
+                "numero": 79,
                 "potencial": 84
             },
             {
@@ -21245,7 +21261,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 79,
+                "numero": 79,
                 "potencial": 84
             },
             {
@@ -21267,7 +21283,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 74,
+                "numero": 74,
                 "potencial": 75
             },
             {
@@ -21289,7 +21305,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 75,
+                "numero": 75,
                 "potencial": 78
             },
             {
@@ -21311,7 +21327,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 77,
+                "numero": 77,
                 "potencial": 81
             },
             {
@@ -21333,7 +21349,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 83
             },
             {
@@ -21355,7 +21371,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 77,
+                "numero": 77,
                 "potencial": 81
             }
         ]
@@ -21391,7 +21407,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 83,
+                "numero": 83,
                 "potencial": 84
             },
             {
@@ -21413,7 +21429,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 79
             },
             {
@@ -21435,7 +21451,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 84,
+                "numero": 84,
                 "potencial": 86
             },
             {
@@ -21457,7 +21473,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 80,
+                "numero": 80,
                 "potencial": 82
             },
             {
@@ -21479,7 +21495,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 82,
+                "numero": 82,
                 "potencial": 84
             },
             {
@@ -21501,7 +21517,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 80,
+                "numero": 80,
                 "potencial": 80
             },
             {
@@ -21523,7 +21539,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 83,
+                "numero": 83,
                 "potencial": 88
             },
             {
@@ -21545,7 +21561,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 79,
+                "numero": 79,
                 "potencial": 82
             },
             {
@@ -21567,7 +21583,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 82,
+                "numero": 82,
                 "potencial": 87
             },
             {
@@ -21589,7 +21605,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 79
             },
             {
@@ -21611,7 +21627,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 82,
+                "numero": 82,
                 "potencial": 82
             }
         ],
@@ -21634,7 +21650,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 80,
+                "numero": 80,
                 "potencial": 83
             },
             {
@@ -21656,7 +21672,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 77
             },
             {
@@ -21678,7 +21694,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 80
             },
             {
@@ -21700,7 +21716,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 81,
+                "numero": 81,
                 "potencial": 82
             },
             {
@@ -21722,7 +21738,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 81,
+                "numero": 81,
                 "potencial": 85
             },
             {
@@ -21744,7 +21760,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 75,
+                "numero": 75,
                 "potencial": 80
             },
             {
@@ -21766,7 +21782,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 83
             },
             {
@@ -21788,7 +21804,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 77,
+                "numero": 77,
                 "potencial": 81
             },
             {
@@ -21810,7 +21826,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 79,
+                "numero": 79,
                 "potencial": 83
             },
             {
@@ -21832,7 +21848,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 80,
+                "numero": 80,
                 "potencial": 82
             },
             {
@@ -21854,7 +21870,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 81,
+                "numero": 81,
                 "potencial": 83
             },
             {
@@ -21876,7 +21892,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 81,
+                "numero": 81,
                 "potencial": 83
             }
         ]
@@ -21912,7 +21928,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 78
             },
             {
@@ -21934,7 +21950,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 82
             },
             {
@@ -21956,7 +21972,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 81,
+                "numero": 81,
                 "potencial": 82
             },
             {
@@ -21978,7 +21994,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 80,
+                "numero": 80,
                 "potencial": 80
             },
             {
@@ -22000,7 +22016,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 78
             },
             {
@@ -22022,7 +22038,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 80
             },
             {
@@ -22044,7 +22060,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 84,
+                "numero": 84,
                 "potencial": 86
             },
             {
@@ -22066,7 +22082,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 82,
+                "numero": 82,
                 "potencial": 83
             },
             {
@@ -22088,7 +22104,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 81,
+                "numero": 81,
                 "potencial": 81
             },
             {
@@ -22110,7 +22126,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 81,
+                "numero": 81,
                 "potencial": 82
             },
             {
@@ -22132,7 +22148,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 80,
+                "numero": 80,
                 "potencial": 84
             }
         ],
@@ -22155,7 +22171,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 77,
+                "numero": 77,
                 "potencial": 77
             },
             {
@@ -22177,7 +22193,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 77,
+                "numero": 77,
                 "potencial": 81
             },
             {
@@ -22199,7 +22215,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 77,
+                "numero": 77,
                 "potencial": 78
             },
             {
@@ -22221,7 +22237,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 78
             },
             {
@@ -22243,7 +22259,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 81,
+                "numero": 81,
                 "potencial": 86
             },
             {
@@ -22265,7 +22281,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 76
             },
             {
@@ -22287,7 +22303,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 80,
+                "numero": 80,
                 "potencial": 84
             },
             {
@@ -22309,7 +22325,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 79,
+                "numero": 79,
                 "potencial": 81
             },
             {
@@ -22331,7 +22347,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 80,
+                "numero": 80,
                 "potencial": 84
             },
             {
@@ -22353,7 +22369,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 81,
+                "numero": 81,
                 "potencial": 85
             },
             {
@@ -22375,7 +22391,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 78
             },
             {
@@ -22397,7 +22413,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 81
             }
         ]
@@ -22433,7 +22449,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 82,
+                "numero": 82,
                 "potencial": 84
             },
             {
@@ -22455,7 +22471,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 79,
+                "numero": 79,
                 "potencial": 81
             },
             {
@@ -22477,7 +22493,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 81
             },
             {
@@ -22499,7 +22515,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 81,
+                "numero": 81,
                 "potencial": 81
             },
             {
@@ -22521,7 +22537,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 79,
+                "numero": 79,
                 "potencial": 82
             },
             {
@@ -22543,7 +22559,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 79,
+                "numero": 79,
                 "potencial": 84
             },
             {
@@ -22565,7 +22581,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 80,
+                "numero": 80,
                 "potencial": 85
             },
             {
@@ -22587,7 +22603,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 80,
+                "numero": 80,
                 "potencial": 83
             },
             {
@@ -22609,7 +22625,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 77,
+                "numero": 77,
                 "potencial": 78
             },
             {
@@ -22631,7 +22647,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 79
             },
             {
@@ -22653,7 +22669,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 81,
+                "numero": 81,
                 "potencial": 84
             }
         ],
@@ -22676,7 +22692,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 75,
+                "numero": 75,
                 "potencial": 75
             },
             {
@@ -22698,7 +22714,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 77,
+                "numero": 77,
                 "potencial": 80
             },
             {
@@ -22720,7 +22736,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 80,
+                "numero": 80,
                 "potencial": 82
             },
             {
@@ -22742,7 +22758,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 77,
+                "numero": 77,
                 "potencial": 80
             },
             {
@@ -22764,7 +22780,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 75,
+                "numero": 75,
                 "potencial": 75
             },
             {
@@ -22786,7 +22802,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 75,
+                "numero": 75,
                 "potencial": 75
             },
             {
@@ -22808,7 +22824,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 79,
+                "numero": 79,
                 "potencial": 83
             },
             {
@@ -22830,7 +22846,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 81
             },
             {
@@ -22852,7 +22868,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 80,
+                "numero": 80,
                 "potencial": 81
             },
             {
@@ -22874,7 +22890,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 75,
+                "numero": 75,
                 "potencial": 77
             },
             {
@@ -22896,7 +22912,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 76
             },
             {
@@ -22918,7 +22934,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 79,
+                "numero": 79,
                 "potencial": 79
             }
         ]
@@ -22954,7 +22970,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 79
             },
             {
@@ -22976,7 +22992,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 79
             },
             {
@@ -22998,7 +23014,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 80,
+                "numero": 80,
                 "potencial": 81
             },
             {
@@ -23020,7 +23036,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 79,
+                "numero": 79,
                 "potencial": 84
             },
             {
@@ -23042,7 +23058,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 80,
+                "numero": 80,
                 "potencial": 84
             },
             {
@@ -23064,7 +23080,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 82,
+                "numero": 82,
                 "potencial": 82
             },
             {
@@ -23086,7 +23102,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 81
             },
             {
@@ -23108,7 +23124,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 79
             },
             {
@@ -23130,7 +23146,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 79,
+                "numero": 79,
                 "potencial": 79
             },
             {
@@ -23152,7 +23168,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 81,
+                "numero": 81,
                 "potencial": 85
             },
             {
@@ -23174,7 +23190,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 79,
+                "numero": 79,
                 "potencial": 84
             }
         ],
@@ -23197,7 +23213,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 79,
+                "numero": 79,
                 "potencial": 79
             },
             {
@@ -23219,7 +23235,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 77,
+                "numero": 77,
                 "potencial": 78
             },
             {
@@ -23241,7 +23257,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 77,
+                "numero": 77,
                 "potencial": 77
             },
             {
@@ -23263,7 +23279,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 74,
+                "numero": 74,
                 "potencial": 75
             },
             {
@@ -23285,7 +23301,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 77,
+                "numero": 77,
                 "potencial": 81
             },
             {
@@ -23307,7 +23323,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 74,
+                "numero": 74,
                 "potencial": 76
             },
             {
@@ -23329,7 +23345,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 77,
+                "numero": 77,
                 "potencial": 78
             },
             {
@@ -23351,7 +23367,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 74,
+                "numero": 74,
                 "potencial": 78
             },
             {
@@ -23373,7 +23389,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 73,
+                "numero": 73,
                 "potencial": 78
             },
             {
@@ -23395,7 +23411,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 75,
+                "numero": 75,
                 "potencial": 77
             },
             {
@@ -23417,7 +23433,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 74,
+                "numero": 74,
                 "potencial": 77
             },
             {
@@ -23439,7 +23455,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 74,
+                "numero": 74,
                 "potencial": 79
             }
         ]
@@ -23475,7 +23491,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 82
             },
             {
@@ -23497,7 +23513,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 83
             },
             {
@@ -23519,7 +23535,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 81,
+                "numero": 81,
                 "potencial": 81
             },
             {
@@ -23541,7 +23557,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 79
             },
             {
@@ -23563,7 +23579,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 80,
+                "numero": 80,
                 "potencial": 85
             },
             {
@@ -23585,7 +23601,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 79,
+                "numero": 79,
                 "potencial": 83
             },
             {
@@ -23607,7 +23623,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 79,
+                "numero": 79,
                 "potencial": 83
             },
             {
@@ -23629,7 +23645,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 79,
+                "numero": 79,
                 "potencial": 81
             },
             {
@@ -23651,7 +23667,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 82,
+                "numero": 82,
                 "potencial": 86
             },
             {
@@ -23673,7 +23689,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 82,
+                "numero": 82,
                 "potencial": 85
             },
             {
@@ -23695,7 +23711,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 77,
+                "numero": 77,
                 "potencial": 77
             }
         ],
@@ -23718,7 +23734,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 78
             },
             {
@@ -23740,7 +23756,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 77,
+                "numero": 77,
                 "potencial": 80
             },
             {
@@ -23762,7 +23778,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 80,
+                "numero": 80,
                 "potencial": 80
             },
             {
@@ -23784,7 +23800,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 77
             },
             {
@@ -23806,7 +23822,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 75,
+                "numero": 75,
                 "potencial": 79
             },
             {
@@ -23828,7 +23844,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 77
             },
             {
@@ -23850,7 +23866,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 79,
+                "numero": 79,
                 "potencial": 81
             },
             {
@@ -23872,7 +23888,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 75,
+                "numero": 75,
                 "potencial": 78
             },
             {
@@ -23894,7 +23910,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 80,
+                "numero": 80,
                 "potencial": 81
             },
             {
@@ -23916,7 +23932,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 83
             },
             {
@@ -23938,7 +23954,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 80,
+                "numero": 80,
                 "potencial": 80
             },
             {
@@ -23960,7 +23976,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 79,
+                "numero": 79,
                 "potencial": 82
             }
         ]
@@ -23996,7 +24012,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 75,
+                "numero": 75,
                 "potencial": 80
             },
             {
@@ -24018,7 +24034,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 75,
+                "numero": 75,
                 "potencial": 75
             },
             {
@@ -24040,7 +24056,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 80
             },
             {
@@ -24062,7 +24078,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 80
             },
             {
@@ -24084,7 +24100,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 81
             },
             {
@@ -24106,7 +24122,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 75,
+                "numero": 75,
                 "potencial": 76
             },
             {
@@ -24128,7 +24144,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 77,
+                "numero": 77,
                 "potencial": 79
             },
             {
@@ -24150,7 +24166,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 80,
+                "numero": 80,
                 "potencial": 85
             },
             {
@@ -24172,7 +24188,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 80,
+                "numero": 80,
                 "potencial": 85
             },
             {
@@ -24194,7 +24210,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 77,
+                "numero": 77,
                 "potencial": 78
             },
             {
@@ -24216,7 +24232,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 78,
+                "numero": 78,
                 "potencial": 81
             }
         ],
@@ -24239,7 +24255,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 79
             },
             {
@@ -24261,7 +24277,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 71,
+                "numero": 71,
                 "potencial": 72
             },
             {
@@ -24283,7 +24299,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 72,
+                "numero": 72,
                 "potencial": 74
             },
             {
@@ -24305,7 +24321,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 78
             },
             {
@@ -24327,7 +24343,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 75,
+                "numero": 75,
                 "potencial": 75
             },
             {
@@ -24349,7 +24365,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 72,
+                "numero": 72,
                 "potencial": 76
             },
             {
@@ -24371,7 +24387,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 71,
+                "numero": 71,
                 "potencial": 72
             },
             {
@@ -24393,7 +24409,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 73,
+                "numero": 73,
                 "potencial": 78
             },
             {
@@ -24415,7 +24431,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 78
             },
             {
@@ -24437,7 +24453,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 79
             },
             {
@@ -24459,7 +24475,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 74,
+                "numero": 74,
                 "potencial": 76
             },
             {
@@ -24481,7 +24497,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 71,
+                "numero": 71,
                 "potencial": 74
             }
         ]
@@ -24517,7 +24533,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 70,
+                "numero": 70,
                 "potencial": 71
             },
             {
@@ -24539,7 +24555,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 72,
+                "numero": 72,
                 "potencial": 76
             },
             {
@@ -24561,7 +24577,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 71,
+                "numero": 71,
                 "potencial": 72
             },
             {
@@ -24583,7 +24599,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 74,
+                "numero": 74,
                 "potencial": 78
             },
             {
@@ -24605,7 +24621,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 71,
+                "numero": 71,
                 "potencial": 73
             },
             {
@@ -24627,7 +24643,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 80
             },
             {
@@ -24649,7 +24665,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 70,
+                "numero": 70,
                 "potencial": 73
             },
             {
@@ -24671,7 +24687,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 76,
+                "numero": 76,
                 "potencial": 81
             },
             {
@@ -24693,7 +24709,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 74,
+                "numero": 74,
                 "potencial": 75
             },
             {
@@ -24715,7 +24731,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 74,
+                "numero": 74,
                 "potencial": 75
             },
             {
@@ -24737,7 +24753,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 71,
+                "numero": 71,
                 "potencial": 72
             }
         ],
@@ -24760,7 +24776,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 71,
+                "numero": 71,
                 "potencial": 71
             },
             {
@@ -24782,7 +24798,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 72,
+                "numero": 72,
                 "potencial": 72
             },
             {
@@ -24804,7 +24820,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 69,
+                "numero": 69,
                 "potencial": 71
             },
             {
@@ -24826,7 +24842,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 67,
+                "numero": 67,
                 "potencial": 67
             },
             {
@@ -24848,7 +24864,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 70,
+                "numero": 70,
                 "potencial": 74
             },
             {
@@ -24870,7 +24886,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 67,
+                "numero": 67,
                 "potencial": 68
             },
             {
@@ -24892,7 +24908,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 68,
+                "numero": 68,
                 "potencial": 69
             },
             {
@@ -24914,7 +24930,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 71,
+                "numero": 71,
                 "potencial": 74
             },
             {
@@ -24936,7 +24952,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 70,
+                "numero": 70,
                 "potencial": 75
             },
             {
@@ -24958,7 +24974,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 68,
+                "numero": 68,
                 "potencial": 68
             },
             {
@@ -24980,7 +24996,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 69,
+                "numero": 69,
                 "potencial": 73
             },
             {
@@ -25002,7 +25018,7 @@ const listaDeTimes = [
                 "gols": 0,
                 "assistencias": 0,
                 "jogos": 0,
-                //"overall": 67,
+                "numero": 67,
                 "potencial": 70
             }
         ]

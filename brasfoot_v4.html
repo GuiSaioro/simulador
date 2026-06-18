@@ -711,7 +711,8 @@
             font-weight: bold;
         }
     </style>
-    <script src="timescopa.js">
+<script src="timescopa.js"></script>
+    <script>
 // ==== V4 SYSTEMS ====
 window.estadoJogo = window.estadoJogo || {fadiga:{},moral:{},suspensos:{},lesoes:{}};
 
@@ -723,8 +724,29 @@ function bonusJogador(j){
  let mor=estadoJogo.moral[k]||50;
  let les=estadoJogo.lesoes[k];
  let mod=(mor-50)/10 - (fad/15);
- if(les) mod-=15;
+ if(les) mod-=18;
  return mod;
+}
+
+function jogadorDisponivel(j){
+ if(!j) return false;
+ let k=getJogKey(j);
+ return !(estadoJogo.suspensos[k] > 0 || (estadoJogo.lesoes[k] || 0) > 0);
+}
+
+function obterTitularesAtuais(t){
+ if(!t) return [];
+ let titulares = (t.titulares || t.titularesPadrao || []).slice();
+ let banco = (t.banco || t.bancoPadrao || []).slice();
+ let disponiveis = titulares.filter(j => jogadorDisponivel(j));
+ let indisponiveis = titulares.filter(j => !jogadorDisponivel(j));
+ if(indisponiveis.length === 0) return titulares;
+ let reservas = banco.filter(j => jogadorDisponivel(j));
+ reservas.sort((a, b) => calcularOvrPosicional(b, getMacroPosicao(b.posicao || b.posicao2 || "MEI")) - calcularOvrPosicional(a, getMacroPosicao(a.posicao || a.posicao2 || "MEI")));
+ while(disponiveis.length < 11 && reservas.length > 0){
+     disponiveis.push(reservas.shift());
+ }
+ return disponiveis.length > 0 ? disponiveis : titulares;
 }
 
 function registrarPosJogo(elenco,vitoria){
@@ -735,7 +757,8 @@ function registrarPosJogo(elenco,vitoria){
    if(Math.random()<0.03) estadoJogo.lesoes[k]=2+Math.floor(Math.random()*3);
    if(Math.random()<0.08) estadoJogo.suspensos[k]=(estadoJogo.suspensos[k]||0)+1;
  });
- Object.keys(estadoJogo.lesoes).forEach(k=>{ if(estadoJogo.lesoes[k]>0) estadoJogo.lesoes[k]--; });
+ Object.keys(estadoJogo.lesoes).forEach(k=>{ if(estadoJogo.lesoes[k]>0) estadoJogo.lesoes[k]--; if(estadoJogo.lesoes[k] === 0) delete estadoJogo.lesoes[k]; });
+ Object.keys(estadoJogo.suspensos).forEach(k=>{ if(estadoJogo.suspensos[k]>0) estadoJogo.suspensos[k]--; if(estadoJogo.suspensos[k] === 0) delete estadoJogo.suspensos[k]; });
 }
 
 function pesoGolPos(pos){
@@ -970,7 +993,7 @@ function pesoGolPos(pos){
                         <option value="800">Rápido (2x)</option>
                         <option value="300">Turbo (3x)</option>
                     </select>
-                    <!--<button class="principal" id="btn-proxima-jogada" onclick="avancarJogadaManual()">Lance ➔</button>-->
+                    <button class="principal" id="btn-proxima-jogada" onclick="avancarJogadaManual()">Lance ➔</button>
                 </div>
             </div>
 
@@ -1036,7 +1059,7 @@ function pesoGolPos(pos){
     <script>
         let faseAtual = "GRUPOS"; let rodadaGrupo = 1; let meuTimeId = null; let meuTimeNome = "";
         let letrasGrupos = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L"]; let grupos = {}; let tabelaPartidasGrupos = []; let minhaTrajetoria = [];
-        let bracketDados = { "OITAVAS": [], "QUARTAS": [], "SEMIS": [], "FINAL": [] };
+        let bracketDados = { "16AVOS": [], "OITAVAS": [], "QUARTAS": [], "SEMIS": [], "FINAL": [] };
         const arranjosFormacoes = {
             "4-4-2": [{ tipo: "GOL", top: 88, left: 50 }, { tipo: "LE", top: 68, left: 15 }, { tipo: "ZAG", top: 72, left: 38 }, { tipo: "ZAG", top: 72, left: 62 }, { tipo: "LD", top: 68, left: 85 }, { tipo: "ME", top: 46, left: 15 }, { tipo: "MC", top: 48, left: 38 }, { tipo: "MC", top: 48, left: 62 }, { tipo: "MD", top: 46, left: 85 }, { tipo: "CA", top: 22, left: 33 }, { tipo: "CA", top: 22, left: 67 }],
             "4-3-3": [{ tipo: "GOL", top: 88, left: 50 }, { tipo: "LE", top: 68, left: 15 }, { tipo: "ZAG", top: 72, left: 38 }, { tipo: "ZAG", top: 72, left: 62 }, { tipo: "LD", top: 68, left: 85 }, { tipo: "MC", top: 48, left: 24 }, { tipo: "VOL", top: 52, left: 50 }, { tipo: "MC", top: 48, left: 76 }, { tipo: "PE", top: 22, left: 18 }, { tipo: "CA", top: 18, left: 50 }, { tipo: "PD", top: 22, left: 82 }],
@@ -1047,23 +1070,87 @@ function pesoGolPos(pos){
         let statsAoVivo = { casa: { chutes: 0, posse: 50 }, vis: { chutes: 0, posse: 50 } }; let golsCasaLive = 0; let golsVisLive = 0;
         let emProrrogacao = false; let disputaPenaisAtiva = false; let penaisPlacar = { casa: 0, vis: 0, chutes: 0 }; let penaisSeries = { casa: [], vis: [] }; let currentPenalTaker = 'casa';
         let subsFeitasAnteriormente = 0; let paradasSub = 0; let emIntervalo = false; let segundoTempoIniciado = false; let isLiveBoard = false; let emVestiario = false; let snapshotTitularesJanela = []; let aiEstrategia = "Equilibrado";
-        let scoutSel1 = null; let scoutSel2 = null; let estrategiaTime = "Equilibrado"; let palestraAplicada = "nenhuma"; let meuCapitaoNome = ""; let meuBatedorNome = "";
+        let scoutSel1 = null; let scoutSel2 = null; let estrategiaTime = "Equilibrado"; let palestraAplicada = "nenhuma"; let meuCapitaoNome = ""; let meuBatedorNome = ""; let gritoAtivo = "nenhum"; let tempoGritoAtivo = 0; let preJogoBonus = 0;
+        let estadoJogo = { suspensos: {}, lesoes: {} };
 
         function getMacroPosicao(pos) { let p = (pos || "MEI").toUpperCase(); if (["GOL", "GK"].includes(p)) return "GOL"; if (["ZAG", "CB", "ZC"].includes(p)) return "ZAG"; if (["LAT", "LD", "LE", "ALA", "AD", "AE", "RB", "LB", "RWB", "LWB"].includes(p)) return "LAT"; if (["ATA", "CA", "SA", "PE", "PD", "PT", "ST", "CF", "RW", "LW"].includes(p)) return "ATA"; return "MEI"; }
+        function getJogKey(j) { return `${j.id || ''}_${j.nome || ''}_${j.posicao || ''}_${j.numero || ''}`; }
         function calcularOvrPosicional(j, posSlot) { const pesos = { "GOL": { v: 0.05, f: 0, p: 0.05, d: 0, de: 0.9, fi: 0 }, "ZAG": { v: 0.15, f: 0.05, p: 0.1, d: 0.05, de: 0.5, fi: 0.15 }, "LAT": { v: 0.25, f: 0.1, p: 0.2, d: 0.15, de: 0.2, fi: 0.1 }, "MEI": { v: 0.2, f: 0.2, p: 0.3, d: 0.2, de: 0.05, fi: 0.05 }, "ATA": { v: 0.2, f: 0.35, p: 0.1, d: 0.25, de: 0, fi: 0.1 } }; let mac = getMacroPosicao(posSlot); let p = pesos[mac] || pesos["MEI"]; let base = ((j.velocidade || 70) * p.v) + ((j.finalizacao || 70) * p.f) + ((j.passe || 70) * p.p) + ((j.drible || 70) * p.d) + ((j.defesa || 70) * p.de) + ((j.fisico || 70) * p.fi); let posJog = (j.posicao || "MEI") + (j.posicao2 ? "/" + j.posicao2 : ""); if (!posJog.toUpperCase().includes(mac)) base -= 10; return Math.round(base); }
-        function obterForcaAtual(t, usePadrao = true) { let tits = usePadrao ? t.titularesPadrao : t.titulares; let form = usePadrao ? t.formacaoPadrao : t.formacao; if (!tits || tits.length === 0) return 75; let slots = arranjosFormacoes[form || "4-4-2"]; let soma = 0; tits.forEach((j, i) => { soma += calcularOvrPosicional(j, slots[i] ? slots[i].tipo : "MEI"); }); return Math.round(soma / 11); }
+        function jogadorDisponivel(j) { if (!j) return false; let k = getJogKey(j); return !(estadoJogo.suspensos[k] > 0 || (estadoJogo.lesoes[k] || 0) > 0); }
+        function obterTitularesAtuais(t) { if (!t) return []; let titulares = (t.titulares || t.titularesPadrao || []).slice(); let banco = (t.banco || t.bancoPadrao || []).slice(); let disponiveis = titulares.filter(j => jogadorDisponivel(j)); let reservas = banco.filter(j => jogadorDisponivel(j)); if (disponiveis.length === 11 || reservas.length === 0) return disponiveis.length > 0 ? disponiveis : titulares; reservas.sort((a, b) => calcularOvrPosicional(b, getMacroPosicao(b.posicao || b.posicao2 || "MEI")) - calcularOvrPosicional(a, getMacroPosicao(a.posicao || a.posicao2 || "MEI"))); while (disponiveis.length < 11 && reservas.length > 0) { disponiveis.push(reservas.shift()); } return disponiveis.length > 0 ? disponiveis : titulares; }
+        function obterForcaTime(t, usePadrao = true) { let lineup = obterTitularesAtuais(Object.assign({}, t, { titulares: usePadrao ? (t.titularesPadrao || t.titulares) : (t.titulares || t.titularesPadrao), banco: usePadrao ? (t.bancoPadrao || t.banco) : (t.banco || t.bancoPadrao) })); if (!lineup || lineup.length === 0) return { geral: 75, ataque: 75, defesa: 75, finalizacao: 75, goleiro: 70, capitaoBonus: 0 }; let soma = 0, somaAta = 0, somaDef = 0, somaFin = 0, somaGk = 0; let countAta = 0, countDef = 0, countFin = 0, countGk = 0; let capitaoBonus = 0; lineup.forEach(j => { let pos = getMacroPosicao(j.posicao || j.posicao2 || "MEI"); let ovr = calcularOvrPosicional(j, pos); soma += ovr; if (pos === "ATA" || pos === "MEI") { somaAta += ((j.finalizacao || 70) * 1.3) + ((j.drible || 70) * 0.4) + ((j.velocidade || 70) * 0.3); countAta++; } if (pos === "ZAG" || pos === "LAT" || pos === "GOL") { somaDef += ((j.defesa || 70) * 1.05) + ((j.fisico || 70) * 0.35) + ((j.velocidade || 70) * 0.15); countDef++; } if (pos === "ATA" || pos === "MEI") { somaFin += (j.finalizacao || 70); countFin++; } if (pos === "GOL") { somaGk += ((j.defesa || 70) * 0.72) + ((j.fisico || 70) * 0.18) + ((j.passe || 70) * 0.1); countGk++; } if (j.nome === meuCapitaoNome) capitaoBonus = 4; }); let ataque = Math.round((somaAta / Math.max(1, countAta)) + (capitaoBonus * 0.35)); let defesa = Math.round((somaDef / Math.max(1, countDef)) + (capitaoBonus * 0.25)); let finalizacao = Math.round(somaFin / Math.max(1, countFin)); let goleiro = Math.round(somaGk / Math.max(1, countGk)); return { geral: Math.round((soma / lineup.length) + capitaoBonus), ataque, defesa, finalizacao, goleiro, capitaoBonus }; }
+        function obterForcaAtual(t, usePadrao = true) { return obterForcaTime(t, usePadrao).geral; }
+        function obterForcaElencoTotal(t) { let elenco = t.elenco || t.jogadores || [];
+            if ((!elenco || elenco.length === 0) && (t.titulares || t.banco)) {
+                elenco = (t.titulares || []).concat(t.banco || []);
+            }
+            if (!elenco || elenco.length === 0) return obterForcaAtual(t, true);
+            let soma = 0;
+            elenco.forEach(j => {
+                let pos = (j.posicao || j.posicao2 || "MEI").split(/[\/,\-]/)[0].trim();
+                soma += calcularOvrPosicional(j, getMacroPosicao(pos));
+            });
+            return Math.round(soma / elenco.length);
+        }
+        function selecionarArtilheiro(lineup) {
+            if (!Array.isArray(lineup) || lineup.length === 0) return { nome: "Jogador", finalizacao: 70, drible: 70, velocidade: 70, passe: 70 };
+            let candidatos = lineup.map(j => {
+                let peso = ((j.finalizacao || 70) * 0.55) + ((j.drible || 70) * 0.18) + ((j.velocidade || 70) * 0.16) + ((j.passe || 70) * 0.11);
+                let pos = (j.posicao || j.posicao2 || "").toUpperCase();
+                if (pos.includes("ATA") || pos.includes("CA") || pos.includes("PE") || pos.includes("ST") || pos.includes("CF") || pos.includes("LW") || pos.includes("RW")) peso += 10;
+                return { jogador: j, peso };
+            });
+            candidatos.sort((a, b) => b.peso - a.peso);
+            return (candidatos.length > 1 && Math.random() < 0.18) ? candidatos[1].jogador : candidatos[0].jogador;
+        }
+        function calcularChanceGol(ataque, defesa, finalizacao, goleiro, posturaBonus = 0, gritoBonus = 0) {
+            let diff = ataque - defesa;
+            let base = 0.04 + (diff * 0.0038) + ((finalizacao - 70) * 0.0017) - ((goleiro - 70) * 0.0025);
+            base += posturaBonus + gritoBonus;
+            base *= 1 + (Math.random() * 0.08 - 0.04);
+            return Math.max(0.02, Math.min(0.55, base));
+        }
+        function calcularChancePenal(t, kicker = null) {
+            let base = 0.78;
+            if (typeof t.penalti === 'number') base += ((t.penalti - 75) * 0.0014);
+            let skill = kicker ? (kicker.finalizacao || 70) : 75;
+            base += ((skill - 75) * 0.0042);
+            let power = obterForcaTime(t, false).geral;
+            base += ((power - 75) * 0.0011);
+            return Math.max(0.45, Math.min(0.94, base));
+        }
         function formatarNomePequeno(n) { let p = n.split(" "); return p.length === 1 ? p[0] : p[0] + " " + p[p.length - 1]; }
 
 
 
+        function inicializarTimesPadrao() {
+            listaDeTimes.forEach(t => {
+                let elenco = t.jogadores || t.elenco || [];
+                if (!Array.isArray(t.titulares) || t.titulares.length === 0) t.titulares = elenco.slice(0, 11);
+                if (!Array.isArray(t.banco) || t.banco.length === 0) t.banco = elenco.slice(11);
+                t.formacao = t.formacao || "4-4-2";
+                t.formacaoPadrao = t.formacaoPadrao || t.formacao;
+                t.postura = t.postura || "Equilibrado";
+                let posturaNormalizada = t.postura.toLowerCase();
+                if (posturaNormalizada === "retranca") posturaNormalizada = "defensivo";
+                if (posturaNormalizada === "ataque") posturaNormalizada = "ofensivo";
+                t.posturaPadrao = t.posturaPadrao || posturaNormalizada.charAt(0).toUpperCase() + posturaNormalizada.slice(1);
+                t.titularesPadrao = t.titularesPadrao || [...t.titulares];
+                t.bancoPadrao = t.bancoPadrao || [...t.banco];
+                t.titularesPadrao.forEach((j, i) => { if (j) { j.gols = j.gols || 0; j.numero = j.numero || (i + 1); } });
+                t.bancoPadrao.forEach((j, i) => { if (j) { j.gols = j.gols || 0; j.numero = j.numero || (i + 12); } });
+            });
+        }
+
         let swiperTimes;
 
         window.addEventListener('load', function () {
+            inicializarTimesPadrao();
             const wrapper = document.getElementById("wrapper-times");
 
             wrapper.innerHTML = "";
             [...listaDeTimes].sort((a, b) => a.nome.localeCompare(b.nome)).forEach(t => {
-                let ovrTime = obterForcaAtual(t, true);
+                let ovrTime = obterForcaElencoTotal(t);
                 let slide = document.createElement("div");
                 slide.className = "swiper-slide";
                 slide.innerHTML = `
@@ -1108,6 +1195,8 @@ function pesoGolPos(pos){
         });
 
         function iniciarJogo() {
+            inicializarTimesPadrao();
+
             // 1. Verifica se o Swiper já foi inicializado
             if (typeof swiperTimes === 'undefined' || swiperTimes.activeIndex === undefined) {
                 alert("Erro: O carrossel não está pronto.");
@@ -1136,7 +1225,7 @@ function pesoGolPos(pos){
 
             letrasGrupos = listaDeTimes.length <= 32 ? ["A", "B", "C", "D", "E", "F", "G", "H"] : ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L"];
             listaDeTimes.forEach(t => {
-                t.pontos = 0; t.vitorias = 0; t.empates = 0; t.derrotas = 0; t.gp = 0; t.gc = 0; t.sg = 0; t.jogos = 0;
+                t.pontos = 0; t.vitorias = 0; t.empates = 0; t.derrotas = 0; t.gp = 0; t.gc = 0; t.sg = 0; t.jogos = 0; t.golsPro = 0; t.golsContra = 0; t.saldo = 0;
                 let el = t.jogadores || t.elenco || [];
                 if (!t.titulares || t.titulares.length === 0) t.titulares = el.slice(0, 11);
                 if (!t.banco || t.banco.length === 0) t.banco = el.slice(11);
@@ -1152,15 +1241,6 @@ function pesoGolPos(pos){
             meuBatedorNome = meuTime.titularesPadrao.find(j => j && j.posicao && j.posicao.includes("ATA"))?.nome || meuCapitaoNome;
             sortearGruposMundiais(); gerarTabelaFaseGrupos(); renderizarInterface();
         }
-        function salvarPostura() {
-    let selectTatico = document.getElementById("gerenciar-postura");
-    let mt = listaDeTimes.find(t => t.id === meuTimeId);
-
-    if (mt && selectTatico) {
-        mt.posturaPadrao = selectTatico.value; 
-
-    }
-}
         function prepararTimesParaJogo(jogo) { [jogo.casa, jogo.visitante].forEach(t => { t.titulares = [...t.titularesPadrao]; t.banco = [...t.bancoPadrao]; t.formacao = t.formacaoPadrao; t.titulares.forEach(j => j.foiSubstituidoDefinitivo = false); t.banco.forEach(j => j.foiSubstituidoDefinitivo = false); }); }
         function mudarAba(idAba, btn) { document.querySelectorAll('.aba-conteudo').forEach(e => e.classList.remove('ativa')); document.querySelectorAll('.aba-btn').forEach(e => e.classList.remove('ativa')); document.getElementById(idAba).classList.add('ativa'); if (btn) btn.classList.add('ativa'); if (idAba === 'aba-gerenciar') { scoutSel1 = null; scoutSel2 = null; renderizarQuadroTatico(false); } }
         function aoClicarJogador(tipo, idx, ehLive) {
@@ -1235,27 +1315,46 @@ function pesoGolPos(pos){
             document.getElementById("pre-jogo-postura").value = jogoAtActiveRef.posturaLive; document.getElementById("vestiario-adv-ovr").innerText = obterForcaAtual(adv, true); document.getElementById("prancheta-componente-live").style.display = "grid"; document.getElementById("slot-prancheta-vestiario").appendChild(document.getElementById("prancheta-componente-live")); renderizarScoutUI(true); renderizarQuadroTatico(true); document.getElementById("live-contexto-fase").innerText = `Modo Técnico - ${lbl}`; document.getElementById("live-nome-casa").innerText = jogo.casa.nome; document.getElementById("live-nome-vis").innerText = jogo.visitante.nome;
         }
         function entrarEmCampoLive() {
-            emVestiario = false; isLiveBoard = false; scoutSel1 = null; scoutSel2 = null; minutoJogo = 0; golsCasaLive = 0; golsVisLive = 0; emProrrogacao = false; disputaPenaisAtiva = false; emIntervalo = false; segundoTempoIniciado = false; subsFeitasAnteriormente = 0; paradasSub = 0; snapshotTitularesJanela = []; statsAoVivo = { casa: { chutes: 0, posse: 50 }, vis: { chutes: 0, posse: 50 } }; document.getElementById("placar-shootout").style.display = "none"; estrategiaTime = document.getElementById("pre-jogo-postura").value; palestraAplicada = document.getElementById("pre-jogo-palestra").value; mudarPosturaLive(estrategiaTime); atualizarTextosSubs(); document.getElementById("modal-vestiario").style.display = "none"; document.getElementById("container-live-jogo").style.display = "grid"; document.getElementById("live-gols-casa").innerText = "0"; document.getElementById("live-gols-vis").innerText = "0"; document.getElementById("live-tempo").innerText = "0'"; montarListasElencoUI(jogoAtActiveRef.jogo.casa, "lista-titulares-casa", "lista-banco-casa"); montarListasElencoUI(jogoAtActiveRef.jogo.visitante, "lista-titulares-vis", "lista-banco-vis"); document.getElementById("live-narracao").innerHTML = ""; adicionarNarracao("0'", "🏁 Rola a bola! Início de partida!"); atualizarEstatisticasUI(); iniciarSimulacaoAutomatica(); document.getElementById("live-escudo-casa").src = jogoAtActiveRef.jogo.casa.brasaoUrl || jogoAtActiveRef.jogo.casa.escudo || "";
-            document.getElementById("live-escudo-vis").src = jogoAtActiveRef.jogo.visitante.brasaoUrl || jogoAtActiveRef.jogo.visitante.escudo || "";
-            document.getElementById("live-narracao").innerHTML = ""; adicionarNarracao("0'", "🏁 Rola a bola! Início de partida!");
+            let mt = listaDeTimes.find(t => t.id === meuTimeId);
+            emVestiario = false;
+            isLiveBoard = false;
+            scoutSel1 = null;
+            scoutSel2 = null;
+            minutoJogo = 0;
+            golsCasaLive = 0;
+            golsVisLive = 0;
+            emProrrogacao = false;
+            disputaPenaisAtiva = false;
+            emIntervalo = false;
+            segundoTempoIniciado = false;
+            subsFeitasAnteriormente = 0;
+            paradasSub = 0;
+            snapshotTitularesJanela = [];
+            statsAoVivo = { casa: { chutes: 0, posse: 50 }, vis: { chutes: 0, posse: 50 } };
+            document.getElementById("placar-shootout").style.display = "none";
             let selectVestiario = document.getElementById("pre-jogo-postura");
-            let selectVestiarioPostura = document.getElementById("pre-jogo-postura");
-            if (selectVestiarioPostura) {
-                selectVestiarioPostura.value = mt.posturaPadrao;
+            let selectPalestra = document.getElementById("pre-jogo-palestra");
+            estrategiaTime = selectVestiario ? selectVestiario.value : "Equilibrado";
+            palestraAplicada = selectPalestra ? selectPalestra.value : "nenhuma";
+            document.getElementById("modal-vestiario").style.display = "none";
+            document.getElementById("container-live-jogo").style.display = "grid";
+            document.getElementById("live-gols-casa").innerText = "0";
+            document.getElementById("live-gols-vis").innerText = "0";
+            document.getElementById("live-tempo").innerText = "0'";
+            montarListasElencoUI(jogoAtActiveRef.jogo.casa, "lista-titulares-casa", "lista-banco-casa");
+            montarListasElencoUI(jogoAtActiveRef.jogo.visitante, "lista-titulares-vis", "lista-banco-vis");
+            document.getElementById("live-narracao").innerHTML = "";
+            adicionarNarracao("0'", "🏁 Rola a bola! Início de partida!");
+            atualizarEstatisticasUI();
+            document.getElementById("live-escudo-casa").src = jogoAtActiveRef.jogo.casa.brasaoUrl || jogoAtActiveRef.jogo.casa.escudo || "";
+            document.getElementById("live-escudo-vis").src = jogoAtActiveRef.jogo.visitante.brasaoUrl || jogoAtActiveRef.jogo.visitante.escudo || "";
+            if (mt && mt.posturaPadrao) {
+                document.getElementById("pre-jogo-postura").value = mt.posturaPadrao;
+                estrategiaTime = mt.posturaPadrao;
             }
-            estrategiaTime = selectVestiario.value;
             mudarPosturaLive(estrategiaTime);
-            if (selectVestiarioPostura) {
-        estrategiaTime = selectVestiarioPostura.value;
-    } else {
-        estrategiaTime = "Equilibrado"; // Segurança
-    }
-
-    // Se tiver função de mudar botões visuais
-    if (typeof mudarPosturaLive === "function") {
-        mudarPosturaLive(estrategiaTime);
-    }
-            atualizarEstatisticasUI(); iniciarSimulacaoAutomatica();
+            atualizarTextosSubs();
+            iniciarSimulacaoAutomatica();
         }
         function mudarPosturaLive(n) {
             estrategiaTime = n; // Atualiza a variável que a simulação usa
@@ -1274,7 +1373,6 @@ function pesoGolPos(pos){
         function iniciarIntervalo() { emIntervalo = true; pausarSimulacao(); let divO = document.getElementById("botoes-overlay-jogo"); divO.innerHTML = ""; let bT = document.createElement("button"); bT.className = "secundario"; bT.style.padding = "12px 25px"; bT.innerText = "📋 Abrir Táticas"; bT.onclick = abrirQuadroTaticoLive; let bV = document.createElement("button"); bV.className = "principal"; bV.style.padding = "12px 25px"; bV.innerText = "Voltar ➔"; bV.onclick = voltarDoIntervalo; divO.appendChild(bT); divO.appendChild(bV); document.getElementById("titulo-overlay-jogo").innerText = emProrrogacao ? "Intervalo Prorrogação" : "Fim do 1º Tempo"; adicionarNarracao(minutoJogo + "'", "⏱️ Fim de etapa."); document.getElementById("overlay-intervalo").style.display = "flex"; }
         function voltarDoIntervalo() { emIntervalo = false; segundoTempoIniciado = true; if (minutoJogo === 45) minutoJogo = 46; else if (minutoJogo === 105) minutoJogo = 106; document.getElementById("overlay-intervalo").style.display = "none"; adicionarNarracao(minutoJogo + "'", "🏁 Bola rolando!"); atualizarTempoUI(); iniciarSimulacaoAutomatica(); }
         function avancarJogadaManual() { if (disputaPenaisAtiva) { simularPassoPenal(); return; } if (emIntervalo) return; minutoJogo += Math.floor(Math.random() * 4) + 4; if (minutoJogo >= 45 && !segundoTempoIniciado) { minutoJogo = 45; iniciarIntervalo(); return; } if (minutoJogo > 90 && !emProrrogacao && !jogoAtActiveRef.ehMataMata) minutoJogo = 90; if (minutoJogo > 90 && !emProrrogacao && jogoAtActiveRef.ehMataMata && golsCasaLive !== golsVisLive) minutoJogo = 90; if (minutoJogo >= 90 && !emProrrogacao && segundoTempoIniciado) { if (golsCasaLive === golsVisLive && jogoAtActiveRef.ehMataMata) { emProrrogacao = true; minutoJogo = 90; adicionarNarracao("90'", "⌛ Prorrogação!"); atualizarTempoUI(); return; } else { finalizarJogoModoTecnico(); return; } } if (emProrrogacao && minutoJogo >= 105 && minutoJogo < 108 && !emIntervalo) { minutoJogo = 105; iniciarIntervalo(); return; } if (emProrrogacao && minutoJogo >= 120) { if (golsCasaLive === golsVisLive) { disputaPenaisAtiva = true; penaisPlacar = { casa: 0, vis: 0, chutes: 0 }; adicionarNarracao("120'", "🚨 Vamos para os Pênaltis!"); atualizarTempoUI(); iniciarDisputaPenaltis(); return; } else { finalizarJogoModoTecnico(); return; } } processarLanceMecanica(); }
-        function mudarPosturaLive(n) { estrategiaTime = n; document.querySelectorAll('.btn-tatica').forEach(b => b.classList.remove('ativo')); document.getElementById(`btn-tatica-${n.toLowerCase()}`).classList.add('ativo'); if (minutoJogo > 0) adicionarNarracao(`${minutoJogo}'`, `🔄 Postura: ${n}.`); }
         function darGritoLive(tipo, btn) {
             document.querySelectorAll('.btn-grito').forEach(b => b.classList.remove('ativo'));
             btn.classList.add('ativo');
@@ -1288,66 +1386,136 @@ function pesoGolPos(pos){
 
         function processarLanceMecanica() {
             atualizarTempoUI(); let c = jogoAtActiveRef.jogo.casa; let v = jogoAtActiveRef.jogo.visitante;
-            let IA = c.id === meuTimeId ? v : c; let sdG = c.id === meuTimeId ? (golsVisLive - golsCasaLive) : (golsCasaLive - golsVisLive);
+            let sdG = c.id === meuTimeId ? (golsVisLive - golsCasaLive) : (golsCasaLive - golsVisLive);
             if (minutoJogo > 70 && sdG > 0 && aiEstrategia !== "Defensivo") { aiEstrategia = "Defensivo"; adicionarNarracao(`${minutoJogo}'`, `🛡️ Adversário recua.`); } else if (minutoJogo > 70 && sdG < 0 && aiEstrategia !== "Ofensivo") { aiEstrategia = "Ofensivo"; adicionarNarracao(`${minutoJogo}'`, `🔥 Adversário ataca!`); }
-            let fC = obterForcaAtual(c, false); let fV = obterForcaAtual(v, false); let pC = c.id === meuTimeId ? estrategiaTime : aiEstrategia; let pV = v.id === meuTimeId ? estrategiaTime : aiEstrategia;
-            let postura = (c.id === meuTimeId) ? c.posturaPadrao : "Equilibrado";
-            if (postura === "Ofensivo") fC += 15; // Bónus de ataque
-            if (postura === "Defensivo") { fC -= 10; fV -= 5; } // Bónus defensivo (reduz ritmo)
-
-            if (pC === "Ofensivo") fC += 14; if (pC === "Defensivo") { fC -= 8; fV -= 12; } if (pV === "Ofensivo") fV += 14; if (pV === "Defensivo") { fV -= 8; fC -= 12; }
-
-            let lAtq = Math.random() < (fC / (fC + fV)) ? 'casa' : 'vis'; let atq = lAtq === 'casa' ? c : v;
-            statsAoVivo[lAtq].posse = Math.min(75, Math.max(25, statsAoVivo[lAtq].posse + (Math.random() > 0.5 ? 5 : -5))); statsAoVivo[lAtq === 'casa' ? 'vis' : 'casa'].posse = 100 - statsAoVivo[lAtq].posse;
-
-            if (Math.random() < 0.40) {
-                if (Math.random() < 0.05) { dispararPenaltiEmJogo(atq, lAtq); return; }
+            let fC = obterForcaTime(c, false); let fV = obterForcaTime(v, false);
+            let pC = c.id === meuTimeId ? estrategiaTime : aiEstrategia; let pV = v.id === meuTimeId ? estrategiaTime : aiEstrategia;
+            let bonusC = 0; let bonusV = 0;
+            if (pC === "Ofensivo") bonusC += 10; if (pC === "Defensivo") bonusC -= 8;
+            if (pV === "Ofensivo") bonusV += 10; if (pV === "Defensivo") bonusV -= 8;
+            let gritoBonusC = 0; let gritoBonusV = 0;
+            if (gritoAtivo === 'pressao') { gritoBonusC = c.id === meuTimeId ? 4 : 1; }
+            if (gritoAtivo === 'segurar') { gritoBonusV = v.id !== meuTimeId ? 2 : 0; }
+            if (tempoGritoAtivo > 0) tempoGritoAtivo--; else gritoAtivo = 'nenhum';
+            let pesoC = fC.ataque * 1.15 + fC.geral * 0.6 + bonusC + gritoBonusC;
+            let pesoV = fV.ataque * 1.15 + fV.geral * 0.6 + bonusV + gritoBonusV;
+            let lAtq = Math.random() < (pesoC / (pesoC + pesoV)) ? 'casa' : 'vis'; let atq = lAtq === 'casa' ? c : v; let def = lAtq === 'casa' ? v : c;
+            statsAoVivo[lAtq].posse = Math.min(75, Math.max(25, statsAoVivo[lAtq].posse + (Math.random() > 0.5 ? 6 : -4)));
+            statsAoVivo[lAtq === 'casa' ? 'vis' : 'casa'].posse = 100 - statsAoVivo[lAtq].posse;
+            let lineup = (atq.titulares || []).slice();
+            let finalizador = selecionarArtilheiro(lineup) || lineup[0] || { nome: "Jogador", finalizacao: 70 };
+            let ataqueAtq = lAtq === 'casa' ? fC.ataque : fV.ataque;
+            let defesaDef = lAtq === 'casa' ? fV.defesa : fC.defesa;
+            let goleiroDef = lAtq === 'casa' ? fV.goleiro : fC.goleiro;
+            let posturaBonus = (lAtq === 'casa' ? (pC === 'Ofensivo' ? 0.03 : pC === 'Defensivo' ? -0.02 : 0) : (pV === 'Ofensivo' ? 0.03 : pV === 'Defensivo' ? -0.02 : 0));
+            let chanceGol = calcularChanceGol(ataqueAtq, defesaDef, finalizador.finalizacao || 70, goleiroDef, posturaBonus, gritoAtivo === 'pressao' && atq.id === meuTimeId ? 0.02 : 0);
+            let ataqueMomento = Math.min(0.52, 0.28 + ((ataqueAtq - defesaDef) * 0.004) + (posturaBonus * 0.14) + (gritoAtivo === 'pressao' && atq.id === meuTimeId ? 0.02 : 0));
+            let temAtaqueImportante = Math.random() < Math.max(0.18, ataqueMomento);
+            if (temAtaqueImportante) {
+                if (Math.random() < (0.06 + ((ataqueAtq - defesaDef) * 0.004) + (posturaBonus * 0.03))) { dispararPenaltiEmJogo(atq, lAtq); return; }
                 statsAoVivo[lAtq].chutes++;
-                if (Math.random() < (0.15 + ((fC - fV) * 0.01))) {
-                    if (lAtq === 'casa') golsCasaLive++; else golsVisLive++; let el = (atq.titulares || []).concat(atq.banco || []); let art = el.length > 0 ? el[Math.floor(Math.random() * Math.min(4, el.length))] : { nome: "Jogador" };
-                    art.gols = (art.gols || 0) + 1; document.getElementById("live-gols-casa").innerText = golsCasaLive; document.getElementById("live-gols-vis").innerText = golsVisLive; adicionarNarracao(`${minutoJogo}'`, `⚽ <b>GOOOOOL DA ${atq.nome.toUpperCase()}!</b> ${art.nome}!`, "gol");
-                } else { let r = Math.random(); if (r < 0.3) adicionarNarracao(`${minutoJogo}'`, `Na trave!! Quase o gol.`); else if (r < 0.6) adicionarNarracao(`${minutoJogo}'`, `Espalma o goleiro!`); else adicionarNarracao(`${minutoJogo}'`, `Pra fora! Tiro de meta.`); }
-            } else { let r = Math.random(); if (r < 0.4) adicionarNarracao(`${minutoJogo}'`, `A zaga corta o ataque.`); else adicionarNarracao(`${minutoJogo}'`, `Toque de bola no meio campo.`); } atualizarEstatisticasUI();
+                if (Math.random() < chanceGol) {
+                    if (lAtq === 'casa') golsCasaLive++; else golsVisLive++;
+                    finalizador.gols = (finalizador.gols || 0) + 1;
+                    document.getElementById("live-gols-casa").innerText = golsCasaLive;
+                    document.getElementById("live-gols-vis").innerText = golsVisLive;
+                    adicionarNarracao(`${minutoJogo}'`, `⚽ <b>GOOOOOL ${atq.nome.toUpperCase()}!</b> ${finalizador.nome} completa a jogada.`, "gol");
+                } else {
+                    let r = Math.random();
+                    if (r < 0.25) adicionarNarracao(`${minutoJogo}'`, `Na trave! Quase o gol de ${finalizador.nome}.`);
+                    else if (r < 0.55) adicionarNarracao(`${minutoJogo}'`, `O goleiro salva em grande estilo.`);
+                    else adicionarNarracao(`${minutoJogo}'`, `Muito forte! Vai para escanteio.`);
+                }
+            } else {
+                let r = Math.random();
+                if (r < 0.35) adicionarNarracao(`${minutoJogo}'`, `A zaga afasta o perigo.`);
+                else adicionarNarracao(`${minutoJogo}'`, `Troca de passes no meio de campo.`);
+            }
+            atualizarEstatisticasUI();
         }
 
         function dispararPenaltiEmJogo(atq, lado) {
             pausarSimulacao(); adicionarNarracao(`${minutoJogo}'`, `🚨 <b>PÊNALTI PARA A ${atq.nome.toUpperCase()}!</b>`, "penalti");
             if (atq.id === meuTimeId) {
-                let bt = atq.titulares.find(j => j.nome === meuBatedorNome);
-                if (!bt) { let cd = document.getElementById("lista-batedores-penalti"); cd.innerHTML = ""; atq.titulares.forEach(j => { let b = document.createElement("button"); b.className = "secundario"; b.innerHTML = `<b>${j.nome.split(" ")[0]}</b>`; b.onclick = () => { document.getElementById("modal-escolher-batedor").style.display = "none"; executarCobrancaPenaltiEmJogo(atq, lado, j); }; cd.appendChild(b); }); document.getElementById("modal-escolher-batedor").style.display = "flex"; }
-                else { executarCobrancaPenaltiEmJogo(atq, lado, bt); }
-            } else { let aiBt = atq.titulares.reduce((a, b) => ((a.finalizacao || 70) > (b.finalizacao || 70)) ? a : b); executarCobrancaPenaltiEmJogo(atq, lado, aiBt); }
+                let bt = atq.titulares.find(j => j.nome === meuBatedorNome) || atq.titulares.find(j => j.id === atq.penalti);
+                if (!bt) {
+                    let cd = document.getElementById("lista-batedores-penalti"); cd.innerHTML = "";
+                    atq.titulares.forEach(j => {
+                        let b = document.createElement("button"); b.className = "secundario";
+                        b.innerHTML = `<b>${j.nome.split(" ")[0]}</b>`;
+                        b.onclick = () => { document.getElementById("modal-escolher-batedor").style.display = "none"; executarCobrancaPenaltiEmJogo(atq, lado, j); };
+                        cd.appendChild(b);
+                    });
+                    document.getElementById("modal-escolher-batedor").style.display = "flex";
+                } else {
+                    executarCobrancaPenaltiEmJogo(atq, lado, bt);
+                }
+            } else {
+                let aiBt = atq.titulares.find(j => j.id === atq.penalti) || atq.titulares.reduce((a, b) => ((a.finalizacao || 70) > (b.finalizacao || 70)) ? a : b, atq.titulares[0]);
+                executarCobrancaPenaltiEmJogo(atq, lado, aiBt);
+            }
         }
         function executarCobrancaPenaltiEmJogo(t, l, j) {
-            statsAoVivo[l].chutes++; if (Math.random() < (0.75 + (((j.finalizacao || 70) - 70) * 0.01))) { if (l === 'casa') golsCasaLive++; else golsVisLive++; j.gols = (j.gols || 0) + 1; document.getElementById("live-gols-casa").innerText = golsCasaLive; document.getElementById("live-gols-vis").innerText = golsVisLive; adicionarNarracao(`${minutoJogo}'`, `⚽ <b>GOL DE PÊNALTI!</b> ${j.nome} converte!`, "gol"); } else { adicionarNarracao(`${minutoJogo}'`, `❌ <b>PERDEU!</b> Goleiro pega a cobrança de ${j.nome}!`, "penalti"); }
+            statsAoVivo[l].chutes++;
+            let chance = calcularChancePenal(t, j);
+            let adv = l === 'casa' ? jogoAtActiveRef.jogo.visitante : jogoAtActiveRef.jogo.casa;
+            let goleiroAdv = obterForcaTime(adv, false).goleiro;
+            chance -= ((goleiroAdv - 70) * 0.004);
+            chance = Math.max(0.25, Math.min(0.92, chance));
+            if (Math.random() < chance) {
+                if (l === 'casa') golsCasaLive++; else golsVisLive++;
+                j.gols = (j.gols || 0) + 1;
+                document.getElementById("live-gols-casa").innerText = golsCasaLive;
+                document.getElementById("live-gols-vis").innerText = golsVisLive;
+                adicionarNarracao(`${minutoJogo}'`, `⚽ <b>GOL DE PÊNALTI!</b> ${j.nome} converte!`, "gol");
+            } else {
+                adicionarNarracao(`${minutoJogo}'`, `❌ <b>PERDEU!</b> Goleiro pega a cobrança de ${j.nome}!`, "penalti");
+            }
             atualizarEstatisticasUI(); setTimeout(() => { if (!emIntervalo) alternarAutomatico(); }, 1500);
         }
 
         function iniciarDisputaPenaltis() { document.getElementById("placar-shootout").style.display = "block"; document.getElementById("bolinhas-casa").innerHTML = ""; document.getElementById("bolinhas-vis").innerHTML = ""; document.getElementById("gols-pen-casa").innerText = "0"; document.getElementById("gols-pen-vis").innerText = "0"; penaisSeries = { casa: [], vis: [] }; currentPenalTaker = 'casa'; penaisPlacar.chutes = 0; document.getElementById("btn-proxima-jogada").innerText = "Bater Pênalti ➔"; }
         function simularPassoPenal() {
             let tc = currentPenalTaker === 'casa' ? jogoAtActiveRef.jogo.casa : jogoAtActiveRef.jogo.visitante;
-            if (Math.random() < 0.7) { penaisSeries[currentPenalTaker].push("gol"); penaisPlacar[currentPenalTaker]++; adicionarNarracao("PEN", `⚽ <b>GOL!</b> ${tc.nome} converte!`); } else { penaisSeries[currentPenalTaker].push("erro"); adicionarNarracao("PEN", `❌ <b>ERROU!</b> ${tc.nome} desperdiça!`, "penalti"); }
-            document.getElementById("gols-pen-casa").innerText = penaisPlacar.casa; document.getElementById("gols-pen-vis").innerText = penaisPlacar.vis; let hC = ""; penaisSeries.casa.forEach(r => hC += `<span class="bolinha-penalti ${r}"></span>`); document.getElementById("bolinhas-casa").innerHTML = hC; let hV = ""; penaisSeries.vis.forEach(r => hV += `<span class="bolinha-penalti ${r}"></span>`); document.getElementById("bolinhas-vis").innerHTML = hV;
+            let kicker = tc.titulares.find(j => j.nome === meuBatedorNome) || tc.titulares.find(j => j.id === tc.penalti) || tc.titulares.reduce((a, b) => ((a.finalizacao || 70) > (b.finalizacao || 70)) ? a : b, tc.titulares[0]);
+            let chance = calcularChancePenal(tc, kicker);
+            let outro = currentPenalTaker === 'casa' ? jogoAtActiveRef.jogo.visitante : jogoAtActiveRef.jogo.casa;
+            chance -= ((obterForcaTime(outro, false).goleiro - 70) * 0.004);
+            chance = Math.max(0.25, Math.min(0.92, chance));
+            if (Math.random() < chance) {
+                penaisSeries[currentPenalTaker].push("gol");
+                penaisPlacar[currentPenalTaker]++;
+                adicionarNarracao("PEN", `⚽ <b>GOL!</b> ${tc.nome} converte com ${kicker.nome}!`);
+            } else {
+                penaisSeries[currentPenalTaker].push("erro");
+                adicionarNarracao("PEN", `❌ <b>ERROU!</b> ${tc.nome} desperdiça!`, "penalti");
+            }
+            document.getElementById("gols-pen-casa").innerText = penaisPlacar.casa;
+            document.getElementById("gols-pen-vis").innerText = penaisPlacar.vis;
+            let hC = ""; penaisSeries.casa.forEach(r => hC += `<span class="bolinha-penalti ${r}"></span>`); document.getElementById("bolinhas-casa").innerHTML = hC;
+            let hV = ""; penaisSeries.vis.forEach(r => hV += `<span class="bolinha-penalti ${r}"></span>`); document.getElementById("bolinhas-vis").innerHTML = hV;
             if (currentPenalTaker === 'casa') currentPenalTaker = 'vis'; else { currentPenalTaker = 'casa'; penaisPlacar.chutes++; }
             let cG = penaisPlacar.casa, vG = penaisPlacar.vis, mx = 5, rAt = penaisPlacar.chutes;
-            if (rAt < mx) { if (cG > vG + (mx - rAt) || vG > cG + (mx - rAt) - (currentPenalTaker === 'vis' ? 1 : 0)) encerrarDisputaPenaltis(); } else if (rAt >= mx && currentPenalTaker === 'casa' && cG !== vG) encerrarDisputaPenaltis();
+            if (rAt < mx) { if (cG > vG + (mx - rAt) || vG > cG + (mx - rAt) - (currentPenalTaker === 'vis' ? 1 : 0)) encerrarDisputaPenaltis(); }
+            else if (rAt >= mx && currentPenalTaker === 'casa' && cG !== vG) encerrarDisputaPenaltis();
         }
         function encerrarDisputaPenaltis() { let v = penaisPlacar.casa > penaisPlacar.vis ? jogoAtActiveRef.jogo.casa : jogoAtActiveRef.jogo.visitante; adicionarNarracao("FIM", `🏆 <b>${v.nome.toUpperCase()} VENCE NOS PÊNALTIS!</b>`); document.getElementById("btn-proxima-jogada").innerText = "Finalizar Partida"; document.getElementById("btn-proxima-jogada").onclick = finalizarJogoModoTecnico; }
 
         function sortearGruposMundiais() { let mt = [...listaDeTimes].sort(() => Math.random() - 0.5); letrasGrupos.forEach((l, i) => { grupos[l] = mt.slice(i * 4, (i * 4) + 4); grupos[l].forEach(t => t.grupoLetra = l); }); }
         function gerarTabelaFaseGrupos() { tabelaPartidasGrupos = [[], [], []]; letrasGrupos.forEach(l => { let g = grupos[l]; tabelaPartidasGrupos[0].push({ casa: g[0], visitante: g[3] }, { casa: g[1], visitante: g[2] }); tabelaPartidasGrupos[1].push({ casa: g[0], visitante: g[1] }, { casa: g[2], visitante: g[3] }); tabelaPartidasGrupos[2].push({ casa: g[0], visitante: g[2] }, { casa: g[3], visitante: g[1] }); }); }
         function processarFluxoTorneio() { if (faseAtual === "GRUPOS") simularRodadaGrupos(); else if (faseAtual !== "FIM") simularFaseMataMata(); }
-        function calcularPlacarRapido(fC, fV) {
- let diff=fC-fV;
- let base=1.35 + (diff*0.06);
- base=Math.max(0.15,Math.min(3.8,base));
- let gols=0;
- for(let i=0;i<8;i++){
-   if(Math.random() < (base/8)) gols++;
+        function calcularPlacarRapido(ataque, defesa, finalizacao) {
+ let diff = ataque - defesa;
+ let mean = 0.85 + (diff * 0.028) + ((finalizacao - 75) * 0.012);
+ mean = Math.max(0.14, Math.min(2.6, mean));
+ let gols = 0;
+ for (let i = 0; i < 6; i++) {
+   if (Math.random() < Math.min(0.5, mean / 6)) gols++;
  }
- if(diff>15 && Math.random()<0.35) gols++;
- if(diff<-15 && gols>0 && Math.random()<0.25) gols--;
- gols=Math.round(gols*1.0); return Math.max(0,gols);
+ if (Math.random() < Math.max(0.01, mean * 0.12)) gols++;
+ if (diff > 14 && Math.random() < 0.09) gols++;
+ if (diff < -14 && gols > 0 && Math.random() < 0.15) gols--;
+ return Math.max(0, gols);
 }
 
         function finalizarJogoModoTecnico() {
@@ -1365,6 +1533,23 @@ function pesoGolPos(pos){
     let c = jR.casa;
     let v = jR.visitante;
 
+    // 1. Definir vencedor da partida no mata-mata, se necessário
+    if (jogoAtActiveRef.ehMataMata) {
+        if (golsCasaLive > golsVisLive) { jR.vencedor = c; }
+        else if (golsVisLive > golsCasaLive) { jR.vencedor = v; }
+        else {
+            if ((penaisPlacar.casa || 0) !== (penaisPlacar.vis || 0)) {
+                jR.vencedor = penaisPlacar.casa > penaisPlacar.vis ? c : v;
+            } else {
+                jR.vencedor = c; // fallback
+            }
+        }
+        if ((penaisSeries.casa.length || 0) > 0 || (penaisSeries.vis.length || 0) > 0) {
+            jR.penC = penaisPlacar.casa;
+            jR.penV = penaisPlacar.vis;
+        }
+    }
+
     // 2. Atualiza a pontuação baseada nos gols salvos acima
     if (!jogoAtActiveRef.ehMataMata) {
         if (jR.gc > jR.gv) { c.pontos += 3; c.vitorias++; v.derrotas++; }
@@ -1374,6 +1559,10 @@ function pesoGolPos(pos){
 
     c.sg += (jR.gc - jR.gv);
     v.sg += (jR.gv - jR.gc);
+    c.gp += jR.gc; v.gp += jR.gv;
+    c.gc += jR.gv; v.gc += jR.gc;
+    c.golsPro += jR.gc; v.golsPro += jR.gv;
+    c.golsContra += jR.gv; v.golsContra += jR.gc;
     c.jogos++;
     v.jogos++;
 
@@ -1423,32 +1612,31 @@ function pesoGolPos(pos){
 
             jg.forEach(j => {
                 let c = j.casa, v = j.visitante;
+                let destaque = (j.casa.id === meuTimeId || j.visitante.id === meuTimeId) ? 'background:#fff3cd;' : '';
 
-                let golsCasa = calcularPlacarRapido(obterForcaAtual(j.casa), obterForcaAtual(j.visitante));
-    let golsVis = calcularPlacarRapido(obterForcaAtual(j.visitante), obterForcaAtual(j.casa));
-    
-    // 2. O PULO DO GATO: Salvar no objeto da partida
-    j.gc = golsCasa;
-    j.gv = golsVis;
+                let fCasa = obterForcaTime(j.casa, true); let fVis = obterForcaTime(j.visitante, true);
+                let golsCasa = calcularPlacarRapido(fCasa.ataque, fVis.defesa, fCasa.finalizacao);
+                let golsVis = calcularPlacarRapido(fVis.ataque, fCasa.defesa, fVis.finalizacao);
 
-                // Se for o seu jogo, calculamos o resultado apenas para registro, 
-                // mas mantemos o placar zerado ou simulado para aparecer na lista
                 let gc, gv;
                 if (j.casa.id === meuTimeId || j.visitante.id === meuTimeId) {
-                    // O seu jogo será decidido no modo técnico, então vamos colocar um placar fictício inicial
                     gc = 0; gv = 0;
+                    j.gc = 0; j.gv = 0;
                 } else {
-                    gc = calcularPlacarRapido(obterForcaAtual(c, true), obterForcaAtual(v, true));
-                    gv = calcularPlacarRapido(obterForcaAtual(v, true), obterForcaAtual(c, true));
+                    gc = golsCasa;
+                    gv = golsVis;
+                    j.gc = gc;
+                    j.gv = gv;
                     c.sg += (gc - gv); v.sg += (gv - gc);
+                    c.gp += gc; v.gp += gv;
+                    c.gc += gv; v.gc += gc;
+                    c.golsPro += gc; v.golsPro += gv;
+                    c.golsContra += gv; v.golsContra += gc;
                     c.jogos++; v.jogos++;
                     if (gc > gv) { c.pontos += 3; c.vitorias++; v.derrotas++; }
                     else if (gv > gc) { v.pontos += 3; v.vitorias++; c.derrotas++; }
                     else { c.pontos++; v.pontos++; c.empates++; v.empates++; }
                 }
-
-                // Adiciona na lista de resultados (destacado se for o seu time)
-                let destaque = (j.casa.id === meuTimeId || j.visitante.id === meuTimeId) ? "background:#eef7ff; font-weight:bold;" : "";
                 div.innerHTML += `<div class="placar" style="${destaque}"><strong>Grupo ${c.grupoLetra}:</strong> ${c.nome} <b>${gc} x ${gv}</b> ${v.nome} ${destaque ? '(A seguir)' : ''}</div>`;
             });
 
@@ -1460,35 +1648,95 @@ function pesoGolPos(pos){
         }
         function concluirFluxoFaseGruposAtiva() { if (rodadaGrupo < 3) { rodadaGrupo++; document.getElementById("btn-simular-acao").innerText = `Simular Rodada ${rodadaGrupo}`; } else { apurarClassificadosPara16Avos(); } renderizarInterface(); }
         function apurarClassificadosPara16Avos() {
- let classificados=[], terceiros=[];
+ let vencedores=[]; let vice=[]; let terceiros=[];
  letrasGrupos.forEach(l=>{
    let g=grupos[l];
    g.sort((a,b)=>b.pontos-a.pontos||b.sg-a.sg||b.gp-a.gp||b.vitorias-a.vitorias);
-   classificados.push(g[0],g[1]);
+   vencedores.push(g[0]);
+   vice.push(g[1]);
    if(g[2]) terceiros.push(g[2]);
  });
  terceiros.sort((a,b)=>b.pontos-a.pontos||b.sg-a.sg||b.gp-a.gp||b.vitorias-a.vitorias);
- classificados.push(...terceiros.slice(0,8));
- faseAtual="OITAVAS";
- bracketDados["OITAVAS"]=[];
- for(let i=0;i<classificados.length/2;i++){
-   bracketDados["OITAVAS"].push({casa:classificados[i],visitante:classificados[classificados.length-1-i],gc:null,gv:null,penC:null,penV:null,vencedor:null});
+ let melhoresTerceiros = terceiros.slice(0,8);
+ faseAtual="16AVOS";
+ bracketDados["16AVOS"]=[];
+ // 16 Avos: primeiros x melhores terceiros, e segundos nas demais chaves.
+ for (let i = 0; i < 8; i++) {
+   bracketDados["16AVOS"].push({ casa: vencedores[i], visitante: melhoresTerceiros[7 - i], gc: null, gv: null, penC: null, penV: null, vencedor: null });
  }
- document.getElementById("titulo-fase-principal").innerText = "Mata-Mata: Oitavas"; document.getElementById("btn-simular-acao").innerText = "Simular Oitavas"; mudarAba('aba-simulador', document.querySelector('.menu-abas button')); }
+ for (let i = 0; i < 4; i++) {
+   bracketDados["16AVOS"].push({ casa: vencedores[8 + i], visitante: vice[i], gc: null, gv: null, penC: null, penV: null, vencedor: null });
+ }
+ for (let i = 0; i < 4; i++) {
+   bracketDados["16AVOS"].push({ casa: vice[4 + i * 2], visitante: vice[4 + i * 2 + 1], gc: null, gv: null, penC: null, penV: null, vencedor: null });
+ }
+ document.getElementById("titulo-fase-principal").innerText = "Mata-Mata: 16 Avos"; document.getElementById("btn-simular-acao").innerText = "Simular 16 Avos"; mudarAba('aba-simulador', document.querySelector('.menu-abas button')); }
         function simularFaseMataMata() {
             let cA = bracketDados[faseAtual]; let mJ = cA.find(j => (j.casa && j.casa.id === meuTimeId) || (j.visitante && j.visitante.id === meuTimeId));
-            cA.forEach(j => { if (mJ && j === mJ) return; if (j.vencedor !== null) return; let c = j.casa, v = j.visitante, gc = calcularPlacarRapido(obterForcaAtual(c, true), obterForcaAtual(v, true)), gv = calcularPlacarRapido(obterForcaAtual(v, true), obterForcaAtual(c, true)), venc = null; if (gc === gv) { j.penC = Math.floor(Math.random() * 3) + 3; j.penV = Math.floor(Math.random() * 3) + 1; venc = c; } else venc = gc > gv ? c : v; j.gc = gc; j.gv = gv; j.vencedor = venc; });
-            if (mJ && mJ.vencedor === null) carregarModoTecnico(mJ, `Mata-Mata: ${faseAtual}`, true); else concluirFluxoFaseMataMataAtiva();
+            cA.forEach(j => {
+                if (mJ && j === mJ) return;
+                if (j.vencedor != null) return;
+                let c = j.casa, v = j.visitante;
+                let fC = obterForcaTime(c, true); let fV = obterForcaTime(v, true);
+                let gc = calcularPlacarRapido(fC.ataque, fV.defesa, fC.finalizacao);
+                let gv = calcularPlacarRapido(fV.ataque, fC.defesa, fV.finalizacao);
+                let venc = null;
+                if (gc === gv) {
+                    let kickerC = c.titulares.find(j => j.id === c.penalti) || c.titulares.reduce((a, b) => ((a.finalizacao || 70) > (b.finalizacao || 70)) ? a : b, c.titulares[0]);
+                    let kickerV = v.titulares.find(j => j.id === v.penalti) || v.titulares.reduce((a, b) => ((a.finalizacao || 70) > (b.finalizacao || 70)) ? a : b, v.titulares[0]);
+                    let probC = calcularChancePenal(c, kickerC);
+                    let probV = calcularChancePenal(v, kickerV);
+                    let chanceC = probC / Math.max(0.001, probC + probV);
+                    venc = Math.random() < chanceC ? c : v;
+                    if (venc === c) { j.penC = Math.floor(Math.random() * 3) + 3; j.penV = Math.floor(Math.random() * 2) + 1; }
+                    else { j.penV = Math.floor(Math.random() * 3) + 3; j.penC = Math.floor(Math.random() * 2) + 1; }
+                } else venc = gc > gv ? c : v;
+                j.gc = gc; j.gv = gv; j.vencedor = venc;
+            });
+            if (mJ && (mJ.vencedor === null || mJ.vencedor === undefined)) carregarModoTecnico(mJ, `Mata-Mata: ${faseAtual}`, true); else concluirFluxoFaseMataMataAtiva();
         }
         function concluirFluxoFaseMataMataAtiva() {
-            let div = document.getElementById("resultados-jogos"); div.innerHTML = ""; let cA = bracketDados[faseAtual]; let vnc = [];
-            cA.forEach(j => { vnc.push(j.vencedor); let st = (j.casa.id === meuTimeId || j.visitante.id === meuTimeId) ? "background:#fff3cd;" : ""; let pP = j.penC !== null ? ` (Pen: ${j.penC}x${j.penV})` : ""; div.innerHTML += `<div class="placar" style="${st}"><strong>${faseAtual}:</strong> ${j.casa.nome} ${j.gc} x ${j.gv} ${j.visitante.nome}${pP}<br><small style="color:#28a745;">➔ Avançou: ${j.vencedor.nome}</small></div>`; });
-            if (faseAtual === "OITAVAS") { faseAtual = "QUARTAS"; let id = 0; for (let i = 0; i < 4; i++)bracketDados["QUARTAS"][i] = { casa: vnc[id++], visitante: vnc[id++] }; document.getElementById("btn-simular-acao").innerText = "Simular Quartas"; } else if (faseAtual === "QUARTAS") { faseAtual = "SEMIS"; let id = 0; for (let i = 0; i < 2; i++)bracketDados["SEMIS"][i] = { casa: vnc[id++], visitante: vnc[id++] }; document.getElementById("btn-simular-acao").innerText = "Simular Semifinal"; } else if (faseAtual === "SEMIS") { faseAtual = "FINAL"; bracketDados["FINAL"][0] = { casa: vnc[0], visitante: vnc[1] }; document.getElementById("btn-simular-acao").innerText = "Simular Final"; } else if (faseAtual === "FINAL") { document.getElementById("titulo-fase-principal").innerHTML = `🏆 CAMPEÃO: ${vnc[0].nome} 🏆`; document.getElementById("btn-simular-acao").style.display = "none"; faseAtual = "FIM"; }
+            let div = document.getElementById("resultados-jogos"); div.innerHTML = ""; let cA = bracketDados[faseAtual] || []; let vnc = [];
+            cA.forEach(j => {
+                if (!j || !j.vencedor) return;
+                vnc.push(j.vencedor);
+                let st = (j.casa && j.casa.id === meuTimeId) || (j.visitante && j.visitante.id === meuTimeId) ? "background:#fff3cd;" : "";
+                let pP = (typeof j.penC === 'number' && typeof j.penV === 'number') ? ` (Pen: ${j.penC}x${j.penV})` : "";
+                div.innerHTML += `<div class="placar" style="${st}"><strong>${faseAtual}:</strong> ${j.casa ? j.casa.nome : 'A vencer'} ${j.gc != null ? j.gc : ''} x ${j.gv != null ? j.gv : ''} ${j.visitante ? j.visitante.nome : 'A vencer'}${pP}<br><small style="color:#28a745;">➔ Avançou: ${j.vencedor.nome}</small></div>`;
+            });
+            if (faseAtual === "16AVOS") {
+                faseAtual = "OITAVAS";
+                let id = 0;
+                for (let i = 0; i < 8; i++) bracketDados["OITAVAS"][i] = { casa: vnc[id++] || null, visitante: vnc[id++] || null, gc: null, gv: null, penC: null, penV: null, vencedor: null };
+                document.getElementById("titulo-fase-principal").innerText = "Mata-Mata: Oitavas";
+                document.getElementById("btn-simular-acao").innerText = "Simular Oitavas";
+            } else if (faseAtual === "OITAVAS") {
+                faseAtual = "QUARTAS";
+                let id = 0;
+                for (let i = 0; i < 4; i++) bracketDados["QUARTAS"][i] = { casa: vnc[id++] || null, visitante: vnc[id++] || null, gc: null, gv: null, penC: null, penV: null, vencedor: null };
+                document.getElementById("titulo-fase-principal").innerText = "Mata-Mata: Quartas";
+                document.getElementById("btn-simular-acao").innerText = "Simular Quartas";
+            } else if (faseAtual === "QUARTAS") {
+                faseAtual = "SEMIS";
+                let id = 0;
+                for (let i = 0; i < 2; i++) bracketDados["SEMIS"][i] = { casa: vnc[id++] || null, visitante: vnc[id++] || null, gc: null, gv: null, penC: null, penV: null, vencedor: null };
+                document.getElementById("titulo-fase-principal").innerText = "Mata-Mata: Semifinais";
+                document.getElementById("btn-simular-acao").innerText = "Simular Semifinal";
+            } else if (faseAtual === "SEMIS") {
+                faseAtual = "FINAL";
+                bracketDados["FINAL"][0] = { casa: vnc[0] || null, visitante: vnc[1] || null, gc: null, gv: null, penC: null, penV: null, vencedor: null };
+                document.getElementById("titulo-fase-principal").innerText = "Mata-Mata: Final";
+                document.getElementById("btn-simular-acao").innerText = "Simular Final";
+            } else if (faseAtual === "FINAL") {
+                document.getElementById("titulo-fase-principal").innerHTML = `🏆 CAMPEÃO: ${vnc[0] ? vnc[0].nome : '---'} 🏆`;
+                document.getElementById("btn-simular-acao").style.display = "none";
+                faseAtual = "FIM";
+            }
             renderizarInterface();
         }
         function renderizarInterface() {
             let cf = document.getElementById("container-visual-fase"); cf.innerHTML = ""; let hG = `<div class="grid-grupos">`; letrasGrupos.forEach(l => { let g = grupos[l]; g.sort((a, b) => b.pontos - a.pontos || b.sg - a.sg); hG += `<div class="card-grupo"><div class="titulo-grupo">GRUPO ${l}</div><table class="tabela-mini"><tr><th>Seleção</th><th>P</th><th>SG</th></tr>`; g.forEach(t => { let m = t.id === meuTimeId ? "background:#fff3cd;font-weight:bold;" : ""; hG += `<tr style="${m}"><td>${t.nome}</td><td><strong>${t.pontos}</strong></td><td>${t.sg}</td></tr>`; }); hG += `</table></div>`; }); hG += `</div>`;
-            if (faseAtual === "GRUPOS") { cf.innerHTML = hG; } else { let hB = `<div class="bracket-scroll"><div class="bracket-container">`;["OITAVAS", "QUARTAS", "SEMIS", "FINAL"].forEach(f => { hB += `<div class="bracket-coluna"><div class="bracket-fase-titulo">${f}</div>`; bracketDados[f].forEach(j => { let nC = j.casa ? j.casa.nome : "A vencer", nV = j.visitante ? j.visitante.nome : "A vencer", tC = j.gc !== null ? j.gc : "", tV = j.gv !== null ? j.gv : "", cC = (j.vencedor && j.vencedor.id === j.casa?.id) ? "bracket-time vencedor" : "bracket-time", cV = (j.vencedor && j.vencedor.id === j.visitante?.id) ? "bracket-time vencedor" : "bracket-time"; hB += `<div class="bracket-jogo"><div class="${cC}"><span>${nC}</span><strong>${tC}</strong></div><div class="${cV}"><span>${nV}</span><strong>${tV}</strong></div></div>`; }); hB += `</div>`; }); hB += `</div></div>`; cf.innerHTML = hB + `<br><h3 style="text-align:left;">Classificação Grupos</h3>` + hG; }
+            if (faseAtual === "GRUPOS") { cf.innerHTML = hG; } else { let hB = `<div class="bracket-scroll"><div class="bracket-container">`;["16AVOS", "OITAVAS", "QUARTAS", "SEMIS", "FINAL"].forEach(f => { hB += `<div class="bracket-coluna"><div class="bracket-fase-titulo">${f}</div>`; bracketDados[f].forEach(j => { let nC = j.casa ? j.casa.nome : "A vencer", nV = j.visitante ? j.visitante.nome : "A vencer", tC = j.gc !== null ? j.gc : "", tV = j.gv !== null ? j.gv : "", cC = (j.vencedor && j.vencedor.id === j.casa?.id) ? "bracket-time vencedor" : "bracket-time", cV = (j.vencedor && j.vencedor.id === j.visitante?.id) ? "bracket-time vencedor" : "bracket-time"; hB += `<div class="bracket-jogo"><div class="${cC}"><span>${nC}</span><strong>${tC}</strong></div><div class="${cV}"><span>${nV}</span><strong>${tV}</strong></div></div>`; }); hB += `</div>`; }); hB += `</div></div>`; cf.innerHTML = hB + `<br><h3 style="text-align:left;">Classificação Grupos</h3>` + hG; }
             renderizarArtilheiros();
         }
         function atualizarVisualTrajetoria() { let ct = document.getElementById("container-trajetoria"); if (minhaTrajetoria.length === 0) return; let hT = `<table class="tabela-trajetoria"><tr><th>Fase</th><th>Oponente</th><th>Placar</th><th>Res.</th><th>Detalhes</th></tr>`; minhaTrajetoria.forEach(t => { let c = t.status === "V" ? "badge vitoria" : t.status === "E" ? "badge empate" : "badge derrota"; hT += `<tr><td><strong>${t.fase}</strong></td><td>${t.adversario}</td><td><code>${t.placar}</code></td><td><span class="${c}">${t.status}</span></td><td><small>${t.detalhes || "-"}</small></td></tr>`; }); ct.innerHTML = hT + `</table>`; }

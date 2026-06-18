@@ -9397,6 +9397,8 @@ const listaDeTimes = [
         "id": 19,
         "nome": "África do Sul",
         "sigla": "RSA",
+        "formacao":"4-3-3",
+        "postura":"Defensivo",
         "brasaoUrl": "https://escudosfc.com.br/images/africadosul_new.png",
         "pontos": 0,
         "vitorias": 0,

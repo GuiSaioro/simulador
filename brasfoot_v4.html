@@ -1060,36 +1060,34 @@
         </div>
     </div>
     <div id="modal-lesao-live" class="modal-tatica-live" style="z-index: 9999; display: none;">
-    <div class="modal-conteudo">
-        <h2 style="color:#dc3545;">🚑 JOGADOR MACHUCADO!</h2>
-        <p id="msg-lesao-nome" style="font-weight: bold; font-size: 18px;"></p>
-        <p id="msg-lesao-detalhe"></p>
-        
-        <button class="principal" style="background:#dc3545;" 
-                onclick="fecharModalLesaoEContinuar()">
-            Fechar
-        </button>
-        <button class="principal" style="background:#dc3545;" 
-                onclick="abrirQuadroTaticoLive()">
-            Quadro
-        </button>
-        
+        <div class="modal-conteudo">
+            <h2 style="color:#dc3545;">🚑 JOGADOR MACHUCADO!</h2>
+            <p id="msg-lesao-nome" style="font-weight: bold; font-size: 18px;"></p>
+            <p id="msg-lesao-detalhe"></p>
+
+            <button class="principal" style="background:#dc3545;" onclick="fecharModalLesaoEContinuar()">
+                Fechar
+            </button>
+            <button class="principal" style="background:#dc3545;" onclick="abrirQuadroTaticoLive()">
+                Quadro
+            </button>
+
+        </div>
     </div>
-</div>
     <script>
 
         function fecharModalLesaoEContinuar() {
-                    console.log("Fechando modal..."); // Verifique se isso aparece no F12 ao clicar
+            console.log("Fechando modal..."); // Verifique se isso aparece no F12 ao clicar
 
-                    let modal = document.getElementById("modal-lesao-live");
-                    if (modal) {
-                        modal.style.display = "none";
-                        // IMPORTANTE: Retomar o loop do jogo
-                        if (typeof iniciarSimulacaoAutomatica === 'function' && !emIntervalo) {
-                            iniciarSimulacaoAutomatica();
-                        }
-                    }
+            let modal = document.getElementById("modal-lesao-live");
+            if (modal) {
+                modal.style.display = "none";
+                // IMPORTANTE: Retomar o loop do jogo
+                if (typeof iniciarSimulacaoAutomatica === 'function' && !emIntervalo) {
+                    iniciarSimulacaoAutomatica();
                 }
+            }
+        }
 
         let faseAtual = "GRUPOS"; let rodadaGrupo = 1; let meuTimeId = null; let meuTimeNome = "";
         let letrasGrupos = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L"]; let grupos = {}; let tabelaPartidasGrupos = []; let minhaTrajetoria = [];
@@ -1470,7 +1468,34 @@
 
         // TÁTICAS E JOGO
         function atualizarTextosSubs() { document.getElementById("modal-info-subs").innerText = `${subsFeitasAnteriormente}/5`; }
-        function abrirQuadroTaticoLive() { if (!emIntervalo && paradasSub >= 3 && subsFeitasAnteriormente < 5) return alert("Você já usou suas paradas!"); pausarSimulacao();fecharModalLesaoEContinuar(); isLiveBoard = true; scoutSel1 = null; scoutSel2 = null; let t = listaDeTimes.find(x => x.id === meuTimeId); snapshotTitularesJanela = [...t.titulares]; document.getElementById("prancheta-componente-live").style.display = "grid"; document.getElementById("slot-prancheta-modal").appendChild(document.getElementById("prancheta-componente-live")); renderizarScoutUI(true); renderizarQuadroTatico(true); atualizarTextosSubs(); document.getElementById("overlay-intervalo").style.display = "none"; document.getElementById("modal-tatica-live").style.display = "flex"; }
+        function abrirQuadroTaticoLive() {
+            if (!emIntervalo && paradasSub >= 3 && subsFeitasAnteriormente < 5) return alert("Você já usou suas paradas!");
+
+            pausarSimulacao();
+
+            // CORREÇÃO: Esconder o modal de lesão diretamente em vez de usar a função que despausa o jogo
+            let modalLesao = document.getElementById("modal-lesao-live");
+            if (modalLesao) {
+                modalLesao.style.display = "none";
+            }
+
+            isLiveBoard = true;
+            scoutSel1 = null;
+            scoutSel2 = null;
+
+            let t = listaDeTimes.find(x => x.id === meuTimeId);
+            snapshotTitularesJanela = [...t.titulares];
+
+            document.getElementById("prancheta-componente-live").style.display = "grid";
+            document.getElementById("slot-prancheta-modal").appendChild(document.getElementById("prancheta-componente-live"));
+
+            renderizarScoutUI(true);
+            renderizarQuadroTatico(true);
+            atualizarTextosSubs();
+
+            document.getElementById("overlay-intervalo").style.display = "none";
+            document.getElementById("modal-tatica-live").style.display = "flex";
+        }
         function fecharQuadroTaticoLive() { isLiveBoard = false; scoutSel1 = null; scoutSel2 = null; let t = listaDeTimes.find(x => x.id === meuTimeId); if (!emVestiario) { let rasc = t.titulares.filter(j => !snapshotTitularesJanela.includes(j)); if (rasc.length > 0) { snapshotTitularesJanela.filter(j => !t.titulares.includes(j)).forEach(j => j.foiSubstituidoDefinitivo = true); subsFeitasAnteriormente += rasc.length; if (!emIntervalo) paradasSub++; adicionarNarracao(minutoJogo + "'", `🔄 Tática: ${rasc.length} substituições feitas.`); } montarListasElencoUI(jogoAtActiveRef.jogo.casa, "lista-titulares-casa", "lista-banco-casa"); montarListasElencoUI(jogoAtActiveRef.jogo.visitante, "lista-titulares-vis", "lista-banco-vis"); } atualizarTextosSubs(); document.getElementById("modal-tatica-live").style.display = "none"; if (emIntervalo) document.getElementById("overlay-intervalo").style.display = "flex"; }
         function carregarModoTecnico(jogo, lbl, ehMata) {
             let mt = listaDeTimes.find(t => t.id === meuTimeId); prepararTimesParaJogo(jogo); jogoAtActiveRef = { jogo, label: lbl, ehMataMata: ehMata }; emVestiario = true; isLiveBoard = true; scoutSel1 = null; scoutSel2 = null; document.getElementById("tela-jogo").style.display = "none"; document.getElementById("tela-partida-tecnico").style.display = "block"; document.getElementById("modal-vestiario").style.display = "block"; document.getElementById("container-live-jogo").style.display = "none"; let adv = jogo.casa.id === meuTimeId ? jogo.visitante : jogo.casa; document.getElementById("vestiario-adv-nome").innerText = adv.nome; document.getElementById("vestiario-adv-tatica").innerText = adv.formacaoPadrao || "4-4-2"; jogoAtActiveRef.posturaLive = mt.posturaPadrao;
@@ -1878,6 +1903,8 @@
             let outro = currentPenalTaker === 'casa' ? jogoAtActiveRef.jogo.visitante : jogoAtActiveRef.jogo.casa;
             chance -= ((obterForcaTime(outro, false).goleiro - 70) * 0.004);
             chance = Math.max(0.25, Math.min(0.92, chance));
+
+            // Calcula gol ou erro
             if (Math.random() < chance) {
                 penaisSeries[currentPenalTaker].push("gol");
                 penaisPlacar[currentPenalTaker]++;
@@ -1886,14 +1913,48 @@
                 penaisSeries[currentPenalTaker].push("erro");
                 adicionarNarracao("PEN", `❌ <b>ERROU!</b> ${tc.nome} desperdiça!`, "penalti");
             }
+
+            // Atualiza Placar Visual
             document.getElementById("gols-pen-casa").innerText = penaisPlacar.casa;
             document.getElementById("gols-pen-vis").innerText = penaisPlacar.vis;
             let hC = ""; penaisSeries.casa.forEach(r => hC += `<span class="bolinha-penalti ${r}"></span>`); document.getElementById("bolinhas-casa").innerHTML = hC;
             let hV = ""; penaisSeries.vis.forEach(r => hV += `<span class="bolinha-penalti ${r}"></span>`); document.getElementById("bolinhas-vis").innerHTML = hV;
-            if (currentPenalTaker === 'casa') currentPenalTaker = 'vis'; else { currentPenalTaker = 'casa'; penaisPlacar.chutes++; }
-            let cG = penaisPlacar.casa, vG = penaisPlacar.vis, mx = 5, rAt = penaisPlacar.chutes;
-            if (rAt < mx) { if (cG > vG + (mx - rAt) || vG > cG + (mx - rAt) - (currentPenalTaker === 'vis' ? 1 : 0)) encerrarDisputaPenaltis(); }
-            else if (rAt >= mx && currentPenalTaker === 'casa' && cG !== vG) encerrarDisputaPenaltis();
+
+            // Alterna o batedor
+            if (currentPenalTaker === 'casa') {
+                currentPenalTaker = 'vis';
+            } else {
+                currentPenalTaker = 'casa';
+                penaisPlacar.chutes++;
+            }
+
+            let cG = penaisPlacar.casa; // Gols do time da Casa
+            let vG = penaisPlacar.vis;  // Gols do time Visitante
+            let kC = penaisSeries.casa.length; // Cobranças feitas Casa
+            let kV = penaisSeries.vis.length;  // Cobranças feitas Visitante
+
+            // Cobranças restantes dentro da série inicial de 5
+            let leftC = Math.max(0, 5 - kC);
+            let leftV = Math.max(0, 5 - kV);
+
+            let matchEnded = false;
+
+            // Regra da série inicial de 5 pênaltis
+            if (kC <= 5 && kV <= 5) {
+                if (cG > vG + leftV) matchEnded = true; // Casa ganhou matematicamente
+                if (vG > cG + leftC) matchEnded = true; // Visitante ganhou matematicamente
+            }
+            // Regra da morte súbita (Alternadas - após 5 cobranças)
+            else {
+                // Só acaba se tiverem batido a mesma quantidade de pênaltis e a pontuação for diferente
+                if (kC === kV && cG !== vG) {
+                    matchEnded = true;
+                }
+            }
+
+            if (matchEnded) {
+                encerrarDisputaPenaltis();
+            }
         }
         function encerrarDisputaPenaltis() { let v = penaisPlacar.casa > penaisPlacar.vis ? jogoAtActiveRef.jogo.casa : jogoAtActiveRef.jogo.visitante; adicionarNarracao("FIM", `🏆 <b>${v.nome.toUpperCase()} VENCE NOS PÊNALTIS!</b>`); document.getElementById("btn-proxima-jogada").innerText = "Finalizar Partida"; document.getElementById("btn-proxima-jogada").onclick = mostrarEstatisticasFimDeJogo; }
 

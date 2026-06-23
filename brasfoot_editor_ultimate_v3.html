@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Brasfoot Editor Ultimate v3 (Estilo Jogo)</title>
+<style>
+/* ESTILOS IMPORTADOS DO JOGO PRINCIPAL */
+body {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background: #f0f2f5;
+    color: #333;
+    margin: 0;
+    padding: 10px;
+}
+header {
+    background: #007bff;
+    color: white;
+    padding: 15px;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+.container {
+    display: grid;
+    grid-template-columns: 300px 440px 1fr;
+    gap: 15px;
+}
+.panel {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+    border: 1px solid #e1e4e8;
+}
+.list { max-height: 400px; overflow: auto; padding-right: 5px; }
+
+h3 { margin-top: 0; color: #007bff; border-bottom: 2px solid #e3e8ef; padding-bottom: 5px; }
+label { display: block; margin-top: 8px; color: #555; font-size: 12px; font-weight: bold; }
+input, select {
+    width: 100%; padding: 8px; border: 1px solid #ccc;
+    border-radius: 6px; box-sizing: border-box; background: #fff;
+    font-family: inherit; font-size: 13px;
+}
+input:focus, select:focus { border-color: #007bff; outline: none; }
+
+.grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.top-bar {
+    padding: 15px; display: flex; gap: 15px; align-items: center; 
+    background: white; margin-bottom: 15px; border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.06); border: 1px solid #e1e4e8;
+}
+
+button {
+    padding: 10px 15px; cursor: pointer; border-radius: 6px; border: none; 
+    background: #007bff; color: white; font-weight: bold; transition: 0.2s;
+}
+button:hover { background: #0056b3; }
+#btnExcluirJogador { background: #dc3545; }
+#btnExcluirJogador:hover { background: #b91c1c; }
+#btnSalvarJogador { background: #28a745; width: 100%; margin-top: 20px; font-size: 16px; padding: 12px;}
+#btnSalvarJogador:hover { background: #218838; }
+
+img { width: 100px; height: 100px; object-fit: contain; margin-top: 10px; border: 1px solid #ddd; padding: 5px; border-radius: 8px; background:#fff; }
+
+/* CAMPO DE FUTEBOL IDENTICO AO JOGO */
+.campo-futebol {
+    position: relative;
+    background: #2e7d32;
+    border: 4px solid #fff;
+    border-radius: 10px;
+    height: 480px;
+    width: 100%;
+    max-width: 440px;
+    margin: 0 auto 15px auto;
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+}
+.campo-linha-meio { position: absolute; top: 50%; left: 0; width: 100%; height: 2px; background: rgba(255, 255, 255, 0.6); }
+.campo-circulo-meio { position: absolute; top: 50%; left: 50%; width: 90px; height: 90px; border: 2px solid rgba(255, 255, 255, 0.6); border-radius: 50%; transform: translate(-50%, -50%); }
+.campo-grande-area-top { position: absolute; top: 0; left: 50%; width: 220px; height: 75px; border: 2px solid rgba(255, 255, 255, 0.6); border-top: none; transform: translateX(-50%); }
+.campo-grande-area-bot { position: absolute; bottom: 0; left: 50%; width: 220px; height: 75px; border: 2px solid rgba(255, 255, 255, 0.6); border-bottom: none; transform: translateX(-50%); }
+
+/* TOTENS DOS JOGADORES NO CAMPO */
+.slot-jogador {
+    position: absolute; transform: translate(-50%, -50%); width: 78px; height: 70px;
+    text-align: center; z-index: 5; cursor: grab;
+}
+.player-totem {
+    background: #1a1a1a; border: 2px solid #ffc107; border-radius: 8px; color: white;
+    padding: 4px; font-size: 10px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; box-sizing: border-box;
+    transition: transform 0.1s;
+}
+.player-totem:hover { transform: scale(1.05); }
+.player-totem.selected { border-color: #28a745; box-shadow: 0 0 10px rgba(40,167,69,0.9); }
+.totem-nome { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 95%; font-size: 10px; margin: 2px 0; font-weight: bold; }
+.totem-ovr { font-weight: bold; color: #5cb85c; font-size: 11px; margin-top: 1px; }
+.num-camisa { background: #333; color: #fff; font-size: 9px; padding: 1px 3px; border-radius: 3px; border: 1px solid #666; font-weight: bold; margin: 0; }
+
+/* LISTA DE RESERVAS DO JOGO */
+.lista-drag-banco { list-style: none; padding: 0; margin: 0; }
+.item-drag-banco {
+    background: #f8f9fa; border: 1px solid #ddd; border-radius: 6px; padding: 8px 12px;
+    margin-bottom: 6px; display: flex; justify-content: space-between; align-items: center; cursor: grab;
+    transition: all 0.2s;
+}
+.item-drag-banco:hover { border-color: #0056b3; background: #eef7ff; }
+.item-drag-banco.selected { border: 2px dashed #17a2b8 !important; background: #e0f7fa; }
+</style>
+</head>
+<body>
+<header>⚽ Brasfoot Editor Ultimate v3</header>
+
+<div class="top-bar">
+    <div style="flex: 1;">
+        <label for="fileInput" style="margin-top:0; color:#333;">1. Carregar timescopa.js</label>
+        <input type="file" id="fileInput" accept=".js,.json" style="padding: 5px;">
+    </div>
+    <div style="flex: 1; text-align: center;">
+        <label style="margin-top:0; color:#333;">Selecione um Time:</label>
+        <select id="teamSelect" style="width: 100%; font-weight: bold;">
+            <option value="">Nenhum arquivo carregado...</option>
+        </select>
+    </div>
+    <div style="flex: 1; text-align: right; padding-top: 18px;">
+        <button id="btnExport" style="background:#28a745;">💾 2. Exportar Editado</button>
+    </div>
+</div>
+
+<div class="container">
+
+<div class="panel">
+    <h3>Dados do Time</h3>
+    <label>Nome</label><input id="t_nome">
+    <label>Sigla</label><input id="t_sigla">
+    <label>Grupo</label><input id="t_grupo">
+    <label>posicao-Grupo</label><input id="t_posicaoGrupo">
+    
+    <label>Formação Tática</label>
+    <select id="t_formacao">
+        <option value="4-4-2">4-4-2</option>
+        <option value="4-3-3">4-3-3</option>
+        <option value="3-5-2">3-5-2</option>
+        <option value="5-3-2">5-3-2</option>
+         <option value="4-2-3-1">4-2-3-1</option>
+    </select>
+    
+    <label>Postura</label>
+    <select id="t_postura">
+        <option>Ofensivo</option><option>Equilibrado</option><option>Defensivo</option>
+    </select>
+
+    <div style="margin-top: 15px; background: #f8f9fa; padding: 10px; border-radius: 8px; border: 1px solid #ddd;">
+        <label style="color:#007bff; margin-top:0;">Brasão (Selecionar Imagem)</label>
+        <input type="file" id="t_brasaoFile" accept="image/*" style="background:#fff;">
+        <label>Caminho do Brasão</label>
+        <input id="t_brasaoUrl" placeholder="Ex: escudos/brasil.png">
+        <div style="text-align: center;"><img id="t_brasaoImg" src=""></div>
+    </div>
+
+    <label>Capitão</label><select id="t_capitao"></select>
+    <label>Batedor Pênaltis</label><select id="t_batedor"></select>
+
+    <hr style="border-color: #eee; margin: 15px 0;">
+
+    <h4 style="margin:0 0 10px 0; color:#555; display:none;">Histórico</h4>
+    <div class="grid" style="display:none;">
+        <div><label>Pontos</label><input id="t_pontos" type="number"></div>
+        <div><label>Vitórias</label><input id="t_vitorias" type="number"></div>
+        <div><label>Empates</label><input id="t_empates" type="number"></div>
+        <div><label>Derrotas</label><input id="t_derrotas" type="number"></div>
+        <div><label>Gols Pró</label><input id="t_golsPro" type="number"></div>
+        <div><label>Gols Con</label><input id="t_golsContra" type="number"></div>
+    </div>
+</div>
+
+<div class="panel" style="padding-bottom: 5px;">
+    <h3 style="display:flex; justify-content:space-between; align-items:center;">
+        <span>📋 Quadro Tático</span>
+        <small style="color:#888; font-size:11px;">Arraste para trocar</small>
+    </h3>
+    
+    <div class="campo-futebol" id="campoTatico">
+        <div class="campo-grande-area-top"></div>
+        <div class="campo-linha-meio"></div>
+        <div class="campo-circulo-meio"></div>
+        <div class="campo-grande-area-bot"></div>
+        </div>
+
+    <h3 style="margin-top: 0;">🪑 Reservas</h3>
+    <input id="searchPlayer" placeholder="Pesquisar reserva..." style="margin-bottom: 10px;">
+    
+    <div class="list" id="listReservas" style="background: #fafafa; border: 1px solid #ddd; border-radius: 6px; padding: 5px; min-height: 150px;">
+        <ul class="lista-drag-banco" id="ulReservas"></ul>
+    </div>
+
+    <div style="display: flex; gap: 5px; margin-top: 10px;">
+        <button id="btnNovoJogador" style="flex:1; background:#17a2b8;">➕ Novo Reserva</button>
+        <button id="btnExcluirJogador" style="flex:1;">🗑️ Excluir Selecionado</button>
+    </div>
+</div>
+
+<div class="panel">
+    <h3>Dados do Jogador Selecionado</h3>
+
+    <div style="display:flex; gap:10px;">
+        <div style="flex:1;"><label>ID</label><input id="p_id" readonly style="background: #e9ecef; color:#666;"></div>
+        <div style="flex:3;"><label>Nome</label><input id="p_nome"></div>
+    </div>
+
+    <div class="grid">
+        <div>
+            <label>Posição</label>
+            <select id="p_posicao">
+                <option>GOL</option><option>ZAG</option><option>LD</option>
+                <option>LE</option><option>VOL</option><option>MC</option>
+                <option>MEI</option><option>PD</option><option>PE</option>
+                <option>CA</option><option>ATA</option>
+            </select>
+        </div>
+        <div><label>Pos. Secundária</label><input id="p_posicao2" placeholder="Ex: MC"></div>
+        <div>
+            <label>Pé</label>
+            <select id="p_pe"><option>D</option><option>E</option><option>A</option></select>
+        </div>
+    </div>
+
+    <div class="grid">
+        <div><label>Idade</label><input id="p_idade" type="number"></div>
+        <div><label>Número</label><input id="p_numero" type="number"></div>
+        <div><label>Energia</label><input id="p_energia" type="number"></div>
+
+        <div><label>Velocidade</label><input id="p_velocidade" type="number"></div>
+        <div><label>Finalização</label><input id="p_finalizacao" type="number"></div>
+        <div><label>Passe</label><input id="p_passe" type="number"></div>
+
+        <div><label>Drible</label><input id="p_drible" type="number"></div>
+        <div><label>Defesa</label><input id="p_defesa" type="number"></div>
+        <div><label>Físico</label><input id="p_fisico" type="number"></div>
+
+        <div><label>Moral</label><input id="p_moral" type="number"></div>
+        <div><label>Potencial</label><input id="p_potencial" type="number"></div>
+        <div><label>Resistência</label><input id="p_resistencia" type="number"></div>
+    </div>
+
+    <label>Condição / Lesão</label>
+    <select id="p_lesao">
+        <option value="baixa">Lesão Leve</option>
+        <option value="Média">Lesão Média</option>
+        <option value="Alta">Lesão Grave</option>
+    </select>
+
+    <div style="background:#f8f9fa; border:1px solid #ddd; padding:15px; margin-top:15px; border-radius:8px; text-align:center;">
+        <h2 id="p_overall" style="margin:0; color:#28a745;">Overall: 0</h2>
+    </div>
+    
+    <button id="btnSalvarJogador">💾 Salvar Alterações do Jogador</button>
+</div>
+
+</div>
+
+<script>
+let listaDeTimes = [];
+let timeAtual = null;
+let jogadorAtual = null;
+let tipoVetorJogador = null;
+
+// Matriz de posicionamento copiada do Jogo Original
+const arranjosFormacoes = {
+    "4-4-2": [{ tipo: "GOL", top: 88, left: 50 }, { tipo: "LE", top: 68, left: 15 }, { tipo: "ZAG", top: 72, left: 38 }, { tipo: "ZAG", top: 72, left: 62 }, { tipo: "LD", top: 68, left: 85 }, { tipo: "ME", top: 46, left: 15 }, { tipo: "MC", top: 48, left: 38 }, { tipo: "MC", top: 48, left: 62 }, { tipo: "MD", top: 46, left: 85 }, { tipo: "CA", top: 22, left: 33 }, { tipo: "CA", top: 22, left: 67 }],
+    "4-3-3": [{ tipo: "GOL", top: 88, left: 50 }, { tipo: "LE", top: 68, left: 15 }, { tipo: "ZAG", top: 72, left: 38 }, { tipo: "ZAG", top: 72, left: 62 }, { tipo: "LD", top: 68, left: 85 }, { tipo: "MC", top: 48, left: 24 }, { tipo: "VOL", top: 52, left: 50 }, { tipo: "MC", top: 48, left: 76 }, { tipo: "PE", top: 22, left: 18 }, { tipo: "CA", top: 18, left: 50 }, { tipo: "PD", top: 22, left: 82 }],
+    "3-5-2": [{ tipo: "GOL", top: 88, left: 50 }, { tipo: "ZAG", top: 72, left: 25 }, { tipo: "ZAG", top: 74, left: 50 }, { tipo: "ZAG", top: 72, left: 75 }, { tipo: "AE", top: 50, left: 12 }, { tipo: "MC", top: 50, left: 34 }, { tipo: "VOL", top: 53, left: 50 }, { tipo: "MC", top: 50, left: 66 }, { tipo: "AD", top: 50, left: 88 }, { tipo: "CA", top: 22, left: 33 }, { tipo: "CA", top: 22, left: 67 }],
+    "5-3-2": [{ tipo: "GOL", top: 88, left: 50 }, { tipo: "LE", top: 68, left: 12 }, { tipo: "ZAG", top: 72, left: 31 }, { tipo: "ZAG", top: 74, left: 50 }, { tipo: "ZAG", top: 72, left: 69 }, { tipo: "LD", top: 68, left: 88 }, { tipo: "MC", top: 48, left: 25 }, { tipo: "VOL", top: 48, left: 50 }, { tipo: "MC", top: 48, left: 75 }, { tipo: "CA", top: 22, left: 33 }, { tipo: "CA", top: 22, left: 67 }],
+    "4-2-3-1": [{ tipo: "GOL", top: 88, left: 50 }, { tipo: "LE", top: 68, left: 15 }, { tipo: "ZAG", top: 72, left: 38 }, { tipo: "ZAG", top: 72, left: 62 }, { tipo: "LD", top: 68, left: 85 }, { tipo: "VOL", top: 54, left: 38 }, { tipo: "VOL", top: 54, left: 62 }, { tipo: "ME", top: 40, left: 15 }, { tipo: "MEI", top: 38, left: 50 }, { tipo: "MD", top: 40, left: 85 }, { tipo: "CA", top: 18, left: 50 }],
+
+};
+
+// Leitura do Arquivo
+document.getElementById('fileInput').addEventListener('change', (event) => {
+    const file = event.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (e) => {
+        try {
+            let txt = e.target.result;
+            const startIdx = txt.indexOf('[');
+            const endIdx = txt.lastIndexOf(']');
+            if (startIdx === -1 || endIdx === -1) throw new Error("Matriz de dados não encontrada.");
+            
+            txt = txt.substring(startIdx, endIdx + 1);
+            listaDeTimes = eval('(' + txt + ')');
+            
+            const select = document.getElementById('teamSelect');
+            select.innerHTML = '<option value="">Selecione um Time</option>';
+            listaDeTimes.forEach((t, i) => { select.insertAdjacentHTML('beforeend', `<option value="${i}">${t.nome}</option>`); });
+            alert('Times carregados com sucesso!');
+        } catch (err) { alert('Erro ao interpretar o arquivo.'); console.error(err); }
+    };
+    reader.readAsText(file);
+});
+
+// Exportar
+document.getElementById('btnExport').addEventListener('click', () => {
+    if (listaDeTimes.length === 0) return alert('Nenhum dado para exportar!');
+    const txt = "const listaDeTimes = " + JSON.stringify(listaDeTimes, null, 4) + ";\n";
+    const blob = new Blob([txt], { type: 'application/javascript' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = 'timescopa.js'; a.click(); URL.revokeObjectURL(url);
+});
+
+// Eventos de alteração dos dados do time (Atualiza o objeto ao digitar/selecionar)
+['t_nome','t_sigla','t_postura','t_grupo','t_posicaoGrupo','t_pontos','t_vitorias','t_empates','t_derrotas','t_golsPro','t_golsContra'].forEach(id => {
+    document.getElementById(id).addEventListener('change', (e) => {
+        if (timeAtual) {
+            let val = e.target.value;
+            if (e.target.type === 'number') val = Number(val);
+            timeAtual[id.replace('t_', '')] = val;
+        }
+    });
+});
+
+// Mudar Formação Atualiza os Slots do Campo Instantaneamente
+document.getElementById('t_formacao').addEventListener('change', (e) => {
+    if (timeAtual) {
+        timeAtual.formacao = e.target.value;
+        atualizarListas();
+    }
+});
+
+// Seleção de Time
+document.getElementById('teamSelect').addEventListener('change', (e) => {
+    timeAtual = e.target.value === "" ? null : listaDeTimes[e.target.value];
+    carregarDadosTime();
+});
+
+function carregarDadosTime() {
+    if (!timeAtual) return;
+    
+    // Tratamento de Formação Padrão caso não exista
+    if (!timeAtual.formacao) timeAtual.formacao = "4-4-2";
+    
+    ['nome','sigla','grupo','posicaoGrupo','formacao','postura','brasaoUrl','pontos','vitorias','empates','derrotas','golsPro','golsContra'].forEach(c => {
+        document.getElementById('t_'+c).value = timeAtual[c] || (['pontos','vitorias','empates','derrotas','golsPro','golsContra'].includes(c) ? 0 : '');
+    });
+    
+    // Garante compatibilidade do Select de Formação
+    let formacaoValida = arranjosFormacoes[timeAtual.formacao] ? timeAtual.formacao : "4-4-2";
+    document.getElementById('t_formacao').value = formacaoValida;
+    timeAtual.formacao = formacaoValida; // Força fixar no objeto
+    
+    document.getElementById('t_brasaoImg').src = timeAtual.brasaoUrl || '';
+    atualizarListas();
+}
+
+// Atualizar Imagem Brasão
+document.getElementById('t_brasaoFile').addEventListener('change', (e) => {
+    if (!timeAtual || !e.target.files[0]) return;
+    const caminho = "escudos/" + e.target.files[0].name;
+    timeAtual.brasaoUrl = caminho;
+    document.getElementById('t_brasaoUrl').value = caminho;
+    document.getElementById('t_brasaoImg').src = URL.createObjectURL(e.target.files[0]);
+});
+
+function calcularOverall(j) {
+    // Calculo simples médio que você já utilizava
+    return Math.round(((j.velocidade||0)+(j.finalizacao||0)+(j.passe||0)+(j.drible||0)+(j.defesa||0)+(j.fisico||0)) / 6);
+}
+
+// ATUALIZAR QUADRO TÁTICO E BANCO (COM AUTO-AJUSTE DE ORDEM DOS RESERVAS)
+function atualizarListas() {
+    if (!timeAtual) return;
+    if(!timeAtual.titulares) timeAtual.titulares = [];
+    if(!timeAtual.banco) timeAtual.banco = [];
+
+    // =========================================================================
+    // REGRA DE OURO: Ordena o array real dos reservas por peso de posição e OVR
+    // Isso altera a ordem física do array que será exportado para o timescopa.js
+    // =========================================================================
+    const pesosPosicaoBanco = {
+        'GOL': 1,
+        'ZAG': 2,
+        'LE': 3,
+        'LD': 4,
+        'VOL': 5,
+        'MC': 6,
+        'MEI': 7,
+        'PE': 8,
+        'PD': 9,
+        'ATA': 10,
+        'CA': 11
+    };
+
+    timeAtual.banco.sort((a, b) => {
+        let pesoA = pesosPosicaoBanco[String(a.posicao).toUpperCase()] || 99;
+        let pesoB = pesosPosicaoBanco[String(b.posicao).toUpperCase()] || 99;
+        
+        // Se as posições forem diferentes, ordena por ordem tática (GOL primeiro, CA por último)
+        if (pesoA !== pesoB) {
+            return pesoA - pesoB;
+        }
+        // Se for a mesma posição, quem tiver o maior Overall fica no topo da fila daquela posição
+        return calcularOverall(b) - calcularOverall(a);
+    });
+    // =========================================================================
+
+    const campo = document.getElementById('campoTatico');
+    // Limpa apenas os totens para não apagar as linhas desenhadas via HTML
+    campo.querySelectorAll('.slot-jogador').forEach(e => e.remove());
+    
+    const ulReservas = document.getElementById('ulReservas');
+    ulReservas.innerHTML = '';
+    
+    document.getElementById('t_capitao').innerHTML = '';
+    document.getElementById('t_batedor').innerHTML = '';
+
+    const formA = timeAtual.formacao || "4-4-2";
+    const slots = arranjosFormacoes[formA] || arranjosFormacoes["4-4-2"];
+
+    // TITULARES (Usando Posicionamento Absoluto Baseado na Formação)
+    timeAtual.titulares.forEach((jogador, i) => {
+        let sm = slots[i] || { tipo: "MEI", top: 50, left: 50 };
+        
+        let div = document.createElement('div');
+        div.className = 'slot-jogador';
+        div.style.top = `${sm.top}%`;
+        div.style.left = `${sm.left}%`;
+        div.dataset.id = jogador.id;
+        
+        let isSelected = (jogadorAtual && jogadorAtual.id === jogador.id) ? "selected" : "";
+        let corEnergia = (jogador.energia || 100) > 70 ? "#5cb85c" : (jogador.energia || 100) > 40 ? "#ffc107" : "#ff4d4d";
+        
+        div.innerHTML = `
+            <div class="player-totem ${isSelected}">
+                <div style="display:flex; width:100%; justify-content:space-between; font-size:8px;">
+                    <span>${jogador.posicao}</span>
+                    <span class="num-camisa">${jogador.numero || i+1}</span>
+                </div>
+                <span class="totem-nome">${jogador.nome.split(' ')[0]}</span>
+                <span class="totem-ovr">${calcularOverall(jogador)}</span>
+            </div>
+            <div style="width: 100%; background: #333; height: 5px; margin-top:3px; border-radius:2px; border: 1px solid #fff; box-shadow: 0 1px 2px rgba(0,0,0,0.5);">
+                <div style="width: ${jogador.energia || 100}%; background: ${corEnergia}; height: 100%; border-radius:1px;"></div>
+            </div>
+        `;
+
+        div.draggable = true;
+        div.ondragstart = (e) => { e.dataTransfer.setData('text/plain', JSON.stringify({id: jogador.id, tipo: 'titulares'})); };
+        div.onclick = () => selecionarJogador(jogador, 'titulares');
+        
+        // Adiciona selects de capitão e batedor
+        const selC = `value="${jogador.id}" ${timeAtual.capitao == jogador.id || timeAtual.capitao === jogador.nome ? 'selected' : ''}>${jogador.nome}`;
+        document.getElementById('t_capitao').insertAdjacentHTML('beforeend', `<option ${selC}</option>`);
+        
+        const selB = `value="${jogador.id}" ${timeAtual.batedor == jogador.id || timeAtual.batedor === jogador.nome ? 'selected' : ''}>${jogador.nome}`;
+        document.getElementById('t_batedor').insertAdjacentHTML('beforeend', `<option ${selB}</option>`);
+
+        campo.appendChild(div);
+    });
+
+    // RESERVAS (Agora renderizados já na ordem correta do array reordenado)
+    timeAtual.banco.forEach((jogador, i) => {
+        let li = document.createElement('li');
+        let isSelected = (jogadorAtual && jogadorAtual.id === jogador.id) ? "selected" : "";
+        li.className = `item-drag-banco ${isSelected}`;
+        li.dataset.id = jogador.id;
+        
+        li.innerHTML = `
+            <div style="display: flex; align-items: center; width: 100%;">
+                <strong style="color:#007bff; font-size:11px; background:#eef7ff; padding:2px 5px; border-radius:3px; margin-right:6px;">${jogador.posicao}</strong>
+                <span style="font-size:13px; font-weight:500;">${jogador.nome}</span>
+                <span title="Overall" style="margin-left:auto; background:#28a745; color:#fff; font-weight:bold; font-size:12px; padding:2px 8px; border-radius:10px; min-width:26px; text-align:center;">${calcularOverall(jogador)}</span>
+            </div>
+        `;
+        
+        li.draggable = true;
+        li.ondragstart = (e) => { e.dataTransfer.setData('text/plain', JSON.stringify({id: jogador.id, tipo: 'banco'})); };
+        li.onclick = () => selecionarJogador(jogador, 'banco');
+        ulReservas.appendChild(li);
+    });
+}
+
+// SISTEMA DE TROCA (SWAP) COM DRAG AND DROP
+['campoTatico', 'listReservas'].forEach(id => {
+    const zona = document.getElementById(id);
+    zona.ondragover = e => e.preventDefault();
+    zona.ondrop = e => {
+        e.preventDefault();
+        if(!timeAtual) return;
+        
+        const info = JSON.parse(e.dataTransfer.getData('text/plain'));
+        const tipoDestino = id === 'campoTatico' ? 'titulares' : 'banco';
+        const tipoOrigem = info.tipo;
+
+        // Recupera o índice de origem
+        const arrOrigem = timeAtual[tipoOrigem];
+        const arrDestino = timeAtual[tipoDestino];
+        const idxOrigem = arrOrigem.findIndex(j => j.id === info.id);
+        if (idxOrigem === -1) return;
+        const jogadorMovido = arrOrigem[idxOrigem];
+
+        // 1. Origem = Titular / Destino = Titular (Troca de posições no campo)
+        if (tipoOrigem === 'titulares' && tipoDestino === 'titulares') {
+            const cardAlvo = e.target.closest('.slot-jogador');
+            if (cardAlvo) {
+                const idAlvo = Number(cardAlvo.dataset.id);
+                const idxAlvo = arrDestino.findIndex(j => j.id === idAlvo);
+                if (idxAlvo > -1 && idxOrigem !== idxAlvo) {
+                    const temp = arrDestino[idxAlvo];
+                    arrDestino[idxAlvo] = arrOrigem[idxOrigem];
+                    arrOrigem[idxOrigem] = temp;
+                    atualizarListas();
+                }
+            }
+            return;
+        }
+
+        // 2. Reserva arrastado para Titular
+        if (tipoOrigem === 'banco' && tipoDestino === 'titulares') {
+            const cardAlvo = e.target.closest('.slot-jogador');
+            if (cardAlvo) {
+                const idAlvo = Number(cardAlvo.dataset.id);
+                const idxAlvo = arrDestino.findIndex(j => j.id === idAlvo);
+                if (idxAlvo > -1) {
+                    const jogadorSubstituido = arrDestino[idxAlvo];
+                    arrDestino[idxAlvo] = jogadorMovido; // Entra na exata posição
+                    arrOrigem[idxOrigem] = jogadorSubstituido; // Vai pro banco
+                    if(jogadorAtual && jogadorAtual.id === jogadorMovido.id) tipoVetorJogador = tipoDestino;
+                    atualizarListas();
+                    return;
+                }
+            }
+            if (arrDestino.length >= 11) {
+                alert("Para substituir, arraste o reserva EXATAMENTE PARA CIMA do titular que deseja retirar.");
+                return;
+            } else {
+                arrOrigem.splice(idxOrigem, 1);
+                arrDestino.push(jogadorMovido);
+                atualizarListas();
+                return;
+            }
+        }
+
+        // 3. Titular arrastado para o Banco (CORRIGIDO AQUI)
+        if (tipoOrigem === 'titulares' && tipoDestino === 'banco') {
+             const cardAlvo = e.target.closest('.item-drag-banco');
+             if (cardAlvo) {
+                 const idAlvo = Number(cardAlvo.dataset.id);
+                 const idxAlvo = arrDestino.findIndex(j => j.id === idAlvo);
+                 if (idxAlvo > -1) {
+                     // Troca Titular <-> Reserva Específico
+                     const jogadorSubstituido = arrDestino[idxAlvo];
+                     arrDestino[idxAlvo] = jogadorMovido; // Vai pro banco no lugar do reserva
+                     arrOrigem[idxOrigem] = jogadorSubstituido; // Entra no campo
+                     if(jogadorAtual && jogadorAtual.id === jogadorMovido.id) tipoVetorJogador = tipoDestino;
+                     atualizarListas();
+                     return;
+                 }
+             }
+             // Se soltou fora de um reserva, ele avisa para não deixar o time com 10 em campo
+             alert("Para substituir, arraste o titular EXATAMENTE PARA CIMA do jogador reserva que deseja colocar no campo.");
+             return;
+        }
+    };
+});
+
+function selecionarJogador(jogador, tipo) {
+    jogadorAtual = jogador; tipoVetorJogador = tipo;
+    atualizarListas(); // Dá highlight visual no totem ou lista
+    ['id','nome','posicao','posicao2','pe','idade','numero','energia','velocidade','finalizacao','passe','drible','defesa','fisico','moral','potencial','resistencia','lesao'].forEach(c => {
+        document.getElementById('p_'+c).value = jogador[c] !== undefined ? jogador[c] : (['nome','posicao','posicao2','pe','lesao'].includes(c) ? '' : 0);
+    });
+    document.getElementById('p_overall').textContent = 'Overall: ' + calcularOverall(jogador);
+}
+
+// Salvar Jogador
+document.getElementById('btnSalvarJogador').addEventListener('click', () => {
+    if (!jogadorAtual) return alert('Selecione um jogador!');
+    ['nome','posicao','posicao2','pe','lesao'].forEach(c => jogadorAtual[c] = document.getElementById('p_'+c).value);
+    ['idade','numero','energia','velocidade','finalizacao','passe','drible','defesa','fisico','moral','potencial','resistencia'].forEach(c => jogadorAtual[c] = Number(document.getElementById('p_'+c).value));
+    atualizarListas();
+    document.getElementById('p_overall').textContent = 'Overall: ' + calcularOverall(jogadorAtual);
+    alert('Jogador salvo com sucesso!');
+});
+
+// Pesquisar Banco
+document.getElementById('searchPlayer').addEventListener('input', (e) => {
+    const termo = e.target.value.toLowerCase();
+    document.querySelectorAll('#ulReservas .item-drag-banco').forEach(i => {
+        i.style.display = i.textContent.toLowerCase().includes(termo) ? 'flex' : 'none';
+    });
+});
+
+// Novo Jogador
+document.getElementById('btnNovoJogador').addEventListener('click', () => {
+    if (!timeAtual) return alert('Selecione um time!');
+    let novoId = 1000;
+    listaDeTimes.forEach(t => ['titulares','banco'].forEach(v => (t[v]||[]).forEach(j => { if(j.id >= novoId) novoId = j.id + 1; })));
+    const novoObj = {id: novoId, nome: "Novo Jogador", posicao: "MEI", pe: "D", idade: 18, velocidade: 60, finalizacao: 60, passe: 60, drible: 60, defesa: 60, fisico: 60, energia: 100, numero: 99};
+    timeAtual.banco.push(novoObj);
+    atualizarListas();
+    selecionarJogador(novoObj, 'banco');
+});
+
+// Excluir Jogador
+document.getElementById('btnExcluirJogador').addEventListener('click', () => {
+    if (!jogadorAtual) return alert('Selecione um jogador da lista ou do campo!');
+    if (confirm('Excluir ' + jogadorAtual.nome + '?')) {
+        const v = timeAtual[tipoVetorJogador];
+        v.splice(v.findIndex(j => j.id === jogadorAtual.id), 1);
+        jogadorAtual = null; tipoVetorJogador = null;
+        
+        // Limpa painel do jogador
+        ['id','nome','posicao','posicao2','pe','idade','numero','energia','velocidade','finalizacao','passe','drible','defesa','fisico','moral','potencial','resistencia','lesao'].forEach(c => {
+            document.getElementById('p_'+c).value = "";
+        });
+        document.getElementById('p_overall').textContent = 'Overall: 0';
+        
+        atualizarListas();
+    }
+});
+
+// Capturar alterações no Capitão e Batedor e Salvar no Time
+document.getElementById('t_capitao').addEventListener('change', (e) => { if(timeAtual) timeAtual.capitao = isNaN(e.target.value) ? e.target.value : Number(e.target.value); });
+document.getElementById('t_batedor').addEventListener('change', (e) => { if(timeAtual) timeAtual.batedor = isNaN(e.target.value) ? e.target.value : Number(e.target.value); });
+
+</script>
+</body>
+</html>

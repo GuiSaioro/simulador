@@ -1167,8 +1167,9 @@
             text-align: center;
             font-size: 22px;
         }
+
         /*Apaga o botão play*/
-        #btn-modo-rapido{
+        #btn-modo-rapido {
             display: none !important;
         }
     </style>
@@ -1178,7 +1179,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 </head>
-<div style="position: absolute; ">Beta v1.00</div>
+<div style="position: absolute; ">Beta v1.01</div>
 
 <div id="tela-inicial" class="painel" style="max-width: 450px; background-color: #00ca60;">
     <h2>Copa do Mundo 2026</h2>
@@ -1468,7 +1469,8 @@
             </div>
 
             <div style="margin-top:15px; display: flex; justify-content: center; gap: 10px;">
-                <button style="display: none !important;" class="secundario" id="btn-modo-rapido" onclick="alternarAutomatico()">Pausar ⏸</button>
+                <button style="display: none !important;" class="secundario" id="btn-modo-rapido"
+                    onclick="alternarAutomatico()">Pausar ⏸</button>
                 <h2 style="font-size: 12px;">Velocidade</h2>
                 <select id="velocidade-simulacao" onchange="mudarVelocidade(this.value)"
                     style="padding: 8px; border-radius: 6px;">
@@ -2764,6 +2766,14 @@
         //Palestra fim---------------------------------------------------------------------------
 
         emIntervalo = false;
+        [jogoAtActiveRef.jogo.casa, jogoAtActiveRef.jogo.visitante].forEach(t => {
+            t.titulares.forEach(j => {
+                if (!j.expulso && !j.lesionadoPartida) {
+                    // Recupera 12% de energia para o segundo tempo
+                    j.energia = Math.min(100, (j.energia || 50) + 12);
+                }
+            });
+        });
         segundoTempoIniciado = true;
         if (minutoJogo === 45) minutoJogo = 46;
         else if (minutoJogo === 105) minutoJogo = 106;
@@ -3072,7 +3082,8 @@
 
         let temAtaqueImportante = Math.random() < Math.max(0.18, ataqueMomento);
         if (temAtaqueImportante) {
-            if (Math.random() < (0.06 + ((ataqueAtq - defesaDef) * 0.004) + (posturaBonus * 0.03))) { dispararPenaltiEmJogo(atq, lAtq); return; }
+            //chance de penalti 0.01------------------------------------------------------------------------------------------
+            if (Math.random() < (0.01 + ((ataqueAtq - defesaDef) * 0.003) + (posturaBonus * 0.02))) { dispararPenaltiEmJogo(atq, lAtq); return; }
             statsAoVivo[lAtq].chutes++;
             if (Math.random() < chanceGol) {
                 if (lAtq === 'casa') golsCasaLive++; else golsVisLive++;
@@ -3121,9 +3132,9 @@
 
             jogando.forEach(j => {
                 let resistencia = Math.min(100, Math.max(30, j.resistencia || j.fisico || 70));
-                let fatorResistencia = 1 + ((80 - resistencia) / 130);
-                // Desgaste mais acentuado: jogadores chegam visivelmente cansados ao fim da partida
-                j.energia -= (Math.random() * 1.3 + 1.7) * fatorResistencia;
+                let fatorResistencia = 1 + ((80 - resistencia) / 60);
+                //CANSAÇO---- Desgaste mais acentuado: jogadores chegam visivelmente cansados ao fim da partida
+                j.energia -= (Math.random() * 2.0 + 3.0) * fatorResistencia;
                 if (j.energia < 0) j.energia = 0;
 
                 let chanceCartao = Math.random();
@@ -3912,42 +3923,54 @@
             executarSimulacaoRestanteGrupos();
         }
 
-        // 5. Pós jogo------------------------------------
+        // Pós jogo------------------------------------
         function processarPosJogoGeral() {
-            listaDeTimes.forEach(t => {
-                let elencoCompleto = (t.titulares || []).concat(t.banco || []);
+    // --- NOVO: Recuperação híbrida (Meio-Termo) ---
+    let taxaRecuperacao = 40; 
+    
+    if (faseAtual === "GRUPOS") {
+        taxaRecuperacao = 40; // Fôlego quase total nos grupos
+    } else if (faseAtual === "16AVOS" || faseAtual === "OITAVAS" || faseAtual === "QUARTAS") {
+        taxaRecuperacao = 30; // Começa a pesar um pouco o calendário
+    } else {
+        taxaRecuperacao = 25; // Semis e Final: desgaste acumulado, mas ainda jogável
+    }
 
-                elencoCompleto.forEach(j => {
-                    if (j.expulso) {
-                        j.suspenso = true;
-                        j.suspensoDias = 2;
-                    } else if (j.amareloNaPartida) {
-                        j.cartoesAmarelosTotal += 1;
-                        if (j.cartoesAmarelosTotal >= 2) {
-                            j.suspenso = true;
-                            j.suspensoDias = 2;
-                            j.cartoesAmarelosTotal = 0;
-                        }
-                    }
+    listaDeTimes.forEach(t => {
+        let elencoCompleto = (t.titulares || []).concat(t.banco || []);
 
-                    j.amareloNaPartida = false;
-                    j.expulso = false;
-                    j.lesionadoPartida = false;
+        elencoCompleto.forEach(j => {
+            if (j.expulso) {
+                j.suspenso = true;
+                j.suspensoDias = 2;
+            } else if (j.amareloNaPartida) {
+                j.cartoesAmarelosTotal += 1;
+                if (j.cartoesAmarelosTotal >= 2) {
+                    j.suspenso = true;
+                    j.suspensoDias = 2;
+                    j.cartoesAmarelosTotal = 0;
+                }
+            }
 
-                    if (j.suspensoDias > 0) {
-                        j.suspensoDias -= 1;
-                        if (j.suspensoDias === 0) j.suspenso = false;
-                    }
-                    if (j.lesaoDias > 0) {
-                        j.lesaoDias -= 1;
-                        if (j.lesaoDias === 0) j.gravidadeLesao = null;
-                    }
+            j.amareloNaPartida = false;
+            j.expulso = false;
+            j.lesionadoPartida = false;
 
-                    j.energia += 30;
-                    if (j.energia > 100) j.energia = 100;
-                });
-            });
-        }
+            if (j.suspensoDias > 0) {
+                j.suspensoDias -= 1;
+                if (j.suspensoDias === 0) j.suspenso = false;
+            }
+            if (j.lesaoDias > 0) {
+                j.lesaoDias -= 1;
+                if (j.lesaoDias === 0) j.gravidadeLesao = null;
+            }
+
+            // Aplica a taxa de recuperação balanceada
+            j.energia += taxaRecuperacao; 
+            if (j.energia > 100) j.energia = 100;
+        });
+    });
+}
         processarPosJogoGeral();
     }
 

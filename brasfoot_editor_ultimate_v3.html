@@ -365,11 +365,50 @@ document.getElementById('t_brasaoFile').addEventListener('change', (e) => {
     document.getElementById('t_brasaoImg').src = URL.createObjectURL(e.target.files[0]);
 });
 
-function calcularOverall(j) {
-    // Calculo simples médio que você já utilizava
-    return Math.round(((j.velocidade||0)+(j.finalizacao||0)+(j.passe||0)+(j.drible||0)+(j.defesa||0)+(j.fisico||0)) / 6);
+// Removemos calcularOverall() e adicionamos a lógica exata do Brasfoot 10
+function getMacroPosicao(pos) {
+    let p = (pos || "MEI").toUpperCase();
+    if (["GOL", "GK"].includes(p)) return "GOL";
+    if (["ZAG", "CB", "ZC"].includes(p)) return "ZAG";
+    if (["LAT", "LD", "LE", "ALA", "AD", "AE", "RB", "LB", "RWB", "LWB"].includes(p)) return "LAT";
+    if (["ATA", "CA", "SA", "PE", "PD", "PT", "ST", "CF", "RW", "LW"].includes(p)) return "ATA";
+    return "MEI";
 }
 
+function calcularOvrPosicional(j, posSlot) {
+    const pesos = {
+        "GOL": { v: 0.05, f: 0.00, p: 0.08, d: 0.02, de: 0.80, fi: 0.05 },
+        "ZAG": { v: 0.10, f: 0.03, p: 0.10, d: 0.05, de: 0.57, fi: 0.15 },
+        "LAT": { v: 0.22, f: 0.08, p: 0.20, d: 0.15, de: 0.25, fi: 0.10 },
+        "MEI": { v: 0.12, f: 0.18, p: 0.34, d: 0.22, de: 0.08, fi: 0.06 },
+        "ATA": { v: 0.18, f: 0.40, p: 0.08, d: 0.24, de: 0.00, fi: 0.10 }
+    };
+    let mac = getMacroPosicao(posSlot);
+    let p = pesos[mac] || pesos["MEI"];
+    
+    // Forçamos Number() para evitar que os inputs de texto quebrem a matemática
+    let v = Number(j.velocidade) || 70, f = Number(j.finalizacao) || 70, 
+        pa = Number(j.passe) || 70, d = Number(j.drible) || 70, 
+        de = Number(j.defesa) || 70, fi = Number(j.fisico) || 70;
+        
+    let base = (v * p.v) + (f * p.f) + (pa * p.p) + (d * p.d) + (de * p.de) + (fi * p.fi);
+
+    let ponderados = [
+        { val: v, w: p.v }, { val: f, w: p.f }, { val: pa, w: p.p },
+        { val: d, w: p.d }, { val: de, w: p.de }, { val: fi, w: p.fi }
+    ].filter(a => a.w >= 0.15).sort((a, b) => b.val - a.val);
+    
+    let topVal = ponderados.length ? ponderados[0].val : base;
+    if (topVal > base) base += (topVal - base) * 0.30;
+
+    base += 3;
+
+    let posJog = ((j.posicao || "MEI") + "/" + (j.posicao2 || "")).toUpperCase();
+    let macroNatural = getMacroPosicao(j.posicao || j.posicao2 || "MEI");
+    if (macroNatural !== mac && !posJog.includes(mac)) base -= 6; // Penalidade por posição errada
+
+    return Math.max(40, Math.min(99, Math.round(base)));
+}
 // ATUALIZAR QUADRO TÁTICO E BANCO (COM AUTO-AJUSTE DE ORDEM DOS RESERVAS)
 function atualizarListas() {
     if (!timeAtual) return;
@@ -397,13 +436,10 @@ function atualizarListas() {
     timeAtual.banco.sort((a, b) => {
         let pesoA = pesosPosicaoBanco[String(a.posicao).toUpperCase()] || 99;
         let pesoB = pesosPosicaoBanco[String(b.posicao).toUpperCase()] || 99;
+        if (pesoA !== pesoB) return pesoA - pesoB;
         
-        // Se as posições forem diferentes, ordena por ordem tática (GOL primeiro, CA por último)
-        if (pesoA !== pesoB) {
-            return pesoA - pesoB;
-        }
-        // Se for a mesma posição, quem tiver o maior Overall fica no topo da fila daquela posição
-        return calcularOverall(b) - calcularOverall(a);
+        // CORRIGIDO: Usa a posição natural do jogador para ordenar a reserva
+        return calcularOvrPosicional(b, b.posicao) - calcularOvrPosicional(a, a.posicao);
     });
     // =========================================================================
 
@@ -433,14 +469,14 @@ function atualizarListas() {
         let isSelected = (jogadorAtual && jogadorAtual.id === jogador.id) ? "selected" : "";
         let corEnergia = (jogador.energia || 100) > 70 ? "#5cb85c" : (jogador.energia || 100) > 40 ? "#ffc107" : "#ff4d4d";
         
-        div.innerHTML = `
+       div.innerHTML = `
             <div class="player-totem ${isSelected}">
                 <div style="display:flex; width:100%; justify-content:space-between; font-size:8px;">
-                    <span>${jogador.posicao}</span>
+                    <span>${sm.tipo}</span> <!-- CORRIGIDO: Mostra a posição da tática e não a nativa -->
                     <span class="num-camisa">${jogador.numero || i+1}</span>
                 </div>
                 <span class="totem-nome">${jogador.nome.split(' ')[0]}</span>
-                <span class="totem-ovr">${calcularOverall(jogador)}</span>
+                <span class="totem-ovr">${calcularOvrPosicional(jogador, sm.tipo)}</span> <!-- CORRIGIDO: OVR baseado no slot -->
             </div>
             <div style="width: 100%; background: #333; height: 5px; margin-top:3px; border-radius:2px; border: 1px solid #fff; box-shadow: 0 1px 2px rgba(0,0,0,0.5);">
                 <div style="width: ${jogador.energia || 100}%; background: ${corEnergia}; height: 100%; border-radius:1px;"></div>
@@ -472,7 +508,7 @@ function atualizarListas() {
             <div style="display: flex; align-items: center; width: 100%;">
                 <strong style="color:#007bff; font-size:11px; background:#eef7ff; padding:2px 5px; border-radius:3px; margin-right:6px;">${jogador.posicao}</strong>
                 <span style="font-size:13px; font-weight:500;">${jogador.nome}</span>
-                <span title="Overall" style="margin-left:auto; background:#28a745; color:#fff; font-weight:bold; font-size:12px; padding:2px 8px; border-radius:10px; min-width:26px; text-align:center;">${calcularOverall(jogador)}</span>
+                <span title="Overall" style="margin-left:auto; background:#28a745; color:#fff; font-weight:bold; font-size:12px; padding:2px 8px; border-radius:10px; min-width:26px; text-align:center;">${calcularOvrPosicional(jogador, jogador.posicao)}</span>
             </div>
         `;
         
@@ -573,18 +609,19 @@ function selecionarJogador(jogador, tipo) {
     ['id','nome','posicao','posicao2','pe','idade','numero','energia','velocidade','finalizacao','passe','drible','defesa','fisico','moral','potencial','resistencia','lesao'].forEach(c => {
         document.getElementById('p_'+c).value = jogador[c] !== undefined ? jogador[c] : (['nome','posicao','posicao2','pe','lesao'].includes(c) ? '' : 0);
     });
-    document.getElementById('p_overall').textContent = 'Overall: ' + calcularOverall(jogador);
+    document.getElementById('p_overall').textContent = 'Overall: ' + calcularOvrPosicional(jogador, jogador.posicao);
 }
-
 // Salvar Jogador
 document.getElementById('btnSalvarJogador').addEventListener('click', () => {
     if (!jogadorAtual) return alert('Selecione um jogador!');
     ['nome','posicao','posicao2','pe','lesao'].forEach(c => jogadorAtual[c] = document.getElementById('p_'+c).value);
     ['idade','numero','energia','velocidade','finalizacao','passe','drible','defesa','fisico','moral','potencial','resistencia'].forEach(c => jogadorAtual[c] = Number(document.getElementById('p_'+c).value));
     atualizarListas();
-    document.getElementById('p_overall').textContent = 'Overall: ' + calcularOverall(jogadorAtual);
+    document.getElementById('p_overall').textContent = 'Overall: ' + calcularOvrPosicional(jogadorAtual, jogadorAtual.posicao);
     alert('Jogador salvo com sucesso!');
 });
+
+
 
 // Pesquisar Banco
 document.getElementById('searchPlayer').addEventListener('input', (e) => {
@@ -626,6 +663,45 @@ document.getElementById('btnExcluirJogador').addEventListener('click', () => {
 // Capturar alterações no Capitão e Batedor e Salvar no Time
 document.getElementById('t_capitao').addEventListener('change', (e) => { if(timeAtual) timeAtual.capitao = isNaN(e.target.value) ? e.target.value : Number(e.target.value); });
 document.getElementById('t_batedor').addEventListener('change', (e) => { if(timeAtual) timeAtual.batedor = isNaN(e.target.value) ? e.target.value : Number(e.target.value); });
+
+
+// Atributos mapeados no painel HTML
+const camposDoJogador = [
+    'nome','posicao','posicao2','pe','idade','numero','energia',
+    'velocidade','finalizacao','passe','drible','defesa','fisico',
+    'moral','potencial','resistencia','lesao'
+];
+
+// Aplica um ouvinte de 'input' a todos os campos do painel
+camposDoJogador.forEach(c => {
+    const elemento = document.getElementById('p_' + c);
+    if(elemento) {
+        elemento.addEventListener('input', (e) => {
+            if (!jogadorAtual) return;
+            
+            let val = e.target.value;
+            if (['idade','numero','energia','velocidade','finalizacao','passe','drible','defesa','fisico','moral','potencial','resistencia'].includes(c)) {
+                val = Number(val);
+            }
+            
+            // Salva automaticamente no objeto do jogador (na memória)
+            jogadorAtual[c] = val;
+            
+            // Atualiza o badge grande do painel do jogador (usa a posição original)
+            document.getElementById('p_overall').textContent = 'Overall: ' + calcularOvrPosicional(jogadorAtual, jogadorAtual.posicao);
+            
+            // se o campo alterado for uma estatística, posição ou número de camisa.
+            if(c !== 'nome') {
+                atualizarListas(); 
+            }
+        });
+        
+        // Adiciona um evento "change" para forçar a atualização visual caso o nome mude e perca o foco
+        if(c === 'nome') {
+            elemento.addEventListener('change', () => { atualizarListas(); });
+        }
+    }
+});
 
 </script>
 </body>

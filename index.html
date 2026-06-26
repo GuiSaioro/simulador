@@ -82,45 +82,6 @@
             background: rgba(36, 240, 135, 0.1);
         }
 
-        /* Controles que só aparecem no celular */
-        .menu-hamburguer {
-            display: none;
-            width: 100%;
-            background: #000;
-            color: #24F087;
-            border: none;
-            padding: 14px;
-            border-radius: 14px;
-            font-size: 16px;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            cursor: pointer;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        .toggle-elenco {
-            display: none;
-            width: 100%;
-            background: #0056b3;
-            color: #fff;
-            border: none;
-            padding: 10px;
-            border-radius: 8px;
-            font-size: 13px;
-            font-weight: 700;
-            cursor: pointer;
-            margin-bottom: 6px;
-        }
-
-        body.scroll-travado {
-            overflow: hidden !important;
-            touch-action: none;
-        }
-
-
-
-
         .aba-conteudo {
             display: none;
             margin-top: 15px;
@@ -705,8 +666,8 @@
         .slot-jogador {
             position: absolute;
             transform: translate(-50%, -50%);
-            width: 86px;
-            height: 76px;
+            width: 78px;
+            height: 70px;
             text-align: center;
             z-index: 5;
             cursor: pointer;
@@ -717,7 +678,7 @@
             border: 2px solid #5E17EB;
             border-radius: 6px;
             color: white;
-            padding: 5px;
+            padding: 4px;
             font-size: 10px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
             height: 100%;
@@ -919,14 +880,6 @@
 
         .logo-img {
             width: 100px;
-        }
-
-        .nome-sigla {
-            display: none;
-        }
-
-        .nome-extenso {
-            display: inline;
         }
 
         .mini-slot {
@@ -1394,544 +1347,7 @@
             font-size: 11px;
         }
 
-        /* ============================================================
-           AJUSTES PARA CELULAR 
-           ============================================================ */
-        @media (max-width: 768px) {
-            body {
-                padding: 8px;
-            }
-            body.scroll-travado .transmissao-container .toggle-elenco {
-    display: none !important;
-}
-            .painel {
-                padding: 12px;
-                border-radius: 14px;
-                border-top-width: 5px;
-                border-bottom-width: 5px;
-            }
-
-            h2 {
-                font-size: 18px;
-            }
-
-            h3 {
-                font-size: 15px;
-            }
-
-            /* Menu de abas: rolagem horizontal para caber tudo */
-            .menu-abas {
-                flex-wrap: nowrap;
-                overflow-x: auto;
-                justify-content: flex-start;
-                -webkit-overflow-scrolling: touch;
-                padding: 8px;
-                gap: 4px;
-            }
-
-            .menu-abas::-webkit-scrollbar {
-                height: 4px;
-            }
-
-            .aba-btn {
-                flex: 0 0 auto;
-                padding: 8px 10px;
-                font-size: 12px;
-                letter-spacing: 0.5px;
-            }
-
-            button.principal {
-                padding: 14px;
-                font-size: 13px;
-                margin: 6px;
-            }
-
-            /* Grids genéricos em coluna única */
-            .grid-grupos {
-                grid-template-columns: 1fr;
-            }
-
-            /* Aba Gerenciar / pranchetas inline -> empilhar */
-            #aba-gerenciar>div[style*="grid"],
-            #aba-gerenciar>div[style*="grid"] {
-                display: flex !important;
-                flex-direction: column;
-            }
-
-            #prancheta-componente-live[style*="display: grid"] {
-                display: flex !important;
-                flex-direction: column;
-            }
-
-            #prancheta-componente-live {
-                display: none;
-                /* Mantém oculto na tela inicial até ser acionado */
-            }
-
-            #aba-gerenciar>div[style*="grid"]>div {
-                margin-bottom: 16px;
-            }
-
-            #prancheta-componente-live>div {
-                margin-bottom: 16px;
-            }
-
-            /* ---------- TELA DE JOGO AO VIVO ---------- */
-            .transmissao-container {
-                display: flex;
-                flex-direction: column;
-                gap: 12px;
-                grid-template-columns: 1fr;
-                gap: 15px;
-            }
-
-            .placar-ao-vivo {
-                grid-column: 1 / -1;
-                font-size: 14px !important;
-                /* Reduz a fonte original de 24px para caber na tela */
-                display: flex;
-                flex-direction: row !important;
-                /* Garante que fique em uma única linha */
-                flex-wrap: nowrap;
-                /* Impede que os itens pulem para a linha de baixo */
-                justify-content: space-between;
-                align-items: center;
-                padding: 8px 5px !important;
-                gap: 3px;
-            }
-
-            .placar-ao-vivo #live-escudo-casa,
-            .placar-ao-vivo #live-escudo-vis,
-            .placar-ao-vivo img[id^="live-escudo"] {
-                width: 38px !important;
-                height: 38px !important;
-            }
-
-            .placar-ao-vivo img[src="WC26.png"] {
-                width: 32px !important;
-            }
-
-            #live-relogio {
-                font-size: 12px !important;
-                min-width: 55px !important;
-                padding: 3px 5px !important;
-            }
-
-            .placar-ao-vivo span[id^="live-gols"] {
-                padding: 4px 8px !important;
-                margin: 0 4px !important;
-            }
-
-            #live-nome-casa,
-            #live-nome-vis {
-                font-size: 12px;
-            }
-
-            /* O campo ocupa a largura toda mas continua jogável */
-            .campo-futebol {
-                height: 380px;
-                max-width: 100%;
-                min-height: 360px;
-            }
-
-            /* Colunas de elenco empilhadas e legíveis */
-            .coluna-elenco {
-                width: 100%;
-                box-sizing: border-box;
-            }
-
-            /* Gritos do banco em coluna confortável para o toque */
-            .gritos-grid {
-                grid-template-columns: repeat(3, 1fr);
-                gap: 6px;
-            }
-
-            .btn-grito {
-                font-size: 16px;
-                padding: 8px 4px;
-            }
-
-            .btn-grito span {
-                font-size: 10px;
-            }
-
-            /* Botões táticos */
-            .btn-tatica {
-                font-size: 11px;
-                padding: 8px 4px;
-            }
-
-            /* Atributos do scout: menos colunas */
-            .grid-attr {
-                grid-template-columns: repeat(3, 1fr);
-            }
-
-            /* Modais ocupam quase a tela inteira */
-            .modal-conteudo {
-                width: 94% !important;
-                max-width: 94% !important;
-                max-height: 90vh;
-                overflow-y: auto;
-                box-sizing: border-box;
-            }
-
-            #modal-selecao-penaltis>div {
-                width: 92% !important;
-            }
-
-            #lista-batedores-penalti {
-                grid-template-columns: 1fr !important;
-            }
-
-            /* Bracket mata-mata com rolagem horizontal */
-            .bracket-container {
-                overflow-x: auto;
-                -webkit-overflow-scrolling: touch;
-            }
-
-            /* Tabelas com rolagem para não estourar a tela */
-            table {
-                display: block;
-                overflow-x: auto;
-                white-space: nowrap;
-            }
-        }
-
-        /* Telas bem estreitas: opção diagonal para caber a transmissão */
-        @media (max-width: 420px) {
-            .placar-ao-vivo {
-                font-size: 12px;
-            }
-
-            .aba-btn {
-                font-size: 11px;
-                padding: 7px 8px;
-            }
-
-            .campo-futebol {
-                min-height: 320px;
-            }
-        }
-
-        /* ===================== AJUSTES MOBILE v2 ===================== */
-        @media (max-width: 768px) {
-
-            /* Alternância Nome/Sigla no Mobile */
-            .nome-sigla {
-                display: inline;
-            }
-
-            .nome-extenso {
-                display: none;
-            }
-
-            /* Modal de Intervalo */
-            .overlay-intervalo {
-                padding: 10px;
-                box-sizing: border-box;
-            }
-
-            #estatisticas-overlay-jogo {
-                width: 100% !important;
-                max-width: 100% !important;
-                padding: 10px !important;
-                margin-top: 60px !important;
-            }
-
-            #estatisticas-overlay-jogo h1 {
-                font-size: 28px !important;
-            }
-
-            #estatisticas-overlay-jogo>div {
-                gap: 8px !important;
-            }
-
-            /* Modal Fim de Partida (Pênaltis) */
-            #modal-resultado-final>div:nth-child(3) {
-                flex-direction: column;
-                gap: 15px !important;
-                font-size: 16px !important;
-            }
-
-            #modal-resultado-final h1 {
-                font-size: 22px !important;
-            }
-
-            /* ---- Menu sanduíche ---- */
-            .menu-hamburguer {
-                display: block;
-            }
-
-            .menu-abas {
-                display: none;
-                flex-direction: column;
-                gap: 6px;
-                margin-top: 8px;
-                margin-bottom: 16px;
-                overflow: visible;
-            }
-
-            .menu-abas.aberto {
-                display: flex;
-            }
-
-            .menu-abas .aba-btn {
-                width: 100%;
-                text-align: center;
-                padding: 12px;
-                font-size: 13px;
-            }
-
-            /* ---- Campo / totens: evitar sobreposição ---- */
-            .campo-futebol {
-                height: 114vw;
-                min-height: 430px;
-                max-height: 560px;
-                max-width: 100%;
-            }
-
-            .slot-jogador {
-                width: 52px;
-                height: 52px;
-            }
-
-            .player-totem {
-                padding: 2px;
-                border-width: 1px;
-                height: 100% !important;
-            }
-
-            .totem-nome {
-                font-size: 8px;
-                margin: 1px 0;
-            }
-
-            .totem-ovr {
-                font-size: 9px;
-            }
-
-            .totem-pos-vaga {
-                font-size: 8px;
-                padding: 1px 2px;
-            }
-
-            .totem-status span {
-                font-size: 9px;
-            }
-
-            .totem-indisponivel::after {
-                font-size: 8px;
-                top: -7px;
-                right: -4px;
-            }
-
-            /* ---- Aba Meu Time: tabela rolável lateralmente ---- */
-            #container-meu-time {
-                overflow-x: auto;
-                -webkit-overflow-scrolling: touch;
-            }
-
-            #container-meu-time table {
-                display: table;
-                width: max-content;
-                min-width: 100%;
-                white-space: nowrap;
-            }
-
-            #container-meu-time table th,
-            #container-meu-time table td {
-                padding: 7px 9px;
-            }
-
-            /* ---- Próxima partida: escudos menores ---- */
-            #container-proxima-partida img {
-                width: 44px !important;
-                height: auto !important;
-            }
-
-            #container-proxima-partida div[style*="font-size:17px"],
-            #container-proxima-partida div[style*="font-size: 17px"] {
-                flex-wrap: wrap;
-                font-size: 14px !important;
-                gap: 8px !important;
-            }
-
-            /* ---- Vestiário ---- */
-            #modal-vestiario .padding-vestiario,
-            #modal-vestiario>div>div {
-                box-sizing: border-box;
-            }
-
-            #vestiario-adv-escudo {
-                width: 78px !important;
-                height: 78px !important;
-                right: -7px !important;
-                top: 61px !important;
-            }
-
-            #modal-vestiario h4 {
-                font-size: 14px;
-            }
-
-            #modal-vestiario #vestiario-adv-ovr {
-                font-size: 22px !important;
-            }
-
-            #slot-prancheta-vestiario #prancheta-componente-live {
-                display: block !important;
-            }
-
-            #slot-prancheta-vestiario #prancheta-componente-live>div {
-                margin-bottom: 14px;
-            }
-
-            /* ---- Transmissão: narração primeiro, elencos escondidos ---- */
-            .transmissao-container {
-                display: flex;
-                flex-direction: column;
-                gap: 10px;
-            }
-
-            .placar-ao-vivo {
-                order: 0;
-            }
-
-            #placar-shootout {
-                order: 0;
-            }
-
-            #coluna-central-live {
-                order: 1;
-            }
-
-            /* Botões Sanduíche flutuantes nas bordas */
-            .toggle-elenco {
-                display: none;
-                position: fixed;
-                top: 50%;
-                transform: translateY(-50%);
-                width: auto;
-                padding: 12px 15px;
-                font-size: 18px;
-                background: #0056b3;
-                color: white;
-                border: none;
-                border-radius: 50%;
-                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-                margin: 0;
-                z-index: 10001;
-            }
-
-            .toggle-elenco[onclick*="'live-elenco-casa'"] {
-                left: -15px;
-                padding-left: 20px;
-                border-radius: 0 50% 50% 0;
-            }
-
-            .transmissao-container .toggle-elenco {
-                display: block !important;
-            }
-
-            .toggle-elenco[onclick*="'live-elenco-vis'"] {
-                right: -15px;
-                padding-right: 20px;
-                border-radius: 50% 0 0 50%;
-            }
-
-            /* Painéis laterais dos times (off-canvas) */
-            .coluna-elenco {
-                position: fixed;
-                top: 0;
-                height: 100vh !important;
-                max-height: 100vh !important;
-                width: 250px;
-                background: white;
-                z-index: 10000;
-                overflow-y: auto;
-                padding: 20px 15px;
-                box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-                transition: transform 0.3s ease;
-                display: block !important;
-            }
-
-            #live-elenco-casa {
-                left: 0;
-                transform: translateX(-110%);
-            }
-
-            #live-elenco-casa.aberto {
-                transform: translateX(0);
-            }
-
-            #live-elenco-vis {
-                right: 0;
-                transform: translateX(110%);
-            }
-
-            #live-elenco-vis.aberto {
-                transform: translateX(0);
-            }
-
-            .coluna-elenco.aberto {
-                display: block;
-            }
-
-            #overlay-intervalo {
-                order: 0;
-            }
-
-            /* ---- Modais (intervalo / fim de jogo / prancheta) ---- */
-            .overlay-intervalo {
-                position: fixed;
-                z-index: 1000;
-                padding: 16px;
-            }
-
-            .overlay-intervalo h2 {
-                font-size: 26px;
-            }
-
-
-            #botoes-overlay-jogo {
-                flex-wrap: wrap;
-                justify-content: center;
-                width: 94%;
-            }
-
-            #botoes-overlay-jogo button {
-                flex: 1 1 auto;
-                min-width: 130px;
-            }
-
-            .palestra-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .modal-conteudo {
-                width: 94% !important;
-                max-width: 94% !important;
-                max-height: 88vh;
-                overflow-y: auto;
-                padding: 16px !important;
-                box-sizing: border-box;
-            }
-
-            /* Prancheta: mostrar todos os reservas */
-            #live-lista-reservas-drag,
-            #gerenciar-lista-reservas-drag {
-                height: auto !important;
-                max-height: 40vh !important;
-            }
-
-            .narracao-box {
-                height: 160px;
-            }
-
-            .modal-conteudo {
-                width: 95%;
-                padding: 15px;
-            }
-        }
+        /*--------------------------------------------------------------------------*/
     </style>
 
     <script src="timescopa.js"></script>
@@ -1939,7 +1355,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 </head>
-<div style="position: absolute; ">Beta v1.10</div>
+<div style="position: absolute; ">Beta v1.09</div>
 
 <div id="tela-inicial" class="painel" style="max-width: 450px; background-color: #00ca60;">
     <h2>Copa do Mundo 2026</h2>
@@ -1989,9 +1405,7 @@
 </div>
 
 <div id="tela-jogo" class="painel" style="display: none;">
-    <button class="menu-hamburguer" onclick="toggleMenuAbas(this)" aria-label="Abrir menu">☰ <span
-            id="menu-hamburguer-label">Menu</span></button>
-    <div class="menu-abas" id="menu-abas-principal">
+    <div class="menu-abas">
         <button class="aba-btn ativa" onclick="mudarAba('aba-simulador', this)">🎮 Partidas</button>
         <button class="aba-btn" onclick="mudarAba('aba-gerenciar', this)">📋 Quadro Tático</button>
         <button class="aba-btn" onclick="mudarAba('aba-time', this)">👥 Meu Time</button>
@@ -2018,6 +1432,7 @@
                         <option value="3-5-2">3-5-2</option>
                         <option value="5-3-2">5-3-2</option>
                         <option value="4-2-3-1">4-2-3-1</option>
+                        <option value="4-2-3-1">4-2-1-3</option>
                     </select>
                     <select id="gerenciar-postura" onchange="salvarPostura()"
                         style="padding: 6px; border-radius: 4px; font-weight: bold;">
@@ -2148,7 +1563,9 @@
             </div>
             <div id="slot-prancheta-vestiario"></div>
             <div style="display:flex; gap:10px; margin-top:20px;">
-                <button class="secundario" onclick="voltarDoVestiario(); event.stopPropagation();">⬅Voltar</button>
+                <button class="secundario" onclick="voltarDoVestiario(); event.stopPropagation();"
+                    style="flex:0 0 auto; font-size:16px; background:#6c757d; color:#fff; padding:15px 20px; border:none; border-radius:6px; cursor:pointer;">⬅
+                    Voltar</button>
                 <button class="principal" onclick="entrarEmCampoLive()"
                     style="flex:1; font-size:18px; background:#28a745; padding:15px;">ENTRAR EM
                     CAMPO</button>
@@ -2157,7 +1574,7 @@
         </div>
     </div>
 
-    <div class="transmissao-container" id="container-live-jogo" style="display:none">
+    <div class="transmissao-container" id="container-live-jogo" style="display:none;">
         <div id="overlay-intervalo" class="overlay-intervalo">
             <h2 id="titulo-overlay-jogo">Pausado</h2>
             <!-- Quadro de estatísticas -->
@@ -2222,7 +1639,6 @@
             </div>
         </div>
 
-        <button class="toggle-elenco" onclick="toggleElenco('live-elenco-casa', this)">👕</button>
         <div class="coluna-elenco" id="live-elenco-casa">
             <h4>Titulares</h4>
             <ul id="lista-titulares-casa"></ul>
@@ -2230,7 +1646,7 @@
             <ul id="lista-subs-casa" style="color:#666;"></ul>
         </div>
 
-        <div id="coluna-central-live">
+        <div>
             <div class="narracao-box" id="live-narracao"></div>
             <div
                 style="padding: 12px; background: #f8f9fa; border: 1px solid #ddd; border-radius: 8px; text-align: left;">
@@ -2276,7 +1692,6 @@
             </div>
         </div>
 
-        <button class="toggle-elenco" onclick="toggleElenco('live-elenco-vis', this)">👕</button>
         <div class="coluna-elenco" id="live-elenco-vis">
             <h4>Titulares</h4>
             <ul id="lista-titulares-vis"></ul>
@@ -2314,6 +1729,7 @@
                 <option value="3-5-2">3-5-2</option>
                 <option value="5-3-2">5-3-2</option>
                 <option value="4-2-3-1">4-2-3-1</option>
+                <option value="4-2-3-1">4-2-1-3</option>
             </select>
         </div>
         <div class="roles-container">
@@ -2643,8 +2059,8 @@
         "4-3-3": [{ tipo: "GOL", top: 90, left: 50 }, { tipo: "LE", top: 68, left: 15 }, { tipo: "ZAG", top: 72, left: 38 }, { tipo: "ZAG", top: 72, left: 62 }, { tipo: "LD", top: 68, left: 85 }, { tipo: "MC", top: 48, left: 24 }, { tipo: "VOL", top: 52, left: 50 }, { tipo: "MC", top: 48, left: 76 }, { tipo: "PE", top: 22, left: 18 }, { tipo: "CA", top: 18, left: 50 }, { tipo: "PD", top: 22, left: 82 }],
         "3-5-2": [{ tipo: "GOL", top: 90, left: 50 }, { tipo: "ZAG", top: 72, left: 25 }, { tipo: "ZAG", top: 74, left: 50 }, { tipo: "ZAG", top: 72, left: 75 }, { tipo: "AE", top: 50, left: 12 }, { tipo: "MC", top: 50, left: 34 }, { tipo: "VOL", top: 53, left: 50 }, { tipo: "MC", top: 50, left: 66 }, { tipo: "AD", top: 50, left: 88 }, { tipo: "CA", top: 22, left: 33 }, { tipo: "CA", top: 22, left: 67 }],
         "5-3-2": [{ tipo: "GOL", top: 90, left: 50 }, { tipo: "LE", top: 68, left: 12 }, { tipo: "ZAG", top: 72, left: 31 }, { tipo: "ZAG", top: 74, left: 50 }, { tipo: "ZAG", top: 72, left: 69 }, { tipo: "LD", top: 68, left: 88 }, { tipo: "MC", top: 48, left: 25 }, { tipo: "VOL", top: 48, left: 50 }, { tipo: "MC", top: 48, left: 75 }, { tipo: "CA", top: 22, left: 33 }, { tipo: "CA", top: 22, left: 67 }],
-        "4-2-3-1": [{ tipo: "GOL", top: 90, left: 50 }, { tipo: "LE", top: 68, left: 15 }, { tipo: "ZAG", top: 72, left: 38 }, { tipo: "ZAG", top: 72, left: 62 }, { tipo: "LD", top: 68, left: 85 }, { tipo: "VOL", top: 54, left: 38 }, { tipo: "VOL", top: 54, left: 62 }, { tipo: "ME", top: 40, left: 15 }, { tipo: "MEI", top: 38, left: 50 }, { tipo: "MD", top: 40, left: 85 }, { tipo: "CA", top: 18, left: 50 }]
-
+        "4-2-3-1": [{ tipo: "GOL", top: 90, left: 50 }, { tipo: "LE", top: 68, left: 15 }, { tipo: "ZAG", top: 72, left: 38 }, { tipo: "ZAG", top: 72, left: 62 }, { tipo: "LD", top: 68, left: 85 }, { tipo: "VOL", top: 54, left: 38 }, { tipo: "VOL", top: 54, left: 62 }, { tipo: "ME", top: 40, left: 15 }, { tipo: "MEI", top: 38, left: 50 }, { tipo: "MD", top: 40, left: 85 }, { tipo: "CA", top: 18, left: 50 }],
+        "4-2-1-3": [{ tipo: "GOL", top: 90, left: 50 }, { tipo: "LE",  top: 68, left: 15 },{ tipo: "ZAG", top: 72, left: 38 }, { tipo: "ZAG", top: 72, left: 62 }, { tipo: "LD",  top: 68, left: 85 },{ tipo: "VOL", top: 54, left: 38 }, { tipo: "VOL", top: 54, left: 62 }, { tipo: "MEI", top: 40, left: 50 }, { tipo: "PE",  top: 22, left: 18 }, { tipo: "CA",  top: 16, left: 50 }, { tipo: "PD",  top: 22, left: 82 }]
     };
 
     let jogoAtActiveRef = null; let minutoJogo = 0; let loopAutomatico = null; let velocidadeMs = 1500; let usosPalestra = { motivar: 2, bronca: 2, acalmar: 2 };
@@ -2659,7 +2075,7 @@
 
     let gritoAtivo = "nenhum";
     let tempoGritoAtivo = 0;
-
+    
     let preJogoBonus = 0;
     let estadoJogo = { suspensos: {}, lesoes: {} };
 
@@ -2808,36 +2224,36 @@
         return candidatos[0].jogador;
     }
     function obterBonusGrito(tipo) {
-        switch (tipo) {
-            case "pressao":
-                return {
-                    ataque: 8,
-                    defesa: -4,
-                    posse: 0
-                };
+    switch (tipo) {
+        case "pressao":
+            return {
+                ataque: 8,
+                defesa: -4,
+                posse: 0
+            };
 
-            case "segurar":
-                return {
-                    ataque: -6,
-                    defesa: 10,
-                    posse: 5
-                };
+        case "segurar":
+            return {
+                ataque: -6,
+                defesa: 10,
+                posse: 5
+            };
 
-            case "girar":
-                return {
-                    ataque: -2,
-                    defesa: 2,
-                    posse: 10
-                };
+        case "girar":
+            return {
+                ataque: -2,
+                defesa: 2,
+                posse: 10
+            };
 
-            default:
-                return {
-                    ataque: 0,
-                    defesa: 0,
-                    posse: 0
-                };
-        }
+        default:
+            return {
+                ataque: 0,
+                defesa: 0,
+                posse: 0
+            };
     }
+}
     function calcularChanceGol(ataque, defesa, finalizacao, goleiro, posturaBonus = 0, gritoBonus = 0) {
         let diff = ataque - defesa;
         let base = 0.04 + (diff * 0.0038) + ((finalizacao - 70) * 0.0017) - ((goleiro - 70) * 0.0025);
@@ -3093,75 +2509,7 @@
             autoSubstituirIndisponiveis(t);
         });
     }
-    function mudarAba(idAba, btn) { document.querySelectorAll('.aba-conteudo').forEach(e => e.classList.remove('ativa')); document.querySelectorAll('.aba-btn').forEach(e => e.classList.remove('ativa')); document.getElementById(idAba).classList.add('ativa'); if (btn) btn.classList.add('ativa'); var _m = document.getElementById('menu-abas-principal'); if (_m) _m.classList.remove('aberto'); if (idAba === 'aba-gerenciar') { scoutSel1 = null; scoutSel2 = null; renderizarQuadroTatico(false); } if (idAba === 'aba-time') { renderizarMeuTime(); } if (idAba === 'aba-torneio') { renderizarInterface(); renderizarInfoCampeonato(); } }
-
-    // ===== Controles de layout mobile =====
-    function toggleMenuAbas() { var m = document.getElementById('menu-abas-principal'); if (m) m.classList.toggle('aberto'); }
-    function toggleElenco(id, btn) {
-        var el = document.getElementById(id);
-        if (!el) return;
-
-        // Identifica o painel oposto (se clicou em 'casa', acha o 'vis', e vice-versa)
-        var isCasa = id.indexOf('casa') > -1;
-        var outroId = isCasa ? 'live-elenco-vis' : 'live-elenco-casa';
-        var outroEl = document.getElementById(outroId);
-        var outroBtn = document.querySelector(".toggle-elenco[onclick*='" + outroId + "']");
-
-        // Se o outro painel estiver aberto, fecha ele primeiro
-        if (outroEl && outroEl.classList.contains('aberto')) {
-            outroEl.classList.remove('aberto');
-            if (outroBtn) {
-                if (window.innerWidth <= 768) {
-                    outroBtn.innerHTML = '👕';
-                } else {
-                    outroBtn.textContent = '👕 ' + (isCasa ? 'Titulares (Visitante)' : 'Titulares (Casa)');
-                }
-            }
-        }
-
-        // Abre ou fecha o painel que o usuário clicou
-        var aberto = el.classList.toggle('aberto');
-
-        // Altera entre o ícone de camisa e de fechar
-        if (btn && window.innerWidth <= 768) {
-            btn.innerHTML = aberto ? '❌' : '👕';
-        } else if (btn) {
-            btn.textContent = (aberto ? '🔽 Ocultar ' : '👕 ') + (isCasa ? 'Titulares (Casa)' : 'Titulares (Visitante)');
-        }
-    }
-    // Função auxiliar para forçar o fechamento das abas no mobile
-    function fecharPaineisElencoMobile() {
-        if (window.innerWidth <= 768) {
-            ['live-elenco-casa', 'live-elenco-vis'].forEach(function(id) {
-                var el = document.getElementById(id);
-                if (el && el.classList.contains('aberto')) {
-                    el.classList.remove('aberto');
-                    var btn = document.querySelector(".toggle-elenco[onclick*='" + id + "']");
-                    if (btn) btn.innerHTML = '👕';
-                }
-            });
-        }
-    }
-    // ===== Trava a rolagem do fundo enquanto qualquer modal estiver aberto =====
-    function _checarTravaScroll() {
-        var sel = '.modal-tatica-live, #modal-selecao-penaltis, #modal-expulsao-direto, #modal-aviso-expulsao, .overlay-intervalo';
-        var algum = false;
-        document.querySelectorAll(sel).forEach(function (m) {
-            if (!m) return;
-            var cs = getComputedStyle(m);
-            if (cs.display !== 'none' && cs.visibility !== 'hidden' && m.getClientRects().length > 0) algum = true;
-        });
-        document.body.classList.toggle('scroll-travado', algum);
-    }
-    (function () {
-        if (typeof MutationObserver === 'undefined') return;
-        var obs = new MutationObserver(function () { _checarTravaScroll(); });
-        function start() {
-            obs.observe(document.body, { subtree: true, attributes: true, attributeFilter: ['style', 'class'], childList: true });
-            _checarTravaScroll();
-        }
-        if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start); else start();
-    })();
+    function mudarAba(idAba, btn) { document.querySelectorAll('.aba-conteudo').forEach(e => e.classList.remove('ativa')); document.querySelectorAll('.aba-btn').forEach(e => e.classList.remove('ativa')); document.getElementById(idAba).classList.add('ativa'); if (btn) btn.classList.add('ativa'); if (idAba === 'aba-gerenciar') { scoutSel1 = null; scoutSel2 = null; renderizarQuadroTatico(false); } if (idAba === 'aba-time') { renderizarMeuTime(); } if (idAba === 'aba-torneio') { renderizarInterface(); renderizarInfoCampeonato(); } }
     function aoClicarJogador(tipo, idx, ehLive) {
         let t = listaDeTimes.find(x => x.id === meuTimeId);
         let cT = ehLive ? t.titulares : t.titularesPadrao;
@@ -3427,7 +2775,7 @@
     function atualizarTextosSubs() { document.getElementById("modal-info-subs").innerText = `${subsFeitasAnteriormente}/5`; }
     function abrirQuadroTaticoLive() {
         if (!emIntervalo && paradasSub >= 3 && subsFeitasAnteriormente < 5) return alert("Você já usou suas paradas!");
-        fecharPaineisElencoMobile();
+
         pausarSimulacao();
 
         // CORREÇÃO: Esconder o modal de lesão diretamente em vez de usar a função que despausa o jogo
@@ -3496,11 +2844,8 @@
         renderizarQuadroTatico(true);
 
         document.getElementById("live-contexto-fase").innerText = `Fase - ${lbl}`;
-        let siglaCasa = jogo.casa.sigla || jogo.casa.nome.substring(0, 3).toUpperCase();
-        let siglaVis = jogo.visitante.sigla || jogo.visitante.nome.substring(0, 3).toUpperCase();
-
-        document.getElementById("live-nome-casa").innerHTML = `<span class="nome-extenso">${jogo.casa.nome}</span><span class="nome-sigla">${siglaCasa}</span>`;
-        document.getElementById("live-nome-vis").innerHTML = `<span class="nome-extenso">${jogo.visitante.nome}</span><span class="nome-sigla">${siglaVis}</span>`;
+        document.getElementById("live-nome-casa").innerText = jogo.casa.nome;
+        document.getElementById("live-nome-vis").innerText = jogo.visitante.nome;
     }
     // Sai do vestiário e volta para a tela anterior do torneio sem entrar em campo
     function voltarDoVestiario() {
@@ -3625,14 +2970,7 @@
         if (minutoJogo > 0) adicionarNarracao(`${minutoJogo}'`, `🔄 Postura alterada para: ${n}.`);
     }
     function mudarVelocidade(v) { velocidadeMs = parseInt(v); if (loopAutomatico) { pausarSimulacao(); iniciarSimulacaoAutomatica(); } }
-    function pausarSimulacao() {
-        if (loopAutomatico) {
-            clearInterval(loopAutomatico);
-            loopAutomatico = null;
-        }
-        document.getElementById("btn-modo-rapido").innerText = "Play ▶️";
-
-    }
+    function pausarSimulacao() { if (loopAutomatico) { clearInterval(loopAutomatico); loopAutomatico = null; } document.getElementById("btn-modo-rapido").innerText = "Play ▶️"; }
     function iniciarSimulacaoAutomatica() {
         if (emIntervalo || disputaPenaisAtiva) return; // Se for pênalti, bloqueia o autoplay
 
@@ -3669,10 +3007,10 @@
         if (typeof window.penaltiEmAndamento !== 'undefined' && window.penaltiEmAndamento) return;
 
 
-        minutoJogo += Math.floor(Math.random() * 3) + 2;
+        minutoJogo += Math.floor(Math.random() * 4) + 4;
 
         if (minutoJogo >= 45 && !segundoTempoIniciado) { minutoJogo = 45; iniciarIntervalo(); return; }
-        if (minutoJogo > 90 && !emProrrogacao && !jogoAtActiveRef.ehMataMata) minutoJogo = 90;atualizarTempoUI();
+        if (minutoJogo > 90 && !emProrrogacao && !jogoAtActiveRef.ehMataMata) minutoJogo = 90;
         if (minutoJogo > 90 && !emProrrogacao && jogoAtActiveRef.ehMataMata && golsCasaLive !== golsVisLive) minutoJogo = 90;
 
         if (minutoJogo >= 90 && !emProrrogacao && segundoTempoIniciado) {
@@ -3701,7 +3039,6 @@
     }
     function alternarAutomatico() { if (loopAutomatico) pausarSimulacao(); else iniciarSimulacaoAutomatica(); }
     function iniciarIntervalo() {
-        fecharPaineisElencoMobile();
         emIntervalo = true;
         pausarSimulacao();
         let divO = document.getElementById("botoes-overlay-jogo");
@@ -3787,7 +3124,7 @@
     let penaisSeries = { casa: [], vis: [] };
     let currentPenalTaker = 'casa';
     function avancarJogadaManual() {
-        if (disputaPenaisAtiva) { simularPassoPenal(); return; } if (emIntervalo) return; minutoJogo += Math.floor(Math.random() * 4) + 4; if (minutoJogo >= 45 && !segundoTempoIniciado) { minutoJogo = 45; atualizarTempoUI(); iniciarIntervalo(); return; } if (minutoJogo > 90 && !emProrrogacao && !jogoAtActiveRef.ehMataMata) minutoJogo = 90; if (minutoJogo > 90 && !emProrrogacao && jogoAtActiveRef.ehMataMata && golsCasaLive !== golsVisLive) minutoJogo = 90; if (minutoJogo >= 90 && !emProrrogacao && segundoTempoIniciado) { if (golsCasaLive === golsVisLive && jogoAtActiveRef.ehMataMata) { emProrrogacao = true; minutoJogo = 90; adicionarNarracao("90'", "⌛ Prorrogação!"); atualizarTempoUI(); return; } else { mostrarEstatisticasFimDeJogo(); return; } } if (emProrrogacao && minutoJogo >= 105 && minutoJogo < 108 && !emIntervalo) { minutoJogo = 105; iniciarIntervalo(); return; }
+        if (disputaPenaisAtiva) { simularPassoPenal(); return; } if (emIntervalo) return; minutoJogo += Math.floor(Math.random() * 4) + 4; if (minutoJogo >= 45 && !segundoTempoIniciado) { minutoJogo = 45; iniciarIntervalo(); return; } if (minutoJogo > 90 && !emProrrogacao && !jogoAtActiveRef.ehMataMata) minutoJogo = 90; if (minutoJogo > 90 && !emProrrogacao && jogoAtActiveRef.ehMataMata && golsCasaLive !== golsVisLive) minutoJogo = 90; if (minutoJogo >= 90 && !emProrrogacao && segundoTempoIniciado) { if (golsCasaLive === golsVisLive && jogoAtActiveRef.ehMataMata) { emProrrogacao = true; minutoJogo = 90; adicionarNarracao("90'", "⌛ Prorrogação!"); atualizarTempoUI(); return; } else { mostrarEstatisticasFimDeJogo(); return; } } if (emProrrogacao && minutoJogo >= 105 && minutoJogo < 108 && !emIntervalo) { minutoJogo = 105; iniciarIntervalo(); return; }
         // Onde você verifica o fim da prorrogação:
         if (emProrrogacao && minutoJogo >= 120) {
             if (golsCasaLive === golsVisLive) {
@@ -3806,7 +3143,6 @@
         processarLanceMecanica();
     }
     function mostrarTransicaoParaPenaltis() {
-        fecharPaineisElencoMobile();
         pausarSimulacao();
         let overlayPadrão = document.getElementById("overlay-intervalo");
         overlayPadrão.style.display = "flex";
@@ -4034,41 +3370,41 @@
         if (pV === "Ofensivo") bonusV += 10; if (pV === "Defensivo") bonusV -= 8;
 
         let gritoBonusC = 0;
-        let gritoBonusV = 0;
+let gritoBonusV = 0;
 
-        let bonusAtaqueGrito = 0;
-        let bonusDefesaGrito = 0;
-        let bonusPosseGrito = 0;
+let bonusAtaqueGrito = 0;
+let bonusDefesaGrito = 0;
+let bonusPosseGrito = 0;
 
-        if (c.id === meuTimeId) {
+if (c.id === meuTimeId) {
 
-            if (gritoAtivo === 'pressao') {
-                gritoBonusC = 8;
-                bonusAtaqueGrito = 8;
-                bonusDefesaGrito = -4;
-            }
+    if (gritoAtivo === 'pressao') {
+        gritoBonusC = 8;
+        bonusAtaqueGrito = 8;
+        bonusDefesaGrito = -4;
+    }
 
-            if (gritoAtivo === 'segurar') {
-                gritoBonusC = -6;
-                bonusAtaqueGrito = -6;
-                bonusDefesaGrito = 10;
-                bonusPosseGrito = 5;
-            }
+    if (gritoAtivo === 'segurar') {
+        gritoBonusC = -6;
+        bonusAtaqueGrito = -6;
+        bonusDefesaGrito = 10;
+        bonusPosseGrito = 5;
+    }
 
-            if (gritoAtivo === 'calma') {
-                bonusAtaqueGrito = -2;
-                bonusDefesaGrito = 2;
-                bonusPosseGrito = 10;
-            }
-        }
+    if (gritoAtivo === 'calma') {
+        bonusAtaqueGrito = -2;
+        bonusDefesaGrito = 2;
+        bonusPosseGrito = 10;
+    }
+}
 
-        if (tempoGritoAtivo > 0)
-            tempoGritoAtivo--;
-        else
-            gritoAtivo = 'nenhum';
+if (tempoGritoAtivo > 0)
+    tempoGritoAtivo--;
+else
+    gritoAtivo = 'nenhum';
 
-        document.querySelectorAll('.btn-grito')
-            .forEach(b => b.classList.remove('ativo'));
+    document.querySelectorAll('.btn-grito')
+        .forEach(b => b.classList.remove('ativo'));
 
         let pesoC = fC.ataque * 1.15 + fC.geral * 0.6 + bonusC + gritoBonusC;
         let pesoV = fV.ataque * 1.15 + fV.geral * 0.6 + bonusV + gritoBonusV;
@@ -4085,20 +3421,20 @@
 
         let ajustePosse = (Math.random() > 0.5 ? 6 : -4);
 
-        if (lAtq === 'casa' && c.id === meuTimeId)
-            ajustePosse += bonusPosseGrito;
+if (lAtq === 'casa' && c.id === meuTimeId)
+    ajustePosse += bonusPosseGrito;
 
-        if (lAtq === 'vis' && v.id === meuTimeId)
-            ajustePosse += bonusPosseGrito;
+if (lAtq === 'vis' && v.id === meuTimeId)
+    ajustePosse += bonusPosseGrito;
 
-        statsAoVivo[lAtq].posse =
-            Math.min(
-                75,
-                Math.max(
-                    25,
-                    statsAoVivo[lAtq].posse + ajustePosse
-                )
-            );
+statsAoVivo[lAtq].posse =
+    Math.min(
+        75,
+        Math.max(
+            25,
+            statsAoVivo[lAtq].posse + ajustePosse
+        )
+    );
         statsAoVivo[lAtq === 'casa' ? 'vis' : 'casa'].posse = 100 - statsAoVivo[lAtq].posse;
 
         let lineup = (atq.titulares || []).filter(j => !j.expulso);
@@ -4106,14 +3442,14 @@
 
         let finalizador = selecionarArtilheiro(lineup) || lineup[0] || { nome: "Jogador", finalizacao: 70 };
         let ataqueAtq =
-            lAtq === 'casa'
-                ? fC.ataque + (atq.id === meuTimeId ? bonusAtaqueGrito : 0)
-                : fV.ataque + (atq.id === meuTimeId ? bonusAtaqueGrito : 0);
+    lAtq === 'casa'
+        ? fC.ataque + (atq.id === meuTimeId ? bonusAtaqueGrito : 0)
+        : fV.ataque + (atq.id === meuTimeId ? bonusAtaqueGrito : 0);
 
-        let defesaDef =
-            lAtq === 'casa'
-                ? fV.defesa + (def.id === meuTimeId ? bonusDefesaGrito : 0)
-                : fC.defesa + (def.id === meuTimeId ? bonusDefesaGrito : 0);
+let defesaDef =
+    lAtq === 'casa'
+        ? fV.defesa + (def.id === meuTimeId ? bonusDefesaGrito : 0)
+        : fC.defesa + (def.id === meuTimeId ? bonusDefesaGrito : 0);
         let goleiroDef = lAtq === 'casa' ? fV.goleiro : fC.goleiro;
 
         let posturaBonus = (lAtq === 'casa' ? (pC === 'Ofensivo' ? 0.03 : pC === 'Defensivo' ? -0.02 : 0) : (pV === 'Ofensivo' ? 0.03 : pV === 'Defensivo' ? -0.02 : 0));
@@ -4401,7 +3737,6 @@
             });
 
             function dispararModalLesao(j) {
-                fecharPaineisElencoMobile();
                 if (typeof pausarSimulacao === 'function') pausarSimulacao();
                 let modal = document.getElementById("modal-lesao-live");
                 if (!modal) return;
@@ -5078,15 +4413,12 @@
         let listaGolsCasa = formatarGols('casa');
         let listaGolsVis = formatarGols('vis');
 
-        let siglaCasa = jogoAtActiveRef.jogo.casa.sigla || jogoAtActiveRef.jogo.casa.nome.substring(0, 3).toUpperCase();
-        let siglaVis = jogoAtActiveRef.jogo.visitante.sigla || jogoAtActiveRef.jogo.visitante.nome.substring(0, 3).toUpperCase();
-
         return `
             <div style="background:rgba(0,0,0,0.35); padding:14px; border-radius:12px; margin-bottom:18px;">
                 <div style="display:flex; align-items:center; justify-content:center; gap:18px;">
                     <div style="flex:1; text-align:right;">
                         <img src="${jogoAtActiveRef.jogo.casa.brasaoUrl || jogoAtActiveRef.jogo.casa.escudo || ''}" onerror="this.style.display='none'" style="width:38px;height:38px;object-fit:contain;vertical-align:middle;">
-                        <div style="color:#fff; font-weight:bold; font-size:15px; margin-top:4px;"><span class="nome-extenso">${jogoAtActiveRef.jogo.casa.nome}</span><span class="nome-sigla">${siglaCasa}</span></div>
+                        <div style="color:#fff; font-weight:bold; font-size:15px; margin-top:4px;">${jogoAtActiveRef.jogo.casa.nome}</div>
                     </div>
                     <div style="text-align:center;">
                         <div style="color:#ffffff; font-size:44px; font-weight:bold; line-height:1; font-variant-numeric:tabular-nums;">${gC} <span style="color:#777;font-size:28px;">x</span> ${gV}</div>
@@ -5094,7 +4426,7 @@
                     </div>
                     <div style="flex:1; text-align:left;">
                         <img src="${jogoAtActiveRef.jogo.visitante.brasaoUrl || jogoAtActiveRef.jogo.visitante.escudo || ''}" onerror="this.style.display='none'" style="width:38px;height:38px;object-fit:contain;vertical-align:middle;">
-                        <div style="color:#fff; font-weight:bold; font-size:15px; margin-top:4px;"><span class="nome-extenso">${jogoAtActiveRef.jogo.visitante.nome}</span><span class="nome-sigla">${siglaVis}</span></div>
+                        <div style="color:#fff; font-weight:bold; font-size:15px; margin-top:4px;">${jogoAtActiveRef.jogo.visitante.nome}</div>
                     </div>
                 </div>
                 
@@ -5150,9 +4482,7 @@
         if (!disputaPenaisAtiva) {
             let acrescimos = Math.floor(Math.random() * 5) + 2;
             adicionarNarracao(minutoJogo + "'", `⏱️ O árbitro indica +${acrescimos} minutos de acréscimo.`);
-            atualizarTempoUI()
             adicionarNarracao((minutoJogo + acrescimos) + "'", "🏁 Fim de papo!");
-            atualizarTempoUI()
             tocarSom('fim');
 
         }
@@ -5698,12 +5028,9 @@
     background: linear-gradient(#111318,#111318) padding-box, linear-gradient(90deg,#00ff7b,#00d4ff,#4477ff,#8b00ff) border-box !important; border: 4px solid transparent !important; color: #fff !important;">
                 <div style="font-size:12px; letter-spacing:1px; opacity:0.8; text-transform:uppercase;">Próxima Partida · ${faseLbl}</div>
                 <div style="display:flex; align-items:center; justify-content:center; gap:14px; margin-top:8px; font-weight:bold; font-size:17px;">
-                    <span class="nome-extenso" style="align-items:center; gap:8px;">${htmlBandeira(jogo.casa, 100)} ${jogo.casa.nome}</span>
-                    <span class="nome-sigla" style=" align-items:center; gap:8px;">${htmlBandeira(jogo.casa, 100)} ${jogo.casa.sigla}</span>
+                    <span style="display:flex; align-items:center; gap:8px;">${htmlBandeira(jogo.casa, 100)} ${jogo.casa.nome}</span>
                     <span style="background:#6100e4; color:#ffffff; padding:2px 10px; border-radius:6px; font-size:14px;">VS</span>
-                    <span class="nome-extenso" style=" align-items:center; gap:8px;">${jogo.visitante.nome} ${htmlBandeira(jogo.visitante, 100)}</span>
-                    <span class="nome-sigla" style="align-items:center; gap:8px;">${jogo.visitante.sigla} ${htmlBandeira(jogo.visitante, 100)}</span>
-                    
+                    <span style="display:flex; align-items:center; gap:8px;">${jogo.visitante.nome} ${htmlBandeira(jogo.visitante, 100)}</span>
                 </div>
             </div>`;
     }
@@ -5900,14 +5227,13 @@
         });
     }
     function dispararModalExpulsao(j) {
-        fecharPaineisElencoMobile();
-        // Pausa o jogo imediatamente
+        // 1. Pausa o jogo imediatamente
         if (typeof pausarSimulacao === 'function') pausarSimulacao();
         // Remove o modal anterior caso ele já exista na árvore do HTML (evita duplicar)
         let modalExistente = document.getElementById("modal-expulsao-direto");
         if (modalExistente) modalExistente.remove();
 
-        // ria o container do fundo escurecido (Overlay)
+        // 2. Cria o container do fundo escurecido (Overlay)
         let modalOverlay = document.createElement("div");
         modalOverlay.id = "modal-expulsao-direto";
         modalOverlay.style.position = "fixed";
